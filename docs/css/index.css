@@ -1,0 +1,252 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    /* border: 1px solid red; */
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)),
+    url('../img/pexels-emre-kuzu-2237189.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 60%;
+    overflow: auto;
+}
+
+.nav-bar {
+    /* border: 1px solid red; */
+    position: relative;
+    top: 10%;
+}
+
+.nav-bar ul {
+    text-align: center;
+    padding: 0;
+    /* border: 1px solid yellow; */
+    width: 100%;
+    position: relative;
+}
+
+.nav-bar ul li {
+    padding: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 150%;
+    list-style: none;
+    display: inline-block;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.nav-bar ul li a:hover {
+    transition: 0.75s;
+    color: #5F3C50;
+    border-radius: 12px;
+    padding: 7px;
+    background-color: white;
+    /* border-bottom: 1px solid #5F3C50; */
+}
+
+.nav-bar ul li a {
+    transition: 0.75s;
+    text-decoration: none;
+    color: white;
+}
+
+.logo {
+    width: 50%;
+    /* border: 1px solid white; */
+    position: relative;
+    left: 25%;
+    top: 10%;
+    
+}
+
+.logo h1 {
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Satisfy', cursive;
+    color: white;
+    text-align: center;
+    font-size: 500%;
+    transition: 2s;
+    margin-bottom: 12px;
+}
+.logo p {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    text-align: center;
+    margin: 0;
+    font-weight: 100;
+    font-size: 200%;
+}
+
+.main_content {
+    margin-top: 10%;
+    border: 1px solid white;
+    color: white;
+}
+.form-text {
+   text-align: center;
+}
+
+.form_content{
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 20%;
+}
+.form_content__form {
+    width: 50%;
+    margin: auto;
+    margin-top: 5% ;
+}
+.form-group {
+    margin-top: 5%;
+}
+
+.form-text p {
+    margin: 0;
+}
+.form-group input {
+    border-radius: 12px;
+}
+
+.form_content__form button {
+    margin-top: 5%;
+    margin-left: 25%;
+    width: 50%;
+    font-family: 'Raleway', sans-serif;
+    background: none;
+    border: 1px solid white;
+    border-radius: 12px;
+    color: white;
+    transition: 1s;
+}
+
+.form_content__form button:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
+}
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+
+}
+  
+  /* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+  
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    
+  }
+  
+  /* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    
+  }
+  
+  /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    .header {
+        background-image: url('../img/andrew-seaman-sQopSb2K0CU-unsplash.jpg');
+        background-color: #4C4556;
+        overflow: auto;
+    }
+    
+    html {
+        background-color: #4C4556;
+    }
+
+    .logo p {
+        font-size: 24px;
+    }
+
+    .form_content {
+        margin: 0;
+        margin-top: 50%;
+        width: 100%;
+    }
+
+    .form-text h1 {
+        text-align: center;
+        font-size: 24px;
+    }
+
+
+    #rezerviraj_mizo {
+        margin-top: 10%;
+        border-radius: 12px;
+        border: 1px solid white;
+    }
+
+    .nav-bar ul li a:hover {
+        background: none;
+        transition: 0.75s;
+        color: #5F3C50;
+        border-radius: 12px;
+        background-color: white;
+        /* border-bottom: 1px solid #5F3C50; */
+    }
+
+
+  }
+
+
+
