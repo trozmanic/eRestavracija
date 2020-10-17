@@ -9,3 +9,5 @@ Lastnike restavracije v Ljubljani nas je kontaktiral da zeli v popolnosti digita
 - Kuhar ima enake na voljo enake funkcionalnosti kot natakar le da lahko se upravlja z zalogo surovin (naročanje)
 - Direktor ima enake funkcionalnosti kot natakar in kuhar, le da ima vpogled na finančno stanje (možnost vpogleda v zaslužek, prihodke, odhodke itd...)
 
+
+
