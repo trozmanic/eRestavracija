@@ -93,90 +93,98 @@ body {
     font-size: 200%;
 }
 
-.menu-items {
-    margin-top: 5%;
+.resContainer{
+    width: 35%;
+    margin:1em auto;
 }
 
-.card {
-    transition: 1s;
-    margin: auto;
-    width: 40vw;
-    margin-top: 5%;
-    border: none !important;
+.formContainer{
+    display:flex;
+    justify-content: space-between;
 }
 
-.card-text {
+.headCont{
+    color:white;
     font-family: 'Raleway', sans-serif;
-    font-weight: 100;
+    font-weight: bold;
+    font-size:2.5em;
     text-align: center;
-    color: white;
+    margin-top:2em;
 }
 
-.card-text p {
-    color: white;
+.inputs{
+    width:45%
+}
+
+.inputField{
+    margin:10px auto;
+}
+
+.inputField lebel{
+    color:white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 200;
+    display:block;
+}
+
+.inputField input{
+    border-radius: 12px;
+    display:block;
+    width:100%;
+}
+
+.calander{
+    background-color: white;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 10px;
+    margin-right:10px;
+}
+
+.calander th{
+    background-color: #35313b;
+    color:white;
+    font-weight: bold;
     text-align: center;
+    padding: 0.6em 0.5em 0.4em;
 }
 
-.card-img-top {
-    transition: 1s;
-    filter:brightness(70%);
+.calander td{
+    text-align: center;
+    padding: 0.3em 0.5em;
 }
 
-.card-img-top:hover {
-    transition: 1s;
-    filter:brightness(100%);
+.calander td:hover{
+    background-color: #5F3C50;
+    color:white;
     cursor: pointer;
 }
 
-.card-body {
-    transition: 1s;
-    margin: 0;
+.grayedout{
+    color:#B5B2B8;
+}
+
+.calnav{
     background-color: #35313b;
+    color:white;
 }
 
-.card-title {
-    font-family: 'Dancing Script', cursive;
-    font-family: 'Satisfy', cursive;
-    text-align: center;
+.but {
+    margin-top:1em;
+    font-family: 'Raleway', sans-serif;
+    border: 1px solid white;
     color: white;
+    background: none;
+    border-radius: 12px;
+    padding:0.5em;
 }
 
-.properties {
-    -webkit-animation: fadeIn 1.2s;
-    animation: fadeIn 1.2s;
+.but:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
 }
-
-.properties-info {
-    text-align: center;
-    color: white;
-}
-
-.properties-info p {
-    margin: 0;
-    margin-top: 0%;
-}
-
-.hidden {
-    display: none;
-}
-
-
-.rating-stars {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px;
-    padding-bottom: 6px;
-}
-
-@-webkit-keyframes fadeIn {
-    from { opacity: 0; }
-      to { opacity: 1; }
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-      to { opacity: 1; }
-}
-
 
 @media (max-width: 1024px) {
     .card {
