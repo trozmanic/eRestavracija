@@ -136,8 +136,10 @@ body {
 }
 
 
-@media (min-width: 1281px) {
-
+@media (max-width: 1024px) {
+    .card {
+        width: 85vw;
+    }
 }
   
   /* 
@@ -185,7 +187,7 @@ body {
     ##Screen = B/w 320px to 479px
   */
   
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (min-width: 100px) and (max-width: 480px) {
     .main_container {
         background-image: url('../img/andrew-seaman-sQopSb2K0CU-unsplash.jpg');
         background-color: #4C4556;
@@ -215,6 +217,5 @@ body {
         background-color: white;
         /* border-bottom: 1px solid #5F3C50; */
     }
-
 
   }
