@@ -1,0 +1,80 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+.bg {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)),
+    url('../img/pexels-emre-kuzu-2237189.jpg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 60%;
+    overflow: auto;
+}
+.navbar-nadzorna-plosca {
+    /* index ima 5.5% sam je wasted space na nadzorni plosci */
+    margin-top: 1%;
+}
+.navbar-nadzorna-plosca-ul {
+    /* text-align: center; */
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+.navbar-nadzorna-plosca-ul-li{
+    padding: 0;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 150%;
+    list-style: none;
+    display: inline-block;
+    /* index margin-left: 2%; */
+    /* index margin-right: 2%; */
+}
+.navbar-nadzorna-plosca-ul-li:hover {
+    transition: 0.75s;
+    color: #5F3C50;
+    border-radius: 12px;
+    padding: 7px;
+    background-color: white;
+}
+.navbar-nadzorna-plosca-ul-li-text{
+    padding: 0;
+    color: gray;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 150%;
+    list-style: none;
+    display: inline-block;
+    /* index margin-left: 2%; */
+    /* index margin-right: 2%; */
+}
+/* TO JE ZA TO SA JE NAVBAR GUMB BEL*/
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.custom-toggler.navbar-toggler {
+    border-color: rgb(255,255,255);
+}
+/* END*/
+.logo-nadzorna-plosca {
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Satisfy', cursive;
+    color: white;
+    font-weight: 500;
+    font-size: 150%;
+}
+.logo-nadzorna-plosca:hover {
+    transition: 0.75s;
+    color: #5F3C50;
+    border-radius: 12px;
+    padding: 7px;
+    background-color: white;
+}
