@@ -1,6 +1,4 @@
-* {
-    font-family: 'Raleway', sans-serif;
-}
+
 body, html {
     padding: 0;
     margin: 0;
@@ -17,67 +15,82 @@ body, html {
     background-position-y: 60%;
     overflow: auto;
 }
-.navbar-nadzorna-plosca {
-    /* index ima 5.5% sam je wasted space na nadzorni plosci */
-    margin-top: 1%;
+
+/*.mobilelogo{
+    display: none;
+}*/
+
+.navbar{
+    width:60%;
+    margin:auto;
+    display:flex;
+    justify-content: right;
 }
-.navbar-nadzorna-plosca-ul {
-    /* text-align: center; */
-    padding: 0;
-    width: 100%;
-    position: relative;
+
+.logo{
+    margin-right: 1.2em;
 }
-.navbar-nadzorna-plosca-ul-li{
-    padding: 0;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 150%;
-    list-style: none;
-    display: inline-block;
-    /* index margin-left: 2%; */
-    /* index margin-right: 2%; */
-}
-.navbar-nadzorna-plosca-ul-li:hover {
-    transition: 0.75s;
-    color: #5F3C50;
-    border-radius: 12px;
-    padding: 7px;
-    background-color: white;
-}
-.navbar-nadzorna-plosca-ul-li-text{
-    padding: 0;
-    color: gray;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 150%;
-    list-style: none;
-    display: inline-block;
-    /* index margin-left: 2%; */
-    /* index margin-right: 2%; */
-}
-/* TO JE ZA TO SA JE NAVBAR GUMB BEL*/
-.custom-toggler .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
-.custom-toggler.navbar-toggler {
-    border-color: rgb(255,255,255);
-}
-/* END*/
-.logo-nadzorna-plosca {
-    font-family: 'Dancing Script', cursive;
+
+.logo a{
     font-family: 'Satisfy', cursive;
-    color: white;
-    font-weight: 500;
-    font-size: 150%;
+    color:white;
+    font-size:200%;
+    color:white;
 }
-.logo-nadzorna-plosca:hover {
-    transition: 0.75s;
-    color: #5F3C50;
+
+.logo a:hover{
+    text-decoration: none;
+    color:#5F3C50;
+    transition: 0.2s;
+}
+
+
+.navelement{
+    margin: 0 1em;
+    display:flex;
+    padding:5px;
     border-radius: 12px;
-    padding: 7px;
+}
+
+.navelement a{
+    font-family: 'Raleway', sans-serif;
+    font-size:150%;
+    color:white;
+}
+
+.navelement:not(#username):hover{
+    background-color: white;
+    transition: 0.2s;
+}
+
+.navelement a:hover{
+    color:#5F3C50;
+    text-decoration: none;
+}
+
+
+.navelement i{
+    margin-left:0.7em;
+    align-self: center;
+    color:white;
+}
+
+#username{
+    margin-left:auto;
+    color: #CCCCCC;
+}
+
+#username i{
+    padding:5px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#username i:hover{
+    color:#5F3C50;
     background-color: white;
 }
+
 .btn-dark {
     font-size: 25px;
     font-family: 'Raleway', sans-serif;
@@ -93,4 +106,39 @@ body, html {
     background:none;
     border: 1px solid #5F3C50;
     background-color: white;
+}
+
+@media (min-width: 280px) and (max-width: 480px) {
+    .mobilenav{
+        margin-top: 1.5em;
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .mobilenav a{
+        font-family: 'Satisfy', cursive;
+        font-size:250%;
+        color:white;
+        text-align: center;
+    }
+
+    .mobilenav div{
+        color:white;
+        padding: 0 2em;
+    }
+
+    .mobilenav div i{
+        border:1px solid white;
+        border-radius: 12px;
+        padding:0.7em 1em;
+    }
+
+    .mobilenav div div{
+        padding:1.5em;
+    }
+
+    .navbar{
+        display: none;
+    }
 }
