@@ -93,98 +93,89 @@ body {
     font-size: 200%;
 }
 
-.rescontainer{
-    width: 35%;
-    margin:1em auto;
+.desccont{
+    width:50%;
+    margin:1.3em auto;
+    background-color: #35313b;
+    display:flex;
 }
 
-.formcontainer{
+.text{
+    margin:1.5em 1.5em 0;
+}
+
+.text p{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color:white;
+}
+
+.text h1{
+    font-family: 'Satisfy', cursive;
+    color:white;
+}
+
+.slideshow{
+    width:350%
+}
+
+.slideshow img{
+    width: 100%;
+}
+
+.infocont{
+    width:50%;
+    margin:1.5em auto;
+    background-color: #35313b;
     display:flex;
     justify-content: space-between;
 }
 
-.headcont{
+.infoconthor{
+    margin: 1.5em 1.5em 0;
+    flex-basis:100%;
+}
+
+.infocont iframe{
+    flex-basis:100%;
+    margin-left:1.5em;
+}
+
+.infoel{
     color:white;
-    font-family: 'Raleway', sans-serif;
+    display: flex;
+    align-items: center;
+    font-size:120%;
     font-weight: bold;
-    font-size:2.5em;
-    text-align: center;
-    margin-top:2em;
 }
 
-.inputs{
-    width:45%
-}
-
-.inputfield{
-    margin:10px auto;
-}
-
-.inputfield lebel{
+.infodes{
     color:white;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    display:block;
+    align-items: center;
+    font-size:100%;
+    font-weight: 100;
+    margin-bottom: 1em;
 }
 
-.inputfield input{
-    border-radius: 12px;
-    display:block;
-    width:100%;
+.infoel p{
+    margin:0;
+    margin-left: 0.5em;
 }
 
-.calander{
-    background-color: white;
-    font-family: 'Raleway', sans-serif;
-    margin-top: 10px;
-    margin-right:10px;
+.infodes p{
+    margin:0;
+    margin-left: 1.85em;
 }
 
-.calander th{
-    background-color: #35313b;
-    color:white;
-    font-weight: bold;
-    text-align: center;
-    padding: 0.6em 0.5em 0.4em;
+.infoel i{
+    width:1em
 }
 
-.calander td{
-    text-align: center;
-    padding: 0.3em 0.5em;
+.date{
+    display:flex;
+    justify-content: space-between;
 }
 
-.calander td:hover{
-    background-color: #5F3C50;
-    color:white;
-    cursor: pointer;
-}
-
-.grayedout{
-    color:#B5B2B8;
-}
-
-.calnav{
-    background-color: #35313b;
-    color:white;
-}
-
-.but {
-    margin-top:1em;
-    font-family: 'Raleway', sans-serif;
-    border: 1px solid white;
-    color: white;
-    background: none;
-    border-radius: 12px;
-    padding:0.5em;
-}
-
-.but:hover {
-    transition: 1s;
-    color:#5F3C50;
-    background:none;
-    border: 1px solid #5F3C50;
-    background-color: white;
-}
 
 @media (max-width: 1024px) {
     .card {
@@ -268,34 +259,34 @@ body {
         /* border-bottom: 1px solid #5F3C50; */
     }
 
-    .rescontainer{
-        width:90%;
+    .desccont{
+        width: 90%;
+        flex-direction: column-reverse;
     }
 
-    .formcontainer{
-        flex-direction: column;
+    .slideshow{
+        width: 100%;
     }
 
-    .inputs {
-        width:90%;
-        margin:0 auto;
-    }
-
-    .calander{
-        margin: 1em auto 0.5em;
-        width: 85%;
-    }
-
-    .butcontainer{
+    .text h1{
         text-align: center;
     }
 
-    .butcontainer button{
-        width:85%
+    .infocont{
+        width: 90%;
+        flex-direction: column;
     }
 
-    .headcont{
+    .infocont iframe{
+        margin:0;
+        height:15em;
+    }
+
+    .infoconthor{
+        margin:1.5 1.5em 0;
+    }
+
+    .timesmob{
         margin-top:0;
     }
-
   }
