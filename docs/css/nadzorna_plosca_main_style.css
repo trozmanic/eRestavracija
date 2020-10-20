@@ -93,36 +93,35 @@ body, html {
 /* END Vrhni Meni */
 
 
-/* rezervacija skatle */
+/* Rezervacija kartice */
 .rezervacija-skatla {
     color: white;
     background: none;
     backdrop-filter: blur(5px);
     border-radius: 4px;
     border: 1px solid white;
+    margin-bottom: 1%;
 }
-
-/* Rezervacija kartice */
-.akcija-kartica {
-    background: none;
-    backdrop-filter: blur(5px);
-}
-.akcije-gumbi-div {
-    display: flex;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-
-}
-.akcije-text {
-    color: white;
-}
-.akcije-gumbi-text {
-    font-size: 95%;
+.kartica-padding {
+    padding-left: 1%;
+    padding-right: 1%;
 }
 .sredina-text {
     text-align: center;
 }
+.levo-text {
+    text-align: left;
+}
+.levo-float {
+    float: left;
+}
+.desno-text {
+    text-align: right;
+}
+.desno-float {
+    float: right;
+}
+/* END Kartica */
 
 /* ZigaPozar */
 .btn-dark {
