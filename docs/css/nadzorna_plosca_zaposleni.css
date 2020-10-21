@@ -1,0 +1,31 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+.table {
+    font-size: 20px;
+    background-color: #35313b;
+}
+h1 {
+    color: White;
+}
+.thead {
+    background-color: #2A272E;
+    font-size: 21px;
+}
+.gumb {
+    transition: 1s;
+    border: 1px solid #5F3C50;
+    background-color: white;
+    color: #35313b;
+}
+.gumb:hover {
+    transition: 1s;
+    border: 1px solid #35313b;
+    background-color: #35313b;
+}
+.input-group input[type="text"] {
+    border: 1px solid #3f3c45;
+}
+.input-group input[type="text"]:focus:not([readonly]) {
+    box-shadow: 0 0 3px 2px #3f3c45;
+}
