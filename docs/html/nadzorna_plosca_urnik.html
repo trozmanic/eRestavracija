@@ -52,10 +52,11 @@
         <!-- END Vrhni Meni -->
 
         <!-- Tukaj vstavi vsebino -->
-        <div class="col-xl-12">
+        <div class="col-xl-12 title">
             <h1 class="sredina-text text-white">Urnik izmen</h1>
+            <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
         </div>
-        <div class="col-xl-12">
+        <div class="col-xl-12 title">
             <h3 class="sredina-text text-white"><i role="button" class="fas fa-arrow-left ikone-stil-posamezna"></i>Oktober 2020<i role="button" class="fas fa-arrow-right ikone-stil-posamezna"></i></h3>
         </div>
         <!-- Zacetek Urnika -->
@@ -223,21 +224,31 @@
                 </div>
             </div>
 
-            <div class="row rezervacija-skatla">
-                <div class="col-xl-11 ikone-stil-posamezna gor-margin">
-                    <h4>Legenda:</h4>
-                </div>
-                <div class="col-11 col-sm-5 col-md-4 col-lg-3 col-xl-2 ikone-stil-posamezna-no-center">
-                    <p>brez: prosto</p>
-                </div>
-                <div class="col-11 col-sm-5 col-md-4 col-lg-3 col-xl-2 ikone-stil-posamezna-no-center">
-                    <p>?: se ni doloceno</p>
-                </div>
-                <div class="col-11 col-sm-5 col-md-4 col-lg-3 col-xl-2 ikone-stil-posamezna-no-center">
-                    <p>D: dopoldan</p>
-                </div>
-                <div class="col-11 col-sm-5 col-md-4 col-lg-3 col-xl-2 ikone-stil-posamezna-no-center">
-                    <p>P: popoldan</p>
+            <div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h1 class="legendheader">Legenda</h1>
+                            <div class="iconsflex">
+                                <div class="iconmodal">
+                                    <p>brez: prosto</p>
+                                </div>
+                                <div class="iconmodal">
+                                    <p>?: se ni doloceno</p>
+                                </div>
+                                <div class="iconmodal">
+                                    <p>D: dopoldan</p>
+                                </div>
+                                <div class="iconmodal">
+                                    <p>P: popoldan</p>
+                                </div>
+                            </div>
+                            <div class="but">
+                                <button type="submit"  data-dismiss="modal">Zapri</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
