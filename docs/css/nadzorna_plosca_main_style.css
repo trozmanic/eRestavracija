@@ -96,11 +96,11 @@ body, html {
 /* Rezervacija kartice */
 .rezervacija-skatla {
     color: white;
-    background: none;
-    backdrop-filter: blur(5px);
-    border-radius: 4px;
-    border: 1px solid white;
-    margin-bottom: 1%;
+    background-color: #35313b;
+    border-radius: 12px;
+    /*border: 1px solid white;*/
+    margin-bottom: 1em;
+    padding:1em;
 }
 .kartica-padding {
     padding-left: 1%;
@@ -128,5 +128,82 @@ body, html {
     color: white;
     margin-right: 2%;
     margin-left: 2%;
+}
+
+.title{
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title i{
+    font-size: 1.5em;
+    margin: 0 0.5em 0;
+}
+
+.title i:hover{
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+} 
+
+.title h1{
+    margin:0;
+}
+
+.modal-content{
+    background-color: #35313b;
+    border-radius: 12px;
+}
+
+.iconsflex{
+    display:flex;
+    flex-direction: column;
+    margin-left: 0.5em;
+}
+
+.iconmodal{
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.iconmodal i{
+    font-size: 1.5em;
+    color: white;
+    width: 1em;
+}
+
+.iconmodal p{
+    margin:0 1em 0;
+    color:white;
+}
+
+.legendheader{
+    color:white;
+    text-align: center;
+}
+
+.but{
+    display:flex;
+    justify-content: center;
+}
+
+.but button{
+    margin:0 auto;
+    font-family: 'Raleway', sans-serif;
+    border: 1px solid white;
+    color: white;
+    background: none;
+    border-radius: 12px;
+    padding:0.5em;
+}
+
+.but button:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
 }
 /* END Kartica */
