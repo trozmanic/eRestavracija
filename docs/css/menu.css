@@ -2,6 +2,34 @@
     font-family: 'Raleway', sans-serif;
 }
 
+*:focus {
+    outline: 0;
+}
+
+.button:focus, .button:active{
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.button {
+    font-size: 16px;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    background: none;
+    border: 1px solid white;
+    border-radius: 12px;
+    color: white;
+    transition: 1s;
+}
+
+.button:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
+}
+
 html {
     padding: 0;
     margin: 0;
@@ -160,6 +188,24 @@ body {
     display: none;
 }
 
+.slider {
+    margin-left: 25%;
+    width: 50%;
+    margin-top: 5%;
+}
+
+#rating-svg {
+    width: 50%;
+    margin-left: 25%;
+}
+
+#rating-svg svg {
+    width: 20%;
+    height: 20%;
+    margin-left: 40%;
+    color: white;
+}
+
 
 .rating-stars {
     display: inline-block;
@@ -168,6 +214,43 @@ body {
     padding-bottom: 6px;
 }
 
+.btn-menu {
+    padding: 1% 1%;
+    width: 40%;
+    margin-left:30%;
+}
+
+.btn-close {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.btn-review {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    padding: 5% 5%;
+    color: white;
+    background-color: #35313b;
+}
+
+.modal-header {
+    background-color: #35313b;
+    color: white;
+}
+
+.modal-body {
+    background-color: #35313b;
+}
+.slider{
+    fill: white;
+    background-color: white;
+    color: white;
+}
+.modal-footer {
+    margin: auto;
+}
 @-webkit-keyframes fadeIn {
     from { opacity: 0; }
       to { opacity: 1; }
