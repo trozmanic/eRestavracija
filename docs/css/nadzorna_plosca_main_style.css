@@ -121,4 +121,12 @@ body, html {
 .desno-float {
     float: right;
 }
+.gor-margin {
+    margin-top: 1%;
+}
+.ikone-stil-posamezna-no-center {
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
 /* END Kartica */
