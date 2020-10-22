@@ -1,6 +1,8 @@
+/* Pisava */
 * {
     font-family: 'Raleway', sans-serif;
 }
+/* Slika ozadja */
 body, html {
     padding: 0;
     margin: 0;
@@ -17,6 +19,8 @@ body, html {
     background-position-y: 60%;
     overflow: auto;
 }
+
+/* Vrhni Meni */
 .navbar-nadzorna-plosca {
     /* index ima 5.5% sam je wasted space na nadzorni plosci */
     margin-top: 1%;
@@ -27,23 +31,12 @@ body, html {
     width: 100%;
     position: relative;
 }
-.navbar-nadzorna-plosca-ul-li{
-    padding: 0;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 150%;
-    list-style: none;
-    display: inline-block;
-    /* index margin-left: 2%; */
-    /* index margin-right: 2%; */
-}
-.navbar-nadzorna-plosca-ul-li:hover {
-    transition: 0.75s;
-    color: #5F3C50;
-    border-radius: 12px;
-    padding: 7px;
-    background-color: white;
+.navbar-nadzorna-plosca-levo{
+    position: relative;
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
+    text-align: right;
 }
 .navbar-nadzorna-plosca-ul-li-text{
     padding: 0;
@@ -72,12 +65,65 @@ body, html {
     font-size: 150%;
 }
 .logo-nadzorna-plosca:hover {
-    transition: 0.75s;
-    color: #5F3C50;
-    border-radius: 12px;
-    padding: 7px;
-    background-color: white;
+    color: white;
+    /* transition: 0.75s; */
+    /* color: #5F3C50; */
+    /* border-radius: 12px; */
+    /* padding: 7px; */
+    /* background-color: white; */
 }
+/* ikone */
+.ikone-stil {
+    text-align: center;
+    font-size: 150%;
+    color: white;
+}
+.ikone-stil-posamezna {
+    text-align: center;
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+.ikone-stil-logout {
+    text-align: center;
+    font-size: 150%;
+    color: white;
+    margin-left: 1%;
+}
+/* END Vrhni Meni */
+
+
+/* Rezervacija kartice */
+.rezervacija-skatla {
+    color: white;
+    background: none;
+    backdrop-filter: blur(5px);
+    border-radius: 4px;
+    border: 1px solid white;
+    margin-bottom: 1%;
+}
+.kartica-padding {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.sredina-text {
+    text-align: center;
+}
+.levo-text {
+    text-align: left;
+}
+.levo-float {
+    float: left;
+}
+.desno-text {
+    text-align: right;
+}
+.desno-float {
+    float: right;
+}
+/* END Kartica */
+
+/* ZigaPozar */
 .btn-dark {
     font-size: 25px;
     font-family: 'Raleway', sans-serif;
@@ -86,6 +132,9 @@ body, html {
     border-radius: 12px;
     color: white;
     transition: 1s;
+    /* ce ci je usec ta dodatek */
+    backdrop-filter: blur(5px);
+    /* END dodatek */
 }
 .btn-dark:hover {
     transition: 1s;

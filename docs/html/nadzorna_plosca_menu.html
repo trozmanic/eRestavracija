@@ -10,9 +10,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="../css/nadzorna_plosca_main_style.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="../css/nadzorna_plosca_main_style.css">
+
         <title>Nadzorna plošča</title>
         
     </head>
@@ -20,75 +20,84 @@
     <body>
         <div class="bg">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-nadzorna-plosca">
+                <!-- Vrhni Meni -->
+                <nav class="col-xl-12 navbar navbar-expand-lg navbar-nadzorna-plosca">
 
-                    <a class="navbar-brand logo-nadzorna-plosca" href="index.html">AL Dente</a>
+                    <a class="navbar-brand logo-nadzorna-plosca" href="nadzorna_plosca_menu.html">AL Dente</a>
 
                     <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                        <ul class="navbar-nav navbar-nadzorna-plosca-ul">
-                            <li class="nav-item">
-                                <a class="nav-link active navbar-nadzorna-plosca-ul-li" href="#">UPRAVLJANJE REZERVACIJ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link navbar-nadzorna-plosca-ul-li" href="#">IZMENE</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link navbar-nadzorna-plosca-ul-li" href="#">PLACA</a>
-                            </li>
+                    <div class="collapse navbar-collapse navbar-nadzorna-plosca-levo" id="collapsibleNavbar">
+                        <div class="navbar-nav navbar-nadzorna-plosca-ul">
 
-                            <li class="nav-item">
+                            <div class="col-12 col-md-6 nav-item ikone-stil">
+                                <a href="nadzorna_plosca_rezervacije.html"><i class="fas fa-user-clock ikone-stil-posamezna"></i></a>
+                                <a href="nadzorna_plosca_urnik.html"><i class="far fa-calendar-alt ikone-stil-posamezna"></i></a>
+                                <a href="nadzorna_plosca_zasluzek.html"><i class="fas fa-coins ikone-stil-posamezna"></i></a>
+                                <a href="nadzorna_plosca_meni.html"><i class="fas fa-book-open ikone-stil-posamezna"></i></a>
+                                <a href="nadzorna_plosca_zaloga.html"><i class="fas fa-boxes ikone-stil-posamezna"></i></a>
+                                <a href="nadzorna_plosca_zaposleni.html"><i class="fas fa-user-cog ikone-stil-posamezna"></i></a>
+                            </div>
+
+                            <div class="col-12 col-md-6 nav-item navbar-nadzorna-plosca-levo">
                                 <span class="navbar-text navbar-nadzorna-plosca-ul-li-text">Chuck Norris</span>
-                            </li>
+                                <a href="index.html"><i class="fas fa-sign-out-alt ikone-stil-logout"></i></a>
+                            </div>
 
-                            <li class="nav-item">
-                                <a class="nav-link navbar-nadzorna-plosca-ul-li" href="#">ODJAVA</a>
-                            </li>
-
-
-                        </ul>
+                        </div>
                     </div>
-
                 </nav>
-                
+                <!-- END Vrhni Meni -->
+
+                <!-- Tukaj vstavi vsebino -->
+
+
+                <!-- ce ci je usec ta dodatek -->
+                <div class="col-xl-12">
+                    <h1 class="sredina-text text-white">Nadzorna plošča</h1>
+                </div>
+                <div class="col-xl-12">
+                    <h3 class="sredina-text text-white">Legenda ikon menija</h3>
+                </div>
+                <!-- END dodatek -->
+
+
                 <!-- Zacetek nadzorne plosce -->
-                <br>
-                <br>
-                <br>
-                <br>
+
                 <br>
                   <div class="row">
                     <div class="col">
-                        <a href="" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a>
+                        <a href="nadzorna_plosca_rezervacije.html" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a>
                     </div>
                     <div class="col">
-                        <a href="" role="button" class="btn btn-dark btn-block"><i class="fas fa-coins"></i><br>Zaslužek</a>
-                    </div>
-                    <div class="w-100"></div>
-                    <div class="col">&nbsp;</div>
-                    <div class="col">&nbsp;</div>
-                    <div class="w-100"></div>
-                    <div class="col">
-                        <a href="" role="button" class="btn btn-dark btn-block"><i class="far fa-calendar-alt"></i><br>Urnik</a>
-                    </div>
-                    <div class="col">
-                        <a href="" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a>
+                        <a href="nadzorna_plosca_urnik.html" role="button" class="btn btn-dark btn-block"><i class="far fa-calendar-alt"></i><br>Urnik</a>
                     </div>
                     <div class="w-100"></div>
                     <div class="col">&nbsp;</div>
                     <div class="col">&nbsp;</div>
                     <div class="w-100"></div>
                     <div class="col">
-                        <a href="" role="button" class="btn btn-dark btn-block"><i class="fas fa-book-open"></i><br>Meni</a>
+                        <a href="nadzorna_plosca_zasluzek.html" role="button" class="btn btn-dark btn-block"><i class="fas fa-coins"></i><br>Zaslužek</a>
                     </div>
                     <div class="col">
-                        <a href="" role="button" class="btn btn-dark btn-block"><i class="fas fa-boxes"></i><br>Zaloga</a>
+                        <a href="nadzorna_plosca_meni.html" role="button" class="btn btn-dark btn-block"><i class="fas fa-book-open"></i><br>Meni</a>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <a href="nadzorna_plosca_zaloga.html" role="button" class="btn btn-dark btn-block"><i class="fas fa-boxes"></i><br>Zaloga</a>
+                    </div>
+                    <div class="col">
+                        <a href="nadzorna_plosca_zaposleni.html" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a>
                     </div>
                   </div>
-                  <!-- konec nadzorne plosce -->
+                  <!-- END nadzorne plosce -->
+
+                <!-- Tukaj KONEC vsebino -->
             </div>
         </div>
 
