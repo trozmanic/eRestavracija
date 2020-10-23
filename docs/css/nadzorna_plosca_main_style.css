@@ -184,22 +184,26 @@ body, html {
     text-align: center;
 }
 
-.but{
+.butlegenda{
     display:flex;
     justify-content: center;
 }
 
-.but button{
-    margin:0 auto;
+.butkontakt{
+    display: flex;
+}
+
+.but{
     font-family: 'Raleway', sans-serif;
     border: 1px solid white;
     color: white;
     background: none;
     border-radius: 12px;
     padding:0.5em;
+    margin-right: 1em;
 }
 
-.but button:hover {
+.but:hover {
     transition: 1s;
     color:#5F3C50;
     background:none;
@@ -211,4 +215,9 @@ body, html {
     font-size: 1em;
 }
 
+.kontaktinput{
+    width: 100%;
+    height: 10em;
+    margin-bottom: 1em;
+}
 /* END Kartica */

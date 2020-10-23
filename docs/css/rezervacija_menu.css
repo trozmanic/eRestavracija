@@ -93,16 +93,6 @@ body {
     font-size: 200%;
 }
 
-.rescontainer{
-    width: 35%;
-    margin:1em auto;
-}
-
-.formcontainer{
-    display:flex;
-    justify-content: space-between;
-}
-
 .headcont{
     color:white;
     font-family: 'Raleway', sans-serif;
@@ -112,64 +102,42 @@ body {
     margin-top:2em;
 }
 
-.inputs{
-    width:45%
-}
-
-.inputfield{
-    margin:10px auto;
-}
-
-.inputfield lebel{
-    color:white;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    display:block;
-}
-
-.inputfield input{
-    border-radius: 12px;
-    display:block;
-    width:100%;
-}
-
-.calander{
-    background-color: white;
-    font-family: 'Raleway', sans-serif;
-    margin-top: 10px;
-    margin-right:10px;
-}
-
-.calander th{
+.menuitem{
     background-color: #35313b;
-    color:white;
+    margin-bottom: 1.5em;
+}
+
+.menuitem img{
+    width: 100%;
+}
+
+.menudesc{
+    display:flex;
+    justify-content: space-between;
+    padding:1em;
+    align-items: center;
+}
+
+.menudescname{
+    display:flex;
+    align-items: center;
+}
+
+.menudesc h1{
+    margin: 0;
+    color: white;
     font-weight: bold;
-    text-align: center;
-    padding: 0.6em 0.5em 0.4em;
+    font-size: 1.5em;
 }
 
-.calander td{
-    text-align: center;
-    padding: 0.3em 0.5em;
-}
-
-.calander td:hover{
-    background-color: #5F3C50;
+.menudesc p{
+    margin:0 0.3em;
     color:white;
-    cursor: pointer;
-}
-
-.grayedout{
-    color:#B5B2B8;
-}
-
-.calnav{
-    background-color: #35313b;
-    color:white;
-}
+    font-size:1.2em;
+    font-weight: 100;
+} 
 
 .but {
-    margin-top:1em;
     font-family: 'Raleway', sans-serif;
     border: 1px solid white;
     color: white;
@@ -179,6 +147,26 @@ body {
 }
 
 .but:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
+    text-decoration: none;
+}
+
+.butlarge {
+    font-family: 'Raleway', sans-serif;
+    border: 1px solid white;
+    color: white;
+    background: none;
+    border-radius: 12px;
+    padding: 0.2em 2em;
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.butlarge:hover {
     transition: 1s;
     color:#5F3C50;
     background:none;
@@ -269,34 +257,13 @@ body {
         /* border-bottom: 1px solid #5F3C50; */
     }
 
-    .rescontainer{
-        width:90%;
-    }
-
-    .formcontainer{
-        flex-direction: column;
-    }
-
-    .inputs {
-        width:90%;
-        margin:0 auto;
-    }
-
-    .calander{
-        margin: 1em auto 0.5em;
-        width: 85%;
-    }
-
-    .butcontainer{
-        text-align: center;
-    }
-
-    .butcontainer button{
-        width:85%
-    }
-
     .headcont{
         margin-top:0;
+    }
+
+    .menudescname{
+        align-items: baseline;
+        flex-direction: column;
     }
 
   }
