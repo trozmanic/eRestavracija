@@ -77,7 +77,7 @@
 
                 <div class="col-12 col-md-6">
                     <div class="col-xl-12">
-                        <h3 class="sredina-text text-white">Rezervacije</h3>
+                        <h3 class="sredina-text text-white">Nove rezervacije</h3>
                     </div>
 
                     <div class="rezervacija-skatla">
@@ -105,7 +105,7 @@
                             <li>Rizota z lososom <strong>1x</strong></li>
                         </ul>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna"></i>
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
                             <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
                             
                             <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
@@ -130,7 +130,7 @@
                             <li>Cvrti lignji <strong>2x</strong></li>
                         </ul>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna"></i>
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
                             <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
                             
                             <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
@@ -160,7 +160,7 @@
                             <li>Rizota z lososom <strong>1x</strong></li>
                         </ul>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna"></i>
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
                             <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
                             
                             <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
@@ -174,7 +174,7 @@
 
                 <div class="col-12 col-md-6">
                     <div class="col-xl-12">
-                        <h3 class="sredina-text text-white">Odjave</h3>
+                        <h3 class="sredina-text text-white">Potrjene rezervacije</h3>
                     </div>
 
                     <div class="rezervacija-skatla">
@@ -195,9 +195,8 @@
                             <li>File tune na zaru <strong>1x</strong></li>
                         </ul>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna"></i>
-                            <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
-                            
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                            <i role="button" class="fas fa-utensils"></i>              
                             <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
                         </div>
                     </div>
@@ -221,8 +220,8 @@
                             <li>Solata s skampi <strong>1x</strong></li>
                         </ul>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna"></i>
-                            <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                            <i role="button" class="fas fa-utensils"></i>   
                             
                             <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
                         </div>
@@ -247,8 +246,8 @@
                             <li>Rizota z lososom <strong>1x</strong></li>
                         </ul>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna"></i>
-                            <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                            <i role="button" class="fas fa-utensils"></i>   
                             <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
                         </div>
                     </div>
@@ -285,9 +284,29 @@
                                 <i class="fas fa-ban"></i>
                                 <p>Zavrni</p>
                             </div>
+                            <div class="iconmodal">
+                                <i class="fas fa-utensils"></i>
+                                <p>Dodaj med naročila</p>
+                            </div>
                         </div>
-                        <div class="but">
-                            <button type="submit"  data-dismiss="modal">Zapri</button>
+                        <div class="butlegenda">
+                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="kontaktstranke" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="legendheader">Kontakt stranke</h1>
+                        <textarea class="kontaktinput" type="text"></textarea>
+                        <div class="butkontakt">
+                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+                            <button type="submit" class="but">Pošlji</button>
                         </div>
                     </div>
                 </div>

@@ -21,6 +21,7 @@ h1 {
     transition: 1s;
     /* ce ti je usec ta dodatek */
     backdrop-filter: blur(5px);
+    margin-bottom: 0.5em;
     /* END dodatek */
 }
 .btn-dark:hover {
