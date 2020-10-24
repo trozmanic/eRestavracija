@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/nadzorna_plosca_main_style.css">
-    <link rel="stylesheet" href="../css/nadzorna_plosca_menu.css">
+    <link rel="stylesheet" href="../css/nadzorna_plosca_meni.css">
     <title>Meni</title>
 </head>
 <body>
@@ -47,155 +47,177 @@
                 </div>
             </div>
         </nav>
-        <div class="dish">
+
+        <div class="col-xl-12 title">
+            <h1>Meni</h1>
+            <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+        </div>
+
+        <div class="rezervacija-skatla">
+            <h5 class="sredina-text">Nova jed</h5>
             <form method="post">
-                <label style="color: white">Name</label>
-                <input type="text" name="name" >
+                <div class="form-group">
+                    <label style="color: white">Ime</label>
+                    <input type="text" name="name" >
+                </div>
+                <div class="form-group">
+                    <label>Opis</label>
+                    <textarea  name="description" class="form-control form-control-lg mb-3" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Cena</label>
+                    <input type="text"  name="price" >
+                </div>
+                <div class="form-group">
+                    <label>Kalorije</label>
+                    <input type="text" name="calories" >
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Izberi sliko</label>
+                </div>
+                <div class="form-group gor-margin">
+                    <span class="desno-float">
+                        <input type="submit" class="btn btn-success" value="Shrani">
+                    </span>
+                </div>
                 <br>
-                <label>Description</label>
-                <textarea  name="description" class="form-control form-control-lg mb-3" rows="3"></textarea><br>
-                <label>Price</label>
-                <input type="text"  name="price" >
-                <label>Calories</label>
-                <input type="text" name="calories" >
-                <input type="file"  name="image"  value="Chose image" ><br>
-                <input type="submit" class="btn btn-success" value="Save">
             </form>
         </div>
-        <ul class="dashboard-menu">
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>Hobotnica</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>Hobotnica</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <h6>Kalorije: 750kcal</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
-
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>Spageti po mediteransko</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <h6>Kalorije: 750kcal</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h5 class="sredina-text">Uredi</h5>
+            <form method="post">
+                <div class="form-group">
+                    <label style="color: white">Ime</label>
+                    <input type="text" name="name" value="Lignji po trzasko" >
                 </div>
                 <br>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>Spageti po mediteransko</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
+                <div class="form-group">
+                    <label>Opis</label>
+                    <textarea  name="description" class="form-control form-control-lg mb-3" rows="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!"</textarea>
                 </div>
-                <br>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <form method="post">
-                        <label style="color: white">Name</label>
-                        <input type="text" name="name" value="Lignji po trzasko" >
-                        <br>
-                        <label>Description</label>
-                        <textarea  name="description" class="form-control form-control-lg mb-3" rows="3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!"</textarea><br>
-                        <label>Price</label>
-                        <input type="text"  name="price" value="10€" >
-                        <label>Calories</label>
-                        <input type="text"  name="calories" value="750 kcal" >
-                        <input type="file"  name="image" value="Chose image" ><br>
+                <div class="form-group">
+                    <label>Cena</label>
+                    <input type="text"  name="price" value="10€" >
+                </div>
+                <div class="form-group">
+                    <label>Kalorije</label>
+                    <input type="text"  name="calories" value="750 kcal" >
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Izberi sliko</label>
+                </div>
+                <div class="form-group gor-margin">
+                    <span class="desno-float">
                         <input type="submit" class="btn btn-success" value="Save">
-                    </form>
-                </div>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>Cvrti lignji</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
+                    </span>
                 </div>
                 <br>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>Morska solata</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
-                </div>
-                <br>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>Solata s skampi</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
-                </div>
-                <br>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>File tune na zaru</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
-                </div>
-                <br>
-            </li>
-            <li>
-                <br>
-                <div class="dish">
-                    <h4>Rizota z lososom</h4>
-                    <div>
-                        <button type="button" class="btn btn-outline-warning btn-sm" style="float: right">Edit</button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right">Delete</button>
-                    </div>
-                    <h6>10€</h6>
-                    <h6>750 kcal</h6>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
-                    </p>
-                </div>
-                <br>
-            </li>
-        </ul>
+            </form>
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>Cvrti lignji</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <h6>Kalorije: 750kcal</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>Morska solata</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <h6>Kalorije: 750kcal</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>Solata s skampi</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>File tune na zaru</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <h6>Kalorije: 750kcal</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
+        </div>
+        <br>
+        <br>
+        <div class="rezervacija-skatla">
+            <h4>Rizota z lososom</h4>
+            <span class="desno-float">
+                            <button type="button" class="btn btn-outline-warning btn-sm">Uredi</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm">Briši</button>
+                        </span>
+            <h6>Cena: 10€</h6>
+            <h6>Kalorije: 750kcal</h6>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!
+            </p>
+        </div>
+        <br>
 
     </div>
 </div>

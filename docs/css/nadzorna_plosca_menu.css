@@ -21,27 +21,3 @@
     background-color: white;
 }
 
-.dish{
-    padding: 10px;
-    position: center;
-    color: white;
-    border:1px solid white;
-    border-radius: 12px;
-}
-
-
-
-input[type=text]{
-    padding: 4px;
-    border-radius: 5px;
-}
-
-button{
-    margin: 2px;
-}
-
-
-label {
-    color: white;
-}
-
