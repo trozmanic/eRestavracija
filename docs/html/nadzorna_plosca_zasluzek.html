@@ -582,63 +582,6 @@
     }
 
 </script>
-<script type="text/javascript">
-    function PrintElem(elem) {
-        var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
-        mywindow.document.write('<html><head><title>' + 'Racun'  + '</title>');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write('<h1>' + 'Racun'  + '</h1>');
-        mywindow.document.write(document.getElementById(elem).innerHTML);
-        mywindow.document.write('</body></html>');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10*/
-
-        mywindow.print();
-        mywindow.close();
-
-        return true;
-    }
-
-    function f1() {
-        PrintElem('racun1');
-    }
-    function f2() {
-        PrintElem('racun2');
-    }
-    function f3() {
-        PrintElem('racun3');
-    }
-    function f4() {
-        PrintElem('racun4');
-    }
-    function f5() {
-        PrintElem('racun5');
-    }
-    function f6() {
-        PrintElem('racun6');
-    }
-
-    var btn1 = document.getElementById('natisni-g-1');
-    btn1.addEventListener('click', f1);
-
-    var btn2 = document.getElementById('natisni-g-2');
-    btn2.addEventListener('click', f2);
-
-    var btn3 = document.getElementById('natisni-g-3');
-    btn3.addEventListener('click', f3);
-
-    var btn4 = document.getElementById('natisni-g-4');
-    btn4.addEventListener('click', f4);
-
-    var btn5 = document.getElementById('natisni-g-5');
-    btn5.addEventListener('click', f5);
-
-    var btn6 = document.getElementById('natisni-g-6');
-    btn6.addEventListener('click', f6);
-
-
-</script>
 </body>
 </html>
