@@ -65,12 +65,9 @@ body, html {
     font-size: 150%;
 }
 .logo-nadzorna-plosca:hover {
-    color: white;
-    /* transition: 0.75s; */
-    /* color: #5F3C50; */
-    /* border-radius: 12px; */
-    /* padding: 7px; */
-    /* background-color: white; */
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
 }
 /* ikone */
 .ikone-stil {
@@ -89,6 +86,11 @@ body, html {
     font-size: 150%;
     color: white;
     margin-left: 1%;
+}
+.ikone-stil-logout:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
 }
 /* END Vrhni Meni */
 
@@ -146,8 +148,23 @@ body, html {
     cursor: pointer;
     color: #5F3C50;
     transition: 0.75s;
-} 
-
+}
+.ikone-stil-posamezna:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+.ikone-stil-dodatno:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+.ikone-stil-posamezna-no-hover {
+    text-align: center;
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
 .title h1{
     margin:0;
 }
@@ -221,3 +238,7 @@ body, html {
     margin-bottom: 1em;
 }
 /* END Kartica */
+/* graf zasluzek */
+canvas#chLine {
+    background-color: #35313b;
+}
