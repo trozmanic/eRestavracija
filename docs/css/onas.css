@@ -235,7 +235,7 @@ body {
     ##Screen = B/w 320px to 479px
   */
   
-  @media (min-width: 100px) and (max-width: 480px) {
+  @media (min-width: 100px) and (max-width: 767px) {
     .main_container {
         background-image: url('../img/andrew-seaman-sQopSb2K0CU-unsplash.jpg');
         background-color: #4C4556;
