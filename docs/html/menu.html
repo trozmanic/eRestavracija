@@ -28,8 +28,12 @@
                         <path d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
                       </svg>
                 </div>
+                <div id='rating-number'>
+                    Ocena jedi: 3
+                </div>
                 <div class="slidecontainer">
-                    <input type="range" min="1" max="5" value="3" class="slider" id="myRange">
+                    
+                    <input type="range" min="1" max="5" value="3" class="slider" id="myRange" oninput="slider_change(this.value)" >
                 </div>
             </div>
             <div class="modal-footer">
@@ -47,7 +51,7 @@
             <ul>
                 <li> <a href="./index.html">DOMOV</a></li>
                 <li> <a href="./onas.html">O NAS</a></li>
-                <li> <a href="./menu.html">MENU</a></li>
+                <li> <a href="./menu.html" class="selected">MENU</a></li>
                 <li id="rezerviraj_mizo"> <a href="./rezervacija.html">REZERVIRAJ MIZO</a></li>
             </ul>
         </div>
@@ -56,12 +60,12 @@
             <h1>AL Dente</h1>
             <p>Where the flavor inebriates you</p>
         </div>
-
         <div class="menu-items">
             <div class="card" id="card1">
                 <img src="../img/jedi/jed1.png" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h1 class="card-title">Hobotnica </h5>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -104,6 +108,7 @@
                 <img src="../img/jedi/jed2.png" class="card-img-top" alt="">
                 <div class="card-body">  
                 <h1 class="card-title">Spageti po mediteransko</h5>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -145,6 +150,7 @@
                 <img src="../img/jedi/jed3.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h1 class="card-title">Lignji po trzasko</h5>
+                        <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                     <p class="card-text">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                       Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -186,6 +192,7 @@
                 <img src="../img/jedi/jed4.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h1 class="card-title">Cvrti lignji</h1>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                     <p class="card-text">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                       Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -227,6 +234,7 @@
                 <img src="../img/jedi/jed5.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h1 class="card-title">Morska solata</h1>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                     <p class="card-text">
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                       Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -269,6 +277,7 @@
                 <img src="../img/jedi/jed6.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h1 class="card-title">Solata s skampi</h1>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -310,6 +319,7 @@
                 <img src="../img/jedi/jed7.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h1 class="card-title">File tune na zaru </h1>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -351,6 +361,7 @@
                 <img src="../img/jedi/jed8.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h1 class="card-title">Rizota z lososom</h1>
+                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                     Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae,
@@ -426,11 +437,14 @@
 
     const slider = document.getElementById('myRange')
     console.log(slider)
-    slider.addEventListener('change', (event)=> {
+    const slider_change = function (event) {
         const rating = slider.value;
+        const number_container = document.getElementById('rating-number')
         const svg_container = document.getElementById("rating-svg")
         svg_container.innerHTML = svg[parseInt(rating) - 1]
-    })
+        number_container.innerHTML = 'Ocena jedi: ' + rating
+    }
+
     
     const isVisible = (classList) => {
         for (var i = 0; i < classList.length ; i ++) {
