@@ -15,15 +15,10 @@ input[type=text]{
 
 
 
-button{
-    margin: 2px;
-}
 
 
 label {
     color: white;
 }
 
-.button-center{
-    align-items: center;
-}
+
