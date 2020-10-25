@@ -53,10 +53,19 @@ desno pa gumb za zapiranje prikaznega okna. Z drsnikom izberemo oceno jedi (skra
 1 - 5. Na dnu prikaznega okna se nahajata se gumba ZAPRI (zapremo okno) in POSLJI (posljemo oceno).
 
 ### 1.1.3 O NAS
-Na tej strani so prikazane osnovne informacije o naši restavraciji. Na vrhu se nahaja iskalna vrstica, pod njo se nahaja logotip, pod njim pa vsebina strani razdeljena na dva dela. Prvi del sestavlja opis restavracije na levi strani, za enkrat je to sample text, na desni strani pa je slika restavracije. Drugi del predstavlja prikaz osnovnih kontaktnih informacij, čas delanja in Google Maps prikazuje lokacijo restavracije.
+- Na tej strani so prikazane osnovne informacije o naši restavraciji.
+- Na vrhu se nahaja iskalna vrstica, pod njo se nahaja logotip, pod njim pa vsebina strani razdeljena na dva dela. 
+- Prvi del sestavlja opis restavracije na levi strani, za enkrat je to sample text, na desni strani pa je slika restavracije. 
+- Drugi del predstavlja prikaz osnovnih kontaktnih informacij, čas delanja in Google Maps prikazuje lokacijo restavracije.
 
 ### 1.1.4 REZERVIRAJ MIZO
-Na vrhu se nahaja iskalna vrstica, pod njo se nahaja logotip, nato pa vsebina strani, kjer lahko rezerviramo mizo. Na levi strani vnesemo ime, priimek, email, ura in število oseb za rezervacijo. Na desni strani je koloder, ki omogoča premik po mesecih, kjer izberemo datum rezervacije. Ob kliku naprej pridemo na izbiro jedi, kjer s klikom na gumb dodaj, dodamo željeno jed. S klikom na gumb rezerviraj končamo rezervacijo. Podatki zaključene rezervacije se prikažejo na strani rezervacij na nadzorni plošči.
+- Na vrhu se nahaja iskalna vrstica, pod njo se nahaja logotip, nato pa vsebina strani, kjer lahko rezerviramo mizo. 
+- Na levi strani vnesemo ime, priimek, email, ura in število oseb za rezervacijo. 
+- Na desni strani je koloder, ki omogoča premik po mesecih, kjer izberemo datum rezervacije. 
+- Ob kliku naprej pridemo na izbiro jedi, kjer s klikom na gumb dodaj, dodamo željeno jed. 
+- S klikom na gumb rezerviraj končamo rezervacijo. 
+- Podatki zaključene rezervacije se prikažejo na strani rezervacij na nadzorni plošči.
+
 
 ## 1.2 NADZORNA PLOŠČA
 Na vrhu nadzorne plošče je navigacijska vrstica, ki vsebuje naslednje povezave:
