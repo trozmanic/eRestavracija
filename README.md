@@ -72,4 +72,5 @@ desno pa gumb za zapiranje prikaznega okna. Z drsnikom izberemo oceno jedi (skra
 
 ### 1.2.7 NAROČILA
 
- 
+ZUNANJI VIR!!!!
+ANKETA: BLAŽ TINE R. ŽIGA AZUR TINE E.
