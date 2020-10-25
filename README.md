@@ -29,14 +29,17 @@ Varnostno zaščitena progresivna aplikacija -->
 
 
 # 1. OPIS ZASLONSKIH MASK
-## 1.1 INDEX
+
+## 1.1 
+
+### 1.1.1 INDEX
 - Vstopna stran v aplikacijo za uporabnika (landing page)
 - Na vrhu strani se nahaja iskalna vrstica (navigation bar)
 - Pod iskalno vrstico se nahaja logotip aplikacije
 - Na voljo sta dva gumba regsitracija in prijava
 - Ob kliku na enega izmed gumbov se nam prikaze obrazec za registracijo/prijavo uporabnika
 
-## 1.2 MENU
+### 1.1.2 MENU
 - Na vrhu strani se nahaja iskalna vrstica (navigation bar)
 - Pod iskalno vrstico se nahaja logotip aplikacije
 - Menu je predstavljen z jedmi (vsaka jed zavzema eno skatlo)
@@ -48,4 +51,25 @@ OCENI JED. S klikom na gumb se nam odpre prikazno okno.
 - Prikazno okno omogoca uporabniku oddajanje svoje ocene trenutno izbrane jedi. Na samem vrhu levo prikaznega okna je naslov,
 desno pa gumb za zapiranje prikaznega okna. Z drsnikom izberemo oceno jedi (skrajno leva pozicija = najslabsa ocena, skrajno desna pozicija = najboljsa ocena). Ko uporabnik izbira oceno z drsnikom mu je na voljo vizualni prikaz trenutno izbrane ocene v obliki SVG grafike (smiley), ki ponazarja zadovoljstvo z jedjo, kot tudi numericna vrednost drsnika (ocena) v razponu od 
 1 - 5. Na dnu prikaznega okna se nahajata se gumba ZAPRI (zapremo okno) in POSLJI (posljemo oceno).
+
+### 1.1.3 O NAS
+
+### 1.1.4 REZERIVRAJ MIZO
+
+## 1.2 NADZORNA PLOŠČA
+
+### 1.2.1 REZERVACIJE
+
+### 1.2.2 URNIK
+
+### 1.2.3 ZASLUŽEK
+
+### 1.2.4 MENI
+
+### 1.2.5 ZALOGA
+
+### 1.2.6 ZAPOSLENI
+
+### 1.2.7 NAROČILA
+
  
