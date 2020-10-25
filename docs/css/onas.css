@@ -176,6 +176,13 @@ body {
     justify-content: space-between;
 }
 
+.selected {
+    border-radius: 12px;
+    padding: 6px;
+    border: 1px solid white;
+    background-color: white;
+    color: #5F3C50 !important;
+}
 
 @media (max-width: 1024px) {
     .card {

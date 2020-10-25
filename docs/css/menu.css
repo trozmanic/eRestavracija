@@ -175,6 +175,7 @@ body {
 }
 
 .properties-info {
+    margin-top: 5%;
     text-align: center;
     color: white;
 }
@@ -251,6 +252,29 @@ body {
 .modal-footer {
     margin: auto;
 }
+
+.selected {
+    border-radius: 12px;
+    padding: 6px;
+    border: 1px solid white;
+    background-color: white;
+    color: #5F3C50 !important;
+}
+
+#rating-number {
+    color: white;
+    width: 50%;
+    margin: auto;
+    margin-top: 5%;
+    font-size: 24px;
+    text-align: center;
+}
+
+.instructions {
+    color: white;
+    background: none;
+}
+
 @-webkit-keyframes fadeIn {
     from { opacity: 0; }
       to { opacity: 1; }
