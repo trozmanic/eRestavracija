@@ -1,0 +1,244 @@
+/* Pisava */
+* {
+    font-family: 'Raleway', sans-serif;
+}
+/* Slika ozadja */
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+.bg {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)),
+    url('../images/pexels-emre-kuzu-2237189.jpg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 60%;
+    overflow: auto;
+}
+
+/* Vrhni Meni */
+.navbar-nadzorna-plosca {
+    /* index ima 5.5% sam je wasted space na nadzorni plosci */
+    margin-top: 1%;
+}
+.navbar-nadzorna-plosca-ul {
+    /* text-align: center; */
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+.navbar-nadzorna-plosca-levo{
+    position: relative;
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
+    text-align: right;
+}
+.navbar-nadzorna-plosca-ul-li-text{
+    padding: 0;
+    color: gray;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 150%;
+    list-style: none;
+    display: inline-block;
+    /* index margin-left: 2%; */
+    /* index margin-right: 2%; */
+}
+/* TO JE ZA TO SA JE NAVBAR GUMB BEL*/
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.custom-toggler.navbar-toggler {
+    border-color: rgb(255,255,255);
+}
+/* END*/
+.logo-nadzorna-plosca {
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Satisfy', cursive;
+    color: white;
+    font-weight: 500;
+    font-size: 150%;
+}
+.logo-nadzorna-plosca:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+/* ikone */
+.ikone-stil {
+    text-align: center;
+    font-size: 150%;
+    color: white;
+}
+.ikone-stil-posamezna {
+    text-align: center;
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+.ikone-stil-logout {
+    text-align: center;
+    font-size: 150%;
+    color: white;
+    margin-left: 1%;
+}
+.ikone-stil-logout:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+/* END Vrhni Meni */
+
+
+/* Rezervacija kartice */
+.rezervacija-skatla {
+    color: white;
+    background-color: #35313b;
+    border-radius: 12px;
+    /*border: 1px solid white;*/
+    margin-bottom: 1em;
+    padding:1em;
+}
+.kartica-padding {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.sredina-text {
+    text-align: center;
+}
+.levo-text {
+    text-align: left;
+}
+.levo-float {
+    float: left;
+}
+.desno-text {
+    text-align: right;
+}
+.desno-float {
+    float: right;
+}
+.gor-margin {
+    margin-top: 1%;
+}
+.ikone-stil-posamezna-no-center {
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.title{
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title i{
+    font-size: 1.5em;
+    margin: 0 0.5em 0;
+}
+
+.title i:hover{
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+.ikone-stil-posamezna:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+.ikone-stil-dodatno:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+.ikone-stil-posamezna-no-hover {
+    text-align: center;
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+.title h1{
+    margin:0;
+}
+
+.modal-content{
+    background-color: #35313b;
+    border-radius: 12px;
+}
+
+.iconsflex{
+    display:flex;
+    flex-direction: column;
+    margin-left: 0.5em;
+}
+
+.iconmodal{
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.iconmodal i{
+    font-size: 1.5em;
+    color: white;
+    width: 1em;
+}
+
+.iconmodal p{
+    margin:0 1em 0;
+    color:white;
+}
+
+.legendheader{
+    color:white;
+    text-align: center;
+}
+
+.butlegenda{
+    display:flex;
+    justify-content: center;
+}
+
+.butkontakt{
+    display: flex;
+}
+
+.but{
+    font-family: 'Raleway', sans-serif;
+    border: 1px solid white;
+    color: white;
+    background: none;
+    border-radius: 12px;
+    padding:0.5em;
+    margin-right: 1em;
+}
+
+.but:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
+}
+
+.sredina-text i {
+    font-size: 1em;
+}
+
+.kontaktinput{
+    width: 100%;
+    height: 10em;
+    margin-bottom: 1em;
+}
+/* END Kartica */
+/* graf zasluzek */
+canvas#chLine {
+    background-color: #35313b;
+}

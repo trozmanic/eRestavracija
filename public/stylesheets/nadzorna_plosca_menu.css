@@ -1,0 +1,23 @@
+/* ZigaPozar */
+.btn-dark {
+    font-size: 25px;
+    font-family: 'Raleway', sans-serif;
+    background: none;
+    border: 1px solid white;
+    border-radius: 12px;
+    color: white;
+    transition: 1s;
+    /* ce ti je usec ta dodatek */
+    backdrop-filter: blur(5px);
+    /* END dodatek */
+}
+
+
+.btn-dark:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid #5F3C50;
+    background-color: white;
+}
+
