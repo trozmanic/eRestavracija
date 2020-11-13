@@ -21,7 +21,7 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)),
-    url('../images/pexels-emre-kuzu-2237189.jpg');
+    url('../img/pexels-emre-kuzu-2237189.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: 60%;
@@ -98,101 +98,65 @@ body {
     margin:1em auto;
 }
 
-.formcontainer{
-    display:flex;
-    justify-content: space-between;
-}
-
-.headcont{
-    color:white;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-    font-size:2.5em;
-    text-align: center;
-    margin-top:2em;
-}
-
-.inputs{
-    width:45%
-}
-
-.inputfield{
-    margin:10px auto;
-}
-
-.inputfield lebel{
-    color:white;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 200;
-    display:block;
-}
-
-.inputfield input{
-    border-radius: 12px;
-    display:block;
-    width:100%;
-}
-
-.calander{
-    background-color: white;
-    font-family: 'Raleway', sans-serif;
-    margin-top: 10px;
-    margin-right:10px;
-}
-
-.calander th{
-    background-color: #35313b;
-    color:white;
-    font-weight: bold;
-    text-align: center;
-    padding: 0.6em 0.5em 0.4em;
-}
-
-.calander td{
-    text-align: center;
-    padding: 0.3em 0.5em;
-}
-
-.calander td:hover{
-    background-color: #5F3C50;
-    color:white;
-    cursor: pointer;
-}
-
-.grayedout{
-    color:#B5B2B8;
-}
-
-.calnav{
-    background-color: #35313b;
-    color:white;
-}
-
-.but {
-    margin-top:1em;
-    font-family: 'Raleway', sans-serif;
-    border: 1px solid white;
+.rezervacija-skatla {
     color: white;
-    background: none;
+    background-color: #35313b;
     border-radius: 12px;
-    padding:0.5em;
+    /*border: 1px solid white;*/
+    margin-bottom: 1em;
+    padding:1em;
 }
 
-.but:hover {
-    transition: 1s;
-    color:#5F3C50;
-    background:none;
-    border: 1px solid #5F3C50;
-    background-color: white;
-    text-decoration: none;
+.levo-text {
+    text-align: left;
 }
 
-.selected {
-    border-radius: 12px;
-    padding: 6px;
-    border: 1px solid white;
-    background-color: white;
-    color: #5F3C50 !important;
+.kartica-padding {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.sredina-text {
+    text-align: center;
+}
+
+.ikone-stil {
+    text-align: center;
+    font-size: 150%;
+    color: white;
+}
+
+.ikone-stil-posamezna {
+    text-align: center;
+    color: white;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.ikone-stil-posamezna:hover {
+    cursor: pointer;
+    color: #5F3C50;
+    transition: 0.75s;
+}
+
+.rezervacija-info{
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 0.5em;
+}
+
+.rezervacija-info p{
+    margin:0;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.rezervacija-status{
+    display:flex;
+}
+
+.rezervacija-status p{
+    margin:0;
 }
 
 @media (max-width: 1024px) {
@@ -275,36 +239,6 @@ body {
         border-radius: 12px;
         background-color: white;
         /* border-bottom: 1px solid #5F3C50; */
-    }
-
-    .rescontainer{
-        width:90%;
-    }
-
-    .formcontainer{
-        flex-direction: column;
-    }
-
-    .inputs {
-        width:90%;
-        margin:0 auto;
-    }
-
-    .calander{
-        margin: 1em auto 0.5em;
-        width: 85%;
-    }
-
-    .butcontainer{
-        text-align: center;
-    }
-
-    .butcontainer button{
-        width:85%
-    }
-
-    .headcont{
-        margin-top:0;
     }
 
   }
