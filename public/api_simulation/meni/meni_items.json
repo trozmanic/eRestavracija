@@ -1,0 +1,72 @@
+[
+  { "id": 1,
+    "ime": "Hobotnica",
+    "cena": 10,
+    "slika": "/images/jedi/1.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124},
+  {
+    "id": 2,
+    "ime": "Spageti po mediternasko",
+    "cena": 10,
+    "slika": "/images/jedi/2.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  },
+  {
+    "id": 3,
+    "ime": "Lignji po trzasko",
+    "cena": 10,
+    "slika": "/images/jedi/3.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  },
+  {
+    "id": 4,
+    "ime": "Cvrti lignji",
+    "cena": 10,
+    "slika": "/images/jedi/4.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  },
+  {
+    "id": 5,
+    "ime": "Morska solata",
+    "cena": 10,
+    "slika": "/images/jedi/5.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  },
+  {
+    "id": 6,
+    "ime": "Solata s skampi",
+    "cena": 10,
+    "slika": "/images/jedi/6.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  },
+  {
+    "id": 7,
+    "ime": "File tune na zaru",
+    "cena": 10,
+    "slika": "/images/jedi/7.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  },
+  {
+    "id": 8,
+    "ime": "Rizoya z lososom",
+    "cena": 10,
+    "slika": "/images/jedi/8.png",
+    "opis": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!",
+    "ocena": 5,
+    "kalorije": 124
+  }
+]

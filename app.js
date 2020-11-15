@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./app_server/routes/index');
 //var indexApi = require('./app_api/routes/index');
 require('./app_server/views/helpers/hbsh.js');
+require('./app_server/views/partials/hbsp.js');
 
 var app = express();
 

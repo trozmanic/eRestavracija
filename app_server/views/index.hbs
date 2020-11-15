@@ -1,1 +1,66 @@
-<h1>{{title}}</h1>
+<link rel="stylesheet" href="stylesheets/index.css">
+<div class="login-buttons">
+    <button class="btn btn-primary" data-toggle="collapse" href="#register" role="button" aria-expanded="true" aria-controls="register" id="register-button">
+        REGISTRACIJA
+        </a>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#login" aria-expanded="false" aria-controls="login" id="login-button">
+            PRIJAVA
+        </button>
+</div>
+
+<div class="collapse" id="register">
+    <div class="form_content">
+        <div class = 'form-text'>
+            <h1>Nimate uporabniskega racuna ?</h1>
+        </div>
+        <div class="form_content__form">
+            <div class="form-group">
+                <label for="InputName">Ime in Priimek</label>
+                <input type="text" class="form-control" id="InputName">
+            </div>
+
+            <div class="form-group">
+                <label for="InputEmail">Email naslov</label>
+                <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+            </div>
+
+            <div class="form-group">
+                <label for="InputPhoneNumber">Telefonska stevilka</label>
+                <input type="text" class="form-control" id="InputPhoneNumber">
+            </div>
+
+            <div class="form-group">
+                <label for="InputPassword">Geslo</label>
+                <input type="password" class="form-control" id="InputPassword">
+            </div>
+
+            <div class="form-group">
+                <label for="InputPasswordRepeat">Ponovite geslo</label>
+                <input type="password" class="form-control" id="InputPassword">
+            </div>
+
+            <button type="submit" class="btn">REGISTRIRAJ SE</button>
+        </div>
+    </div>
+</div>
+
+<div class="collapse" id="login">
+    <div class="form_content">
+        <div class = 'form-text'>
+            <h1>Imate uporabniski racun ?</h1>
+        </div>
+        <div class="form_content__form">
+            <div class="form-group">
+                <label for="InputEmail">Email naslov</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+
+            <div class="form-group">
+                <label for="InputPassword">Geslo</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <button type="submit" class="btn">PRIJAVI SE</button>
+        </div>
+    </div>
+</div>

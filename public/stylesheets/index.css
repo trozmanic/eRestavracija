@@ -268,7 +268,7 @@ body {
   
   @media (min-width: 280px) and (max-width: 480px) {
     .main_container {
-        background-image: url('../img/andrew-seaman-sQopSb2K0CU-unsplash.jpg');
+        background-image: url('/images/andrew-seaman-sQopSb2K0CU-unsplash.jpg');
         background-color: #4C4556;
         overflow: auto;
     }
