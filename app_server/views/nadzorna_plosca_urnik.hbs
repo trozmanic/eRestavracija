@@ -1,0 +1,244 @@
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
+<script src="/javascript/nadzorna_plosca_urnik.js"></script>
+
+<!-- Tukaj vstavi vsebino -->
+<div class="col-xl-12 title">
+    <h1>Urnik izmen</h1>
+    <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+</div>
+<div class="col-xl-12 title">
+    <h3 class="sredina-text text-white"><i role="button" class="fas fa-arrow-left ikone-stil-posamezna" id="gumb_prejsni_mesec"></i><span id="naslov_datum"></span><i role="button" class="fas fa-arrow-right ikone-stil-posamezna" id="gumb_naslednji_mesec"></i></h3>
+</div>
+<!-- Zacetek Urnika -->
+
+<div class="col-xl-12">
+
+    <div class="row rezervacija-skatla sredina-text">
+
+        <div class="d-none d-lg-block col-lg-11 col-xl-11 ikone-stil-posamezna-no-hover gor-margin">
+            <div class="row">
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Ponedeljek</strong></p>
+                </div>
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Torek</strong></p>
+                </div>
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Sreda</strong></p>
+                </div>
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Cetrtek</strong></p>
+                </div>
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Petek</strong></p>
+                </div>
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Sobota</strong></p>
+                </div>
+                <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>Nedelja</strong></p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+            <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p><strong>1. Teden</strong></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_0"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_1"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_2"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_3"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_4"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_5"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_6"></p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+            <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p><strong>2. Teden</strong></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_7"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_8"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_9"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_10"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_11"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_12"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_13"></p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+            <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p><strong>3. Teden</strong></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_14"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_15"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_16"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_17"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_18"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_19"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_20"></p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+            <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p><strong>4. Teden</strong></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_21"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_22"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_23"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_24"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_25"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_26"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_27"></p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+            <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p><strong>5. Teden</strong></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_28"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_29"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_30"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_31"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_32"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_33"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_34"></p>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+            <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p><strong>6. Teden</strong></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_35"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_36"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_37"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_38"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_39"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_40"></p>
+            </div>
+            <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                <p id="p_dan_41"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1 class="legendheader">Legenda</h1>
+                    <div class="iconsflex">
+                        <div class="iconmodal">
+                            <p>brez: prosto</p>
+                        </div>
+                        <div class="iconmodal">
+                            <p>?: se ni doloceno</p>
+                        </div>
+                        <div class="iconmodal">
+                            <p>D: dopoldan</p>
+                        </div>
+                        <div class="iconmodal">
+                            <p>P: popoldan</p>
+                        </div>
+                        <div class="iconmodal">
+                            <i class="fas fa-arrow-left"></i>
+                            <p>naslednji mesec</p>
+                        </div>
+                        <div class="iconmodal">
+                            <i class="fas fa-arrow-right"></i>
+                            <p>Prejsnji mesec</p>
+                        </div>
+                    </div>
+                    <div class="butlegenda">
+                        <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END Urnik -->
+
+
+<!-- Tukaj KONEC vsebino -->
