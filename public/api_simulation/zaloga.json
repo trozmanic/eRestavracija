@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "sestavina": "Krompir",
+        "količina": "15 kg"
+    },
+    {
+        "id": 2,
+        "sestavina": "Čebula",
+        "količina": "1 kg"
+    },
+    {
+        "id": 3,
+        "sestavina": "Česen",
+        "količina": "1 kg"
+    },
+    {
+        "id": 4,
+        "sestavina": "Peteršilj",
+        "količina": "500 dag"
+    },
+    {
+        "id": 5,
+        "sestavina": "Riž",
+        "količina": "5 kg"
+    },
+    {
+        "id": 6,
+        "sestavina": "Telečji zrezek",
+        "količina": "10 kg"
+    },
+    {
+        "id": 7,
+        "sestavina": "Zelje",
+        "količina": "3 kg"
+    },
+    {
+        "id": 8,
+        "sestavina": "Zelena solata",
+        "količina": "1 kg"
+    },
+    {
+        "id": 9,
+        "sestavina": "Paradižnik",
+        "količina": "2 kg"
+    },
+    {
+        "id": 10,
+        "sestavina": "Svinjska ribica",
+        "količina": "6 kg"
+    },
+    {
+        "id": 11,
+        "sestavina": "Šunka",
+        "količina": "1 kg"
+    },
+    {
+        "id": 12,
+        "sestavina": "Sir",
+        "količina": "4 kg"
+    }
+]

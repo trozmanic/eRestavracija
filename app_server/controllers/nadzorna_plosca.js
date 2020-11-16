@@ -10,8 +10,18 @@ const urnik=function(req,res){
     res.render('nadzorna_plosca_urnik',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Urnik',zaposleni_role:req.query.vloga})
 }
 
+const zaloga=function(req,res){
+    res.render('nadzorna_plosca_zaloga',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaloga',zaposleni_role:req.query.vloga})
+}
+
+const zaposleni=function(req,res){
+    res.render('nadzorna_plosca_zaposleni',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaposleni',zaposleni_role:req.query.vloga})
+}
+
 module.exports={
     menu,
     rezervacije,
-    urnik
+    urnik,
+    zaloga,
+    zaposleni
 }

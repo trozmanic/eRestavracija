@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "uporabnik": "ChuckNorris",
+        "ime": "Chuck Norris",
+        "priimek": "Norris",
+        "e-pošta": "chuck.norris@gmail.com",
+        "vloga": "Admin"
+    },
+    {
+        "id": 2,
+        "uporabnik": "roman_garrett",
+        "ime": "Roman Garrett",
+        "priimek": "Garrett",
+        "e-pošta": "garrett.roman@live.com",
+        "vloga": "Natakar"
+    },
+    {
+        "id": 3,
+        "uporabnik": "ElsaForrest",
+        "ime": "Elsa Forrest",
+        "priimek": "Forrest",
+        "e-pošta": "elsa.forrest@yahoo.com",
+        "vloga": "Natakarica"
+    },
+    {
+        "id": 4,
+        "uporabnik": "EdSpooner",
+        "ime": "Ed Spooner",
+        "priimek": "Spooner",
+        "e-pošta": "ed.spooner1990@gmail.com",
+        "vloga": "Kuhar"
+    },
+    {
+        "id": 5,
+        "uporabnik": "NellaOchoa",
+        "ime": "Nella Ochoa",
+        "priimek": "Ochoa",
+        "e-pošta": "nella.ochoa@gmail.com",
+        "vloga": "Kuharica"
+    },
+    {
+        "id": 6,
+        "uporabnik": "ERobson",
+        "ime": "Edward Robson",
+        "priimek": "Robson",
+        "e-pošta": "edward.robson@live.com",
+        "vloga": "Kuhar"
+    },
+    {
+        "id": 7,
+        "uporabnik": "Amalie",
+        "ime": "Amalie",
+        "priimek": "Curtis",
+        "e-pošta": "amalie.curtis@live.com",
+        "vloga": "Natakarica"
+    },
+    {
+        "id": 8,
+        "uporabnik": "GregoryBrooks",
+        "ime": "Gregory Brooks",
+        "priimek": "Brooks",
+        "e-pošta": "gregory.brooks@yahoo.com",
+        "vloga": "Kuhar"
+    },
+    {
+        "id": 9,
+        "uporabnik": "TeriPeel",
+        "ime": "Teri",
+        "priimek": "Peel",
+        "e-pošta": "teri.peel@gmail.com",
+        "vloga": "Natakar"
+    },
+    {
+        "id": 10,
+        "uporabnik": "MuhamedMckeown",
+        "ime": "Muhamed",
+        "priimek": "Mckeown",
+        "e-pošta": "Muhamed.Mckeown@hotmail.com",
+        "vloga": "Natakar"
+    },
+    {
+        "id": 11,
+        "uporabnik": "Tina",
+        "ime": "Tina",
+        "priimek": "Hagan",
+        "e-pošta": "tina.hagan@gmail.com",
+        "vloga": "Kuharica"
+    },
+    {
+        "id": 12,
+        "uporabnik": "NadaHarvey",
+        "ime": "Nada",
+        "priimek": "Harvey",
+        "e-pošta": "nada.harvey@live.com",
+        "vloga": "Kuharica"
+    }
+]
