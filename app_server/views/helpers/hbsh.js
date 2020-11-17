@@ -35,3 +35,50 @@ hbs.registerHelper('nadzorna_plosca_menu_by_role', (zaposleni_role) => {
   meni_sestavljen += vloga[6] == 1 ? '<a href="nadzorna_plosca_zaposleni.html"><i class="fas fa-user-cog ikone-stil-posamezna"></i></a>' : '';
   return meni_sestavljen;
 });
+
+hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role) => {
+  //urnik imajo vsi
+  //rezervacije,narocila_strezba,narocila_kuhinja,meni,zaloga,zasluzek,zaposleni
+  console.log("TEST "+zaposleni_role);
+  var meni_sestavljen = "";
+  var presledek = '<div class="w-100"></div><div class="col">&nbsp;</div><div class="col">&nbsp;</div><div class="w-100"></div>';
+  if (!zaposleni_role) {
+    meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/rezervacije" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a></div>';
+    meni_sestavljen += presledek;
+    meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/narocila_natakar" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila strežba</a></div>';
+    meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/narocila_kuhar" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila kuhinja</a></div>';
+    meni_sestavljen += presledek;
+    meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/meni" role="button" class="btn btn-dark btn-block"><i class="fas fa-book-open"></i><br>Meni</a></div>';
+    meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zaloga" role="button" class="btn btn-dark btn-block"><i class="fas fa-boxes"></i><br>Zaloga</a></div>';
+    meni_sestavljen += presledek;
+    meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zasluzek" role="button" class="btn btn-dark btn-block"><i class="fas fa-coins"></i><br>Zaslužek</a></div>';
+    meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zaposleni" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a></div>';
+  } else {
+    if (zaposleni_role.localeCompare("vodja") == 0) {
+      meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/rezervacije" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a></div>';
+      meni_sestavljen += presledek;
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/narocila_natakar" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila strežba</a></div>';
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/narocila_kuhar" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila kuhinja</a></div>';
+      meni_sestavljen += presledek;
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/meni" role="button" class="btn btn-dark btn-block"><i class="fas fa-book-open"></i><br>Meni</a></div>';
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zaloga" role="button" class="btn btn-dark btn-block"><i class="fas fa-boxes"></i><br>Zaloga</a></div>';
+      meni_sestavljen += presledek;
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zasluzek" role="button" class="btn btn-dark btn-block"><i class="fas fa-coins"></i><br>Zaslužek</a></div>';
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zaposleni" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a></div>';
+    } else if (zaposleni_role.localeCompare("natakar") == 0) {
+      meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/rezervacije" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a></div>';
+      meni_sestavljen += presledek;
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/narocila_natakar" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila strežba</a></div>';
+    } else if (zaposleni_role.localeCompare("kuhar") == 0) {
+      meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/narocila_kuhar" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila kuhinja</a></div>';
+      meni_sestavljen += presledek;
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/meni" role="button" class="btn btn-dark btn-block"><i class="fas fa-book-open"></i><br>Meni</a></div>';
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zaloga" role="button" class="btn btn-dark btn-block"><i class="fas fa-boxes"></i><br>Zaloga</a></div>';
+    } else if (zaposleni_role.localeCompare("racunovodja") == 0) {
+      meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/zasluzek" role="button" class="btn btn-dark btn-block"><i class="fas fa-coins"></i><br>Zaslužek</a></div>';
+      meni_sestavljen += presledek;
+      meni_sestavljen += '<div class="col"><a href="/nadzorna_plosca/zaposleni" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a></div>';
+    }
+  }
+  return meni_sestavljen;
+});

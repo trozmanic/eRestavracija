@@ -1,5 +1,5 @@
 const menu=function(req,res){
-    res.render('nadzorna_plosca_menu',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča'});
+    res.render('nadzorna_plosca_menu',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča',zaposleni_role:req.query.vloga});
 }
 
 const rezervacije=function(req,res){
