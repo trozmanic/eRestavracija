@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb://localhost/AlDente';
+let dbURI = 'mongodb://localhost/AlDente';
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGODB_CLOUD_URI;
+}
+
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useCreateIndex: true,

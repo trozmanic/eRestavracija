@@ -64,3 +64,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('register-button').addEventListener(('click'), (event) => {
+        const login_html = document.getElementById('login');
+        login_html.classList.remove('show');
+    })
+    document.getElementById('login-button').addEventListener(('click'), (event) => {
+        const register_html = document.getElementById('register');
+        register_html.classList.remove('show');
+    })
+</script>

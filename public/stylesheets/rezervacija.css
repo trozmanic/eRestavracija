@@ -153,7 +153,7 @@ body {
     padding: 0.3em 0.5em;
 }
 
-.calander td:hover{
+.calander td:hover:not(.leto){
     background-color: #5F3C50;
     color:white;
     cursor: pointer;
@@ -193,6 +193,10 @@ body {
     border: 1px solid white;
     background-color: white;
     color: #5F3C50 !important;
+}
+
+.leto{
+    text-align: right !important;
 }
 
 @media (max-width: 1024px) {
