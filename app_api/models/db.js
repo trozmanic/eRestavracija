@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 
+const dbURI = 'mongodb://localhost/AlDente';
+mongoose.connect(dbURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+})
+
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose je povezan na ${dbURI}.`);
 });
@@ -39,3 +47,5 @@ process.on('SIGTERM', () => {
         process.exit(0);
     });
 });
+
+require("./sheme")

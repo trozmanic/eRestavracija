@@ -23,7 +23,15 @@ const onas=function(req,res){
 }
 
 const rezerviraj=function(req,res){
-    res.render('rezervacija',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - O Nas',izbrano_ime:'rezerviraj_mizo'});
+    res.render('rezervacija_prva',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'});
+}
+
+const rezerviraj_podatki=function(req,res){
+    res.render('rezervacija',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
+}
+
+const rezerviraj_menu=function(req,res){
+    res.render('rezervacija_menu',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
 }
 
 const menu = function (req, res) {
@@ -47,5 +55,7 @@ module.exports={
     index,
     onas,
     rezerviraj,
+    rezerviraj_podatki,
+    rezerviraj_menu,
     menu
 }
