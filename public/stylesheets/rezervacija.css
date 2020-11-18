@@ -185,6 +185,7 @@ body {
     border: 1px solid #5F3C50;
     background-color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .selected {
@@ -195,8 +196,13 @@ body {
     color: #5F3C50 !important;
 }
 
-.leto{
+#leto{
     text-align: right !important;
+}
+
+.calander_click{
+    background-color: #5F3C50;
+    color:white;
 }
 
 @media (max-width: 1024px) {

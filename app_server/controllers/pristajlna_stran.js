@@ -34,6 +34,10 @@ const rezerviraj_menu=function(req,res){
     res.render('rezervacija_menu',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
 }
 
+const potrebna_prijava=function(req,res){
+    res.render('potrebna_prijava',{layout:'layout_pristajlna_stran.hbs',title:"Potrebna prijava"})
+}
+
 const menu = function (req, res) {
     let pathJSON = path.dirname(require.main.filename).split('/');
     pathJSON.pop();
@@ -57,5 +61,6 @@ module.exports={
     rezerviraj,
     rezerviraj_podatki,
     rezerviraj_menu,
-    menu
+    menu,
+    potrebna_prijava
 }
