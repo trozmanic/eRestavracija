@@ -10,7 +10,6 @@ if (process.env.NODE_ENV === 'production') {
 const login = function (req, res) {
     const uporabnik = req.body;
     const email_naslov = uporabnik.email_naslov;
-    console.log(uporabnik)
     axios
         .get(apiParametri.streznik + "/api/uporabniki?email=" + email_naslov)
         .then((response) => {

@@ -1,11 +1,22 @@
 const hbs = require('hbs');
 
-hbs.registerHelper('izbrano', (izbrano_ime) => {
+hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
+  let paramid = "";
+  if (uporabnik) {
+    console.log(uporabnik)
+    paramid = "?uporabnik_id="+uporabnik._id;
+  }
+  const hrefs = {
+    "index" : "/" + paramid,
+    "onas": "/onas" + paramid,
+    "menu": "/menu" +paramid,
+    "rezerviraj_mizo": "/rezerviraj" +paramid
+  }
   res="";
-  res+='<li> <a href="/"'+ (izbrano_ime=='index' ? ' class="selected"' : '') +'>DOMOV</a></li>';
-  res+='<li> <a href="/onas"'+ (izbrano_ime=='onas' ? ' class="selected"' : '') +'>O NAS</a></li>';
-  res+='<li> <a href="/menu"'+ (izbrano_ime=='menu' ? ' class="selected"' : '') +'>MENU</a></li>';
-  res+='<li id="rezerviraj_mizo"> <a '+ (izbrano_ime=='rezerviraj_mizo' ? ' class="selected"' : '') +' href="/rezerviraj">REZERVIRAJ MIZO</a></li>';
+  res+='<li> <a href=" ' + hrefs.index + '"' + (izbrano_ime=='index' ? ' class="selected"' : '') +'>DOMOV</a></li>';
+  res+='<li> <a href="' + hrefs.onas + '"' + (izbrano_ime=='onas' ? ' class="selected"' : '') +'>O NAS</a></li>';
+  res+='<li> <a href="' + hrefs.menu + '"' + (izbrano_ime=='menu' ? ' class="selected"' : '') +'>MENU</a></li>';
+  res+='<li id="rezerviraj_mizo"> <a '+ (izbrano_ime=='rezerviraj_mizo' ? ' class="selected"' : '') +' href="' + hrefs.rezerviraj_mizo + '">REZERVIRAJ MIZO</a></li>';
   return res;
 });
 

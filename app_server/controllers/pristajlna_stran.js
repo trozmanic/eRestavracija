@@ -31,9 +31,10 @@ const index=async function(req,res){
         axios.get(apiParametri.streznik + "/api/uporabniki/" + uporabnik_id)
             .then((response)=> {
                 console.log(response.data);
-                return res.render('index_logged', {layout:'layout_pristajlna_stran.hbs',
+                return res.render('index_logged',
+                    {layout:'layout_pristajlna_stran.hbs',
                     title:'Al Dente',izbrano_ime:'index',
-                    ime_uporabnika:response.data.ime})
+                    uporabnik: response.data})
             })
             .catch((err) => {
                 console.log(err);

@@ -15,9 +15,7 @@ const ustvariUporabnika=async (req,res)=>{
         //Every register user is considered to be gost so we add gostModel to DB
         await uporabnik_model.save();
         await gost_model.save();
-        res.status(200).json({"uporabnik_id":uporabnik_model._id.toString(),
-            "vloga": uporabnik_model.vloga,
-            "geslo": uporabnik_model.geslo});
+        res.status(200).json(uporabnik);
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});

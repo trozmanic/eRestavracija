@@ -66,6 +66,23 @@
 </div>
 
 <script>
+    const validate = (user) => {
+        const ponoviGeslo = document.getElementById("InputPasswordRepeat").value;
+        let error_message = ""
+        if (!user.geslo) {
+            error_message += "Vnesite geslo\n";
+        }
+        if (!ponoviGeslo) {
+            error_message += "Potrdite vneseno geslo\n";
+        }
+        if (!user.telefonska_stevilka) {
+            error_message += "Vnesite telefonsko stevilko\n";
+        }
+        if (!user.email_naslov) {
+            error_message += "Vnesite email\n"
+        }
+    }
+
     document.getElementById('register-button').addEventListener(('click'), (event) => {
         const login_html = document.getElementById('login');
         login_html.classList.remove('show');
