@@ -1,18 +1,27 @@
 const mongoose = require('mongoose');
-
-const zaposleniShema = new mongoose.Schema({
-    "ime": { type: String, required: true },
-    "priimek": { type: String, required: true },
-    email: {
-        type: String, required:true, validate: {
+const Schema = mongoose.Schema;
+const uporabnikShema = new mongoose.Schema({
+    "ime": {type:String, required:true},
+    "emailNaslov": {type:String, required:true, validate : {
             validator: function (v) {
                 return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
             }
         }
     },
-    "telefonska stevilka": { type: String, required: true },
-    "vloga": { type: String, required: true },
-    "placa": { type: Number, required: true, min: 0 },
+    "telefonskaStevilka": {type:String, required:true, validate: {
+            validator: function (v) {
+                return /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(v);
+            }
+        }
+    },
+    "geslo": {type:String, required:true},
+    "vloga": {type:String, enum: ['admin', 'kuhar', 'natakar', 'gost']},
+    "id_vloga_info": {type: mongoose.ObjectId, required:true}
+})
+
+const zaposleniShema = new mongoose.Schema({
+    "id_uporabnika" :{type:mongoose.ObjectId, required: true},
+    "placa": { type: Number, required: true, min: 0 }
 })
 
 const surovinaShema = new mongoose.Schema({
@@ -54,20 +63,13 @@ const rezervacijaShema = new mongoose.Schema({
     stanje: { type: String, required:true }
 })
 
+
 const gostShema = new mongoose.Schema({
-    ime: { type: String, required:true },
-    priimek: { type: String, required:true },
-    email: {
-        type: String, required:true, validate: {
-            validator: function (v) {
-                return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
-            }
-        }
-    },
-    telefonska_stevilka: { type: String, required:true, minlength: 9, maxlength: 9 },
+    id_uporabnika :{type: mongoose.ObjectId, required: true},
     rezervacije: [rezervacijaShema]
 })
 
+mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");
 mongoose.model("Gost", gostShema, "Gosti");
 mongoose.model("Rezervacija", rezervacijaShema, "Rezervacije");
 mongoose.model("Narocilo", narociloShema, "Narocila");
