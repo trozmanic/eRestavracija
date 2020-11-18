@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uporabnikShema = new mongoose.Schema({
     "ime": {type:String, required:true},
-    "emailNaslov": {type:String, required:true, validate : {
+    "email_naslov": {type:String, unique:true, required:true, validate : {
             validator: function (v) {
                 return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
             }
         }
     },
-    "telefonskaStevilka": {type:String, required:true, validate: {
+    "telefonska_stevilka": {type:String, required:true, validate: {
             validator: function (v) {
                 return /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(v);
             }
@@ -20,7 +20,7 @@ const uporabnikShema = new mongoose.Schema({
 })
 
 const zaposleniShema = new mongoose.Schema({
-    "id_uporabnika" :{type:mongoose.ObjectId, required: true},
+    "id_uporabnika" :{type:mongoose.ObjectId},
     "placa": { type: Number, required: true, min: 0 }
 })
 
@@ -65,7 +65,7 @@ const rezervacijaShema = new mongoose.Schema({
 
 
 const gostShema = new mongoose.Schema({
-    id_uporabnika :{type: mongoose.ObjectId, required: true},
+    id_uporabnika :{type: mongoose.ObjectId},
     rezervacije: [rezervacijaShema]
 })
 

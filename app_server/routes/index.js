@@ -3,6 +3,8 @@ var router = express.Router();
 
 var pristajlna_stran=require('../controllers/pristajlna_stran');
 var nadzorna_plosca=require('../controllers/nadzorna_plosca');
+var login = require('../service/login')
+var register = require('../service/register')
 
 /* GET home page. */
 router.get('/', pristajlna_stran.index);
@@ -16,5 +18,9 @@ router.get('/nadzorna_plosca/rezervacije',nadzorna_plosca.rezervacije)
 router.get('/nadzorna_plosca/urnik',nadzorna_plosca.urnik)
 router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.zaloga)
 router.get('/nadzorna_plosca/zaposleni',nadzorna_plosca.zaposleni)
+
+/* POST login / register */
+router.post("/login", login.login);
+router.post("/register", register.register)
 
 module.exports = router;

@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="stylesheets/index.css">
+<link rel="stylesheet" href="stylesheets/index_logged.css">
+
+<div class="logo" style="margin-top: 5%;">
+    <h1>Dobrodosli nazaj</h1>
+    <p>{{ime_uporabnika}}</p>
+</div>
+
+<div class="login-buttons" style="margin-left:38%;">
+    <button id="odjava">ODJAVA</button>
+</div>
+
+<script>
+    document.getElementById("odjava").addEventListener("click", (event) => {
+        localStorage.removeItem("credentials");
+        window.location.href = "/";
+    })
+</script>

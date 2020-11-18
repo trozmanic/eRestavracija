@@ -1,5 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
+const apiParametri = {
+    streznik: 'http://localhost:' + (process.env.PORT || 3000)
+};
+if (process.env.NODE_ENV === 'production') {
+    //TODO: include heroku
+    apiParametri.streznik = "";
+}
 //NOTE: temporary function to get JSON data hardcoded on disk
 const read_json = (pathJSON) => {
     return new Promise((resolve, reject) => {
@@ -14,8 +22,26 @@ const read_json = (pathJSON) => {
     })
 }
 
-const index=function(req,res){
-    res.render('index',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente',izbrano_ime:'index'});
+
+const index=async function(req,res){
+    const uporabnik_id = req.query.uporabnik_id;
+    //Specifiran je uporabnik_id, zato zaslonsko masko renderiramo
+    //Glede na njegovo vlogo itd ...
+    if (uporabnik_id) {
+        axios.get(apiParametri.streznik + "/api/uporabniki/" + uporabnik_id)
+            .then((response)=> {
+                console.log(response.data);
+                return res.render('index_logged', {layout:'layout_pristajlna_stran.hbs',
+                    title:'Al Dente',izbrano_ime:'index',
+                    ime_uporabnika:response.data.ime})
+            })
+            .catch((err) => {
+                console.log(err);
+                return res.render('index',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente',izbrano_ime:'index'});
+            })
+    }else {
+        res.render('index',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente',izbrano_ime:'index'});
+    }
 }
 
 const onas=function(req,res){
