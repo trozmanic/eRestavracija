@@ -66,7 +66,8 @@ const rezervacijaShema = new mongoose.Schema({
 
 const gostShema = new mongoose.Schema({
     id_uporabnika :{type: mongoose.ObjectId},
-    rezervacije: [rezervacijaShema]
+    rezervacije: [rezervacijaShema],
+    ocenjene_jedi: [meniItemShema]
 })
 
 mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");

@@ -32,7 +32,7 @@
     </div>
 </div>
 <div class="menu-items">
-    {{#each menu_items as | item |}}
+    {{#each dynamicData.menu_items as | item |}}
     {{> myPartial ime= item.ime opis=item.opis cena=item.cena slika=item.slika id= item.id}}
     {{/each}}
 </div>

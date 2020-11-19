@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const Uporabnik = mongoose.model("Uporabnik");
 const Gost = mongoose.model("Gost");
+const Zaposleni = mongoose.model("Zaposlen");
 var ObjectId = require('mongoose').Types.ObjectId;
 
 const ustvariUporabnika=async (req,res)=>{
@@ -55,13 +56,51 @@ const pridobiUporabnika=async (req,res)=>{
 }
 
 
-const posodbiUporabnika=(req,res)=>{
+const posodbiUporabnika= async (req,res)=>{
+    try {
+        const user = req.body;
+        console.log(req.body.id);
+        if (!user.id) {
+            return res.status(400).send({"error_message": "Specify user ID"});
+        }
+        await Uporabnik.findByIdAndUpdate(user.id, user).exec();
 
+        return res.status(200).send(user);
+    }catch (err) {
+        console.log(err);
+        res.send({"error_message":err});
+    }
+}
+
+const izbrisiUporabnika = async (req,res) => {
+    try {
+        const id = req.params.idUporabnika;
+        if (!id) {
+            return res.status(400).send({"error_message": "Specify user ID"})
+        }
+        const uporabnik = await Uporabnik.findByIdAndDelete(id);
+        if (uporabnik == null) {
+            return res.status(204).send({"error_message": "No user ID: " + id})
+        }
+        const role = uporabnik.vloga;
+        const id_vloga_info = uporabnik.id_vloga_info;
+        //Reference to object is present in DB, we delete it!
+        if (id_vloga_info) {
+            const model_vloga = role === "gost"? Gost : Zaposleni;
+            const vloga = await model_vloga.findByIdAndDelete(id_vloga_info);
+            console.log(vloga);
+        }
+        res.status(200).send({id});
+    }catch (err) {
+        console.log(err)
+        res.status(500).send({"error_message":err})
+    }
 }
 
 module.exports={
     pridobiUporabnike,
     pridobiUporabnika,
     ustvariUporabnika,
-    posodbiUporabnika
+    posodbiUporabnika,
+    izbrisiUporabnika
 }

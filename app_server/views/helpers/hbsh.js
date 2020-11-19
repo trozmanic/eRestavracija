@@ -3,7 +3,6 @@ const hbs = require('hbs');
 hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
   let paramid = "";
   if (uporabnik) {
-    console.log(uporabnik)
     paramid = "?uporabnik_id="+uporabnik._id;
   }
   const hrefs = {

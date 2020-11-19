@@ -40,6 +40,9 @@
                 </div>
 
                 <button type="submit" class="btn" id="submitRegister">REGISTRIRAJ SE</button>
+                <div id="response_message_register">
+                    
+                </div>
             </div>
     </div>
 </div>
@@ -61,75 +64,11 @@
             </div>
 
             <button type="submit" class="btn" id="submitLogin">PRIJAVI SE</button>
+            <div id="response_message_login">
+
+            </div>
         </div>
     </div>
 </div>
 
-<script>
-    const validate = (user) => {
-        const ponoviGeslo = document.getElementById("InputPasswordRepeat").value;
-        let error_message = ""
-        if (!user.geslo) {
-            error_message += "Vnesite geslo\n";
-        }
-        if (!ponoviGeslo) {
-            error_message += "Potrdite vneseno geslo\n";
-        }
-        if (!user.telefonska_stevilka) {
-            error_message += "Vnesite telefonsko stevilko\n";
-        }
-        if (!user.email_naslov) {
-            error_message += "Vnesite email\n"
-        }
-    }
-
-    document.getElementById('register-button').addEventListener(('click'), (event) => {
-        const login_html = document.getElementById('login');
-        login_html.classList.remove('show');
-    })
-    document.getElementById('login-button').addEventListener(('click'), (event) => {
-        const register_html = document.getElementById('register');
-        register_html.classList.remove('show');
-    })
-    document.getElementById('submitLogin').addEventListener(('click'), (event) => {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/login", true);
-        const user = {
-            email_naslov:document.getElementById("InputEmailLogin").value,
-            geslo:document.getElementById("InputPasswordLogin").value
-        }
-        xhttp.onload = function () {
-            const credentials = JSON.parse(this.responseText);
-            if (credentials.error_message) {
-                //TODO:implement error handling
-                return;
-            }
-            localStorage.setItem("credentials", this.responseText);
-            window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
-        }
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify(user))
-    })
-
-    document.getElementById('submitRegister').addEventListener(('click'), (event) => {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "/register", true);
-        const user = {
-            ime: document.getElementById("InputName").value,
-            email_naslov: document.getElementById("InputEmail").value,
-            telefonska_stevilka: document.getElementById("InputPhoneNumber").value,
-            geslo: document.getElementById("InputPassword").value,
-        }
-        xhttp.onload = function () {
-            console.log(this.responseText);
-            const credentials = JSON.parse(this.responseText);
-            if (credentials.error_message) {
-                //TODO:implement error handling
-                return;
-            }
-            console.log("Uspesna registracija")
-        }
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify(user));
-    })
-</script>
+<script src="/javascript/index.js"></script>

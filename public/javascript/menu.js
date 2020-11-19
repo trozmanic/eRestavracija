@@ -25,6 +25,8 @@ const svg =[`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-emoj
   <path d="M7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
 </svg>`]
 window.addEventListener('load', function () {
+    let chosen = null;
+
     console.log("Document loaded...");
 
     const slider = document.getElementById('myRange')
