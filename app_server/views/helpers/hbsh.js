@@ -1,13 +1,42 @@
 const hbs = require('hbs');
 
-hbs.registerHelper('izbrano', (izbrano_ime) => {
+hbs.registerHelper("not", function(obj) {
+  return !obj;
+});
+
+
+hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
+  let paramid = "";
+  if (uporabnik) {
+    paramid = "?uporabnik_id="+uporabnik._id;
+  }
+  const hrefs = {
+    "index" : "/" + paramid,
+    "onas": "/onas" + paramid,
+    "menu": "/menu" +paramid,
+    "rezerviraj_mizo": "/rezerviraj" +paramid
+  }
   res="";
-  res+='<li> <a href="/"'+ (izbrano_ime=='index' ? ' class="selected"' : '') +'>DOMOV</a></li>';
-  res+='<li> <a href="/onas"'+ (izbrano_ime=='onas' ? ' class="selected"' : '') +'>O NAS</a></li>';
-  res+='<li> <a href="/menu"'+ (izbrano_ime=='menu' ? ' class="selected"' : '') +'>MENU</a></li>';
-  res+='<li id="rezerviraj_mizo"> <a '+ (izbrano_ime=='rezerviraj_mizo' ? ' class="selected"' : '') +' href="/rezerviraj">REZERVIRAJ MIZO</a></li>';
+  res+='<li> <a href=" ' + hrefs.index + '"' + (izbrano_ime==='index' ? ' class="selected"' : '') +'>DOMOV</a></li>';
+  res+='<li> <a href="' + hrefs.onas + '"' + (izbrano_ime==='onas' ? ' class="selected"' : '') +'>O NAS</a></li>';
+  res+='<li> <a href="' + hrefs.menu + '"' + (izbrano_ime==='menu' ? ' class="selected"' : '') +'>MENU</a></li>';
+  if (uporabnik) {
+    res+='<li id="rezerviraj_mizo"> <a '+ (izbrano_ime==='rezerviraj_mizo' ? ' class="selected"' : '') +' href="' + hrefs.rezerviraj_mizo + '">REZERVIRAJ MIZO</a></li>';
+  }
   return res;
 });
+
+hbs.registerHelper('zvezda', (stevilo_zvezdic) => {
+  const zvezdica = '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\n' +
+      '                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>\n' +
+      '                                </svg>';
+  let resp =''
+  for (let i = 0 ; i < stevilo_zvezdic ; i ++) {
+    resp += zvezdica;
+  }
+  return resp;
+
+})
 
 hbs.registerHelper('nadzorna_plosca_menu_by_role', (zaposleni_role) => {
   //urnik imajo vsi
