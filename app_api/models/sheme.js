@@ -40,8 +40,8 @@ const meniItemShema = new mongoose.Schema({
     ocena_count: { type: Number, default: 0 },
     kalorije: { type: Number, required: true, min: 0 },
     sestavine: [new mongoose.Schema({
-        surovina: { type: surovinaShema, required:true },
-        kolicina: { type: Number, required: true, min: 0 }
+        surovina: { type: surovinaShema,},
+        kolicina: { type: Number, min: 0 }
     })]
 })
 

@@ -25,12 +25,20 @@ const svg =[`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-emoj
   <path d="M7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"/>
 </svg>`]
 window.addEventListener('load', function () {
-    let chosen = null;
+
+    var script = document.createElement('script');
+    script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(script);
+    // const $ = document.jQuery;
+
+
 
     console.log("Document loaded...");
 
     const slider = document.getElementById('myRange')
     const slider_change = function (event) {
+        console.log ("Izbrana jed: " + chosen)
         const rating = slider.value;
         const number_container = document.getElementById('rating-number')
         const svg_container = document.getElementById("rating-svg")
@@ -43,36 +51,94 @@ window.addEventListener('load', function () {
 
     const isVisible = (classList) => {
         for (var i = 0; i < classList.length ; i ++) {
-            if (classList[i] == 'hidden') {
+            if (classList[i] === 'hidden') {
                 return false;
             }
         }
         return true;
     }
 
-    for (var i = 1; i <= 8 ; i++) {
-        var first_item = document.getElementById("card" + i);
-        for (var j = 0; j < first_item.childNodes.length ; j ++) {
-            const current_element = first_item.childNodes[j]
-            if (current_element.classList != null && current_element.classList != undefined) {
-                for (var z = 0 ; z < current_element.classList.length; z ++) {
-                    if (current_element.classList[z] == 'card-img-top') {
-                        first_item = current_element;
-                        break;
-                    }
-                }
-            }
+    let children = $(".card .card-img-top").get();
+    let parents = $(".card").map(function() {
+        return this.getAttribute("id");
+    })
+    let buttons = $(".card .button").get();
 
-        }
-        const first_property = document.getElementById("property" + i);
+    //Global variable for chosen menuItem
+    let chosen = null;
 
-        first_item.addEventListener("click", ()=> {
-            console.log("click");
-            if (!isVisible(first_property.classList)) {
-                first_property.classList.remove('hidden');
+    buttons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+            const id = parents[index];
+            chosen = id;
+        })
+    })
+
+    children.forEach((child, index) => {
+        child.addEventListener("click", ()=> {
+            const id = parents[index];
+            const properties = document.getElementById("property-"+id);
+            if (!isVisible(properties.classList)) {
+                properties.classList.remove('hidden');
             }else {
-                first_property.classList.add('hidden');
+                properties.classList.add('hidden');
             }
         })
-    }
+    })
+
+    const posljiOceno = document.getElementById("posljiOceno");
+    posljiOceno.addEventListener("click", () => {
+        const ocena = parseInt(slider.value);
+        console.log ("Ocenil sme jed " + chosen + " z oceno " + ocena);
+        const uporabnik_id = JSON.parse (localStorage.getItem("credentials")).uporabnik_id;
+        if (!uporabnik_id) {
+            return alert("Ce zelite uporabljati funkcinolanosti kot so ocenjevanje jedi se prosim prijavite oziroma" +
+                " kreirajte uporabniski racun");
+        }
+        const obj = {
+            id: chosen,
+            ocena: ocena,
+            id_uporabnika:uporabnik_id
+        }
+        $.ajax({
+            url: '/api/meni/dodajOceno',
+            type: 'PUT',
+            data: obj,
+            success: function(data) {
+                window.location.reload();
+            }
+        });
+    })
+
+    // var all = $(".card").map(function() {
+    //     return this.innerHTML;
+    // }).get();
+
+
+
+    // for (var i = 1; i <= 8 ; i++) {
+    //     var first_item = document.getElementById("card" + i);
+    //     for (var j = 0; j < first_item.childNodes.length ; j ++) {
+    //         const current_element = first_item.childNodes[j]
+    //         if (current_element.classList != null && current_element.classList != undefined) {
+    //             for (var z = 0 ; z < current_element.classList.length; z ++) {
+    //                 if (current_element.classList[z] == 'card-img-top') {
+    //                     first_item = current_element;
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //
+    //     }
+    //     const first_property = document.getElementById("property" + i);
+    //
+    //     first_item.addEventListener("click", ()=> {
+    //         console.log("click");
+    //         if (!isVisible(first_property.classList)) {
+    //             first_property.classList.remove('hidden');
+    //         }else {
+    //             first_property.classList.add('hidden');
+    //         }
+    //     })
+    // }
 })

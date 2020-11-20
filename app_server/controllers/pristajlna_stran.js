@@ -4,6 +4,7 @@ const axios = require('axios');
 const apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
+const meni = require('../service/meni');
 if (process.env.NODE_ENV === 'production') {
     //TODO: include heroku
     apiParametri.streznik = "";
@@ -98,33 +99,55 @@ const rezerviraj_menu=function(req,res){
     res.render('rezervacija_menu',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
 }
 
-const menu = function (req, res) {
+const menu = async function (req, res) {
     const uporabnik_id = req.query.uporabnik_id;
-    console.log(req.query.uporabnik_id);
-    let pathJSON = path.dirname(require.main.filename).split('/');
-    pathJSON.pop();
-    pathJSON = pathJSON.join('/') + "/public/api_simulation/meni/meni_items.json";
-    read_json(pathJSON)
-        .then( (data) => {
-            if (uporabnik_id) {
-                console.log("da");
-                const menu_items = data;
-                return renderDynamic(uporabnik_id,
-                    res,
-                    'layout_pristajlna_stran.hbs',
-                    'Al dente',
-                    'menu',
-                    'menu',
-                    {menu_items: menu_items}
-                    )
-            }
-            res.render('menu', {layout: 'layout_pristajlna_stran.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: data})
-        })
-        .catch( (err) => {
-            console.log(err);
-            //TODO: implement error handling for exmaple notFound/error page ...
-            res.render('not_found');
-        });
+    console.log(uporabnik_id)
+    try {
+        if (uporabnik_id) {
+            const menu_items = await meni.pridobiMeni(uporabnik_id);
+            console.log ("menu_items: " +menu_items);
+            return renderDynamic(uporabnik_id,
+                            res,
+                            'layout_pristajlna_stran.hbs',
+                            'Al dente',
+                            'menu',
+                            'menu',
+                            {menu_items: menu_items}
+                            );
+        }
+        else {
+            res.render('menu', {layout: 'layout_pristajlna_stran.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: []})
+        }
+
+
+    }catch (err) {
+        console.log(err);
+    }
+    // console.log(req.query.uporabnik_id);
+    // let pathJSON = path.dirname(require.main.filename).split('/');
+    // pathJSON.pop();
+    // pathJSON = pathJSON.join('/') + "/public/api_simulation/meni/meni_items.json";
+    // read_json(pathJSON)
+    //     .then( (data) => {
+    //         if (uporabnik_id) {
+    //             console.log("da");
+    //             const menu_items = data;
+    //             return renderDynamic(uporabnik_id,
+    //                 res,
+    //                 'layout_pristajlna_stran.hbs',
+    //                 'Al dente',
+    //                 'menu',
+    //                 'menu',
+    //                 {menu_items: menu_items}
+    //                 )
+    //         }
+    //         res.render('menu', {layout: 'layout_pristajlna_stran.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: data})
+    //     })
+    //     .catch( (err) => {
+    //         console.log(err);
+    //         //TODO: implement error handling for exmaple notFound/error page ...
+    //         res.render('not_found');
+    //     });
 
 
 }

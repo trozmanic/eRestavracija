@@ -1,9 +1,6 @@
 window.addEventListener("load", ()=> {
 
     //Simulation of logged in customer
-    if (!localStorage.getItem("credentials")){
-        document.getElementById("rezerviraj_mizo").style.display = "none";
-    }
 
     const validEmail = (email) => {
         return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
