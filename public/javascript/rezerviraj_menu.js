@@ -1,14 +1,11 @@
-let klikDodaj=function(dogodek){
-    let t=dogodek.target;
-    if(t.classList.contains("but")){
-        t.classList.remove("but");
-        t.classList.add("but_click");
-        t.innerText="Odstrani"
-    }else if(t.classList.contains("but_click")){
-        t.classList.remove("but_click");
-        t.classList.add("but");
-        t.innerText="Dodaj"
-    }
+let klikDodajPlus=function(dogodek){
+    let t=dogodek.target.parentElement.getElementsByTagName("p")[0];
+    t.innerText=Number(t.innerText)<9 ? Number(t.innerText)+1 : 9;
+}
+
+let klikDodajMinus=function(dogodek){
+    let t=dogodek.target.parentElement.getElementsByTagName("p")[0];
+    t.innerText=Number(t.innerText)>0 ? Number(t.innerText)-1 : 0;
 }
 
 let clearStorage=function(){
@@ -19,18 +16,38 @@ let clearStorage=function(){
 }
 
 let klikRezerviraj=function(dogodek){
-    let jedi=[].slice.call(document.getElementsByClassName("but_click")).map(x => x.value);
+    let jedi=[].slice.call(document.getElementsByClassName("foodCounter")).reduce((res,x)=>{
+        if(x.innerText!=0){
+            res.push({"meni_item":x.id,"kolicina":Number(x.innerText)})
+        }
+        return res;
+    },[]);
     let sessionStorage=window.sessionStorage;
     let ura=sessionStorage.getItem("ura");
-    let stOseb=sessionStorage.getItem("stOseb");
-    let datum=new Date(sessionStorage.getItem("datum")).toJSON();
+    let stOseb=Number(sessionStorage.getItem("stOseb"));
+    let datum=sessionStorage.getItem("datum");
+    let datum_in_ura=new Date(datum);
+    datum_in_ura.setHours(ura.split(":")[0],ura.split(":")[1]);
+    const credentials = JSON.parse(localStorage.getItem("credentials"));
     let payload={
-        "ura":ura,
+        "datum_in_ura":datum_in_ura.toJSON(),
         "stOseb":stOseb,
-        "datum":datum,
-        "jedi":jedi
+        "jedi":jedi,
+        "uporabnik_id":credentials.uporabnik_id
     };
-    console.log(payload);
+    console.log(JSON.stringify(payload));
+    let xhttp=new XMLHttpRequest();
+    xhttp.open("POST","/api/rezervacija");
+    xhttp.onload=()=>{
+        if(xhttp.status==200){
+            window.alert("Rezervacija uspešno oddana");
+            window.location.replace("/");
+        }else{
+            window.alert(JSON.parse(xhttp.responseText).sporocilo);
+        }
+    }
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhttp.send(JSON.stringify(payload));
 }
 
 let preveriStorage=function(){
@@ -43,8 +60,11 @@ let preveriStorage=function(){
 }
 
 preveriStorage();
-for(let but of document.getElementsByClassName("but")){
-    but.addEventListener("click",klikDodaj);
+for(let but of document.getElementsByClassName("fa-plus")){
+    but.addEventListener("click",klikDodajPlus);
+}
+for(let but of document.getElementsByClassName("fa-minus")){
+    but.addEventListener("click",klikDodajMinus);
 }
 document.getElementById("klikRezerviraj").addEventListener("click",klikRezerviraj);
 

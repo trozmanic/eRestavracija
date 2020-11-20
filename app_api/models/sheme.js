@@ -46,7 +46,7 @@ const meniItemShema = new mongoose.Schema({
 })
 
 const narociloShema = new mongoose.Schema({
-    natakar: { type: zaposleniShema, required:true },
+    natakar: { type: zaposleniShema },
     datum_in_ura: { type: Date, required:true, default: Date.now },
     meni_items: [new mongoose.Schema({
         meni_item: { type: meniItemShema, required:true },
@@ -54,18 +54,17 @@ const narociloShema = new mongoose.Schema({
     })],
     cena: { type: Number, required:true },
     stanje: { type: String, required:true },
-    miza: { type: Number, required:true }
+    miza: { type: Number}
 })
 
 const rezervacijaShema = new mongoose.Schema({
-    datum: { type: Date, required:true },
+    datum: { type: Date, default: Date.now },
     narocilo: { type: narociloShema },
-    stanje: { type: String, required:true }
+    stanje: { type: String, default: "caka" }
 })
 
 
 const gostShema = new mongoose.Schema({
-    id_uporabnika :{type: mongoose.ObjectId},
     rezervacije: [rezervacijaShema]
 })
 
