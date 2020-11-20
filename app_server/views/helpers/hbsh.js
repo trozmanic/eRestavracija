@@ -1,5 +1,10 @@
 const hbs = require('hbs');
 
+hbs.registerHelper("not", function(obj) {
+  return !obj;
+});
+
+
 hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
   let paramid = "";
   if (uporabnik) {

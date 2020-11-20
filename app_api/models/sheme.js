@@ -70,6 +70,7 @@ const gostShema = new mongoose.Schema({
     ocenjene_jedi: [meniItemShema]
 })
 
+
 mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");
 mongoose.model("Gost", gostShema, "Gosti");
 mongoose.model("Rezervacija", rezervacijaShema, "Rezervacije");

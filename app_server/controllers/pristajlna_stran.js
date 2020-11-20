@@ -25,13 +25,18 @@ const read_json = (pathJSON) => {
 
 const renderDynamic = (uporabnik_id, res, layout, title, izbrano_ime, template, obj) => {
     console.log(obj);
-    axios.get(apiParametri.streznik + "/api/uporabniki/" + uporabnik_id)
-        .then((response) => {
-            return res.render(template, {layout, title, izbrano_ime, uporabnik:response.data, dynamicData:obj})
-        })
-        .catch((err)=> {
-            return res.render(template,{layout,title,izbrano_ime});
-        })
+    if (uporabnik_id) {
+        axios.get(apiParametri.streznik + "/api/uporabniki/" + uporabnik_id)
+            .then((response) => {
+                return res.render(template, {layout, title, izbrano_ime, uporabnik:response.data, dynamicData:obj})
+            })
+            .catch((err)=> {
+                return res.render(template,{layout,title,izbrano_ime});
+            })
+    }
+    else {
+        return res.render(template, {layout, title, izbrano_ime, dynamicData:obj})
+    }
 
 }
 
@@ -103,51 +108,32 @@ const menu = async function (req, res) {
     const uporabnik_id = req.query.uporabnik_id;
     console.log(uporabnik_id)
     try {
+        let menu_items = null;
         if (uporabnik_id) {
-            const menu_items = await meni.pridobiMeni(uporabnik_id);
-            console.log ("menu_items: " +menu_items);
-            return renderDynamic(uporabnik_id,
-                            res,
-                            'layout_pristajlna_stran.hbs',
-                            'Al dente',
-                            'menu',
-                            'menu',
-                            {menu_items: menu_items}
-                            );
+            menu_items = await meni.pridobiMeni(uporabnik_id);
+            console.log(menu_items)
         }
         else {
-            res.render('menu', {layout: 'layout_pristajlna_stran.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: []})
+            const data  = await axios.get(apiParametri.streznik + "/api/meni");
+            menu_items = data.data;
+            menu_items.forEach((item) => {
+                item.ocenjena = false;
+            })
+
         }
+        renderDynamic(uporabnik_id,
+            res,
+            'layout_pristajlna_stran.hbs',
+            'Al dente',
+            'menu',
+            'menu',
+            {menu_items: menu_items}
+        );
 
 
     }catch (err) {
         console.log(err);
     }
-    // console.log(req.query.uporabnik_id);
-    // let pathJSON = path.dirname(require.main.filename).split('/');
-    // pathJSON.pop();
-    // pathJSON = pathJSON.join('/') + "/public/api_simulation/meni/meni_items.json";
-    // read_json(pathJSON)
-    //     .then( (data) => {
-    //         if (uporabnik_id) {
-    //             console.log("da");
-    //             const menu_items = data;
-    //             return renderDynamic(uporabnik_id,
-    //                 res,
-    //                 'layout_pristajlna_stran.hbs',
-    //                 'Al dente',
-    //                 'menu',
-    //                 'menu',
-    //                 {menu_items: menu_items}
-    //                 )
-    //         }
-    //         res.render('menu', {layout: 'layout_pristajlna_stran.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: data})
-    //     })
-    //     .catch( (err) => {
-    //         console.log(err);
-    //         //TODO: implement error handling for exmaple notFound/error page ...
-    //         res.render('not_found');
-    //     });
 
 
 }

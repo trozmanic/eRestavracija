@@ -6,10 +6,10 @@ hbs.registerPartial('myPartial', '<div class="card" id="{{_id}}">\n' +
     '                    <p class="card-text">Za vec informacij o jedi pritisnite na sliko</p>\n' +
     '                  <p class="card-text">\n' +
     '                    {{opis}}\n' +
-    '                  </p>\n' +
-    '                  <button type="button" class="button btn-menu" data-toggle="modal" data-target="#exampleModal">\n' +
-    '                    OCENI JED\n'  +
-    '                  </button>\n' +
+    '                  </p>\n' +'{{#if ocenjena }}'+ '<h1 class="button btn-menu">TO JED STE ZE OCENILI</button>' +
+                        '{{else}}' + '<button type="button" class="button btn-menu" data-toggle="modal" data-target="#exampleModal">\n' +
+        '                    OCENI JED\n'  +
+        '                  </button>\n' + '{{/if}}' +
     '                \n' +
     '                  <div class="properties hidden" id="property-{{_id}}" >\n' +
     '                      <div class="properties-info">\n' +
