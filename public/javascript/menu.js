@@ -90,11 +90,11 @@ window.addEventListener('load', function () {
     posljiOceno.addEventListener("click", () => {
         const ocena = parseInt(slider.value);
         console.log ("Ocenil sme jed " + chosen + " z oceno " + ocena);
-        if (localStorage.getItem("credentials") === null) {
+        if (sessionStorage.getItem("credentials") === null) {
             return alert("Ce zelite uporabljati funkcinolanosti kot so ocenjevanje jedi se prosim prijavite oziroma" +
                 " kreirajte uporabniski racun");
         }
-        const uporabnik_id = JSON.parse (localStorage.getItem("credentials")).uporabnik_id;
+        const uporabnik_id = JSON.parse (sessionStorage.getItem("credentials")).uporabnik_id;
         const obj = {
             id: chosen,
             ocena: ocena,

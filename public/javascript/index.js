@@ -107,6 +107,7 @@ window.addEventListener("load", ()=> {
                 return;
             }
             localStorage.setItem("credentials", this.responseText);
+            sessionStorage.setItem("credentials", this.responseText);
             window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
         }
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -148,4 +149,10 @@ window.addEventListener("load", ()=> {
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify(user));
     })
+
+    var socket = io();
+    socket.on('news', (msg) => {
+        console.log(msg);
+    })
+
 })
