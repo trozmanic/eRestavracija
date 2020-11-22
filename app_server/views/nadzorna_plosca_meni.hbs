@@ -1,0 +1,8 @@
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
+<script src="/javascript/nadzorna_plosca_meni.js"></script>
+
+<div class="menu-items">
+    {{#each menu_items as | item |}}
+        {{> menuItem ime=item.ime id=item.id cena=item.cena kalorije=item.kalorije edit=(concat "edit" item.id) del=(concat "del" item.id)}}
+    {{/each}}
+</div>

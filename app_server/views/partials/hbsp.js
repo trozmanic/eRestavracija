@@ -22,3 +22,61 @@ hbs.registerPartial('myPartial', '<div class="card" id="{{_id}}">\n' +
     '                  </div>\n' +
     '                </div>\n' +
     '            </div>')
+
+
+hbs.registerPartial('menuItem', '<br>\n' +
+    '                    <div class="rezervacija-skatla">\n' +
+    '                        <h4>{{ ime }}</h4>\n' +
+    '                        <span class="desno-float">\n' +
+    '                            <button type="button" id={{ edit }} class="btn btn-dark btn-block"><i class="fas fa-edit"></i> UREDI</button>\n' +
+    '                            <button type="button" id={{ del }}  class="btn btn-dark btn-block"><i class="fas fa-trash"></i> IZBRIŠI</button>\n' +
+    '                        </span>\n' +
+    '                        <h6>Cena: {{ cena }}€</h6>\n' +
+    '                        <h6>Kalorije: {{ kalorije }}kcal</h6>\n' +
+    '                        <p>{{ opis }}</p>\n' +
+    '                    </div>')
+
+hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\">\n" +
+    "                    <h5 class=\"sredina-text\">Naročilo {{ id }}</h5>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Miza: <strong>4</strong>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                    </p>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
+    "                    </p>\n" +
+    "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
+    "                    <ul>\n" +
+    "                    {{#each jedi as | jed |}} \n "+
+    "                       <li>{{ jed.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
+    "                    {{/each}}"+
+    "                    </ul>\n" +
+    "                    <div class=\"ikone-stil\">\n" +
+    "                        <i role=\"button\" class=\"far fa-check-circle ikone-stil-posamezna\"></i>\n" +
+    "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
+    "                    </div>\n" +
+    "                </div>")
+
+hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\">\n" +
+    "                    <h5 class=\"sredina-text\">Naročilo {{ id }}</h5>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Miza: <strong>4</strong>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                    </p>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
+    "                    </p>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Začetek priprave: <strong>{{ zacetek_priprave }}</strong></span>\n" +
+    "                    </p>\n" +
+    "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
+    "                    <ul>\n" +
+    "                    {{#each jedi as | jed |}} \n "+
+    "                       <li>{{ jed.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
+    "                    {{/each}}"+
+    "                    </ul>\n" +
+    "                    <div class=\"ikone-stil\">\n" +
+    "                        <i role=\"button\" class=\"far fa-check-circle ikone-stil-posamezna\"></i>\n" +
+    "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
+    "                    </div>\n" +
+    "                </div>")

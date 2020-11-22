@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
+
+<div class="row">
+
+    <div class="col-12 col-md-6">
+        <div class="col-xl-12">
+            <h3 class="sredina-text text-white">Naročila</h3>
+        </div>
+
+        {{#each narocila.vrsta as | item |}}
+            {{> narociloItem id = item.id datum = item.datum sprejem_narocila = item.sprejem_narocila jedi=item.jedi }}
+        {{/each}}
+
+    </div>
+
+    <div class="col-12 col-md-6">
+        <div class="col-xl-12">
+            <h3 class="sredina-text text-white">V pripravi</h3>
+        </div>
+        {{#each narocila.priprava as | item |}}
+            {{> narociloItemPriprava id = item.id datum = item.datum sprejem_narocila = item.sprejem_narocila jedi=item.jedi zacetek_priprave=item.zacetek_priprave }}
+        {{/each}}
+    </div>
+
+</div>
