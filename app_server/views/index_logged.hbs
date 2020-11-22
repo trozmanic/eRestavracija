@@ -18,7 +18,13 @@
 
 <script>
     document.getElementById("odjava").addEventListener("click", (event) => {
-        localStorage.removeItem("credentials");
-        window.location.href = "/";
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "/odjava", true);
+        xhttp.onload = function () {
+            localStorage.removeItem("credentials");
+            window.location = "/";
+        }
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send()
     })
 </script>
