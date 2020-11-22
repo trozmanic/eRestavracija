@@ -3,11 +3,17 @@
 
 <div class="logo" style="margin-top: 5%;">
     <h1>Dobrodosli nazaj</h1>
-    <p>{{ime_uporabnika}}</p>
 </div>
 
-<div class="login-buttons" style="margin-left:38%;">
-    <button id="odjava">ODJAVA</button>
+<div class="credentials">
+    <h1>Osebni podatki: </h1>
+    <p>{{uporabnik.ime}}</p>
+    <p>{{uporabnik.email_naslov}}</p>
+    <p>{{uporabnik.telefonska_stevilka}}</p>
+</div>
+
+<div class="logout" id="odjava">
+    <button class="logout__buton">ODJAVA</button>
 </div>
 
 <script>

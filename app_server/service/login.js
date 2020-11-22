@@ -10,16 +10,15 @@ if (process.env.NODE_ENV === 'production') {
 const login = function (req, res) {
     const uporabnik = req.body;
     const email_naslov = uporabnik.email_naslov;
-    console.log(uporabnik)
     axios
         .get(apiParametri.streznik + "/api/uporabniki?email=" + email_naslov)
         .then((response) => {
             const uporabnikDB = response.data[0];
             if (!uporabnikDB) {
-                return res.status(404).send({"error_message": "No user with given email"})
+                return res.status(404).send({"error_message": "Napacni podatki, poskusite ponovno"})
             }
             if (uporabnik.geslo !== uporabnikDB.geslo) {
-                return res.status(401).send({"error_message": "Wrong credentials"})
+                return res.status(401).send({"error_message": "Napacni podatki, poskusite ponovno"})
             }
             return res.status(200).send({"uporabnik_id": uporabnikDB._id.toString(), "vloga": uporabnikDB.vloga});
         })

@@ -137,22 +137,20 @@ body {
     font-weight: 100;
 } 
 
-.but {
-    font-family: 'Raleway', sans-serif;
-    border: 1px solid white;
+.dodaj {
+    display: flex;
     color: white;
-    background: none;
-    border-radius: 12px;
-    padding:0.5em;
+    align-items: center;
 }
 
-.but:hover {
-    transition: 1s;
+.dodaj p{
+    font-weight: bold;
+}
+
+.dodaj i:hover{
     color:#5F3C50;
-    background:none;
-    border: 1px solid #5F3C50;
-    background-color: white;
-    text-decoration: none;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
 .butlarge {

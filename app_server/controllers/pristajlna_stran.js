@@ -4,6 +4,7 @@ const axios = require('axios');
 const apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
+const meni = require('../service/meni');
 if (process.env.NODE_ENV === 'production') {
     //TODO: include heroku
     apiParametri.streznik = "";
@@ -22,60 +23,124 @@ const read_json = (pathJSON) => {
     })
 }
 
+const renderDynamic = (uporabnik_id, res, layout, title, izbrano_ime, template, obj) => {
+    console.log(obj);
+    if (uporabnik_id) {
+        axios.get(apiParametri.streznik + "/api/uporabniki/" + uporabnik_id)
+            .then((response) => {
+                return res.render(template, {layout, title, izbrano_ime, uporabnik:response.data, dynamicData:obj})
+            })
+            .catch((err)=> {
+                return res.render(template,{layout,title,izbrano_ime});
+            })
+    }
+    else {
+        return res.render(template, {layout, title, izbrano_ime, dynamicData:obj})
+    }
+
+}
+
 
 const index=async function(req,res){
     const uporabnik_id = req.query.uporabnik_id;
-    //Specifiran je uporabnik_id, zato zaslonsko masko renderiramo
-    //Glede na njegovo vlogo itd ...
+
     if (uporabnik_id) {
-        axios.get(apiParametri.streznik + "/api/uporabniki/" + uporabnik_id)
-            .then((response)=> {
-                console.log(response.data);
-                return res.render('index_logged', {layout:'layout_pristajlna_stran.hbs',
-                    title:'Al Dente',izbrano_ime:'index',
-                    ime_uporabnika:response.data.ime})
-            })
-            .catch((err) => {
-                console.log(err);
-                return res.render('index',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente',izbrano_ime:'index'});
-            })
+        renderDynamic(uporabnik_id,
+            res,
+            'layout_pristajlna_stran.hbs',
+            'Al Dente',
+            'index',
+            'index_logged');
     }else {
         res.render('index',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente',izbrano_ime:'index'});
     }
 }
 
 const onas=function(req,res){
-    res.render('onas',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - O Nas',izbrano_ime:'onas'});
+    const uporabnik_id = req.query.uporabnik_id;
+    if (uporabnik_id) {
+        renderDynamic(uporabnik_id,
+            res,
+            'layout_pristajlna_stran.hbs',
+            'Al Dente - O Nas',
+            'onas',
+            'onas')
+    }
+    else {
+        res.render('onas',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - O Nas',izbrano_ime:'onas'});
+    }
 }
 
 const rezerviraj=function(req,res){
+    const uporabnik_id = req.query.uporabnik_id;
     res.render('rezervacija_prva',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'});
 }
 
 const rezerviraj_podatki=function(req,res){
-    res.render('rezervacija',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
+    const uporabnik_id = req.query.uporabnik_id;
+    if (uporabnik_id) {
+        renderDynamic(uporabnik_id,
+            res,
+            'layout_pristajlna_stran.hbs',
+            'Al Dente - Rezerviraj',
+            'rezerviraj_mizo',
+            'rezervacija'
+            )
+    }
+    else {
+        res.render('rezervacija',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
+    }
 }
 
 const rezerviraj_menu=function(req,res){
+    const uporabnik_id = req.query.uporabnik_id;
+    if (uporabnik_id) {
+        renderDynamic(uporabnik_id,
+            res,
+            'layout_pristajlna_stran.hbs',
+            'Al Dente - Rezerviraj',
+            'rezerviraj_mizo')
+    }
     res.render('rezervacija_menu',{layout:'layout_pristajlna_stran.hbs',title:'Al Dente - Rezerviraj',izbrano_ime:'rezerviraj_mizo'})
 }
 
-const menu = function (req, res) {
-    let pathJSON = path.dirname(require.main.filename).split('/');
-    pathJSON.pop();
-    pathJSON = pathJSON.join('/') + "/public/api_simulation/meni/meni_items.json";
-    read_json(pathJSON)
-        .then( (data) => {
-            res.render('menu', {layout: 'layout_pristajlna_stran.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: data})
-        })
-        .catch( (err) => {
-            console.log(err);
-            //TODO: implement error handling for exmaple notFound/error page ...
-            res.render('not_found');
-        });
+const menu = async function (req, res) {
+    const uporabnik_id = req.query.uporabnik_id;
+    console.log(uporabnik_id)
+    try {
+        let menu_items = null;
+        if (uporabnik_id) {
+            menu_items = await meni.pridobiMeni(uporabnik_id);
+            console.log(menu_items)
+        }
+        else {
+            const data  = await axios.get(apiParametri.streznik + "/api/meni");
+            menu_items = data.data;
+            menu_items.forEach((item) => {
+                item.ocenjena = false;
+            })
+
+        }
+        renderDynamic(uporabnik_id,
+            res,
+            'layout_pristajlna_stran.hbs',
+            'Al dente',
+            'menu',
+            'menu',
+            {menu_items: menu_items}
+        );
+
+
+    }catch (err) {
+        console.log(err);
+    }
 
 
 }
+const potrebna_prijava = async function (req, res) {
+
+}
+
 
 module.exports={
     index,
@@ -83,5 +148,6 @@ module.exports={
     rezerviraj,
     rezerviraj_podatki,
     rezerviraj_menu,
-    menu
+    menu,
+    potrebna_prijava
 }

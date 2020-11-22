@@ -199,6 +199,34 @@ body {
     color: #5F3C50 !important;
 }
 
+.danger {
+    font-weight: bold;
+    background-color: rgba(240, 52, 52, 0.5)
+}
+
+
+.sucess {
+    padding-top: 10%;
+    color: green;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+}
+
+#response_message {
+    margin-top: 5%;
+    text-align: center;
+    color: red;
+    width: 100%;
+    font-weight: bold;
+}
+
+#response_message_login {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
+
 
   
 

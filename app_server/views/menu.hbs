@@ -26,14 +26,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="button btn-review" data-dismiss="modal">ZAPRI</button>
-                <button type="button" class="button btn-review">POSLJI</button>
+                <button type="button" class="button btn-review" id="posljiOceno">POSLJI</button>
             </div>
         </div>
     </div>
 </div>
 <div class="menu-items">
-    {{#each menu_items as | item |}}
-    {{> myPartial ime= item.ime opis=item.opis cena=item.cena slika=item.slika id= item.id}}
+    {{#each dynamicData.menu_items as | item |}}
+    {{> myPartial item }}
     {{/each}}
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
