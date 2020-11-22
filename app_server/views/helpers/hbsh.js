@@ -106,3 +106,7 @@ hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role) => {
   }
   return meni_sestavljen;
 });
+
+hbs.registerHelper('concat', function (arg1, arg2){
+  return arg1+''+arg2;
+});

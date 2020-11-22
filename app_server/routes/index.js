@@ -18,6 +18,8 @@ router.get('/nadzorna_plosca/rezervacije',nadzorna_plosca.rezervacije)
 router.get('/nadzorna_plosca/urnik',nadzorna_plosca.urnik)
 router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.zaloga)
 router.get('/nadzorna_plosca/zaposleni',nadzorna_plosca.zaposleni)
+router.get('/nadzorna_plosca/narocila_kuhar', nadzorna_plosca.narocila_kuhar)
+router.get('/nadzorna_plosca/meni', nadzorna_plosca.meni)
 
 /* POST login / register */
 router.post("/login", login.login);
