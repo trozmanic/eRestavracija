@@ -5,6 +5,7 @@ const uporabniki=require('../controllers/uporabniki');
 const rezervacije=require('../controllers/rezervacije')
 const meni = require('../controllers/meni');
 const gost = require('../controllers/gost');
+const urnik = require('../controllers/urnik');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -24,5 +25,9 @@ router.delete("/meni/:idJedi", meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
+
+//URNIK
+router.get("/urnik", urnik.pridobiUrnik);
+router.put("/urnik", urnik.posodobiUrnik);
 
 module.exports=router

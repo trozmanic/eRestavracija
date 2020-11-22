@@ -137,6 +137,10 @@ const menu = async function (req, res) {
 
 
 }
+const potrebna_prijava = async function (req, res) {
+
+}
+
 
 module.exports={
     index,
