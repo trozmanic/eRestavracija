@@ -75,7 +75,7 @@ const urnikShema = new mongoose.Schema({
     dnevi: [{
         type: String, required: true, validate: {
             validator: function (v) {
-                if (v && (v.localeCompare("") == 0 || v.localeCompare(" ") || v.localeCompare("?"))) {
+                if (v && (v.localeCompare("") == 0 || v.localeCompare(" ") == 0 || v.localeCompare("?") == 0)) {
                     return true;
                 }
                 return /^\b[p|d]{1}\b$/.test(v);

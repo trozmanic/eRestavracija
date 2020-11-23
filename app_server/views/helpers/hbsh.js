@@ -115,3 +115,110 @@ hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role) => {
 hbs.registerHelper('concat', function (arg1, arg2){
   return arg1+''+arg2;
 });
+
+hbs.registerHelper('mesec_to_string', (mesec) => {
+  var mesec_string;
+  switch(parseInt(mesec)) {
+    case 0:
+      mesec_string = "Januar";
+      break;
+    case 1:
+      mesec_string = "Februar";
+      break;
+    case 2:
+      mesec_string = "Marec";
+      break;
+    case 3:
+      mesec_string = "April ";
+      break;
+    case 4:
+      mesec_string = "Maj";
+      break;
+    case 5:
+      mesec_string = "Junij";
+      break;
+    case 6:
+      mesec_string = "Julij";
+      break;
+    case 7:
+      mesec_string = "Avgust";
+      break;
+    case 8:
+      mesec_string = "September";
+      break;
+    case 9:
+      mesec_string = "Oktober";
+      break;
+    case 10:
+      mesec_string = "November";
+      break;
+    case 11:
+      mesec_string = "December ";
+      break;
+    default:
+      mesec_string = "Napaka helper mesec to string";
+  }
+  return mesec_string;
+});
+
+hbs.registerHelper('datum_to_sting', (dan, index, zac_dan, st_dni) => {
+  if(!dan) {
+    return "";
+  } else {
+    var i = parseInt(index);
+    var prviDan = 0;
+    zac_dan.localeCompare("pon") == 0 ? prviDan=0 : prviDan=prviDan;
+    zac_dan.localeCompare("tor") == 0 ? prviDan=1 : prviDan=prviDan;
+    zac_dan.localeCompare("sre") == 0 ? prviDan=2 : prviDan=prviDan;
+    zac_dan.localeCompare("cet") == 0 ? prviDan=3 : prviDan=prviDan;
+    zac_dan.localeCompare("pet") == 0 ? prviDan=4 : prviDan=prviDan;
+    zac_dan.localeCompare("sob") == 0 ? prviDan=5 : prviDan=prviDan;
+    zac_dan.localeCompare("ned") == 0 ? prviDan=6 : prviDan=prviDan;
+    if (i - prviDan >= 0 && i - prviDan < st_dni) {
+      //dodamo stevec
+      return (i - prviDan + 1) + " " + dan[index];
+
+    }
+    return dan[index]
+  }
+});
+
+hbs.registerHelper('nadzorna_urnik_prev', (leto, mesec, uporabnik_id, zaposleni_role) => {
+  mesec--;
+  if (mesec < 0) {
+    leto--;
+    mesec = 11;
+  }
+  var url_dodatek =  "?uporabnik_id=" + uporabnik_id;
+  if(leto) {
+    url_dodatek =  url_dodatek + "&leto=" + leto;
+  }
+  if(mesec != null) {
+    url_dodatek =  url_dodatek + "&mesec=" + mesec;
+  }
+  if(zaposleni_role) {
+    url_dodatek =  url_dodatek + "&vloga=" + zaposleni_role;
+  }
+  return url_dodatek;
+});
+hbs.registerHelper('nadzorna_urnik_next', (leto, mesec, uporabnik_id, zaposleni_role) => {
+  mesec++;
+  if (mesec > 11) {
+    leto++;
+    mesec = 0;
+  }
+  var url_dodatek = "?uporabnik_id=" + uporabnik_id;
+  if(leto) {
+    url_dodatek =  url_dodatek + "&leto=" + leto;
+  }
+  if(mesec != null) {
+    url_dodatek =  url_dodatek + "&mesec=" + mesec;
+  }
+  if(zaposleni_role) {
+    url_dodatek =  url_dodatek + "&vloga=" + zaposleni_role;
+  }
+  return url_dodatek;
+});
+
+
+//'<a href="/nadzorna_plosca/rezervacije"><i class="fas fa-user-clock ikone-stil-posamezna"></i></a>'
