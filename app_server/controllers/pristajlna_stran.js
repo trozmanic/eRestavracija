@@ -42,7 +42,10 @@ const renderDynamic = (uporabnik_id, res, layout, title, izbrano_ime, template, 
 
 
 const index=async function(req,res){
-    const uporabnik_id = req.query.uporabnik_id;
+    let uporabnik_id = req.query.uporabnik_id;
+    if (!uporabnik_id) {
+        uporabnik_id = req.session.uporabnik_id;
+    }
 
     if (uporabnik_id) {
         req.session.uporabnik_id = uporabnik_id;

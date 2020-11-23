@@ -108,6 +108,9 @@ window.addEventListener("load", ()=> {
             }
             localStorage.setItem("credentials", this.responseText);
             sessionStorage.setItem("credentials", this.responseText);
+            if (credentials.vloga !== "gost") {
+                window.location.href = "nadzorna_plsoca/?vloga="+credentials.vloga;
+            }
             window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
         }
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

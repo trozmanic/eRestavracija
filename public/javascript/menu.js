@@ -90,7 +90,7 @@ window.addEventListener('load', function () {
     posljiOceno.addEventListener("click", () => {
         const ocena = parseInt(slider.value);
         console.log ("Ocenil sme jed " + chosen + " z oceno " + ocena);
-        if (sessionStorage.getItem("credentials") === null) {
+        if (!sessionStorage.getItem("credentials")) {
             return alert("Ce zelite uporabljati funkcinolanosti kot so ocenjevanje jedi se prosim prijavite oziroma" +
                 " kreirajte uporabniski racun");
         }
