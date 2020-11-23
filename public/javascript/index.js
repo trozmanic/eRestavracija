@@ -108,10 +108,12 @@ window.addEventListener("load", ()=> {
             }
             localStorage.setItem("credentials", this.responseText);
             sessionStorage.setItem("credentials", this.responseText);
+            console.log(credentials.vloga);
             if (credentials.vloga !== "gost") {
-                window.location.href = "nadzorna_plsoca/?vloga="+credentials.vloga;
+                window.location.href = "/nadzorna_plosca?vloga="+credentials.vloga;
+            }else {
+                window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
             }
-            window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
         }
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify(user))

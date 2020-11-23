@@ -24,6 +24,7 @@ hbs.registerPartial('myPartial', '<div class="card" id="{{_id}}">\n' +
     '            </div>')
 
 
+
 hbs.registerPartial('menuItem', '<br>\n' +
     '                    <div class="rezervacija-skatla">\n' +
     '                        <h4>{{ ime }}</h4>\n' +
@@ -36,19 +37,19 @@ hbs.registerPartial('menuItem', '<br>\n' +
     '                        <p>{{ opis }}</p>\n' +
     '                    </div>')
 
-hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\">\n" +
-    "                    <h5 class=\"sredina-text\">Naročilo {{ id }}</h5>\n" +
+hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
+    "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>4</strong>\n" +
     "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
+    "                        Sprejem naročila: <strong>{{ ura }}</strong>\n" +
     "                    </p>\n" +
     "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
     "                    <ul>\n" +
-    "                    {{#each jedi as | jed |}} \n "+
-    "                       <li>{{ jed.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
+    "                    {{#each meni_items as | jed |}} \n "+
+    "                       <li>{{ jed.meni_item.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
     "                    {{/each}}"+
     "                    </ul>\n" +
     "                    <div class=\"ikone-stil\">\n" +
@@ -57,8 +58,8 @@ hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\">\n" +
     "                    </div>\n" +
     "                </div>")
 
-hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\">\n" +
-    "                    <h5 class=\"sredina-text\">Naročilo {{ id }}</h5>\n" +
+hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
+    "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>4</strong>\n" +
     "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
@@ -71,8 +72,8 @@ hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\">\
     "                    </p>\n" +
     "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
     "                    <ul>\n" +
-    "                    {{#each jedi as | jed |}} \n "+
-    "                       <li>{{ jed.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
+    "                    {{#each meni_items as | jed |}} \n "+
+    "                       <li>{{ jed.meni_item.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
     "                    {{/each}}"+
     "                    </ul>\n" +
     "                    <div class=\"ikone-stil\">\n" +

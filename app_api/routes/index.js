@@ -7,6 +7,7 @@ const meni = require('../controllers/meni');
 const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
 const zaposleni = require('../controllers/zaposleni');
+const narocila = require('../controllers/narocila');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -35,5 +36,10 @@ router.put("/urnik", urnik.posodobiUrnik);
 router.get("/zaposleni", zaposleni.pridobiZaposlenega);
 router.put("/zaposleni", zaposleni.posodobiZaposlenega);
 router.post("/zaposleni", zaposleni.ustvariZaposlenega);
+
+//NAROCIAL
+router.post("/narocila", narocila.ustvariNarocilo);
+router.get("/narocila", narocila.pridobiNarocila);
+router.put("/narocila", narocila.posodobiNarocilo);
 
 module.exports=router

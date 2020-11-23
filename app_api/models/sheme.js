@@ -21,7 +21,7 @@ const uporabnikShema = new mongoose.Schema({
 
 const zaposleniShema = new mongoose.Schema({
     "id_uporabnika" :{type:mongoose.ObjectId},
-    "placa": { type: Number, required: true, min: 0 }
+    "placa": { type: Number, min: 0 }
 })
 
 const surovinaShema = new mongoose.Schema({
@@ -53,7 +53,7 @@ const narociloShema = new mongoose.Schema({
         kolicina: { type: Number, required:true }
     })],
     cena: { type: Number, required:true },
-    stanje: { type: String, required:true },
+    stanje: { type: String, required:true, enum: ['sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
     miza: { type: Number}
 })
 

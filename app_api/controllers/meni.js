@@ -45,11 +45,30 @@ const ustvariJed = async (req,res) => {
 }
 
 const posodobiJed = async (req,res) => {
+    try {
+        const jedUpdate = req.body;
+        if (!jedUpdate.id) {
+            return res.status(400).json({error_message: "Specify ID"});
+        }
+        await Jed.findByIdAndDelete(jedUpdate.id);
+        res.status(200).json();
+    }catch (err) {
+        res.status(500).json({error_message: err});
+    }
 
 }
 
 const izbrisiJed = async (req,res) => {
-
+    try {
+        const id = req.params.idJedi;
+        if (!id) {
+            return res.status(400).json({error_message: "Specify user id"});
+        }
+        await Jed.findByIdAndDelete(id);
+        res.status(200).json({});
+    }catch (err) {
+        res.status(500).json({error_message: err});
+    }
 }
 
 //Maybe add transaction here !

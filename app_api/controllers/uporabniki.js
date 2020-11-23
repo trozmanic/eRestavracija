@@ -8,14 +8,19 @@ const ustvariUporabnika=async (req,res)=>{
     try {
         let uporabnik = req.body;
         console.log(uporabnik);
-        uporabnik.vloga=  "gost";
-        const uporabnik_model = new Uporabnik(uporabnik);
-        const gost_model = new Gost({"id_uporabnika":uporabnik_model._id});
-        uporabnik_model.id_vloga_info = gost_model._id;
+        if (!uporabnik.vloga) {
+            uporabnik.vloga=  "gost";
+        }
+        const vlogaShema = uporabnik.vloga === 'gost' ? Gost : Zaposleni;
 
-        //Every register user is considered to be gost so we add gostModel to DB
+        const uporabnik_model = new Uporabnik(uporabnik);
+        const vlogaModel = new vlogaShema({"id_uporabnika":uporabnik_model._id});
+        uporabnik_model.id_vloga_info = vlogaModel._id;
+
+        //Every register user is considered to be gost so we add gostModel to DB if there is no
+        //vloga specified
         await uporabnik_model.save();
-        await gost_model.save();
+        await vlogaModel.save();
         res.status(200).json(uporabnik);
     }catch (err) {
         console.log(err);

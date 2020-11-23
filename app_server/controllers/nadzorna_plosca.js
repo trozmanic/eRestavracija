@@ -11,6 +11,7 @@ const axios = require('axios').create({
     baseURL: apiParametri.streznik,
     timeout: 5000
 });
+const narocilaService = require('../service/narocila');
 
 const menu=function(req,res){
     res.render('nadzorna_plosca_menu',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča',zaposleni_role:req.query.vloga});
@@ -83,27 +84,29 @@ const strezba=function(req,res){
     res.render('nadzorna_plosca_strezba',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Strežba',zaposleni_role:req.query.vloga})
 }
 
-const narocila_kuhar=function (req, res){
-    read_json('./public/api_simulation/narocila/narocila_kuhinja.json')
-        .then((data) => {
-            res.render('nadzorna_plosca_kuhar',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Narocila kuhinja', narocila: data});
-        })
-        .catch( (err) => {
-            console.log(err);
-            //TODO: implement error handling for exmaple notFound/error page ...
-
-        })
+const narocila_kuhar= async function (req, res){
+    const idUporabnika = req.session.id;
+    if (!idUporabnika) {
+        return res.render("404 NOT FOUND");
+    }
+    try {
+        const data = await axios.get(apiParametri.streznik + "/api/narocila");
+        const narocila = narocilaService.prepKuhar(data.data);
+        res.render('nadzorna_plosca_kuhar',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Narocila kuhinja', narocila});
+    }catch (err) {
+        console.log(err);
+        res.render("error");
+    }
 }
-const meni=function (req, res){
-    read_json('./public/api_simulation/meni/meni_items.json')
-        .then((data) => {
-            res.render('nadzorna_plosca_meni', {layout: 'layout_nadzorna_plosca.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: data})
-        })
-        .catch((err) => {
-            console.log(err);
-            //TODO: implement error handling for exmaple notFound/error page ...
-
-        })
+const meni= async function (req, res){
+    try {
+        const meniItems =  await axios.get(apiParametri.streznik + "/api/meni" );
+        res.render('nadzorna_plosca_meni',
+            {layout: 'layout_nadzorna_plosca.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: meniItems.data});
+    }catch (err) {
+        console.log(err);
+        res.render('error');
+    }
 }
 
 const read_json = (pathJSON) => {
