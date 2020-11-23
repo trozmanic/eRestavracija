@@ -1,0 +1,153 @@
+{
+  "vrsta": [
+    {
+      "id": 14,
+      "miza": 9,
+      "datum": "15.5.2020",
+      "sprejem_narocila": "12:48",
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "miza": 9,
+      "datum": "15.5.2020",
+      "sprejem_narocila": "12:44",
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "miza": 9,
+      "datum": "15.5.2020",
+      "sprejem_narocila": "12:47",
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    }
+  ],
+  "pripravljena": [
+    {
+      "id": 2,
+      "miza": 4,
+      "datum": "15.5.2020",
+      "sprejem_narocila": "12:38",
+      "zacetek_priprave": "12:42",
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    },{
+      "id": 3,
+      "miza": 4,
+      "datum": "15.5.2020",
+      "sprejem_narocila": "12:42",
+      "zacetek_priprave": "12:50",
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    },{
+      "id": 5,
+      "miza": 4,
+      "datum": "15.5.2020",
+      "sprejem_narocila": "12:45",
+      "zacetek_priprave": "12:52",
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    }
+  ],
+  "postrezena": [
+    {
+      "id": 5,
+      "miza": 4,
+      "datum": "15.5.2020",
+      "narocilo_postrezeno": "12:45"
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "miza": 4,
+      "datum": "15.5.2020",
+      "narocilo_postrezeno": "12:45"
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "miza": 4,
+      "datum": "15.5.2020",
+      "narocilo_postrezeno": "12:45"
+      "jedi": [
+        {
+          "ime": "Hobotnica",
+          "kolicina": 2
+        },
+        {
+          "ime": "Rizota z lososom",
+          "kolicina": 1
+        }
+      ]
+    }
+  ]
+}

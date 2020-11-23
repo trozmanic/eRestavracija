@@ -40,7 +40,7 @@ hbs.registerPartial('menuItem', '<br>\n' +
 hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Miza: <strong>4</strong>\n" +
+    "                        Miza: <strong>{{ miza }}</strong>\n" +
     "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
@@ -61,7 +61,7 @@ hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id
 hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Miza: <strong>4</strong>\n" +
+    "                        Miza: <strong>{{ miza }}</strong>\n" +
     "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
@@ -78,6 +78,52 @@ hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\" i
     "                    </ul>\n" +
     "                    <div class=\"ikone-stil\">\n" +
     "                        <i role=\"button\" class=\"far fa-check-circle ikone-stil-posamezna\"></i>\n" +
+    "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
+    "                    </div>\n" +
+    "                </div>")
+
+hbs.registerPartial('narociloItemPripravljeno', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
+    "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Miza: <strong>{{ miza }}</strong>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                    </p>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
+    "                    </p>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Konec priprave: <strong>{{ konec_priprave }}</strong></span>\n" +
+    "                    </p>\n" +
+    "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
+    "                    <ul>\n" +
+    "                    {{#each meni_items as | jed |}} \n "+
+    "                       <li>{{ jed.meni_item.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
+    "                    {{/each}}"+
+    "                    </ul>\n" +
+    "                    <div class=\"ikone-stil\">\n" +
+    "                        <i role=\"button\" class=\"fas fa-utensils ikone-stil-posamezna\"></i>\n" +
+    "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
+    "                    </div>\n" +
+    "                </div>")
+
+
+hbs.registerPartial('narociloItemPostrezeno', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
+    "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Miza: <strong>{{ miza }}</strong>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                    </p>\n" +
+    "                    <p class=\"levo-text kartica-padding\">\n" +
+    "                        Naročilo postreženo: <strong>{{ narocilo_postezeno }}</strong>\n" +
+    "                    </p>\n" +
+    "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
+    "                    <ul>\n" +
+    "                    {{#each meni_items as | jed |}} \n "+
+    "                       <li>{{ jed.meni_item.ime }} <strong>{{jed.kolicina}}x</strong></li>\n "+
+    "                    {{/each}}"+
+    "                    </ul>\n" +
+    "                    <div class=\"ikone-stil\">\n" +
+    "                        <i role=\"button\" class=\"fas fa-euro-sign ikone-stil-posamezna\"></i>\n" +
     "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
     "                    </div>\n" +
     "                </div>")
