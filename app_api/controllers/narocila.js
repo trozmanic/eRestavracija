@@ -55,8 +55,8 @@ const pridobiNarocila = async (req, res) => {
 const posodobiNarocilo = async (req, res) => {
     try {
         const id = req.body.id;
-        await Narocila.findByIdAndUpdate(id, req.body);
-        res.status(200).json({});
+        const narocilo = await Narocila.findByIdAndUpdate(id, req.body);
+        res.status(200).json(narocilo);
     }catch (err) {
         return res.status(500).json({"error_message": err})
     }
