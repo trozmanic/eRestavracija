@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 const Urnik = mongoose.model("Urnik");
-const Gost = mongoose.model("Gost");
+const Zaposleni = mongoose.model("Zaposlen");
 
 const narediPrazenUrnik = (st_dni) => {
     var dnevi = new Array(st_dni);
@@ -42,6 +42,22 @@ function preoblikuj (urnik, zac_dan) {
     }
     return dnevi;
 }
+function preoblikujNazaj(urnik, zac_dan, st_dni) {
+    var dnevi = new Array(st_dni);
+    var prviDan = 0;
+    zac_dan.localeCompare("pon") == 0 ? prviDan=0 : prviDan=prviDan;
+    zac_dan.localeCompare("tor") == 0 ? prviDan=1 : prviDan=prviDan;
+    zac_dan.localeCompare("sre") == 0 ? prviDan=2 : prviDan=prviDan;
+    zac_dan.localeCompare("cet") == 0 ? prviDan=3 : prviDan=prviDan;
+    zac_dan.localeCompare("pet") == 0 ? prviDan=4 : prviDan=prviDan;
+    zac_dan.localeCompare("sob") == 0 ? prviDan=5 : prviDan=prviDan;
+    zac_dan.localeCompare("ned") == 0 ? prviDan=6 : prviDan=prviDan;
+    var i;
+    for (i = 0; i < st_dni; i++) {
+        dnevi[i] = urnik[i+prviDan];
+    }
+    return dnevi;
+}
 
 const pridobiUrnik = (req, res) => {
     try {
@@ -50,7 +66,7 @@ const pridobiUrnik = (req, res) => {
         var leto = req.query.leto;
         //preveri ce uporabnik obstaja
         if (id) {
-            Gost.find({id_uporabnika:id}).exec( (napaka, uporabnik) => {
+            Zaposleni.find({id_uporabnika:id}).exec( (napaka, uporabnik) => {
                 if (!uporabnik || !uporabnik[0]) {
                     return res.status(404).json({
                         "sporocilo": "Ne najdem uporabnika s tem id."
@@ -109,8 +125,75 @@ const pridobiUrnik = (req, res) => {
     }
 }
 
-const posodobiUrnik = async (req, res) => {
+const posodobiUrnik = (req, res) => {
+    try {
+        var id = req.query.uporabnik_id;
+        var mesec = req.query.mesec;
+        var leto = req.query.leto;
+        //preveri ce uporabnik obstaja
+        if (id) {
+            Zaposleni.find({id_uporabnika:id}).exec( (napaka, uporabnik) => {
+                if (!uporabnik || !uporabnik[0]) {
+                    return res.status(404).json({
+                        "sporocilo": "Ne najdem uporabnika s tem id."
+                    });
+                } else if (napaka) {
+                    return res.status(500).json(napaka);
+                }
+                //preveri mesec, leto, in set ce ni prov
+                var dan = new Date();
+                if (!mesec || mesec > 11 || mesec < 0) {
+                    mesec = dan.getMonth();
+                }
+                if (!leto || leto > 2099 || leto < 1901) {
+                    leto = dan.getFullYear();
+                }
+                //preveri ce je ta urnik ze
+                Urnik.find({id_uporabnika:id,leto:leto,mesec:mesec}).exec((napaka2, urnik) => {
+                    if (napaka2) {
+                        return res.status(500).json(napaka2);
+                    }
+                    if (urnik.length < 1) {
+                        return res.status(404).json({
+                            "sporocilo": "Urnik ne obstaja."
+                        });
+                    } else {
+                        //imamo urnik vrni, preveri podatke
+                        var statoSt_dni = parseInt(urnik[0].st_dni.toString());
+                        var stariZac_dan = urnik[0].zac_dan;
+                        //naredi objekt iz tega
+                        var noviUrnik = req.body;
+                        var novoSt_dni = parseInt(noviUrnik.st_dni.toString());
+                        var novoZac_dan = noviUrnik.zac_dan;
+                        if ( statoSt_dni == novoSt_dni && stariZac_dan.localeCompare(novoZac_dan) == 0) {
+                            //preoblikuj v tapravo tabelo
+                            noviUrnik.dnevi = preoblikujNazaj(noviUrnik.dnevi, stariZac_dan, statoSt_dni);
 
+                            urnik[0].dnevi = noviUrnik.dnevi
+
+                            urnik[0].save((napaka3, urnik2) => {
+                                if (napaka3) {
+                                    return res.status(404).json(napaka3);
+                                } else {
+                                    //preoblikuj
+                                    urnik2.dnevi = preoblikuj(urnik2.dnevi, urnik2.zac_dan);
+                                    return res.status(200).send(urnik2);
+                                }
+                            });
+                        } else {
+                            return res.status(404).json({
+                                "sporocilo": "Spremenili ste nekaj kar nebi smeli."
+                            });
+                        }
+                    }
+                });
+            });
+        } else {
+            return res.status(400).send({"error_message": "Specify user ID"})
+        }
+    } catch (err) {
+        res.status(500).json({"error_message": err});
+    }
 }
 
 module.exports = {
