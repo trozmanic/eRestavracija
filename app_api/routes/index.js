@@ -21,7 +21,7 @@ router.post("/rezervacija",rezervacije.ustvariRezervacijo);
 router.get("/meni",meni.pridobiJedi);
 router.get("/meni/:idJedi",meni.pridobiJed);
 router.post("/meni",meni.ustvariJed);
-router.put("/meni",meni.posodobiJed);
+router.put("/meni/:idJedi",meni.posodobiJed);
 router.put("/meni/dodajOceno", meni.dodajOceno);
 router.delete("/meni/:idJedi", meni.izbrisiJed);
 

@@ -14,7 +14,9 @@ input[type=text]{
 }
 
 
-
+form{
+    visibility: hidden;
+}
 
 
 label {
