@@ -54,7 +54,7 @@ let klikNaprej=function(dogodek){
     
     let errors=[];
     if(ura=="") errors.push("uro");
-    if(stOseb=="") errors.push("število oseb");
+    if(stOseb<1) errors.push("število oseb");
     if(dan==null) errors.push("datum");
 
     if(errors.length>0){
@@ -65,19 +65,11 @@ let klikNaprej=function(dogodek){
         sessionStorage.setItem("ura",ura);
         sessionStorage.setItem("stOseb",stOseb);
         sessionStorage.setItem("datum",datum);
-        window.location.replace("/rezerviraj/menu");
-    }
-}
-
-let preveriStorage=function(){
-    if(window.localStorage.getItem("credentials")==null){
-        window.location.replace("/potrebna_prijava");
+        window.location.replace("/rezerviraj/menu?uporabnik_id="+JSON.parse(localStorage.getItem("credentials")).uporabnik_id);
     }
 }
 
 let meseci=["Januar","Februar","Marec","April","Maj","Junij","Julij","Avgust","September","Oktober","November","December"];
-
-preveriStorage();
 
 let date=new Date();
 drawCalander(date.getFullYear(),date.getMonth());

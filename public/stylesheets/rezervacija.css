@@ -205,6 +205,10 @@ body {
     color:white;
 }
 
+input[disabled]{
+    color:white;
+}
+
 @media (max-width: 1024px) {
     .card {
         width: 85vw;

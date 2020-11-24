@@ -12,6 +12,8 @@ router.get("/uporabniki/:idUporabnika",uporabniki.pridobiUporabnika);
 router.post("/uporabniki",uporabniki.ustvariUporabnika);
 router.put("/uporabniki",uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
+router.get("/rezervacija",rezervacije.pridobiRezervacije);
+router.get("/rezervacija/:idUporabnika",rezervacije.pridobiRezervacije)
 router.post("/rezervacija",rezervacije.ustvariRezervacijo);
 
 //MENI

@@ -1,62 +1,24 @@
 <link rel="stylesheet" href="/stylesheets/rezervacija_prva.css">
 
 
-<a class="dodaj" href="/rezerviraj/podatki"><i class="fas fa-plus"></i></a>
+<a class="dodaj" href="/rezerviraj/podatki?uporabnik_id={{uporabnik._id}}"><i class="fas fa-plus"></i></a>
 
+{{#each dynamicData.rezervacije as |rezervacija|}}
 <div class="rescontainer">
     <div class="rezervacija-skatla">
 
         <div class="rezervacija-info">
-            <p>Datum: 12.5.2020</p>
-            <p>Ura: 12:30</p>
-            <p>St. oseb: 4 osebe</p>
+            <p>Datum: {{datum rezervacija.narocilo.datum_in_ura}}</p>
+            <p>Ura: {{cas rezervacija.narocilo.datum_in_ura}}</p>
+            <p>St. oseb: {{rezervacija.st_oseb}} osebe</p>
         </div>
 
-        <h6 class="sredina-text"><strong>Meni:</strong></h6>
-        <ul>
-            <li>Hobotnica <strong>1x</strong></li>
-            <li>Spageti po mediteransko <strong>1x</strong></li>
-            <li>Lignji po trzasko <strong>1x</strong></li>
-            <li>Cvrti lignji <strong>1x</strong></li>
-            <li>Morska solata <strong>1x</strong></li>
-            <li>Solata s skampi <strong>1x</strong></li>
-            <li>File tune na zaru <strong>1x</strong></li>
-            <li>Rizota z lososom <strong>1x</strong></li>
-        </ul>
+        {{{meniRezervacije rezervacija.narocilo.meni_items ../dynamicData.meni}}}
         <div class="rezervacija-status">
             <p>Status: čaka na potrditev</p>
             <p class="preklici">Prekliči <i role="button" class="fas fa-ban"></i></p>
         </div>
     </div>
 </div>
-
-<div class="rescontainer">
-    <div class="rezervacija-skatla">
-
-        <div class="rezervacija-info">
-            <p>Datum: 12.5.2020</p>
-            <p>Ura: 12:30</p>
-            <p>St. oseb: 4 osebe</p>
-        </div>
-
-        <h6 class="sredina-text"><strong>Meni:</strong></h6>
-        <ul>
-            <li>Hobotnica <strong>1x</strong></li>
-            <li>Spageti po mediteransko <strong>1x</strong></li>
-            <li>Lignji po trzasko <strong>1x</strong></li>
-            <li>Cvrti lignji <strong>1x</strong></li>
-            <li>Morska solata <strong>1x</strong></li>
-            <li>Solata s skampi <strong>1x</strong></li>
-            <li>File tune na zaru <strong>1x</strong></li>
-            <li>Rizota z lososom <strong>1x</strong></li>
-        </ul>
-        <div class="rezervacija-status">
-            <p>Status: čaka na potrditev</p>
-            <p class="preklici">Prekliči <i role="button" class="fas fa-ban"></i></p>
-        </div>
-    </div>
+{{/each}}
 </div>
-
-</div>
-
-<script src="/javascript/rezerviraj_prva.js"></script>
