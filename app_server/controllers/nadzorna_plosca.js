@@ -61,8 +61,66 @@ const prikaziUrnik = function (req, res, urnik, sporocilo) {
         });
     }
 }
-
-const urnik = function (req, res) {
+const prikaziZasluzek=function(req,res, urnik, sporocilo){
+    if (sporocilo) {
+        res.render('error',{layout:'layout_nadzorna_plosca.hbs',title:'Napaka',zaposleni_role:req.query.vloga, message:sporocilo});
+    } else {
+        res.render('nadzorna_plosca_zasluzek', {layout:'layout_nadzorna_plosca.hbs',
+            title: 'Nadzorna plošča - Zasluzek',
+            zaposleni_role:req.query.vloga,
+            urnik:urnik.dnevi,
+            leto:urnik.leto,
+            mesec:urnik.mesec,
+            zac_dan:urnik.zac_dan,
+            uporabnik_id:urnik.uporabnik_id,
+            st_dni:urnik.st_dni,
+            ostevilceni_dnevi: {osi:urnik.ostevilceni_dnevi},
+            zasluzek_dnevi: {podatki:urnik.zasluzek_dnevi},
+            skupno_prilivi:urnik.skupno_prilivi
+        });
+    }
+}
+const zasluzek=function(req,res){
+    var id = req.query.uporabnik_id;
+    var mesec = req.query.mesec;
+    var leto = req.query.leto;
+    if (id && mesec && leto) {
+        axios.get('/api/zasluzek', {
+            params: {
+                uporabnik_id: id,
+                mesec: mesec,
+                leto: leto
+            }
+        })
+            .then((odgovor) => {
+                prikaziZasluzek(req, res, odgovor.data);
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data.sporocilo) {
+                    prikaziZasluzek(req, res, [], error.response.data.sporocilo);
+                } else {
+                    prikaziZasluzek(req, res, [], "Napaka API-ja pri iskanju zasluzka.");
+                }
+            });
+    } else {
+        axios.get('/api/zasluzek', {
+            params: {
+                uporabnik_id: id
+            }
+        })
+            .then((odgovor) => {
+                prikaziZasluzek(req, res, odgovor.data);
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data.sporocilo) {
+                    prikaziZasluzek(req, res, [], error.response.data.sporocilo);
+                } else {
+                    prikaziZasluzek(req, res, [], "Napaka API-ja pri iskanju zasluzka.");
+                }
+            });
+    }
+}
+const urnik=function(req,res){
     var id = req.query.uporabnik_id;
     var mesec = req.query.mesec;
     var leto = req.query.leto;
@@ -153,5 +211,6 @@ module.exports = {
     zaposleni,
     narocila_kuhar,
     meni,
-    strezba
+    strezba,
+    zasluzek
 }
