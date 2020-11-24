@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/stylesheets/rezervacija_prva.css">
 
 
-<a class="dodaj" href="/rezerviraj/podatki?uporabnik_id={{uporabnik._id}}"><i class="fas fa-plus"></i></a>
+<a class="dodaj" href="/rezerviraj/podatki"><i class="fas fa-plus"></i></a>
 
 {{#each dynamicData.rezervacije as |rezervacija|}}
 <div class="rescontainer">
-    <div class="rezervacija-skatla">
+    <div class="rezervacija-skatla" id={{rezervacija._id}}>
 
         <div class="rezervacija-info">
             <p>Datum: {{datum rezervacija.narocilo.datum_in_ura}}</p>
@@ -15,10 +15,12 @@
 
         {{{meniRezervacije rezervacija.narocilo.meni_items ../dynamicData.meni}}}
         <div class="rezervacija-status">
-            <p>Status: čaka na potrditev</p>
-            <p class="preklici">Prekliči <i role="button" class="fas fa-ban"></i></p>
+            <p>Status: {{stanjeRezervacije rezervacija.stanje}}</p>
+            <p class="preklici">Prekliči <i role="button" class="fas fa-ban preklici_rezervacijo"></i></p>
         </div>
     </div>
 </div>
 {{/each}}
 </div>
+
+<script src="javascript/rezerviraj_prva.js"></script>

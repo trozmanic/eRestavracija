@@ -15,9 +15,12 @@ router.get("/uporabniki/:idUporabnika",uporabniki.pridobiUporabnika);
 router.post("/uporabniki",uporabniki.ustvariUporabnika);
 router.put("/uporabniki",uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
+
+//REZERVACIJE
 router.get("/rezervacija",rezervacije.pridobiRezervacije);
 router.get("/rezervacija/:idUporabnika",rezervacije.pridobiRezervacije)
 router.post("/rezervacija",rezervacije.ustvariRezervacijo);
+router.put("/rezervacija/:idRezervacije/:operacija",rezervacije.posodobiRezervacijo)
 
 //MENI
 router.get("/meni",meni.pridobiJedi);
@@ -39,9 +42,10 @@ router.get("/zaposleni", zaposleni.pridobiZaposlenega);
 router.put("/zaposleni", zaposleni.posodobiZaposlenega);
 router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 
-//NAROCIAL
+//NAROCILA
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
-router.put("/narocila", narocila.posodobiNarocilo);
+router.get("/narocila/:idNarocila",narocila.pridobiNarocilo);
+router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
 module.exports=router

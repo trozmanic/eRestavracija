@@ -40,11 +40,10 @@ let klikRezerviraj=function(dogodek){
     xhttp.onload=()=>{
         if(xhttp.status==200){
             window.alert("Rezervacija uspešno oddana");
-            window.location.replace("/?uporabnik_id="+JSON.parse(localStorage.getItem("credentials")).uporabnik_id);
+            window.location.replace("/");
         }else{
-            console.log(xhttp.responseText);
             window.alert("Prišlo je do napake: "+JSON.parse(xhttp.responseText).sporocilo);
-            window.location.replace("/?uporabnik_id="+JSON.parse(localStorage.getItem("credentials")).uporabnik_id);
+            window.location.replace("/");
         }
     }
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -53,10 +52,8 @@ let klikRezerviraj=function(dogodek){
 
 let preveriStorage=function(){
     let sessionStorage=window.sessionStorage;
-    /*if(window.localStorage.getItem("credentials")==null){
-        window.location.replace("/potrebna_prijava");
-    }else*/ if(sessionStorage.getItem("ura")==null || sessionStorage.getItem("stOseb")==null || sessionStorage.getItem("datum")==null){
-        window.location.replace("/?uporabnik_id="+JSON.parse(localStorage.getItem("credentials")).uporabnik_id);
+    if(sessionStorage.getItem("ura")==null || sessionStorage.getItem("stOseb")==null || sessionStorage.getItem("datum")==null){
+        window.location.replace("/");
     }
 }
 

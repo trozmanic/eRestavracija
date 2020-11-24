@@ -8,9 +8,9 @@ hbs.registerHelper("not", function(obj) {
 
 hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
   let paramid = "";
-  if (uporabnik) {
+  /*if (uporabnik) {
     paramid = "?uporabnik_id="+uporabnik._id;
-  }
+  }*/
   const hrefs = {
     "index" : "/" + paramid,
     "onas": "/onas" + paramid,
@@ -47,9 +47,14 @@ hbs.registerHelper("meniRezervacije",(rezervacijaItems,meniItems)=>{
     }
     res+='</ul>'
   }else{
-    res+='<h6 class="sredina-text"><strong>Niste izbrali jedi</strong></h6>';
+    res+='<h6 class="sredina-text"><strong>Ni izbranih jedi</strong></h6>';
   }
   return res;
+})
+
+hbs.registerHelper("stanjeRezervacije",(stanje)=>{
+  const stanja={caka:"Čaka na potrditev",potrjena:"Potrjena",zavrnjena:"Zavrnjena",preklicana:"Preklicana",pretekla:"Pretekla"};
+  return stanja[stanje];
 })
 
 hbs.registerHelper('vsaka_druga',(index)=>{

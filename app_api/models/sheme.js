@@ -54,8 +54,8 @@ const narociloShema = new mongoose.Schema({
         meni_item: { type: mongoose.ObjectId, required: true },
         kolicina: { type: Number, required: true }
     })],
-    cena: { type: Number, required:true },
-    stanje: { type: String, required:true, enum: ['sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
+    cena: { type: Number },
+    stanje: { type: String, required:true, enum: ['rezervacija', 'sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
     miza: { type: Number}
 })
 

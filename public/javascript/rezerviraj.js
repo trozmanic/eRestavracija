@@ -65,7 +65,7 @@ let klikNaprej=function(dogodek){
         sessionStorage.setItem("ura",ura);
         sessionStorage.setItem("stOseb",stOseb);
         sessionStorage.setItem("datum",datum);
-        window.location.replace("/rezerviraj/menu?uporabnik_id="+JSON.parse(localStorage.getItem("credentials")).uporabnik_id);
+        window.location.replace("/rezerviraj/menu");
     }
 }
 

@@ -117,7 +117,42 @@ const pridobiRezervacije = function (req, res) {
     })
 }
 
+const posodobiRezervacijo=function(req,res){
+    const allowed=['potrdi','zavrni','preklici']
+    if(allowed.includes(req.params.operacija)){
+        console.log(req.params.idRezervacije);
+        Gost.find({"rezervacije._id":req.params.idRezervacije}).exec((napaka,gost)=>{
+            if(napaka){
+                res.status(400).json(napaka);
+            }else if(gost==null){
+                res.status(400).json("Rezervacije ni mogoče najti");
+            }else{
+                let rezervacija=gost[0].rezervacije.find(el=>el._id==req.params.idRezervacije);
+                if(req.params.operacija=="potrdi"){
+                    rezervacija.stanje="potrjena";
+                }else if(req.params.operacija=="zavrni"){
+                    rezervacija.stanje="zavrnjena";
+                }else if(req.params.operacija=="preklici"){
+                    rezervacija.stanje="preklicana";
+                }
+                gost[0].save((napaka)=>{
+                    if(napaka){
+                        res.status(400).json(napaka);
+                    }else{
+                        res.status(200).json();
+                    }
+                })
+            }
+        })
+
+        res.status(200).json();
+    }else{
+        res.status(400).json("Nedovoljena operacija");
+    }
+}
+
 module.exports = {
     ustvariRezervacijo,
-    pridobiRezervacije
+    pridobiRezervacije,
+    posodobiRezervacijo
 }
