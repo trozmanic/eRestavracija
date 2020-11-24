@@ -13,12 +13,25 @@ const axios = require('axios').create({
 });
 const narocilaService = require('../service/narocila');
 
+const ime_priimek_uporabnik = function(id){
+    axios.get('/api/uporabniki/' + id, {
+        params: {
+        }
+    })
+        .then((odgovor) => {
+            return odgovor.data.ime;
+        })
+        .catch(() => {
+            return "Napaka uporabnika";
+        });
+}
+
 const menu=function(req,res){
-    res.render('nadzorna_plosca_menu',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča',zaposleni_role:req.query.vloga});
+    res.render('nadzorna_plosca_menu',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča',zaposleni_role:req.query.vloga, uporabnik_id:req.query.uporabnik_id});
 }
 
 const rezervacije=function(req,res){
-    res.render('nadzorna_plosca_rezervacije',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Rezervacije',zaposleni_role:req.query.vloga})
+    res.render('nadzorna_plosca_rezervacije',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Rezervacije',zaposleni_role:req.query.vloga, uporabnik_id:req.query.uporabnik_id})
 }
 
 const prikaziUrnik=function(req,res, urnik, sporocilo){
@@ -74,14 +87,14 @@ const urnik=function(req,res){
 }
 
 const zaloga=function(req,res){
-    res.render('nadzorna_plosca_zaloga',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaloga',zaposleni_role:req.query.vloga})
+    res.render('nadzorna_plosca_zaloga',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaloga',zaposleni_role:req.query.vloga, uporabnik_id:req.query.uporabnik_id})
 }
 
 const zaposleni=function(req,res){
-    res.render('nadzorna_plosca_zaposleni',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaposleni',zaposleni_role:req.query.vloga})
+    res.render('nadzorna_plosca_zaposleni',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaposleni',zaposleni_role:req.query.vloga, uporabnik_id:req.query.uporabnik_id})
 }
 const strezba=function(req,res){
-    res.render('nadzorna_plosca_strezba',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Strežba',zaposleni_role:req.query.vloga})
+    res.render('nadzorna_plosca_strezba',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Strežba',zaposleni_role:req.query.vloga, uporabnik_id:req.query.uporabnik_id})
 }
 
 const narocila_kuhar= async function (req, res){
@@ -92,7 +105,7 @@ const narocila_kuhar= async function (req, res){
     try {
         const data = await axios.get(apiParametri.streznik + "/api/narocila");
         const narocila = narocilaService.prepKuhar(data.data);
-        res.render('nadzorna_plosca_kuhar',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Narocila kuhinja', narocila});
+        res.render('nadzorna_plosca_kuhar',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Narocila kuhinja', uporabnik_id:req.query.uporabnik_id, zaposleni_role:req.query.vloga, narocila});
     }catch (err) {
         console.log(err);
         res.render("error");
@@ -102,7 +115,7 @@ const meni= async function (req, res){
     try {
         const meniItems =  await axios.get(apiParametri.streznik + "/api/meni" );
         res.render('nadzorna_plosca_meni',
-            {layout: 'layout_nadzorna_plosca.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: meniItems.data});
+            {layout: 'layout_nadzorna_plosca.hbs', title:'Al dente', izbrano_ime:'menu', menu_items: meniItems.data, uporabnik_id:req.query.uporabnik_id, zaposleni_role:req.query.vloga});
     }catch (err) {
         console.log(err);
         res.render('error');

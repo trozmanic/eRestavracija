@@ -23,7 +23,7 @@ router.get('/nadzorna_plosca/urnik',nadzorna_plosca.urnik)
 router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.zaloga)
 router.get('/nadzorna_plosca/zaposleni',nadzorna_plosca.zaposleni)
 router.get('/nadzorna_plosca/strezba',nadzorna_plosca.strezba)
-router.get('/nadzorna_plosca/narocila_kuhar', nadzorna_plosca.narocila_kuhar)
+router.get('/nadzorna_plosca/kuhar', nadzorna_plosca.narocila_kuhar)
 router.get('/nadzorna_plosca/meni', nadzorna_plosca.meni)
 
 /* POST login / register */
