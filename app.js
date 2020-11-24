@@ -8,7 +8,7 @@ var indexRouter = require('./app_server/routes/index');
 var indexApi = require('./app_api/routes/index');
 require('./app_server/views/helpers/hbsh.js');
 require('./app_server/views/partials/hbsp.js');
-
+var session = require('express-session')
 var app = express();
 
 // view engine setup
@@ -21,6 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use('/', indexRouter);
 app.use('/api', indexApi);

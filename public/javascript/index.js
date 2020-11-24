@@ -107,7 +107,13 @@ window.addEventListener("load", ()=> {
                 return;
             }
             localStorage.setItem("credentials", this.responseText);
-            window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
+            sessionStorage.setItem("credentials", this.responseText);
+            console.log(credentials.vloga);
+            if (credentials.vloga !== "gost") {
+                window.location.href = "/nadzorna_plosca?vloga="+credentials.vloga;
+            }else {
+                window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
+            }
         }
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify(user))
@@ -148,4 +154,10 @@ window.addEventListener("load", ()=> {
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify(user));
     })
+
+    var socket = io();
+    socket.on('news', (msg) => {
+        console.log(msg);
+    })
+
 })

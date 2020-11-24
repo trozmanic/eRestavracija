@@ -8,25 +8,113 @@
     <h1 class="text-center">Zaloga</h1>
     <br>
     <div class="row">
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik"><i class="fas fa-plus"></i> DODAJ</button></div>
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik"><i class="fas fa-edit"></i> UREDI</button></div>
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik"><i class="fas fa-trash"></i> IZBRIŠI</button></div>
+        <div class="col-4 col-lg-2">
+           <button type="button" class="btn btn-dark btn-block razmik" data-toggle="modal" data-target="#SestavinaModal1"><i class="fas fa-plus"></i> DODAJ</button>
+        </div>
+        <!-- ZAČETEK dodaj sestavino -->
+        <div class="modal fade" id="SestavinaModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog bel" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dodaj sestavino</h5>
+              </div>
+              <div class="modal-body">
+              <form>
+                <div class="form-group">
+                    <label for="SestavinaForm">Sestavina</label>
+                    <input type="text" class="form-control" id="SestavinaForm1" placeholder="Npr.: krompir">
+                </div>
+                <div class="form-group">
+                    <label for="KolicinaForm">Količina</label>
+                    <input type="text" class="form-control" id="KolicinaForm1" placeholder="Npr.: 10 kg">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark mr-auto" id="dodaj" data-dismiss="modal">Dodaj</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Prekliči</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- KONEC dodaj sestavino -->
+        
+        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik" data-toggle="modal" data-target="#SestavinaModal2" id="uredi" disabled><i class="fas fa-edit"></i> UREDI</button></div>
+        <!-- ZAČETEK uredi sestavino -->
+        <div class="modal fade" id="SestavinaModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog bel" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Uredi sestavino</h5>
+              </div>
+              <div class="modal-body">
+              <form>
+                <div class="form-group is-invalid">
+                    <label for="SestavinaForm">Sestavina</label>
+                    <input type="text" class="form-control is-invalid" id="SestavinaForm2" placeholder="Npr.: krompir" pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" required>
+                    <div class="invalid-feedback" id="neveljavnaSestavina">
+                        Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                    </div>
+                </div>
+                
+                <div class="form-group is-invalid">
+                    <label for="KolicinaForm">Količina</label>
+                    <input type="text" class="form-control is-invalid" id="KolicinaForm2" placeholder="Npr.: 10 kg">
+                    <div class="invalid-feedback" id="neveljavnaKolicina">
+                        Količina mora vsebovati število ter enoto!
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark mr-auto" data-dismiss="modal" id="urediSestavinoPotrdi" disabled>Potrdi</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal" id="urediSestavinoPreklici">Prekliči</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- KONEC uredi sestavino -->
+        
+        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik" id="izbrisiSestavino" data-toggle="modal" data-target="#SestavinaModal3" disabled><i class="fas fa-trash"></i> IZBRIŠI</button></div>
+        <!-- ZAČETEK izbriši sestavino -->
+        <div class="modal fade" id="SestavinaModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog bel" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Opozorilo!</h5>
+              </div>
+              <div class="modal-body">
+                  <p>Ali res želite izbrisati izbrane sestavine?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark mr-auto" id="izbrisiSestavinoPotrdi" data-dismiss="modal">Da</button>
+                <button type="button" class="btn btn-dark" id="izbrisiSestavinoPreklici" data-dismiss="modal">Ne</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- KONEC izbriši sestavino -->
+        
         <!-- obrazec za iskanje ZAČETEK -->
         <div class="col-12 col-lg-6">
             <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <select class="custom-select input-group-text izberi">
+                        <option selected>Sestavina</option>
+                        <option value="1">Količina</option>
+                    </select>
+                </div>
                 <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZalogi">
                 <div class="input-group-append">
                     <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
+        <!-- obrazec za iskanje KONEC -->
     </div>
-    <!-- obrazec za iskanje KONEC -->
     <!-- Gumbi in iskanje KONEC -->
     <!-- ZAČETEK tabele -->
     <div class="row justify-content-center">
         <div class="col-12 table-responsive">
-            <table class="table table-dark table-striped table-bordered text-center">
+            <table class="table table-dark table-striped table-bordered text-center" id="tabela">
             <thead class="thead">
               <tr>
                 <th scope="col">Izberi</th>
@@ -37,108 +125,120 @@
             <tbody>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                    <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1"></label>
+                    </div>
                 </th>
                 <td>Krompir</td>
                 <td>15 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                    <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                        <label class="custom-control-label" for="customCheck2"></label>
+                    </div>
                 </th>
                 <td>Čebula</td>
                 <td>1 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                    <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                        <label class="custom-control-label" for="customCheck3"></label>
+                    </div>
                 </th>
                 <td>Česen</td>
                 <td>1 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                        <label class="custom-control-label" for="customCheck4"></label>
+                    </div>
                 </th>
                 <td>Peteršilj</td>
                 <td>500 dag</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                        <label class="custom-control-label" for="customCheck5"></label>
+                    </div>
                 </th>
                 <td>Riž</td>
                 <td>5 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                        <label class="custom-control-label" for="customCheck6"></label>
+                    </div>
                 </th>
                 <td>Telečji zrezek</td>
                 <td>10 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                        <label class="custom-control-label" for="customCheck7"></label>
+                    </div>
                 </th>
                 <td>Zelje</td>
                 <td>3 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck8">
+                        <label class="custom-control-label" for="customCheck8"></label>
+                    </div>
                 </th>
                 <td>Zelena solata</td>
                 <td>1 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck9">
+                        <label class="custom-control-label" for="customCheck9"></label>
+                    </div>
                 </th>
                 <td>Paradižnik</td>
                 <td>2 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck10">
+                        <label class="custom-control-label" for="customCheck10"></label>
+                    </div>
                 </th>
                 <td>Svinjska ribica</td>
                 <td>6 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck11">
+                        <label class="custom-control-label" for="customCheck11"></label>
+                    </div>
                 </th>
                 <td>Šunka</td>
                 <td>1 kg</td>
               </tr>
               <tr>
                 <th scope="row">
-                  <div class="form-check">    
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
+                  <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck12">
+                        <label class="custom-control-label" for="customCheck12"></label>
+                    </div>
                 </th>
                 <td>Sir</td>
                 <td>4 kg</td>
@@ -149,3 +249,5 @@
       </div>
     <!-- KONEC tabele -->
 </div>
+
+<script src="/javascript/nadzorna_plosca_zaloga.js"></script>

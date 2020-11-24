@@ -5,6 +5,9 @@ const uporabniki=require('../controllers/uporabniki');
 const rezervacije=require('../controllers/rezervacije')
 const meni = require('../controllers/meni');
 const gost = require('../controllers/gost');
+const urnik = require('../controllers/urnik');
+const zaposleni = require('../controllers/zaposleni');
+const narocila = require('../controllers/narocila');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -20,11 +23,25 @@ router.post("/rezervacija",rezervacije.ustvariRezervacijo);
 router.get("/meni",meni.pridobiJedi);
 router.get("/meni/:idJedi",meni.pridobiJed);
 router.post("/meni",meni.ustvariJed);
-router.put("/meni",meni.posodobiJed);
+router.put("/meni/:idJedi",meni.posodobiJed);
 router.put("/meni/dodajOceno", meni.dodajOceno);
 router.delete("/meni/:idJedi", meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
+
+//URNIK
+router.get("/urnik", urnik.pridobiUrnik);
+router.put("/urnik", urnik.posodobiUrnik);
+
+//ZAPOSLENI
+router.get("/zaposleni", zaposleni.pridobiZaposlenega);
+router.put("/zaposleni", zaposleni.posodobiZaposlenega);
+router.post("/zaposleni", zaposleni.ustvariZaposlenega);
+
+//NAROCIAL
+router.post("/narocila", narocila.ustvariNarocilo);
+router.get("/narocila", narocila.pridobiNarocila);
+router.put("/narocila", narocila.posodobiNarocilo);
 
 module.exports=router

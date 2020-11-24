@@ -22,8 +22,8 @@ const uporabnikShema = new mongoose.Schema({
 })
 
 const zaposleniShema = new mongoose.Schema({
-    "id_uporabnika": { type: mongoose.ObjectId },
-    "placa": { type: Number, required: true, min: 0 }
+    "id_uporabnika" :{type:mongoose.ObjectId},
+    "placa": { type: Number, min: 0 }
 })
 
 const surovinaShema = new mongoose.Schema({
@@ -54,9 +54,9 @@ const narociloShema = new mongoose.Schema({
         meni_item: { type: mongoose.ObjectId, required: true },
         kolicina: { type: Number, required: true }
     })],
-    cena: { type: Number },
-    stanje: { type: String, required: true },
-    miza: { type: Number }
+    cena: { type: Number, required:true },
+    stanje: { type: String, required:true, enum: ['sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
+    miza: { type: Number}
 })
 
 const rezervacijaShema = new mongoose.Schema({
@@ -73,6 +73,57 @@ const gostShema = new mongoose.Schema({
     ocenjene_jedi: [meniItemShema]
 })
 
+const urnikShema = new mongoose.Schema({
+    id_uporabnika: {type: mongoose.ObjectId},
+    dnevi: [{
+        type: String, required: true, validate: {
+            validator: function (v) {
+                if (v && (v.localeCompare("") == 0 || v.localeCompare(" ") == 0 || v.localeCompare("?") == 0)) {
+                    return true;
+                }
+                return /^\b[p|d]{1}\b$/.test(v);
+            }
+        }
+    }],
+    leto: {
+        type: Number, required: true, validate: {
+            validator: function (v) {
+                if (v > 1900 && v < 2100) {
+                    return true;
+                }
+                return false;
+            }
+        }
+    },
+    mesec: {
+        type: Number, required: true, validate: {
+            validator: function (v) {
+                if (v >= 0 && v < 12) {
+                    return true;
+                }
+                return false;
+            }
+        }
+    },
+    st_dni: {
+        type: Number, required: true, validate: {
+            validator: function (v) {
+                if (v >= 28 && v < 32) {
+                    return true;
+                }
+                return false;
+            }
+        }
+    },
+    zac_dan: {
+        type: String, required: true, validate: {
+            validator: function (v) {
+                return /^\b[pon|tor|sre|cet|pet|sob|ned]{3}\b$/.test(v);
+            }
+        }
+    }
+})
+
 
 mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");
 mongoose.model("Gost", gostShema, "Gosti");
@@ -81,3 +132,4 @@ mongoose.model("Narocilo", narociloShema, "Narocila");
 mongoose.model("MeniItem", meniItemShema, "MeniItems");
 mongoose.model("Surovina", surovinaShema, "Surovine");
 mongoose.model("Zaposlen", zaposleniShema, "Zaposleni");
+mongoose.model("Urnik", urnikShema, "Urniki");

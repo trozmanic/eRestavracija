@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
+<script src="/javascript/nadzorna_plosca_meni.js"></script>
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_meni.css">
+
+<a>
+    <div class="col-4 col-sm-4"><button id="add" type="button" class="btn btn-dark btn-block"><i class="fas fa-plus"></i> DODAJ</button></div>
+</a>
+<div id="novaJed" class="rezervacija-skatla">
+    <h5 class="sredina-text">Nova jed</h5>
+    <form method="post" >
+        <div class="form-group">
+            <label style="color: white">Ime</label>
+            <input type="text" name="name" >
+        </div>
+        <div class="form-group">
+            <label>Opis</label>
+            <textarea  name="description" class="form-control form-control-lg mb-3" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Cena</label>
+            <input type="text"  name="price" >
+        </div>
+        <div class="form-group">
+            <label>Kalorije</label>
+            <input type="text" name="calories" >
+        </div>
+        <div class="form-group">
+            <label>Food API</label>
+            <input type="text" name="ingredient" value="Vnesi sestavino">
+            <input type="text" name="quantity" value="Vnesi količino">
+            <i role="button" class="fas fa-search ikone-stil-posamezna"></i>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input"
+                   aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="inputGroupFile01">Izberi sliko</label>
+        </div>
+        <div class="form-group gor-margin">
+                    <span class="desno-float">
+                        <button type="button" class="btn btn-dark btn-block"><i class="fas fa-save"></i> SHRANI</button>
+                    </span>
+        </div>
+        <br>
+    </form>
+</div>
+<div class="menu-items">
+    {{#each menu_items as | item |}}
+        {{> menuItem ime=item.ime id=item.id cena=item.cena kalorije=item.kalorije edit=(concat "edit_" item.id) del=(concat "del_" item.id) form=(concat "form_" item.id)}}
+    {{/each}}
+</div>

@@ -42,10 +42,14 @@ const renderDynamic = (uporabnik_id, res, layout, title, izbrano_ime, template, 
 }
 
 
-const index = async function (req, res) {
-    const uporabnik_id = req.query.uporabnik_id;
+const index=async function(req,res){
+    let uporabnik_id = req.query.uporabnik_id;
+    if (!uporabnik_id) {
+        uporabnik_id = req.session.uporabnik_id;
+    }
 
     if (uporabnik_id) {
+        req.session.uporabnik_id = uporabnik_id;
         renderDynamic(uporabnik_id,
             res,
             'layout_pristajlna_stran.hbs',
@@ -57,8 +61,8 @@ const index = async function (req, res) {
     }
 }
 
-const onas = function (req, res) {
-    const uporabnik_id = req.query.uporabnik_id;
+const onas=function(req,res){
+    const uporabnik_id = req.session.uporabnik_id;
     if (uporabnik_id) {
         renderDynamic(uporabnik_id,
             res,
@@ -73,7 +77,7 @@ const onas = function (req, res) {
 }
 
 const rezerviraj = function (req, res) {
-    const uporabnik_id = req.query.uporabnik_id;
+    const uporabnik_id = req.session.uporabnik_id
     if (uporabnik_id) {
         axios.get(apiParametri.streznik+"/api/rezervacija/"+uporabnik_id).then((rezervacije)=>{
             axios.get(apiParametri.streznik+"/api/meni").then((meni)=>{
@@ -87,7 +91,7 @@ const rezerviraj = function (req, res) {
 }
 
 const rezerviraj_podatki = function (req, res) {
-    const uporabnik_id = req.query.uporabnik_id;
+    const uporabnik_id = req.session.uporabnik_id;
     if (uporabnik_id) {
         renderDynamic(uporabnik_id,
             res,
@@ -102,8 +106,8 @@ const rezerviraj_podatki = function (req, res) {
     }
 }
 
-const rezerviraj_menu = function (req, res) {
-    const uporabnik_id = req.query.uporabnik_id;
+const rezerviraj_menu=function(req,res){
+    const uporabnik_id = req.session.uporabnik_id;
     if (uporabnik_id) {
         axios.get(apiParametri.streznik+"/api/meni").then((odgovor)=>{
             renderDynamic(uporabnik_id,res,'layout_pristajlna_stran.hbs','Al Dente - Rezerviraj','rezerviraj_mizo','rezervacija_menu',odgovor.data);
@@ -118,7 +122,7 @@ const potrebna_prijava = function (req, res) {
 }
 
 const menu = async function (req, res) {
-    const uporabnik_id = req.query.uporabnik_id;
+    const uporabnik_id = req.session.uporabnik_id;
     console.log(uporabnik_id)
     try {
         let menu_items = null;
@@ -131,6 +135,15 @@ const menu = async function (req, res) {
             menu_items = data.data;
             menu_items.forEach((item) => {
                 item.ocenjena = false;
+                const ocena = parseInt(item.ocena);
+                const ocena_count = parseInt(item.ocena_count);
+                delete item.ocena
+                delete item.ocena_count
+                if (ocena_count === 0) {
+                    item.ocena = 0;
+                }else {
+                    item.ocena =  Math.round(ocena/ocena_count);
+                }
             })
 
         }
@@ -148,7 +161,11 @@ const menu = async function (req, res) {
         console.log(err);
     }
 
+}
 
+const logout = async function (req, res)  {
+    req.session.destroy();
+    res.status(200).json({});
 }
 
 module.exports = {
@@ -158,5 +175,5 @@ module.exports = {
     rezerviraj_podatki,
     rezerviraj_menu,
     menu,
-    potrebna_prijava
+    logout
 }
