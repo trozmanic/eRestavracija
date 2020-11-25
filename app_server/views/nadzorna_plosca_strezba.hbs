@@ -1,40 +1,41 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
 <link rel="stylesheet" href="/stylesheets/nadzorna_plosca_zaloga.css">
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_strezba.css">
 
 <!-- Narocila ZAČETEK-->
 <!-- Button trigger modal -->
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" id="dodajNaorcilo">
-    Launch demo modal
+    Ustvari narocilo
 </button>
 
 <div class="row">
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4" id="narocila">
         <h3 class="sredina-text text-white">Naročila</h3>
 
         {{#each narocila.vrsta as | item |}}
-            {{> narociloItem id = item.id datum = item.datum sprejem_narocila = item.sprejem_narocila jedi=item.jedi miza=item.miza }}
+            {{> narociloItem id = item._id datum = item.datum sprejem_narocila = item.ura jedi=item.meni_items miza=item.miza }}
         {{/each}}
 
     </div>
     <!-- Naročila KONEC-->
     <!-- Pripravljene jedi ZAČETEK-->
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4" id="pripravljeneJedi">
         <h3 class="sredina-text text-white">Pripravljene jedi</h3>
 
-        {{#each narocila.pripravljena as | item |}}
-            {{> narociloItemPripravljeno id = item.id datum = item.datum sprejem_narocila = item.sprejem_narocila konec_priprave=item.konec_priprave jedi=item.jedi miza=item.miza}}
+        {{#each narocila.priprava as | item |}}
+            {{> narociloItemPripravljeno id = item._id datum = item.datum sprejem_narocila = item.ura konec_priprave=item.konec_priprave jedi=item.meni_items miza=item.miza}}
         {{/each}}
 
     </div>
     <!-- Pripravljene jedi KONEC-->
     <!-- Postrežene jedi ZAČETEK-->
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-4" id="postrezeneJedi">
         <h3 class="sredina-text text-white">Postrežene jedi</h3>
 
         {{#each narocila.postrezena as | item |}}
-            {{> narociloItemPostrezeno id = item.id datum = item.datum narocilo_postrezeno=item.narocilo_postrezeno jedi=item.jedi miza=item.miza }}
+            {{> narociloItemPostrezeno id = item._id datum = item.datum narocilo_postrezeno=item.ura jedi=item.meni_items miza=item.miza }}
         {{/each}}
 
     </div>
@@ -47,18 +48,39 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="title">DODAJ NOVO NAROCILO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                {{#each jedi as | jed |}}
+                    <div class="jed">
+                        <div class="def-number-input number-input safari_only">
+                            <input class="quantity" min="0" name="quantity" value="0" type="number" id="{{jed._id}}" cena="{{jed.cena}}">
+                            <div class="jed__ime">Ime: {{jed.ime}}</div>
+                            <div class="jed__cena">Cena: {{jed.cena}}$</div>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="miza">
+                <h3>Stevilka mize:</h3>
+                <input type="value" id="stevilkaMize">
+            </div>
+            <div class="footer">
+                <button type="button" data-dismiss="modal" id="dismiss" class="narocilo__button">Zapri narocilo</button>
+                <button type="button" id="saveData" class="narocilo__button">Ustvari narocilo</button>
+            </div>
+            <div class="cena">
+                <h1 id="cenaNarocila">0$</h1>
             </div>
         </div>
     </div>
 </div>
+
+<div class="bell hidden">
+    <span class="bell fa fa-bell"></span>
+</div>
+
+<script src="/javascript/nadzorna_plosca_natakar.js"></script>

@@ -20,6 +20,8 @@ const login = function (req, res) {
             if (uporabnik.geslo !== uporabnikDB.geslo) {
                 return res.status(401).send({"error_message": "Napacni podatki, poskusite ponovno"})
             }
+            req.session.uporabnik_id = uporabnikDB._id;
+            req.session.vloga = uporabnikDB.vloga;
             return res.status(200).send({"uporabnik_id": uporabnikDB._id.toString(), "vloga": uporabnikDB.vloga});
         })
         .catch((err)=> {

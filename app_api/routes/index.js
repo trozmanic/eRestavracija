@@ -41,5 +41,6 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
 router.put("/narocila", narocila.posodobiNarocilo);
+router.delete("/narocila/:id", narocila.izbrisiNarocilo);
 
 module.exports=router

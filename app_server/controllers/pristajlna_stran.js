@@ -151,6 +151,7 @@ const menu = async function (req, res) {
 }
 
 const logout = async function (req, res)  {
+    console.log("LOGGIN OUT")
     req.session.destroy();
     res.status(200).json({});
 }

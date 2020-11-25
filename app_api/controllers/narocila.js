@@ -33,6 +33,7 @@ const ustvariNarocilo = async (req, res) => {
         }
     }
     req.body.meni_items = meni_items;
+    req.body.natakar = zaposleni;
     console.log(req.body);
     const narocilo = new Narocila(req.body);
     try {
@@ -58,12 +59,23 @@ const posodobiNarocilo = async (req, res) => {
         const narocilo = await Narocila.findByIdAndUpdate(id, req.body);
         res.status(200).json(narocilo);
     }catch (err) {
-        return res.status(500).json({"error_message": err})
+        return res.status(500).json({"error_message": err});
+    }
+}
+
+const izbrisiNarocilo = async (req, res) => {
+    try {
+        const id = req.params.id;
+        await Narocila.findByIdAndDelete(id);
+        res.status(200).json({id});
+    }catch (err) {
+        return res.status(500).json({"error_message":err});
     }
 }
 
 module.exports = {
     ustvariNarocilo,
     pridobiNarocila,
-    posodobiNarocilo
+    posodobiNarocilo,
+    izbrisiNarocilo
 }
