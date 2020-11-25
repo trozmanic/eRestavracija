@@ -35,7 +35,6 @@ let klikRezerviraj=function(dogodek){
         "jedi":jedi,
         "uporabnik_id":credentials.uporabnik_id
     };
-    console.log(JSON.stringify(payload));
     let xhttp=new XMLHttpRequest();
     xhttp.open("POST","/api/rezervacija");
     xhttp.onload=()=>{
@@ -43,7 +42,8 @@ let klikRezerviraj=function(dogodek){
             window.alert("Rezervacija uspešno oddana");
             window.location.replace("/");
         }else{
-            window.alert(JSON.parse(xhttp.responseText).sporocilo);
+            window.alert("Prišlo je do napake: "+JSON.parse(xhttp.responseText).sporocilo);
+            window.location.replace("/");
         }
     }
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -52,10 +52,8 @@ let klikRezerviraj=function(dogodek){
 
 let preveriStorage=function(){
     let sessionStorage=window.sessionStorage;
-    if(window.localStorage.getItem("credentials")==null){
-        window.location.replace("/potrebna_prijava");
-    }else if(sessionStorage.getItem("ura")==null || sessionStorage.getItem("stOseb")==null || sessionStorage.getItem("datum")==null){
-        window.location.replace("/rezerviraj");
+    if(sessionStorage.getItem("ura")==null || sessionStorage.getItem("stOseb")==null || sessionStorage.getItem("datum")==null){
+        window.location.replace("/");
     }
 }
 

@@ -1,0 +1,497 @@
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
+<!-- Zacetek Zasluzka -->
+        <div class="col-xl-12 title">
+            <h1>Zasluzek</h1>
+            <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+        </div>
+<div class="col-xl-12 title">
+    <h3 class="sredina-text text-white"><a href="/nadzorna_plosca/zasluzek{{{nadzorna_urnik_prev leto mesec uporabnik_id zaposleni_role}}}"><i class="fas fa-arrow-left ikone-stil-posamezna"></i></a><span id="naslov_datum">{{mesec_to_string mesec}} {{leto}}</span><a href="/nadzorna_plosca/zasluzek{{{nadzorna_urnik_next leto mesec uporabnik_id zaposleni_role}}}"><i class="fas fa-arrow-right ikone-stil-posamezna"></i></a></h3>
+</div>
+
+        <div class="col-xl-12 rezervacija-skatla">
+
+            <p class="levo-text kartica-padding">
+                prilivi
+                <span class="desno-float"><strong>{{skupno_prilivi}}</strong></span>
+            </p>
+
+            <p class="levo-text kartica-padding">
+                placa delavcev in prispevki
+                <span class="desno-float"><strong>-$4526</strong></span>
+            </p>
+
+            <p class="levo-text kartica-padding">
+                surovine
+                <span class="desno-float"><strong>-$2943</strong></span>
+            </p>
+
+            <p class="levo-text kartica-padding">
+                ostali tekoci stroski
+                <span class="desno-float"><strong>-$830</strong></span>
+            </p>
+
+            <p class="levo-text kartica-padding border-top">
+                <strong>Skupni zasluzek ta mesec</strong>
+                <span class="desno-float"><strong>$1231</strong></span>
+            </p>
+        </div>
+        <!-- Pregled prilivov -->
+        <div class="col-xl-12 title">
+            <h1 class="sredina-text text-white">Prilivi<i role="button" data-toggle="collapse" data-target=".pregled-collapse" aria-expanded="false" aria-controls="skrij-pregled skrij-pregled2" class="fas fa-arrow-down"></i></h1>
+        </div>
+
+        <div class="row collapse pregled-collapse rezervacija-skatla sredina-text" id="skrij-pregled2">
+            <div class="d-none d-lg-block col-lg-11 col-xl-11 ikone-stil-posamezna-no-hover gor-margin">
+                <div class="row">
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Ponedeljek</strong></p>
+                    </div>
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Torek</strong></p>
+                    </div>
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Sreda</strong></p>
+                    </div>
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Cetrtek</strong></p>
+                    </div>
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Petek</strong></p>
+                    </div>
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Sobota</strong></p>
+                    </div>
+                    <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                        <p><strong>Nedelja</strong></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+                <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>1. Teden</strong></p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_0">{{datum_to_sting urnik 0 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_1">{{datum_to_sting urnik 1 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_2">{{datum_to_sting urnik 2 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_3">{{datum_to_sting urnik 3 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_4">{{datum_to_sting urnik 4 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_5">{{datum_to_sting urnik 5 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_6">{{datum_to_sting urnik 6 zac_dan st_dni}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+                <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>2. Teden</strong></p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_7">{{datum_to_sting urnik 7 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_8">{{datum_to_sting urnik 8 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_9">{{datum_to_sting urnik 9 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_10">{{datum_to_sting urnik 10 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_11">{{datum_to_sting urnik 11 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_12">{{datum_to_sting urnik 12 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_13">{{datum_to_sting urnik 13 zac_dan st_dni}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+                <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>3. Teden</strong></p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_14">{{datum_to_sting urnik 14 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_15">{{datum_to_sting urnik 15 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_16">{{datum_to_sting urnik 16 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_17">{{datum_to_sting urnik 17 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_18">{{datum_to_sting urnik 18 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_19">{{datum_to_sting urnik 19 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_20">{{datum_to_sting urnik 20 zac_dan st_dni}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+                <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>4. Teden</strong></p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_21">{{datum_to_sting urnik 21 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_22">{{datum_to_sting urnik 22 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_23">{{datum_to_sting urnik 23 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_24">{{datum_to_sting urnik 24 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_25">{{datum_to_sting urnik 25 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_26">{{datum_to_sting urnik 26 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_27">{{datum_to_sting urnik 27 zac_dan st_dni}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+                <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>5. Teden</strong></p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_28">{{datum_to_sting urnik 28 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_29">{{datum_to_sting urnik 29 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_30">{{datum_to_sting urnik 30 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_31">{{datum_to_sting urnik 31 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_32">{{datum_to_sting urnik 32 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_33">{{datum_to_sting urnik 33 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_34">{{datum_to_sting urnik 34 zac_dan st_dni}}</p>
+                </div>
+            </div>
+            <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+                <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p><strong>6. Teden</strong></p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_35">{{datum_to_sting urnik 35 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_36">{{datum_to_sting urnik 36 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_37">{{datum_to_sting urnik 37 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_38">{{datum_to_sting urnik 38 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_39">{{datum_to_sting urnik 39 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_40">{{datum_to_sting urnik 40 zac_dan st_dni}}</p>
+                </div>
+                <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+                    <p id="p_dan_41">{{datum_to_sting urnik 41 zac_dan st_dni}}</p>
+                </div>
+            </div>
+
+            <div class="col-xl-11">
+                <canvas id="chLine"></canvas>
+            </div>
+        </div>
+
+        <!-- Racuni -->
+        <div class="col-xl-12 title">
+            <h1 class="sredina-text text-white">Racuni <i role="button" data-toggle="collapse" data-target=".racun-collapse" aria-expanded="false" aria-controls="skrij-racun skrij-racun2" class="fas fa-arrow-down"></i></h1>
+        </div>
+
+        <div class="row collapse racun-collapse" id="skrij-racun2">
+
+            <div class="col-12 col-md-6">
+                <div class="col-xl-12">
+                    <h3 class="sredina-text text-white">Placani (3)</h3>
+                </div>
+
+                <div class="rezervacija-skatla" id="racun1">
+                    <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+
+                    <p class="levo-text kartica-padding">
+                        Stranka: <strong>Chuck Norris</strong>
+                        <span class="desno-float">St. racuna: <strong>734865</strong></span>
+                    </p>
+
+                    <p class="levo-text kartica-padding">
+                        Datum: <strong>12.5.2020</strong>
+                        <span class="desno-float">Ura: <strong>12.30</strong></span>
+                    </p>
+
+                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                    <ul>
+                        <li>Hobotnica <strong>1x$10</strong></li>
+                        <li>Spageti po mediteransko <strong>1x$10</strong></li>
+                        <li>Lignji po trzasko <strong>1x$10</strong></li>
+                        <li>Cvrti lignji <strong>1x$10</strong></li>
+                        <li>Morska solata <strong>1x$10</strong></li>
+                        <li>Solata s skampi <strong>1x$10</strong></li>
+                        <li>File tune na zaru <strong>1x$10</strong></li>
+                        <li>Rizota z lososom <strong>1x$10</strong></li>
+                    </ul>
+                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$80</strong></h5>
+                    <div class="ikone-stil">
+                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
+                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-1"></i>
+                    </div>
+                </div>
+
+                <div class="rezervacija-skatla" id="racun2">
+                    <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+
+                    <p class="levo-text kartica-padding">
+                        Stranka: <strong>Franc Novak</strong>
+                        <span class="desno-float">St. racuna: <strong>734866</strong></span>
+                    </p>
+
+                    <p class="levo-text kartica-padding">
+                        Datum: <strong>17.6.2020</strong>
+                        <span class="desno-float">Ura: <strong>14.30</strong></span>
+                    </p>
+
+                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                    <ul>
+                        <li>Cvrti lignji <strong>2x$10</strong></li>
+                    </ul>
+                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$20</strong></h5>
+                    <div class="ikone-stil">
+                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
+                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-2"></i>
+                    </div>
+                </div>
+
+                <div class="rezervacija-skatla" id="racun3">
+                    <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+
+                    <p class="levo-text kartica-padding">
+                        Stranka: <strong>Janez Horvat</strong>
+                        <span class="desno-float">St. racuna: <strong>734867</strong></span>
+                    </p>
+
+                    <p class="levo-text kartica-padding">
+                        Datum: <strong>23.11.2020</strong>
+                        <span class="desno-float">Ura: <strong>9.30</strong></span>
+                    </p>
+
+                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                    <ul>
+                        <li>Spageti po mediteransko <strong>2x$10</strong></li>
+                        <li>Lignji po trzasko <strong>2x$10</strong></li>
+                        <li>Morska solata <strong>1x$10</strong></li>
+                        <li>Solata s skampi <strong>1x$10</strong></li>
+                        <li>File tune na zaru <strong>1x$10</strong></li>
+                        <li>Rizota z lososom <strong>1x$10</strong></li>
+                    </ul>
+                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$80</strong></h5>
+                    <div class="ikone-stil">
+                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
+                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-3"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="col-xl-12">
+                    <h3 class="sredina-text text-white">Neplacani (3)</h3>
+                </div>
+
+                <div class="rezervacija-skatla" id="racun4">
+                    <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
+
+                    <p class="levo-text kartica-padding">
+                        Stranka: <strong>Marko Krajnc</strong>
+                        <span class="desno-float">St. racuna: <strong>734868</strong></span>
+                    </p>
+
+                    <p class="levo-text kartica-padding">
+                        Datum: <strong>10.12.2020</strong>
+                        <span class="desno-float">Ura: <strong>8.30</strong></span>
+                    </p>
+
+                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                    <ul>
+                        <li>File tune na zaru <strong>1x$10</strong></li>
+                    </ul>
+                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$10</strong></h5>
+                    <div class="ikone-stil">
+                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
+                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-4"></i>
+                    </div>
+                </div>
+
+                <div class="rezervacija-skatla" id="racun5">
+                    <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
+
+                    <p class="levo-text kartica-padding">
+                        Stranka: <strong>Anton Mlakar</strong>
+                        <span class="desno-float">St. racuna: <strong>734869</strong></span>
+                    </p>
+
+                    <p class="levo-text kartica-padding">
+                        Datum: <strong>1.1.2021</strong>
+                        <span class="desno-float">Ura: <strong>13.30</strong></span>
+                    </p>
+
+                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                    <ul>
+                        <li>Morska solata <strong>1x$10</strong></li>
+                        <li>Solata s skampi <strong>1x$10</strong></li>
+                    </ul>
+                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$20</strong></h5>
+                    <div class="ikone-stil">
+                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
+                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-5"></i>
+                    </div>
+                </div>
+
+                <div class="rezervacija-skatla" id="racun6">
+                    <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
+
+                    <p class="levo-text kartica-padding">
+                        Stranka: <strong>Andrej Vidmar</strong>
+                        <span class="desno-float">St. racuna: <strong>734870</strong></span>
+                    </p>
+
+                    <p class="levo-text kartica-padding">
+                        Datum: <strong>25.12.2020</strong>
+                        <span class="desno-float">Ura: <strong>10.30</strong></span>
+                    </p>
+
+                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                    <ul>
+                        <li>Morska solata <strong>4x$10</strong></li>
+                        <li>Rizota z lososom <strong>1x$10</strong></li>
+                    </ul>
+                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$50</strong></h5>
+                    <div class="ikone-stil">
+                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
+                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-6"></i>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- END Zasluzek -->
+        <div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="legendheader">Legenda</h1>
+                        <div class="iconsflex">
+                            <div class="iconmodal">
+                                <i class="far fa-address-book"></i>
+                                <p>Kontakt stranke</p>
+                            </div>
+                            <div class="iconmodal">
+                                <i class="fas fa-trash"></i>
+                                <p>Sturniraj</p>
+                            </div>
+                            <div class="iconmodal">
+                                <i class="fas fa-print"></i>
+                                <p>Natisni</p>
+                            </div>
+                            <div class="iconmodal">
+                                <i class="fas fa-arrow-left"></i>
+                                <p>naslednji mesec</p>
+                            </div>
+                            <div class="iconmodal">
+                                <i class="fas fa-arrow-right"></i>
+                                <p>Prejsnji mesec</p>
+                            </div>
+                            <div class="iconmodal">
+                                <i class="fas fa-arrow-down"></i>
+                                <p>Prikazi/skrij vsebino</p>
+                            </div>
+                        </div>
+                        <div class="butlegenda">
+                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="kontaktstranke" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="legendheader">Kontakt stranke</h1>
+                        <textarea class="kontaktinput" type="text"></textarea>
+                        <div class="butkontakt">
+                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+                            <button type="submit" class="but">Pošlji</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="sturniraj" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h1 class="legendheader">Ali res zelite sturnirati racun?</h1>
+                        <div class="butkontakt">
+                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+                            <button type="submit" class="but">Potrdi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tukaj KONEC vsebino -->
+    </div>
+</div>
+<div class="collapse" id="oznake_osi">{{json_to_string ostevilceni_dnevi}}</div>
+<div class="collapse" id="zasluzek_dnevi">{{json_to_string zasluzek_dnevi}}</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"> </script>
+<script src="/javascript/nadzorna_plosca_zasluzek.js"></script>

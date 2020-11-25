@@ -208,6 +208,7 @@ body, html {
 
 .butkontakt{
     display: flex;
+    justify-content: space-around;
 }
 
 .but{
@@ -241,4 +242,73 @@ body, html {
 /* graf zasluzek */
 canvas#chLine {
     background-color: #35313b;
+}
+
+.inputfield {
+    margin: 10px 0;
+    width: 40%;
+}
+
+.inputfieldtop {
+    display: flex;
+    justify-content: space-around;
+}
+
+.inputfield lebel {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}
+
+.inputfield select{
+    border-radius: 12px;
+    display:block;
+    width:100%;
+}
+
+.meniitem {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    color:white;
+    justify-content: space-between;
+}
+
+.meniitemflex {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin-right: .3em;
+}
+
+.meniitemflex p {
+    margin: 0;
+}
+
+.meniitem i {
+    margin: 0 0.2em;
+    cursor: pointer;
+}
+
+.meniitem i:hover {
+    color:#5F3C50;
+    transition: 0.25s;
+}
+
+#meni{
+    width: 89%;
+    margin:auto;
+}
+
+.modalheader{
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+
+.cena {
+    margin: 0;
+    font-weight: lighter;
 }

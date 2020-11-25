@@ -34,17 +34,9 @@ server.on('listening', onListening);
  * Normalize a port into a number, string, or false.
  */
 
-io.on('connection', function (socket) {
-  console.log("Connected succesfully to the socket ...");
+const socket = require ('../socket/socket');
+socket.start(io);
 
-
-  // Send news on the socket
-  socket.emit('new_order', {} );
-
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
 
 function normalizePort(val) {
   var port = parseInt(val, 10);

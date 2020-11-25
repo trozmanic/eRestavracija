@@ -8,7 +8,7 @@
         </div>
 
         {{#each narocila.vrsta as | item |}}
-            {{> narociloItem id = item.id datum = item.datum sprejem_narocila = item.sprejem_narocila jedi=item.jedi miza=item.miza}}
+            {{> narociloItem id = item.id datum = item.datum sprejem_narocila = item.sprejem_narocila jedi=item.jedi miza=item.miza natakar=item.natakar.id_uporabnika}}
         {{/each}}
 
     </div>
@@ -18,10 +18,9 @@
             <h3 class="sredina-text text-white">V pripravi</h3>
         </div>
         {{#each narocila.priprava as | item |}}
-            {{> narociloItemPriprava id = item.id datum = item.datum sprejem_narocila = item.ura jedi=item.meni_items zacetek_priprave=item.zacetek_priprave miza=item.miza}}
+            {{> narociloItemPriprava id = item.id datum = item.datum sprejem_narocila = item.ura jedi=item.meni_items zacetek_priprave=item.zacetek_priprave miza=item.miza natakar=item.natakar.id_uporabnika}}
         {{/each}}
     </div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/javascript/nadzorna_plosca_kuhar.js"></script>

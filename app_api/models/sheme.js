@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uporabnikShema = new mongoose.Schema({
-    "ime": {type:String, required:true},
-    "email_naslov": {type:String, unique:true, required:true, validate : {
+    "ime": { type: String, required: true },
+    "email_naslov": {
+        type: String, unique: true, required: true, validate: {
             validator: function (v) {
                 return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
             }
         }
     },
-    "telefonska_stevilka": {type:String, required:true, validate: {
+    "telefonska_stevilka": {
+        type: String, required: true, validate: {
             validator: function (v) {
                 return /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(v);
             }
         }
     },
-    "geslo": {type:String, required:true},
-    "vloga": {type:String, enum: ['admin', 'kuhar', 'natakar', 'gost']},
-    "id_vloga_info": {type: mongoose.ObjectId, required:true}
+    "geslo": { type: String, required: true },
+    "vloga": { type: String, enum: ['admin', 'kuhar', 'natakar', 'gost'] },
+    "id_vloga_info": { type: mongoose.ObjectId, required: true }
 })
 
 const zaposleniShema = new mongoose.Schema({
@@ -40,32 +42,33 @@ const meniItemShema = new mongoose.Schema({
     ocena_count: { type: Number, default: 0 },
     kalorije: { type: Number, required: true, min: 0 },
     sestavine: [new mongoose.Schema({
-        surovina: { type: surovinaShema,},
+        surovina: { type: surovinaShema, },
         kolicina: { type: Number, min: 0 }
     })]
 })
 
 const narociloShema = new mongoose.Schema({
     natakar: { type: zaposleniShema },
-    datum_in_ura: { type: Date, required:true, default: Date.now },
+    datum_in_ura: { type: Date, required: true, default: Date.now },
     meni_items: [new mongoose.Schema({
-        meni_item: { type: meniItemShema, required:true },
-        kolicina: { type: Number, required:true }
+        meni_item: { type: mongoose.ObjectId, required: true },
+        kolicina: { type: Number, required: true }
     })],
-    cena: { type: Number, required:true },
-    stanje: { type: String, required:true, enum: ['sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
+    cena: { type: Number },
+    stanje: { type: String, required:true, enum: ['rezervacija', 'sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
     miza: { type: Number}
 })
 
 const rezervacijaShema = new mongoose.Schema({
     datum: { type: Date, default: Date.now },
-    narocilo: { type: narociloShema },
-    stanje: { type: String, default: "caka" }
+    narocilo: { type: mongoose.ObjectId },
+    stanje: { type: String, default: "caka" },
+    st_oseb: { type: String }
 })
 
 
 const gostShema = new mongoose.Schema({
-    id_uporabnika :{type: mongoose.ObjectId},
+    id_uporabnika: { type: mongoose.ObjectId },
     rezervacije: [rezervacijaShema],
     ocenjene_jedi: [meniItemShema]
 })
@@ -120,6 +123,11 @@ const urnikShema = new mongoose.Schema({
         }
     }
 })
+const testDate = new mongoose.Schema({
+    datum_in_ura: { type: Date, default: Date.now },
+    stanje: { type: String, required:true, enum: ['sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
+    cena: { type: Number, required:true }
+})
 
 
 mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");
@@ -130,3 +138,4 @@ mongoose.model("MeniItem", meniItemShema, "MeniItems");
 mongoose.model("Surovina", surovinaShema, "Surovine");
 mongoose.model("Zaposlen", zaposleniShema, "Zaposleni");
 mongoose.model("Urnik", urnikShema, "Urniki");
+mongoose.model("TestDate", testDate, "TestDate");

@@ -37,7 +37,7 @@ hbs.registerPartial('menuItem', '<br>\n' +
     '                        <p>{{ opis }}</p>\n' +
     '                    </div>')
 
-hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
+hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id}}' idNatakar='{{natakar}}'>\n" +
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
@@ -58,7 +58,7 @@ hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id
     "                    </div>\n" +
     "                </div>")
 
-hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
+hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\" id='{{_id}}' idNatakar='{{natakar}}'>\n" +
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
@@ -101,8 +101,8 @@ hbs.registerPartial('narociloItemPripravljeno', "<div class=\"rezervacija-skatla
     "                    {{/each}}"+
     "                    </ul>\n" +
     "                    <div class=\"ikone-stil\">\n" +
-    "                        <i role=\"button\" class=\"fas fa-utensils ikone-stil-posamezna\"></i>\n" +
-    "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
+    "                        <i role=\"button\" class=\"far fa-check-circle ikone-stil-posamezna\"></i>\n" +
+    "                   " +
     "                    </div>\n" +
     "                </div>")
 
@@ -123,7 +123,8 @@ hbs.registerPartial('narociloItemPostrezeno', "<div class=\"rezervacija-skatla\"
     "                    {{/each}}"+
     "                    </ul>\n" +
     "                    <div class=\"ikone-stil\">\n" +
-    "                        <i role=\"button\" class=\"fas fa-euro-sign ikone-stil-posamezna\"></i>\n" +
+    "                        <i role=\"button\" class=\"far fa-check-circle ikone-stil-posamezna\"></i>\n" +
     "                        <i role=\"button\" class=\"fas fa-ban ikone-stil-posamezna\"></i>\n" +
+    "                   " +
     "                    </div>\n" +
     "                </div>")

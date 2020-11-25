@@ -1,4 +1,5 @@
 const hbs = require('hbs');
+const meni = require('../../service/meni');
 
 hbs.registerHelper("not", function(obj) {
   return !obj;
@@ -7,9 +8,9 @@ hbs.registerHelper("not", function(obj) {
 
 hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
   let paramid = "";
-  if (uporabnik) {
+  /*if (uporabnik) {
     paramid = "?uporabnik_id="+uporabnik._id;
-  }
+  }*/
   const hrefs = {
     "index" : "/" + paramid,
     "onas": "/onas" + paramid,
@@ -25,6 +26,40 @@ hbs.registerHelper('izbrano', (izbrano_ime, uporabnik) => {
   }
   return res;
 });
+
+hbs.registerHelper('datum',(date)=>{
+  date=new Date(date);
+  return date.getDay()+"."+(date.getMonth()+1)+"."+date.getFullYear();
+})
+
+hbs.registerHelper("cas",(date)=>{
+  date=new Date(date);
+  return date.getHours()+":"+date.getMinutes();
+})
+
+hbs.registerHelper("meniRezervacije",(rezervacijaItems,meniItems)=>{
+  let res="";
+  if(rezervacijaItems.length>0){
+    res+='<h6 class="sredina-text"><strong>Meni:</strong></h6><ul>';
+    for(let item of rezervacijaItems){
+      res+='<li>'+meniItems.find(e=>e._id==item.meni_item).ime+' <strong>'+item.kolicina+'x</strong></li>'
+      //res+='<li>${} <strong>1x</strong></li>'
+    }
+    res+='</ul>'
+  }else{
+    res+='<h6 class="sredina-text"><strong>Ni izbranih jedi</strong></h6>';
+  }
+  return res;
+})
+
+hbs.registerHelper("stanjeRezervacije",(stanje)=>{
+  const stanja={caka:"Čaka na potrditev",potrjena:"Potrjena",zavrnjena:"Zavrnjena",preklicana:"Preklicana",pretekla:"Pretekla"};
+  return stanja[stanje];
+})
+
+hbs.registerHelper('vsaka_druga',(index)=>{
+  return (index+1)%2==0 ? '<div class="w-100 d-none d-md-block"></div>' : '';
+})
 
 hbs.registerHelper('zvezda', (stevilo_zvezdic) => {
   const zvezdica = '<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">\n' +
@@ -238,6 +273,11 @@ hbs.registerHelper('nadzorna_urnik_aldante', (zaposleni_role, uporabnik_id) => {
   }
   return url_dodatek;
 });
+
+hbs.registerHelper('json_to_string', (podatki) => {
+  return JSON.stringify(podatki);
+});
+
 hbs.registerHelper("stevec", function (indeks){
     return indeks + 1;
 });

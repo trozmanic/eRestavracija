@@ -8,7 +8,11 @@ const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
 const zaposleni = require('../controllers/zaposleni');
 const narocila = require('../controllers/narocila');
+<<<<<<< HEAD
 const zaloga = require('../controllers/zaloga');
+=======
+const zasluzek = require('../controllers/zasluzek');
+>>>>>>> f40b292e802b2be9f8c5566b7c017302473e5a86
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -16,7 +20,12 @@ router.get("/uporabniki/:idUporabnika",uporabniki.pridobiUporabnika);
 router.post("/uporabniki",uporabniki.ustvariUporabnika);
 router.put("/uporabniki",uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
+
+//REZERVACIJE
+router.get("/rezervacija",rezervacije.pridobiRezervacije);
+router.get("/rezervacija/:idUporabnika",rezervacije.pridobiRezervacije)
 router.post("/rezervacija",rezervacije.ustvariRezervacijo);
+router.put("/rezervacija/:idRezervacije/:operacija",rezervacije.posodobiRezervacijo)
 
 //MENI
 router.get("/meni",meni.pridobiJedi);
@@ -28,6 +37,9 @@ router.delete("/meni/:idJedi", meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
+
+//ZASLUZEK
+router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
 
 //URNIK
 router.get("/urnik", urnik.pridobiUrnik);
@@ -41,7 +53,12 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 //NAROCILA
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
-router.put("/narocila", narocila.posodobiNarocilo);
+router.get("/narocila/:idNarocila",narocila.pridobiNarocilo);
+router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
+
+//ZASLUZEK
+router.get("/zasluzek", zasluzek.pridobiNarocilo);
+router.post("/zasluzek", zasluzek.test);
 
 //ZALOGA
 router.get("/zaloga", zaloga.pridobiSestavine);

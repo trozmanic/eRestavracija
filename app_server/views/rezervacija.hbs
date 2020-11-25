@@ -6,11 +6,11 @@
         <div class="inputs">
             <div class="inputfield">
                 <lebel for="imeInPriimek">Ime in Priimek</lebel>
-                <input type="text" id="imeInPriimek">
+                <input type="text" id="imeInPriimek" disabled="" value="{{uporabnik.ime}}">
             </div>
             <div class="inputfield">
                 <lebel for="email">Email</lebel>
-                <input type="email" id="email">
+                <input type="email" id="email" disabled="" value="{{uporabnik.email_naslov}}">
             </div>
             <div class="inputfield">
                 <lebel for="time">Ura</lebel>
@@ -18,7 +18,7 @@
             </div>
             <div class="inputfield">
                 <lebel for="stoseb">Število oseb</lebel>
-                <input type="number" id="stoseb">
+                <input type="number" id="stoseb" min="1">
             </div>
         </div>
         <table class="calander">

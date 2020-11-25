@@ -54,7 +54,7 @@ let klikNaprej=function(dogodek){
     
     let errors=[];
     if(ura=="") errors.push("uro");
-    if(stOseb=="") errors.push("število oseb");
+    if(stOseb<1) errors.push("število oseb");
     if(dan==null) errors.push("datum");
 
     if(errors.length>0){
@@ -69,15 +69,7 @@ let klikNaprej=function(dogodek){
     }
 }
 
-let preveriStorage=function(){
-    if(window.localStorage.getItem("credentials")==null){
-        window.location.replace("/potrebna_prijava");
-    }
-}
-
 let meseci=["Januar","Februar","Marec","April","Maj","Junij","Julij","Avgust","September","Oktober","November","December"];
-
-preveriStorage();
 
 let date=new Date();
 drawCalander(date.getFullYear(),date.getMonth());
