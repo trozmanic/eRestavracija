@@ -2,7 +2,27 @@
 <p class="headcont">Izberite hrano</p>
 
 <div class="row justify-content-center">
+    {{#each dynamicData as |meni_item|}}
     <div class="col-md-3 col-10">
+        <div class="menuitem">
+            <img src="{{meni_item.slika}}">
+            <div class="menudesc">
+                <div class="menudescname">
+                    <h1>{{meni_item.ime}}</h1>
+                    <p>{{meni_item.cena}}€</p>
+                </div>
+                <div class="dodaj">
+                    <i class="fas fa-plus"></i>
+                    <p class="foodCounter" id="{{meni_item._id}}">0</p>
+                    <i class="fas fa-minus"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{#vsaka_druga @index}}
+    {{/vsaka_druga}}
+    {{/each}}
+    <!--<div class="col-md-3 col-10">
         <div class="menuitem">
             <img src="/images/jedi/1.png">
             <div class="menudesc">
@@ -17,139 +37,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/2.png">
-            <div class="menudesc">
-                <div class="menudescname">
-                    <h1>Spageti po mediteransko</h1>
-                    <p>12€</p>
-                </div>
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="2">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-100 d-none d-md-block"></div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/3.png">
-            <div class="menudesc">
-
-                <div class="menudescname">
-                    <h1>Lignji po trzasko</h1>
-                    <p>12€</p>
-                </div>
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="3">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/4.png">
-
-
-            <div class="menudesc">
-                <div class="menudescname">
-                    <h1>Cvrti lignji</h1>
-                    <p>12€</p>
-
-                </div>
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="4">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-100 d-none d-md-block"></div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/5.png">
-
-
-            <div class="menudesc">
-                <div class="menudescname">
-                    <h1>Morska solata</h1>
-                    <p>12€</p>
-                </div>
-
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="5">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/6.png">
-
-
-            <div class="menudesc">
-                <div class="menudescname">
-                    <h1>Solata s skampi</h1>
-                    <p>12€</p>
-                </div>
-
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="6">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-100 d-none d-md-block"></div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/7.png">
-
-
-            <div class="menudesc">
-                <div class="menudescname">
-                    <h1>File tune na zaru</h1>
-                    <p>12€</p>
-
-                </div>
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="7">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-10">
-        <div class="menuitem">
-            <img src="/images/jedi/8.png">
-
-
-            <div class="menudesc">
-                <div class="menudescname">
-                    <h1>Rizota z lososom</h1>
-                    <p>12€</p>
-
-                </div>
-                <div class="dodaj">
-                    <i class="fas fa-plus"></i>
-                    <p class="foodCounter" id="8">0</p>
-                    <i class="fas fa-minus"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="w-100 d-none d-md-block"></div>
+    </div>-->
     <button class="butlarge" id="klikRezerviraj">Rezerviraj</button>
 </div>
 

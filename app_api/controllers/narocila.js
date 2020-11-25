@@ -53,6 +53,16 @@ const pridobiNarocila = async (req, res) => {
     }
 }
 
+const pridobiNarocilo = (req,res)=>{
+    Narocila.findById(req.params.idNarocila).exec((napaka,narocilo)=>{
+        if(napaka){
+            res.status(400).json(napaka);
+        }else{
+            res.status(200).json(narocilo);
+        }
+    })
+}
+
 const posodobiNarocilo = async (req, res) => {
     try {
         const id = req.body.id;
@@ -77,5 +87,6 @@ module.exports = {
     ustvariNarocilo,
     pridobiNarocila,
     posodobiNarocilo,
-    izbrisiNarocilo
+    izbrisiNarocilo,
+    pridobiNarocilo
 }

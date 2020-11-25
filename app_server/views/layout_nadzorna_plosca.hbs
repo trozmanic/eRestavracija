@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/5245444ef8.js" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <title>{{title}}</title>
 
 </head>
@@ -24,7 +24,7 @@
         <!-- Vrhni Meni -->
         <nav class="col-xl-12 navbar navbar-expand-lg navbar-nadzorna-plosca">
 
-            <a class="navbar-brand logo-nadzorna-plosca" href="/nadzorna_plosca">AL Dente</a>
+            <a class="navbar-brand logo-nadzorna-plosca" href="/nadzorna_plosca{{{nadzorna_urnik_aldante zaposleni_role uporabnik_id}}}">AL Dente</a>
 
             <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -34,13 +34,12 @@
                 <div class="navbar-nav navbar-nadzorna-plosca-ul">
 
                     <div class="col-6 col-md-6 nav-item ikone-stil">
-                        <a href="/nadzorna_plosca/urnik"><i class="far fa-calendar-alt ikone-stil-posamezna"></i></a>
-                        {{{nadzorna_plosca_menu_by_role zaposleni_role}}}
+                        {{{nadzorna_plosca_menu_by_role zaposleni_role uporabnik_id}}}
                     </div>
 
                     <div class="col-12 col-md-6 nav-item navbar-nadzorna-plosca-levo">
-                        <span class="navbar-text navbar-nadzorna-plosca-ul-li-text">Chuck Norris</span>
-                        <a href="index.html"><i class="fas fa-sign-out-alt ikone-stil-logout"></i></a>
+                        <span class="navbar-text navbar-nadzorna-plosca-ul-li-text">TO DO NAME</span>
+                        <a href="/"><i class="fas fa-sign-out-alt ikone-stil-logout"></i></a>
                     </div>
 
                 </div>
@@ -57,7 +56,6 @@
 <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>-->
 <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
