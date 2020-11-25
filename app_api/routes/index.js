@@ -49,16 +49,13 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 //NAROCILA
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
-<<<<<<< HEAD
 router.put("/narocila", narocila.posodobiNarocilo);
 router.delete("/narocila/:id", narocila.izbrisiNarocilo);
-=======
 router.get("/narocila/:idNarocila",narocila.pridobiNarocilo);
 router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
 //ZASLUZEK
 router.get("/zasluzek", zasluzek.pridobiNarocilo);
 router.post("/zasluzek", zasluzek.test);
->>>>>>> c8941396678d91fda3ee3024952fd40d9125a619
 
 module.exports=router

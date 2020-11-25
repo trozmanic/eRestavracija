@@ -162,30 +162,28 @@ const zaloga = function (req, res) {
 const zaposleni = function (req, res) {
     res.render('nadzorna_plosca_zaposleni', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Zaposleni', zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id })
 }
-<<<<<<< HEAD
-const strezba= async function(req,res){
+
+const strezba= async function (req,res) {
     const idUporabnika = req.session.uporabnik_id;
     console.log("iz seje " + idUporabnika)
     if (!idUporabnika) {
         return res.render("error");
     }
     try {
-        let narocila = await  axios.get(apiParametri.streznik + "/api/narocila");
+        let narocila = await axios.get(apiParametri.streznik + "/api/narocila");
         const natakarData = narocilaService.prepNatakar(narocila.data, idUporabnika);
-        let meni = await  axios.get(apiParametri.streznik + "/api/meni");
+        let meni = await axios.get(apiParametri.streznik + "/api/meni");
 
-        res.render('nadzorna_plosca_strezba',{layout:'layout_nadzorna_plosca.hbs',
-            title:'Nadzorna plošča - Strežba',
-            zaposleni_role:req.query.vloga,
-            narocila:natakarData,
-            jedi: meni.data})
-    }catch (err) {
+        res.render('nadzorna_plosca_strezba', {
+            layout: 'layout_nadzorna_plosca.hbs',
+            title: 'Nadzorna plošča - Strežba',
+            zaposleni_role: req.query.vloga,
+            narocila: natakarData,
+            jedi: meni.data
+        })
+    } catch (err) {
         res.render('error');
     }
-=======
-const strezba = function (req, res) {
-    res.render('nadzorna_plosca_strezba', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Strežba', zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id })
->>>>>>> c8941396678d91fda3ee3024952fd40d9125a619
 }
 
 const narocila_kuhar = async function (req, res) {
