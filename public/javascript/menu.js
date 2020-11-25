@@ -102,7 +102,7 @@ window.addEventListener('load', function () {
         }
         $.ajax({
             url: '/api/meni/dodajOceno',
-            type: 'PUT',
+            type: 'POST',
             data: obj,
             success: function(data) {
                 window.location.reload();
