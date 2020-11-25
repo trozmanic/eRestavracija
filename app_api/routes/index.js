@@ -8,6 +8,7 @@ const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
 const zaposleni = require('../controllers/zaposleni');
 const narocila = require('../controllers/narocila');
+const zaloga = require('../controllers/zaloga');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -37,9 +38,16 @@ router.get("/zaposleni", zaposleni.pridobiZaposlenega);
 router.put("/zaposleni", zaposleni.posodobiZaposlenega);
 router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 
-//NAROCIAL
+//NAROCILA
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
 router.put("/narocila", narocila.posodobiNarocilo);
+
+//ZALOGA
+router.get("/zaloga", zaloga.pridobiSestavine);
+router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
+router.post("/zaloga", zaloga.ustvariSestavino);
+router.put("/zaloga", zaloga.posodobiSestavino);
+router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
 
 module.exports=router

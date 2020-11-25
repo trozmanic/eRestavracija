@@ -3,10 +3,6 @@ var steviloVrsticNaZacetku = 0;
 var gumbPotrdiUrejanje = 0;
 var gumbPotrdiDodajanje = 0;
 
-document.addEventListener("load", function() {
-    steviloVrsticNaZacetku = document.getElementsByTagName("tr");
-});
-
 //Najdi vrednosti izbranega checkboxa
 gumbUredi.addEventListener("click", function(){
     
@@ -40,10 +36,11 @@ document.addEventListener("click", function(){
 });
 
 //Dodaj vrstico v tabelo
-var dodaj = document.getElementById("dodaj");
+var dodaj = document.getElementById("dodajSestavinoPotrdi");
 
 dodaj.addEventListener("click", function(){
     
+    /*
     var tabela = document.getElementById("tabela");
     var vrstica = tabela.getElementsByTagName("tr");
     var vnosSestavine = document.getElementById("")
@@ -55,6 +52,7 @@ dodaj.addEventListener("click", function(){
     }else {
         vrstica[1].insertAdjacentHTML("beforebegin", "<tr><th scope='row'><div class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' id='customCheck"+steviloVrsticNaZacetku+"'><label class='custom-control-label' for='customCheck"+steviloVrsticNaZacetku+"'></label></div></th><td>"+document.getElementById("SestavinaForm1").value+"</td><td>"+document.getElementById("KolicinaForm1").value+"</td></tr>");
     }
+    */
     
     document.getElementById("SestavinaForm1").value = "";
     document.getElementById("KolicinaForm1").value = "";

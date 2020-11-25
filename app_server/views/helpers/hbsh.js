@@ -238,3 +238,6 @@ hbs.registerHelper('nadzorna_urnik_aldante', (zaposleni_role, uporabnik_id) => {
   }
   return url_dodatek;
 });
+hbs.registerHelper("stevec", function (indeks){
+    return indeks + 1;
+});

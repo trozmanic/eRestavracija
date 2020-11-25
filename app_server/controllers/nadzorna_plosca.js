@@ -12,6 +12,7 @@ const axios = require('axios').create({
     timeout: 5000
 });
 const narocilaService = require('../service/narocila');
+const zalogaService = require("../service/zaloga");
 
 const ime_priimek_uporabnik = function(id){
     axios.get('/api/uporabniki/' + id, {
@@ -86,8 +87,58 @@ const urnik=function(req,res){
     }
 }
 
-const zaloga=function(req,res){
-    res.render('nadzorna_plosca_zaloga',{layout:'layout_nadzorna_plosca.hbs',title:'Nadzorna plošča - Zaloga',zaposleni_role:req.query.vloga, uporabnik_id:req.query.uporabnik_id})
+//ZALOGA
+
+const shraniSestavino = (req, res) => {
+    console.log("POST metoda");
+    var kolicinaEnota = req.body.kolicinaEnota;
+    var razdeli = kolicinaEnota.split(" ");
+    var kolicina = razdeli[0];
+    var enota = razdeli[1];
+    axios({
+        method: 'post',
+        url: '/api/zaloga',
+        data: {
+            ime: req.body.sestavina,
+            kolicina: kolicina,
+            enota: enota,
+            cena: req.body.cena
+        }
+    }).then(() => {
+        console.log("POST uspesen");
+        res.redirect('/zaloga');
+    }).catch((napaka) => {
+        res.render("Error:"+napaka);
+    });
+};
+
+const seznamZaloge = (req, res) => {
+  axios
+    .get('/api/zaloga')
+    .then((odgovor) => {
+      zaloga(req, res, odgovor.data);
+    });
+};
+
+const zaloga= function(req,res, seznamSestavin){
+    const idUporabnika = req.session.id;
+    if (!idUporabnika) {
+        return res.render("404 NOT FOUND");
+    }
+    try {
+        //const podatki = await axios.get(apiParametri.streznik + "/api/zaloga");
+        //const sestavine = zalogaService.seznamSestavin(podatki.data);
+        res.render('nadzorna_plosca_zaloga',{
+            layout:'layout_nadzorna_plosca.hbs',
+            title:'Nadzorna plošča - Zaloga',
+            sestavine: seznamSestavin,
+            zaposleni_role:req.query.vloga,
+            uporabnik_id:req.query.uporabnik_id
+        })
+    }catch (err) {
+        console.log(err);
+        res.render("error");
+    }
 }
 
 const zaposleni=function(req,res){
@@ -111,6 +162,7 @@ const narocila_kuhar= async function (req, res){
         res.render("error");
     }
 }
+
 const meni= async function (req, res){
     try {
         const meniItems =  await axios.get(apiParametri.streznik + "/api/meni" );
@@ -134,10 +186,13 @@ const read_json = (pathJSON) => {
         })
     })
 }
+
 module.exports={
     menu,
     rezervacije,
     urnik,
+    seznamZaloge,
+    shraniSestavino,
     zaloga,
     zaposleni,
     narocila_kuhar,

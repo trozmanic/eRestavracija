@@ -19,20 +19,25 @@
                 <h5 class="modal-title" id="exampleModalLabel">Dodaj sestavino</h5>
               </div>
               <div class="modal-body">
-              <form>
+              <form action="/api/zaloga" method="post" role="form">
                 <div class="form-group">
-                    <label for="SestavinaForm">Sestavina</label>
-                    <input type="text" class="form-control" id="SestavinaForm1" placeholder="Npr.: krompir">
+                    <label for="SestavinaForm1">Sestavina</label>
+                    <input type="text" class="form-control" id="SestavinaForm1" placeholder="Npr.: krompir" name="sestavina">
                 </div>
                 <div class="form-group">
-                    <label for="KolicinaForm">Količina</label>
-                    <input type="text" class="form-control" id="KolicinaForm1" placeholder="Npr.: 10 kg">
+                    <label for="KolicinaForm1">Količina</label>
+                    <input type="text" class="form-control" id="KolicinaForm1" placeholder="Npr.: 10 kg" name="kolicinaEnota">
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-dark mr-auto" id="dodaj" data-dismiss="modal">Dodaj</button>
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Prekliči</button>
-              </div>
+                <div class="form-group">
+                    <label for="CenaForm1">Cena (€)</label>
+                    <input type="text" class="form-control" id="CenaForm1" placeholder="Npr.: 5" name="cena">
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark mr-auto" id="dodajSestavinoPotrdi" data-dismiss="modal">Dodaj</button>
+                    <button type="button" class="btn btn-dark" id="dodajSestavinoPreklici" data-dismiss="modal">Prekliči</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -120,129 +125,24 @@
                 <th scope="col">Izberi</th>
                 <th scope="col">Sestavina</th>
                 <th scope="col">Količina</th>
+                <th scope="col">Cena na enoto</th>
               </tr>
             </thead>
+            <!-- Od tu naprej vstavi generiranje s pomocjo hbsh helperja -->
             <tbody>
+            {{#each sestavine as | podatek |}}
               <tr>
                 <th scope="row">
                     <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1"></label>
+                        <input type="checkbox" class="custom-control-input" id="customCheck{{stevec @index}}">
+                        <label class="custom-control-label" for="customCheck{{stevec @index}}"></label>
                     </div>
                 </th>
-                <td>Krompir</td>
-                <td>15 kg</td>
+                <td>{{podatek.ime}}</td>
+                <td>{{podatek.kolicina}} {{podatek.enota}}</td>
+                <td>{{podatek.cena}} €</td>
               </tr>
-              <tr>
-                <th scope="row">
-                    <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                        <label class="custom-control-label" for="customCheck2"></label>
-                    </div>
-                </th>
-                <td>Čebula</td>
-                <td>1 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                    <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                        <label class="custom-control-label" for="customCheck3"></label>
-                    </div>
-                </th>
-                <td>Česen</td>
-                <td>1 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                        <label class="custom-control-label" for="customCheck4"></label>
-                    </div>
-                </th>
-                <td>Peteršilj</td>
-                <td>500 dag</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck5">
-                        <label class="custom-control-label" for="customCheck5"></label>
-                    </div>
-                </th>
-                <td>Riž</td>
-                <td>5 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck6">
-                        <label class="custom-control-label" for="customCheck6"></label>
-                    </div>
-                </th>
-                <td>Telečji zrezek</td>
-                <td>10 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                        <label class="custom-control-label" for="customCheck7"></label>
-                    </div>
-                </th>
-                <td>Zelje</td>
-                <td>3 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck8">
-                        <label class="custom-control-label" for="customCheck8"></label>
-                    </div>
-                </th>
-                <td>Zelena solata</td>
-                <td>1 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck9">
-                        <label class="custom-control-label" for="customCheck9"></label>
-                    </div>
-                </th>
-                <td>Paradižnik</td>
-                <td>2 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck10">
-                        <label class="custom-control-label" for="customCheck10"></label>
-                    </div>
-                </th>
-                <td>Svinjska ribica</td>
-                <td>6 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck11">
-                        <label class="custom-control-label" for="customCheck11"></label>
-                    </div>
-                </th>
-                <td>Šunka</td>
-                <td>1 kg</td>
-              </tr>
-              <tr>
-                <th scope="row">
-                  <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck12">
-                        <label class="custom-control-label" for="customCheck12"></label>
-                    </div>
-                </th>
-                <td>Sir</td>
-                <td>4 kg</td>
-              </tr>
+              {{/each}}
             </tbody>
           </table>
         </div>
