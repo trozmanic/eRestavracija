@@ -26,16 +26,17 @@ hbs.registerPartial('myPartial', '<div class="card" id="{{_id}}">\n' +
 
 
 hbs.registerPartial('menuItem', '<br>\n' +
-    '                    <div class="rezervacija-skatla">\n' +
-    '                        <h4>{{ ime }}</h4>\n' +
+    '                    <div class="rezervacija-skatla" id={{ id }}>\n' +
+    '                        <h4><ime>{{ ime }}</ime></h4>\n' +
     '                        <span class="desno-float">\n' +
-    '                            <button type="button" id={{ edit }} class="btn btn-dark btn-block"><i class="fas fa-edit"></i> UREDI</button>\n' +
-    '                            <button type="button" id={{ del }}  class="btn btn-dark btn-block"><i class="fas fa-trash"></i> IZBRIŠI</button>\n' +
+    '                            <button type="button" id={{ edit }}  class="btn btn-dark btn-block edit"><i class="fas fa-edit"></i> UREDI</button>\n' +
+    '                            <button type="button" id={{ del }}   class="btn btn-dark btn-block delete"><i class="fas fa-trash"></i> IZBRIŠI</button>\n' +
     '                        </span>\n' +
-    '                        <h6>Cena: {{ cena }}€</h6>\n' +
-    '                        <h6>Kalorije: {{ kalorije }}kcal</h6>\n' +
-    '                        <p>{{ opis }}</p>\n' +
+    '                        <h6>Cena: <cena>{{ cena }}</cena>€</h6>\n' +
+    '                        <h6>Kalorije: <kalorije>{{ kalorije }}</kalorije>kcal</h6>\n' +
+    '                        <p><opis>{{ opis }}</opis></p>\n' +
     '                    </div>')
+
 
 hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id}}'>\n" +
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +

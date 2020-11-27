@@ -8,6 +8,7 @@ const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
 const zaposleni = require('../controllers/zaposleni');
 const narocila = require('../controllers/narocila');
+const slike = require('../controllers/image');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -41,5 +42,7 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
 router.put("/narocila", narocila.posodobiNarocilo);
+
+router.post('/image', slike.shraniSliko)
 
 module.exports=router

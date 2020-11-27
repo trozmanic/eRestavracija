@@ -121,6 +121,7 @@ const read_json = (pathJSON) => {
         })
     })
 }
+
 module.exports={
     menu,
     rezervacije,
