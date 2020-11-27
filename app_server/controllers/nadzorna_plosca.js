@@ -268,7 +268,7 @@ const read_json = (pathJSON) => {
     return new Promise((resolve, reject) => {
         fs.readFile(pathJSON, (err, data) => {
             if (err) {
-                reject(err);
+                reject (err);
             }
             else {
                 resolve(JSON.parse(data))
@@ -276,17 +276,13 @@ const read_json = (pathJSON) => {
         })
     })
 }
-
-module.exports = {
+module.exports={
     menu,
     rezervacije,
     urnik,
-    seznamZaloge,
-    shraniSestavino,
     zaloga,
     zaposleni,
     narocila_kuhar,
     meni,
-    strezba,
-    zasluzek
+    strezba
 }

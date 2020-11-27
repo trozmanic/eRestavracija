@@ -5,6 +5,7 @@ var pristajlna_stran=require('../controllers/pristajlna_stran');
 var nadzorna_plosca=require('../controllers/nadzorna_plosca');
 var login = require('../service/login')
 var register = require('../service/register')
+var meni = require('../service/meni')
 
 /* GET home page. */
 router.get('/', pristajlna_stran.index);
@@ -32,5 +33,11 @@ router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.seznamZaloge)
 /* POST login / register */
 router.post("/login", login.login);
 router.post("/register", register.register)
+
+
+/* PUT POST meni edid add dish */
+
+router.put("/nadzorna_plosca/meni/:id", meni.editMeni)
+router.post("/nadzorna_plosca/meni", meni.addDish)
 
 module.exports = router;
