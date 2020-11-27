@@ -276,13 +276,16 @@ const read_json = (pathJSON) => {
         })
     })
 }
-module.exports={
+module.exports = {
     menu,
     rezervacije,
     urnik,
+    seznamZaloge,
+    shraniSestavino,
     zaloga,
     zaposleni,
     narocila_kuhar,
     meni,
-    strezba
+    strezba,
+    zasluzek
 }
