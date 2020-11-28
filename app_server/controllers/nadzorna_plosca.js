@@ -77,7 +77,10 @@ const prikaziZasluzek=function(req,res, urnik, sporocilo){
             st_dni:urnik.st_dni,
             ostevilceni_dnevi: {osi:urnik.ostevilceni_dnevi},
             zasluzek_dnevi: {podatki:urnik.zasluzek_dnevi},
-            skupno_prilivi:urnik.skupno_prilivi
+            skupno_prilivi:urnik.skupno_prilivi,
+            tabele_placanil:urnik.tabele_placanil,
+            tabele_ne_placanil:urnik.tabele_ne_placanil,
+            zaposleni_strosek:urnik.zaposleni_strosek
         });
     }
 }
@@ -85,7 +88,7 @@ const zasluzek=function(req,res){
     var id = req.query.uporabnik_id;
     var mesec = req.query.mesec;
     var leto = req.query.leto;
-    if (id && mesec && leto) {
+    if (mesec && leto) {
         axios.get('/api/zasluzek', {
             params: {
                 uporabnik_id: id,
@@ -119,6 +122,26 @@ const zasluzek=function(req,res){
                     prikaziZasluzek(req, res, [], "Napaka API-ja pri iskanju zasluzka.");
                 }
             });
+    }
+}
+const zasluzel_brisi_racun=function(req,res){
+    var id = req.params.id;
+
+    if (id) {
+        axios.delete('/api/narocila/' + id, {
+        })
+            .then((odgovor) => {
+                zasluzek(req, res);
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data.sporocilo) {
+                    prikaziZasluzek(req, res, [], error.response.data.sporocilo);
+                } else {
+                    prikaziZasluzek(req, res, [], "Napaka brisanja racuna.");
+                }
+            });
+    } else {
+        prikaziZasluzek(req, res, [], "Ni podan id za brisat racun.");
     }
 }
 const urnik=function(req,res){
@@ -287,5 +310,6 @@ module.exports = {
     narocila_kuhar,
     meni,
     strezba,
-    zasluzek
+    zasluzek,
+    zasluzel_brisi_racun
 }
