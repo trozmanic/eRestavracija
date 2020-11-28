@@ -110,9 +110,9 @@ window.addEventListener("load", ()=> {
             sessionStorage.setItem("credentials", this.responseText);
             console.log(credentials.vloga);
             if (credentials.vloga !== "gost") {
-                window.location.href = "/nadzorna_plosca?vloga="+credentials.vloga;
+                window.location.href = "/nadzorna_plosca";
             }else {
-                window.location.href = "/?uporabnik_id="+ credentials.uporabnik_id;
+                window.location.href = "/";
             }
         }
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");

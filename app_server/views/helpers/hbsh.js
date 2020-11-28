@@ -281,3 +281,16 @@ hbs.registerHelper('json_to_string', (podatki) => {
 hbs.registerHelper("stevec", function (indeks){
     return indeks + 1;
 });
+hbs.registerHelper("dolzina_tabele", function (tabela){
+  return tabela.length;
+});
+hbs.registerHelper("time_to_string", function (datum){
+  return datum.toString();
+});
+hbs.registerHelper("dodaj_mesec_leto", function (mesec, leto){
+  console.log(mesec + "123123" + leto)
+  if (mesec && leto) {
+    return "?leto=" + leto + "&mesec=" + mesec;
+  }
+  return "";
+});

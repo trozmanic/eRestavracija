@@ -8,8 +8,14 @@ const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
 const zaposleni = require('../controllers/zaposleni');
 const narocila = require('../controllers/narocila');
+<<<<<<< HEAD
 const zasluzek = require('../controllers/zasluzek');
 const zaloga = require('../controllers/zaloga');
+=======
+const zaloga = require('../controllers/zaloga');
+const zasluzek = require('../controllers/zasluzek');
+const slike = require('../controllers/image');
+>>>>>>> 2d019b3b59114106bee58ab89a3fc816f1ce0b18
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -29,7 +35,7 @@ router.get("/meni",meni.pridobiJedi);
 router.get("/meni/:idJedi",meni.pridobiJed);
 router.post("/meni",meni.ustvariJed);
 router.put("/meni/:idJedi",meni.posodobiJed);
-router.put("/meni/dodajOceno", meni.dodajOceno);
+router.post("/meni/dodajOceno", meni.dodajOceno);
 router.delete("/meni/:idJedi", meni.izbrisiJed);
 
 //GOST
@@ -50,6 +56,8 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 //NAROCILA
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
+router.put("/narocila", narocila.posodobiNarocilo);
+router.delete("/narocila/:id", narocila.izbrisiNarocilo);
 router.get("/narocila/:idNarocila",narocila.pridobiNarocilo);
 router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
@@ -63,5 +71,7 @@ router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
 router.post("/zaloga", zaloga.ustvariSestavino);
 router.put("/zaloga", zaloga.posodobiSestavino);
 router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
+
+router.post('/image', slike.shraniSliko)
 
 module.exports=router

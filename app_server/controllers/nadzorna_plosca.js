@@ -77,7 +77,10 @@ const prikaziZasluzek=function(req,res, urnik, sporocilo){
             st_dni:urnik.st_dni,
             ostevilceni_dnevi: {osi:urnik.ostevilceni_dnevi},
             zasluzek_dnevi: {podatki:urnik.zasluzek_dnevi},
-            skupno_prilivi:urnik.skupno_prilivi
+            skupno_prilivi:urnik.skupno_prilivi,
+            tabele_placanil:urnik.tabele_placanil,
+            tabele_ne_placanil:urnik.tabele_ne_placanil,
+            zaposleni_strosek:urnik.zaposleni_strosek
         });
     }
 }
@@ -85,7 +88,7 @@ const zasluzek=function(req,res){
     var id = req.query.uporabnik_id;
     var mesec = req.query.mesec;
     var leto = req.query.leto;
-    if (id && mesec && leto) {
+    if (mesec && leto) {
         axios.get('/api/zasluzek', {
             params: {
                 uporabnik_id: id,
@@ -119,6 +122,26 @@ const zasluzek=function(req,res){
                     prikaziZasluzek(req, res, [], "Napaka API-ja pri iskanju zasluzka.");
                 }
             });
+    }
+}
+const zasluzel_brisi_racun=function(req,res){
+    var id = req.params.id;
+
+    if (id) {
+        axios.delete('/api/narocila/' + id, {
+        })
+            .then((odgovor) => {
+                zasluzek(req, res);
+            })
+            .catch((error) => {
+                if (error.response && error.response.data && error.response.data.sporocilo) {
+                    prikaziZasluzek(req, res, [], error.response.data.sporocilo);
+                } else {
+                    prikaziZasluzek(req, res, [], "Napaka brisanja racuna.");
+                }
+            });
+    } else {
+        prikaziZasluzek(req, res, [], "Ni podan id za brisat racun.");
     }
 }
 const urnik=function(req,res){
@@ -188,6 +211,7 @@ const zaposleni = function (req, res) {
     res.render('nadzorna_plosca_zaposleni', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Zaposleni', zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id })
 }
 
+
 const strezba= async function(req,res){
     const idUporabnika = req.session.uporabnik_id;
     console.log("iz seje " + idUporabnika)
@@ -195,16 +219,18 @@ const strezba= async function(req,res){
         return res.render("error");
     }
     try {
-        let narocila = await  axios.get(apiParametri.streznik + "/api/narocila");
+        let narocila = await axios.get(apiParametri.streznik + "/api/narocila");
         const natakarData = narocilaService.prepNatakar(narocila.data, idUporabnika);
-        let meni = await  axios.get(apiParametri.streznik + "/api/meni");
+        let meni = await axios.get(apiParametri.streznik + "/api/meni");
 
-        res.render('nadzorna_plosca_strezba',{layout:'layout_nadzorna_plosca.hbs',
-            title:'Nadzorna plošča - Strežba',
-            zaposleni_role:req.query.vloga,
-            narocila:natakarData,
-            jedi: meni.data})
-    }catch (err) {
+        res.render('nadzorna_plosca_strezba', {
+            layout: 'layout_nadzorna_plosca.hbs',
+            title: 'Nadzorna plošča - Strežba',
+            zaposleni_role: req.query.vloga,
+            narocila: natakarData,
+            jedi: meni.data
+        })
+    } catch (err) {
         res.render('error');
     }
 }
@@ -239,7 +265,7 @@ const read_json = (pathJSON) => {
     return new Promise((resolve, reject) => {
         fs.readFile(pathJSON, (err, data) => {
             if (err) {
-                reject(err);
+                reject (err);
             }
             else {
                 resolve(JSON.parse(data))
@@ -247,7 +273,6 @@ const read_json = (pathJSON) => {
         })
     })
 }
-
 module.exports = {
     menu,
     rezervacije,
@@ -258,5 +283,6 @@ module.exports = {
     narocila_kuhar,
     meni,
     strezba,
-    zasluzek
+    zasluzek,
+    zasluzel_brisi_racun
 }

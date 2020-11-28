@@ -61,7 +61,50 @@ const pridobiMeni = async (id_uporabnika) => {
         }
     })
 }
+function prepareData(dish){
+    var api_dish = {};
+    var food_api = false;
+    if(dish.hasOwnProperty('id')){
+        api_dish.id = dish.id;
+    }
+    if(!dish.hasOwnProperty('kalorije') || dish.kalorije <= 0){
+        food_api = true;
+        api_dish.kalorije = 0;
+    }
+    for(let key in dish){
+
+        // to do make food api request
+        api_dish[key] = dish[key];
+    }
+
+
+
+    return api_dish;
+}
+
+const editMeni =  async function(req, res){
+    var dish = req.body;
+
+    axios.put(apiParametri.streznik + '/api/meni/'+req.query.id, prepareData(dish))
+        .then((api_res) => {
+            return res.status(200).json(api_res.body);
+    }).catch((err)=> {
+            return res.status(500).json({"error_message": err})
+    });
+}
+const addDish = async function(req, res){
+    var dish = req.body;
+
+    axios.post(apiParametri.streznik + '/api/meni', prepareData(dish))
+        .then((api_res) => {
+            return res.status(200).json(api_res.body);
+        }).catch((err)=> {
+        return res.status(500).json({"error_message": err})
+    });
+}
 
 module.exports = {
-    pridobiMeni
+    pridobiMeni,
+    editMeni,
+    addDish
 }

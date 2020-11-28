@@ -5,6 +5,7 @@ var pristajlna_stran=require('../controllers/pristajlna_stran');
 var nadzorna_plosca=require('../controllers/nadzorna_plosca');
 var login = require('../service/login')
 var register = require('../service/register')
+var meni = require('../service/meni')
 
 /* GET home page. */
 router.get('/', pristajlna_stran.index);
@@ -25,10 +26,22 @@ router.get('/nadzorna_plosca/strezba',nadzorna_plosca.strezba)
 router.get('/nadzorna_plosca/kuhar', nadzorna_plosca.narocila_kuhar)
 router.get('/nadzorna_plosca/meni', nadzorna_plosca.meni)
 router.get('/nadzorna_plosca/zasluzek', nadzorna_plosca.zasluzek)
+<<<<<<< HEAD
+=======
+router.get("/nadzorna_plosca/zasluzek/delete/:id", nadzorna_plosca.zasluzel_brisi_racun)
+
+//Zaloga
+>>>>>>> 2d019b3b59114106bee58ab89a3fc816f1ce0b18
 router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.seznamZaloge)
 
 /* POST login / register */
 router.post("/login", login.login);
 router.post("/register", register.register)
+
+
+/* PUT POST meni edid add dish */
+
+router.put("/nadzorna_plosca/meni/:id", meni.editMeni)
+router.post("/nadzorna_plosca/meni", meni.addDish)
 
 module.exports = router;

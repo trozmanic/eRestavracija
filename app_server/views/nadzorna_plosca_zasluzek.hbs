@@ -12,22 +12,22 @@
 
             <p class="levo-text kartica-padding">
                 prilivi
-                <span class="desno-float"><strong>{{skupno_prilivi}}</strong></span>
+                <span class="desno-float"><strong>+{{skupno_prilivi}}€</strong></span>
             </p>
 
             <p class="levo-text kartica-padding">
                 placa delavcev in prispevki
-                <span class="desno-float"><strong>-$4526</strong></span>
+                <span class="desno-float"><strong>-{{zaposleni_strosek}}€</strong></span>
             </p>
 
             <p class="levo-text kartica-padding">
                 surovine
-                <span class="desno-float"><strong>-$2943</strong></span>
+                <span class="desno-float"><strong>-TO DO ??€</strong></span>
             </p>
 
             <p class="levo-text kartica-padding">
                 ostali tekoci stroski
-                <span class="desno-float"><strong>-$830</strong></span>
+                <span class="desno-float"><strong>-TO DO ??€</strong></span>
             </p>
 
             <p class="levo-text kartica-padding border-top">
@@ -239,179 +239,72 @@
 
             <div class="col-12 col-md-6">
                 <div class="col-xl-12">
-                    <h3 class="sredina-text text-white">Placani (3)</h3>
+                    <h3 class="sredina-text text-white">Placani (placano) ({{dolzina_tabele tabele_placanil}})</h3>
                 </div>
 
-                <div class="rezervacija-skatla" id="racun1">
-                    <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+                {{#each tabele_placanil as |racun|}}
+                    <div class="rezervacija-skatla" id="{{racun._id}}">
+                        <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
 
-                    <p class="levo-text kartica-padding">
-                        Stranka: <strong>Chuck Norris</strong>
-                        <span class="desno-float">St. racuna: <strong>734865</strong></span>
-                    </p>
+                        <p class="levo-text kartica-padding">
+                            Stranka: <strong>TO DO</strong>
+                            <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+                        </p>
 
-                    <p class="levo-text kartica-padding">
-                        Datum: <strong>12.5.2020</strong>
-                        <span class="desno-float">Ura: <strong>12.30</strong></span>
-                    </p>
+                        <p class="levo-text kartica-padding">
+                            Datum in ura: <strong>{{time_to_string racun.datum_in_ura}}</strong>
+                        </p>
 
-                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-                    <ul>
-                        <li>Hobotnica <strong>1x$10</strong></li>
-                        <li>Spageti po mediteransko <strong>1x$10</strong></li>
-                        <li>Lignji po trzasko <strong>1x$10</strong></li>
-                        <li>Cvrti lignji <strong>1x$10</strong></li>
-                        <li>Morska solata <strong>1x$10</strong></li>
-                        <li>Solata s skampi <strong>1x$10</strong></li>
-                        <li>File tune na zaru <strong>1x$10</strong></li>
-                        <li>Rizota z lososom <strong>1x$10</strong></li>
-                    </ul>
-                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$80</strong></h5>
-                    <div class="ikone-stil">
-                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
-                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
-                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-1"></i>
+                        <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                        <ul>
+                            {{#each racun.meni_items as |meni_item|}}
+                                <li>TO DO name <strong>{{meni_item.kolicina}}x(TO DO cena)</strong></li>
+                            {{/each}}
+                        </ul>
+                        <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+                        <div class="ikone-stil">
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                            <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
+                            <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
+                        </div>
                     </div>
-                </div>
+                {{/each}}
 
-                <div class="rezervacija-skatla" id="racun2">
-                    <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
-
-                    <p class="levo-text kartica-padding">
-                        Stranka: <strong>Franc Novak</strong>
-                        <span class="desno-float">St. racuna: <strong>734866</strong></span>
-                    </p>
-
-                    <p class="levo-text kartica-padding">
-                        Datum: <strong>17.6.2020</strong>
-                        <span class="desno-float">Ura: <strong>14.30</strong></span>
-                    </p>
-
-                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-                    <ul>
-                        <li>Cvrti lignji <strong>2x$10</strong></li>
-                    </ul>
-                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$20</strong></h5>
-                    <div class="ikone-stil">
-                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
-                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
-                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-2"></i>
-                    </div>
-                </div>
-
-                <div class="rezervacija-skatla" id="racun3">
-                    <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
-
-                    <p class="levo-text kartica-padding">
-                        Stranka: <strong>Janez Horvat</strong>
-                        <span class="desno-float">St. racuna: <strong>734867</strong></span>
-                    </p>
-
-                    <p class="levo-text kartica-padding">
-                        Datum: <strong>23.11.2020</strong>
-                        <span class="desno-float">Ura: <strong>9.30</strong></span>
-                    </p>
-
-                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-                    <ul>
-                        <li>Spageti po mediteransko <strong>2x$10</strong></li>
-                        <li>Lignji po trzasko <strong>2x$10</strong></li>
-                        <li>Morska solata <strong>1x$10</strong></li>
-                        <li>Solata s skampi <strong>1x$10</strong></li>
-                        <li>File tune na zaru <strong>1x$10</strong></li>
-                        <li>Rizota z lososom <strong>1x$10</strong></li>
-                    </ul>
-                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$80</strong></h5>
-                    <div class="ikone-stil">
-                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
-                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
-                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-3"></i>
-                    </div>
-                </div>
 
             </div>
 
             <div class="col-12 col-md-6">
                 <div class="col-xl-12">
-                    <h3 class="sredina-text text-white">Neplacani (3)</h3>
+                    <h3 class="sredina-text text-white">Neplacani (postrezeno) ({{dolzina_tabele tabele_ne_placanil}})</h3>
                 </div>
 
-                <div class="rezervacija-skatla" id="racun4">
-                    <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
+                {{#each tabele_ne_placanil as |racun|}}
+                    <div class="rezervacija-skatla" id="{{racun._id}}">
+                        <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
 
-                    <p class="levo-text kartica-padding">
-                        Stranka: <strong>Marko Krajnc</strong>
-                        <span class="desno-float">St. racuna: <strong>734868</strong></span>
-                    </p>
+                        <p class="levo-text kartica-padding">
+                            Stranka: <strong>TO DO</strong>
+                            <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+                        </p>
 
-                    <p class="levo-text kartica-padding">
-                        Datum: <strong>10.12.2020</strong>
-                        <span class="desno-float">Ura: <strong>8.30</strong></span>
-                    </p>
+                        <p class="levo-text kartica-padding">
+                            Datum in ura: <strong>{{time_to_string racun.datum_in_ura}}</strong>
+                        </p>
 
-                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-                    <ul>
-                        <li>File tune na zaru <strong>1x$10</strong></li>
-                    </ul>
-                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$10</strong></h5>
-                    <div class="ikone-stil">
-                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
-                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
-                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-4"></i>
+                        <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+                        <ul>
+                            {{#each racun.meni_items as |meni_item|}}
+                                <li>TO DO name <strong>{{meni_item.kolicina}}x(TO DO cena)</strong></li>
+                            {{/each}}
+                        </ul>
+                        <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+                        <div class="ikone-stil">
+                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
+                            <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
+                            <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
+                        </div>
                     </div>
-                </div>
-
-                <div class="rezervacija-skatla" id="racun5">
-                    <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
-
-                    <p class="levo-text kartica-padding">
-                        Stranka: <strong>Anton Mlakar</strong>
-                        <span class="desno-float">St. racuna: <strong>734869</strong></span>
-                    </p>
-
-                    <p class="levo-text kartica-padding">
-                        Datum: <strong>1.1.2021</strong>
-                        <span class="desno-float">Ura: <strong>13.30</strong></span>
-                    </p>
-
-                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-                    <ul>
-                        <li>Morska solata <strong>1x$10</strong></li>
-                        <li>Solata s skampi <strong>1x$10</strong></li>
-                    </ul>
-                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$20</strong></h5>
-                    <div class="ikone-stil">
-                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
-                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
-                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-5"></i>
-                    </div>
-                </div>
-
-                <div class="rezervacija-skatla" id="racun6">
-                    <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
-
-                    <p class="levo-text kartica-padding">
-                        Stranka: <strong>Andrej Vidmar</strong>
-                        <span class="desno-float">St. racuna: <strong>734870</strong></span>
-                    </p>
-
-                    <p class="levo-text kartica-padding">
-                        Datum: <strong>25.12.2020</strong>
-                        <span class="desno-float">Ura: <strong>10.30</strong></span>
-                    </p>
-
-                    <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-                    <ul>
-                        <li>Morska solata <strong>4x$10</strong></li>
-                        <li>Rizota z lososom <strong>1x$10</strong></li>
-                    </ul>
-                    <h5 class="desno-text kartica-padding">Skupaj: <strong>$50</strong></h5>
-                    <div class="ikone-stil">
-                        <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
-                        <i role="button" class="fas fa-trash ikone-stil-posamezna" data-toggle="modal" data-target="#sturniraj"></i>
-                        <i role="button" class="fas fa-print ikone-stil-posamezna" id="natisni-g-6"></i>
-                    </div>
-                </div>
+                {{/each}}
 
 
             </div>
@@ -473,25 +366,13 @@
             </div>
         </div>
 
-        <div class="modal fade" id="sturniraj" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h1 class="legendheader">Ali res zelite sturnirati racun?</h1>
-                        <div class="butkontakt">
-                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
-                            <button type="submit" class="but">Potrdi</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Tukaj KONEC vsebino -->
     </div>
 </div>
 <div class="collapse" id="oznake_osi">{{json_to_string ostevilceni_dnevi}}</div>
 <div class="collapse" id="zasluzek_dnevi">{{json_to_string zasluzek_dnevi}}</div>
+<div class="collapse" id="zasluzek_placani">{{json_to_string tabele_placanil}}</div>
+<div class="collapse" id="zasluzek_ne_placani">{{json_to_string tabele_ne_placanil}}</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"> </script>
 <script src="/javascript/nadzorna_plosca_zasluzek.js"></script>

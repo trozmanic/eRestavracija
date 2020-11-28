@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const Narocila = mongoose.model("Narocilo");
+const Zaposleni = mongoose.model("Zaposlen");
 const Test = mongoose.model("TestDate");
 
 const narediPrazenUrnik = (st_dni) => {
@@ -86,7 +87,7 @@ const pridobiNarocilo = (req, res) => {
 
     console.log(zacetek + " " + konec)
 
-    Test.find({ datum_in_ura: { $gte: zacetek, $lte: konec } }).sort({datum_in_ura: 'descending'}).exec((napaka, narocila) => {
+    Narocila.find({ datum_in_ura: { $gte: zacetek, $lte: konec } }).sort({datum_in_ura: 'descending'}).exec((napaka, narocila) => {
         if (napaka) {
             res.status(500).json(napaka);
         } else {
@@ -128,7 +129,7 @@ const pridobiNarocilo = (req, res) => {
                 }
                 primerjalniDan = new Date(danNiz);
                 for (j = 0; j < narocila.length; j++) {
-                    if (narocila[j].datum_in_ura.getDate() ==  primerjalniDan.getDate()) {
+                    if (narocila[j].datum_in_ura.getDate() ==  primerjalniDan.getDate() && narocila[j].stanje.localeCompare("placano") == 0) {
                         zasluzekDnevi[i] += narocila[j].cena;
                     }
                 }
@@ -141,34 +142,50 @@ const pridobiNarocilo = (req, res) => {
                 skupno_prilivi += zasluzekDnevi[i];
             }
 
-            var zac_dan = priviDanVMesecu (mesec, leto)
+            var zac_dan = priviDanVMesecu (mesec, leto);
 
-            return res.status(200).send({
-                "ostevilceni_dnevi": ostevilceniDnevi,
-                "zasluzek_dnevi": zasluzekDnevi,
-                "dnevi": dnevi,
-                "skupno_prilivi":skupno_prilivi,
-                "mesec":mesec,
-                "leto":leto,
-                "zac_dan":zac_dan,
-                "uporabnik_id":id,
-                "st_dni":st_dnevov
+            //racuni
+            var tabelaPlacani = new Array();
+            var tabelaNePlacani = new Array();
+            for (i = 0; i < narocila.length; i++) {
+                if(narocila[i].stanje.localeCompare("placano") == 0) {
+                    tabelaPlacani.push(narocila[i]);
+                } else if(narocila[i].stanje.localeCompare("postrezeno") == 0){
+                    tabelaNePlacani.push(narocila[i]);
+                }
+            }
+
+            Zaposleni.find().exec( (napaka2, uporabnik) => {
+                if (!uporabnik || !uporabnik[0]) {
+                    return res.status(404).json({
+                        "sporocilo": "Ne najdem nobenega zaposlenega da bi zracunal strosek place."
+                    });
+                } else if (napaka2) {
+                    return res.status(500).json(napaka2);
+                }
+
+                var zaposleni_strosek = 0;
+                for (i = 0; i < uporabnik.length; i++) {
+                    zaposleni_strosek += uporabnik[i].placa;
+                }
+
+                return res.status(200).send({
+                    "ostevilceni_dnevi": ostevilceniDnevi,
+                    "zasluzek_dnevi": zasluzekDnevi,
+                    "dnevi": dnevi,
+                    "skupno_prilivi":skupno_prilivi,
+                    "mesec":mesec,
+                    "leto":leto,
+                    "zac_dan":zac_dan,
+                    "uporabnik_id":id,
+                    "st_dni":st_dnevov,
+                    "tabele_placanil":tabelaPlacani,
+                    "tabele_ne_placanil":tabelaNePlacani,
+                    "zaposleni_strosek":zaposleni_strosek
+                });
+
             });
-
-            //find vse zaposlene in pol jim sestej place
-
-
-            //test ce4 vrne kej
-            return res.status(200).send(narocila);
-            /*
-            -vrnemo array placanih racunov
-            -vracamo array ne placanih racunov
-
-             */
-
-
         }
-
     });
 }
 const test = (req, res) => {
