@@ -22,6 +22,7 @@ const login = function (req, res) {
             }
             req.session.uporabnik_id = uporabnikDB._id;
             req.session.vloga = uporabnikDB.vloga;
+            req.session.ime = uporabnikDB.ime;
             return res.status(200).send({"uporabnik_id": uporabnikDB._id.toString(), "vloga": uporabnikDB.vloga});
         })
         .catch((err)=> {

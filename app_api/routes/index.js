@@ -8,14 +8,9 @@ const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
 const zaposleni = require('../controllers/zaposleni');
 const narocila = require('../controllers/narocila');
-<<<<<<< HEAD
-const zasluzek = require('../controllers/zasluzek');
-const zaloga = require('../controllers/zaloga');
-=======
 const zaloga = require('../controllers/zaloga');
 const zasluzek = require('../controllers/zasluzek');
 const slike = require('../controllers/image');
->>>>>>> 2d019b3b59114106bee58ab89a3fc816f1ce0b18
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
