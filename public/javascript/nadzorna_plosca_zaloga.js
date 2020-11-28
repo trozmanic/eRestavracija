@@ -1,5 +1,4 @@
 var gumbUredi = document.getElementById("uredi");
-var steviloVrsticNaZacetku = 0;
 var gumbPotrdiUrejanje = 0;
 var gumbPotrdiDodajanje = 0;
 
@@ -35,32 +34,42 @@ document.addEventListener("click", function(){
     }
 });
 
-//Dodaj vrstico v tabelo
+//Dodaj sestavino
 var dodaj = document.getElementById("dodajSestavinoPotrdi");
 
 dodaj.addEventListener("click", function(){
     
-    /*
-    var tabela = document.getElementById("tabela");
-    var vrstica = tabela.getElementsByTagName("tr");
-    var vnosSestavine = document.getElementById("")
+    var ime = document.getElementById("SestavinaForm1").value;
+    var kolicinaEnota = document.getElementById("KolicinaForm1").value;
+    var cena = parseInt(document.getElementById("CenaForm1").value);
+    var razdeli = kolicinaEnota.split(" ");
+    var kolicina = parseInt(razdeli[0]);
+    var enota = razdeli[1];
     
-    if(vrstica.length == 1) {
-        var telo = tabela.getElementsByTagName("tbody")[0];
-        telo.insertAdjacentHTML("afterbegin", "<tbody><tr><th scope='row'><div class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' id='customCheck"+steviloVrsticNaZacetku+"'><label class='custom-control-label' for='customCheck"+steviloVrsticNaZacetku+"'></label></div></th><td>"+document.getElementById("SestavinaForm1").value+"</td><td>"+document.getElementById("KolicinaForm1").value+"</td></tr></tbody>");
-
-    }else {
-        vrstica[1].insertAdjacentHTML("beforebegin", "<tr><th scope='row'><div class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' id='customCheck"+steviloVrsticNaZacetku+"'><label class='custom-control-label' for='customCheck"+steviloVrsticNaZacetku+"'></label></div></th><td>"+document.getElementById("SestavinaForm1").value+"</td><td>"+document.getElementById("KolicinaForm1").value+"</td></tr>");
-    }
-    */
+    var novaSestavina = {ime:ime, kolicina:kolicina, enota:enota, cena:cena};
     
-    document.getElementById("SestavinaForm1").value = "";
-    document.getElementById("KolicinaForm1").value = "";
+    /*console.log(JSON.stringify(novaSestavina));
     
-    steviloVrsticNaZacetku++;
+    $.post("/api/zaloga", novaSestavina, function(data, status, jqXHR) {
+        console.log("Status: "+status+", podatki: " + data);
+	});
+	*/
+	
+	$.ajax({
+        url: '/api/zaloga/',
+        type: 'POST',
+        data: novaSestavina,
+        success: function(odgovor) {
+            console.log("Odgovor: "+odgovor);
+            document.getElementById("SestavinaForm1").value = "";
+            document.getElementById("KolicinaForm1").value = "";
+            document.getElementById("CenaForm1").value = "";
+            location.reload();
+        }
+    });
 });
 
-//Uredi izbrano vrstico
+//Uredi izbrano sestavino
 var uredi = document.getElementById("urediSestavinoPotrdi");
 
 uredi.addEventListener("click", function(){
@@ -69,30 +78,44 @@ uredi.addEventListener("click", function(){
     var checkboxi = tabela.getElementsByTagName("input");
     var vrstice = tabela.getElementsByTagName("tr");
     var steviloVrstic = vrstice.length-1;
-    var sestavina = document.getElementById("SestavinaForm2").value;
-    var kolicina = document.getElementById("KolicinaForm2").value;
+    var ime = document.getElementById("SestavinaForm2").value;
+    var kolicinaEnota = document.getElementById("KolicinaForm2").value;
+    var cena = parseInt(document.getElementById("CenaForm2").value);
+    var razdeli = kolicinaEnota.split(" ");
+    var kolicina = parseInt(razdeli[0]);
+    var enota = razdeli[1];
     
-    if(steviloVrstic <= 1) {
-        if(checkboxi[0].checked) {
-            var podatki = vrstice[1].getElementsByTagName("td");
-            console.log(podatki);
-            podatki[0].innerHTML = sestavina;
-            podatki[1].innerHTML = kolicina;
-            checkboxi[0].checked = false;
-        }
-    } else {
-        for(var i=1; i<steviloVrstic; i++){
-            if(checkboxi[i-1].checked) {
-                var podatki = vrstice[i].getElementsByTagName("td");
-                podatki[0].innerHTML = sestavina;
-                podatki[1].innerHTML = kolicina;
-                checkboxi[i-1].checked = false;
+    for(var i=0; i<steviloVrstic; i++){
+        if(checkboxi[i].checked) {
+            var id = checkboxi[i].getAttribute("idsestavine");
+            var posodobljenaSestavina = {id:id};
+            if(ime != ""){
+                posodobljenaSestavina.ime = ime;
             }
+            if(kolicina >= 0){
+                posodobljenaSestavina.kolicina = kolicina;
+            }
+            if(enota != undefined){
+                posodobljenaSestavina.enota = enota;
+            }
+            if(cena >= 0){
+                posodobljenaSestavina.cena = cena;
+            }
+            
+            $.ajax({
+                url: '/api/zaloga/',
+                type: 'PUT',
+                data: posodobljenaSestavina,
+                success: function(odgovor) {
+                    console.log("Odgovor: "+odgovor);
+                    document.getElementById("SestavinaForm2").value = "";
+                    document.getElementById("KolicinaForm2").value = "";
+                    document.getElementById("CenaForm2").value = "";
+                    location.reload();
+                }
+            });
         }
     }
-    
-    document.getElementById("SestavinaForm2").value = "";
-    document.getElementById("KolicinaForm2").value = "";
 });
 
 //Izbriši vnosna polja pri urejanju sestavine, če kliknemo gumb Prekliči
@@ -118,17 +141,17 @@ gumbPotrdi.addEventListener("click", function(){
     var vrstice = tabela.getElementsByTagName("tr");
     var steviloVrstic = vrstice.length-1;
     
-    if(steviloVrstic <= 1) {
-        if(checkboxi[0].checked) {
-            tabela.deleteRow(1);
-        }
-    } else {
-        for(var i=1; i<steviloVrstic; i++){
-            if(checkboxi[i-1].checked) {
-                tabela.deleteRow(i);
-                i = 0;
-                steviloVrstic--;
-            }
+    for(var i=0; i<steviloVrstic; i++){
+        if(checkboxi[i].checked) {
+            var id = checkboxi[i].getAttribute("idsestavine");
+            $.ajax({
+                url: '/api/zaloga/'+id,
+                type: 'DELETE',
+                success: function(odgovor) {
+                    console.log("Odgovor: "+odgovor);
+                    location.reload();
+                }
+            });
         }
     }
 });
@@ -150,12 +173,78 @@ gumbPreklici.addEventListener("click", function(){
     }
 });
 
-//Preveri, če je vnos sestavine pravilen
-var vnosSestavine = document.getElementById("SestavinaForm2");
+//Preveri, če je vnos sestavine pravilen Modal DODAJ
+var vnosSestavine1 = document.getElementById("SestavinaForm1");
 
-vnosSestavine.addEventListener("input", function(){
+vnosSestavine1.addEventListener("input", function(){
     var reg = new RegExp("^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$");
-    var sestavina = vnosSestavine.value;
+    var sestavina = vnosSestavine1.value;
+    var gumbPotrdi = document.getElementById("dodajSestavinoPotrdi");
+    var vnosnoPolje = document.getElementById("SestavinaForm1");
+    
+    if(reg.test(sestavina)){
+        gumbPotrdi.disabled = false;
+        vnosnoPolje.setCustomValidity("");
+        vnosnoPolje.classList.remove("is-invalid");
+        vnosnoPolje.classList.add("is-valid");
+    } else {
+        gumbPotrdi.disabled = true;
+        vnosnoPolje.setCustomValidity("Nepravilen vnos!");
+        vnosnoPolje.classList.remove("is-valid");
+        vnosnoPolje.classList.add("is-invalid");
+    }
+});
+
+//Preveri, če je vnos količine pravilen Modal DODAJ
+var vnosKolicine1 = document.getElementById("KolicinaForm1");
+
+vnosKolicine1.addEventListener("input", function(){
+    var reg = new RegExp("^[0-9]+.?[a-žA-Ž]{1,5}$");
+    var kolicina = vnosKolicine1.value;
+    var gumbPotrdi = document.getElementById("dodajSestavinoPotrdi");
+    var vnosnoPolje = document.getElementById("KolicinaForm1");
+    
+    if(reg.test(kolicina)){
+        gumbPotrdi.disabled = false;
+        vnosnoPolje.setCustomValidity("");
+        vnosnoPolje.classList.remove("is-invalid");
+        vnosnoPolje.classList.add("is-valid");
+    } else {
+        gumbPotrdi.disabled = true;
+        vnosnoPolje.setCustomValidity("Nepravilen vnos!");
+        vnosnoPolje.classList.remove("is-valid");
+        vnosnoPolje.classList.add("is-invalid");
+    }
+});
+
+//Preveri, če je vnos cene pravilen Modal DODAJ
+var vnosCene1 = document.getElementById("CenaForm1");
+
+vnosCene1.addEventListener("input", function(){
+    var reg = new RegExp("^[0-9]*.[0-9]*$");
+    var kolicina = vnosCene1.value;
+    var gumbPotrdi = document.getElementById("dodajSestavinoPotrdi");
+    var vnosnoPolje = document.getElementById("CenaForm1");
+    
+    if(reg.test(kolicina)){
+        gumbPotrdi.disabled = false;
+        vnosnoPolje.setCustomValidity("");
+        vnosnoPolje.classList.remove("is-invalid");
+        vnosnoPolje.classList.add("is-valid");
+    } else {
+        gumbPotrdi.disabled = true;
+        vnosnoPolje.setCustomValidity("Nepravilen vnos!");
+        vnosnoPolje.classList.remove("is-valid");
+        vnosnoPolje.classList.add("is-invalid");
+    }
+});
+
+//Preveri, če je vnos sestavine pravilen Modal UREDI
+var vnosSestavine2 = document.getElementById("SestavinaForm2");
+
+vnosSestavine2.addEventListener("input", function(){
+    var reg = new RegExp("^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$");
+    var sestavina = vnosSestavine2.value;
     var gumbPotrdi = document.getElementById("urediSestavinoPotrdi");
     var vnosnoPolje = document.getElementById("SestavinaForm2");
     
@@ -172,14 +261,36 @@ vnosSestavine.addEventListener("input", function(){
     }
 });
 
-//Preveri, če je vnos količine pravilen
-var vnosKolicine = document.getElementById("KolicinaForm2");
+//Preveri, če je vnos količine pravilen Modal UREDI
+var vnosKolicine2 = document.getElementById("KolicinaForm2");
 
-vnosKolicine.addEventListener("input", function(){
+vnosKolicine2.addEventListener("input", function(){
     var reg = new RegExp("^[0-9]+.?[a-žA-Ž]{1,5}$");
-    var kolicina = vnosKolicine.value;
+    var kolicina = vnosKolicine2.value;
     var gumbPotrdi = document.getElementById("urediSestavinoPotrdi");
     var vnosnoPolje = document.getElementById("KolicinaForm2");
+    
+    if(reg.test(kolicina)){
+        gumbPotrdi.disabled = false;
+        vnosnoPolje.setCustomValidity("");
+        vnosnoPolje.classList.remove("is-invalid");
+        vnosnoPolje.classList.add("is-valid");
+    } else {
+        gumbPotrdi.disabled = true;
+        vnosnoPolje.setCustomValidity("Nepravilen vnos!");
+        vnosnoPolje.classList.remove("is-valid");
+        vnosnoPolje.classList.add("is-invalid");
+    }
+});
+
+//Preveri, če je vnos cene pravilen Modal UREDI
+var vnosCene2 = document.getElementById("CenaForm2");
+
+vnosCene2.addEventListener("input", function(){
+    var reg = new RegExp("^[0-9]*.[0-9]*$");
+    var kolicina = vnosCene2.value;
+    var gumbPotrdi = document.getElementById("urediSestavinoPotrdi");
+    var vnosnoPolje = document.getElementById("CenaForm2");
     
     if(reg.test(kolicina)){
         gumbPotrdi.disabled = false;

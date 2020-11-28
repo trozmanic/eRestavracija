@@ -25,8 +25,6 @@ router.get('/nadzorna_plosca/strezba',nadzorna_plosca.strezba)
 router.get('/nadzorna_plosca/kuhar', nadzorna_plosca.narocila_kuhar)
 router.get('/nadzorna_plosca/meni', nadzorna_plosca.meni)
 router.get('/nadzorna_plosca/zasluzek', nadzorna_plosca.zasluzek)
-
-//Zaloga
 router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.seznamZaloge)
 
 /* POST login / register */

@@ -19,18 +19,27 @@
                 <h5 class="modal-title" id="exampleModalLabel">Dodaj sestavino</h5>
               </div>
               <div class="modal-body">
-              <form action="/api/zaloga" method="post" role="form">
-                <div class="form-group">
+              <form>
+                <div class="form-group is-invalid">
                     <label for="SestavinaForm1">Sestavina</label>
-                    <input type="text" class="form-control" id="SestavinaForm1" placeholder="Npr.: krompir" name="sestavina">
+                    <input type="text" class="form-control is-invalid" id="SestavinaForm1" placeholder="Npr.: krompir">
+                    <div class="invalid-feedback" id="neveljavnaSestavina1">
+                        Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group is-invalid">
                     <label for="KolicinaForm1">Količina</label>
-                    <input type="text" class="form-control" id="KolicinaForm1" placeholder="Npr.: 10 kg" name="kolicinaEnota">
+                    <input type="text" class="form-control is-invalid" id="KolicinaForm1" placeholder="Npr.: 10 kg">
+                    <div class="invalid-feedback" id="neveljavnaKolicina1">
+                        Količina mora vsebovati število ter enoto!
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group is-invalid">
                     <label for="CenaForm1">Cena (€)</label>
-                    <input type="text" class="form-control" id="CenaForm1" placeholder="Npr.: 5" name="cena">
+                    <input type="text" class="form-control is-invalid" id="CenaForm1" placeholder="Npr.: 5">
+                    <div class="invalid-feedback" id="neveljavnaCena1">
+                        Cena vsebuje samo števke brez simbola valute!
+                    </div>
                 </div>
                 </div>
                 <div class="modal-footer">
@@ -55,8 +64,8 @@
               <form>
                 <div class="form-group is-invalid">
                     <label for="SestavinaForm">Sestavina</label>
-                    <input type="text" class="form-control is-invalid" id="SestavinaForm2" placeholder="Npr.: krompir" pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" required>
-                    <div class="invalid-feedback" id="neveljavnaSestavina">
+                    <input type="text" class="form-control is-invalid" id="SestavinaForm2" placeholder="Npr.: krompir">
+                    <div class="invalid-feedback" id="neveljavnaSestavina2">
                         Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
                     </div>
                 </div>
@@ -64,8 +73,15 @@
                 <div class="form-group is-invalid">
                     <label for="KolicinaForm">Količina</label>
                     <input type="text" class="form-control is-invalid" id="KolicinaForm2" placeholder="Npr.: 10 kg">
-                    <div class="invalid-feedback" id="neveljavnaKolicina">
+                    <div class="invalid-feedback" id="neveljavnaKolicina2">
                         Količina mora vsebovati število ter enoto!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="CenaForm1">Cena (€)</label>
+                    <input type="text" class="form-control is-invalid" id="CenaForm2" placeholder="Npr.: 5">
+                    <div class="invalid-feedback" id="neveljavnaCena2">
+                        Cena vsebuje samo števke brez simbola valute!
                     </div>
                 </div>
               </div>
@@ -105,6 +121,7 @@
                     <select class="custom-select input-group-text izberi">
                         <option selected>Sestavina</option>
                         <option value="1">Količina</option>
+                        <option value="2">Cena</option>
                     </select>
                 </div>
                 <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZalogi">
@@ -134,7 +151,7 @@
               <tr>
                 <th scope="row">
                     <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck{{stevec @index}}">
+                        <input type="checkbox" class="custom-control-input" id="customCheck{{stevec @index}}" idsestavine="{{podatek._id}}">
                         <label class="custom-control-label" for="customCheck{{stevec @index}}"></label>
                     </div>
                 </th>
@@ -151,3 +168,4 @@
 </div>
 
 <script src="/javascript/nadzorna_plosca_zaloga.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

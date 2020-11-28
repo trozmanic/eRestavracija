@@ -157,30 +157,6 @@ const urnik=function(req,res){
 }
 
 //ZALOGA
-
-const shraniSestavino = (req, res) => {
-    console.log("POST metoda");
-    var kolicinaEnota = req.body.kolicinaEnota;
-    var razdeli = kolicinaEnota.split(" ");
-    var kolicina = razdeli[0];
-    var enota = razdeli[1];
-    axios({
-        method: 'post',
-        url: '/api/zaloga',
-        data: {
-            ime: req.body.sestavina,
-            kolicina: kolicina,
-            enota: enota,
-            cena: req.body.cena
-        }
-    }).then(() => {
-        console.log("POST uspesen");
-        res.redirect('/zaloga');
-    }).catch((napaka) => {
-        res.render("Error:"+napaka);
-    });
-};
-
 const seznamZaloge = (req, res) => {
   axios
     .get('/api/zaloga')
@@ -195,8 +171,6 @@ const zaloga= function(req,res, seznamSestavin){
         return res.render("404 NOT FOUND");
     }
     try {
-        //const podatki = await axios.get(apiParametri.streznik + "/api/zaloga");
-        //const sestavine = zalogaService.seznamSestavin(podatki.data);
         res.render('nadzorna_plosca_zaloga',{
             layout:'layout_nadzorna_plosca.hbs',
             title:'Nadzorna plošča - Zaloga',
@@ -279,7 +253,6 @@ module.exports = {
     rezervacije,
     urnik,
     seznamZaloge,
-    shraniSestavino,
     zaloga,
     zaposleni,
     narocila_kuhar,

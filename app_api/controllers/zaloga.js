@@ -49,12 +49,12 @@ const posodobiSestavino = async (req,res) => {
         if (!sestavina.id) {
             return res.status(400).json({error_message: "Vnesite id sestavine"});
         }
-        await Surovina.findByIdAndDelete(sestavina.id);
-        res.status(200).json();
+        
+        await Surovina.findByIdAndUpdate(sestavina.id, sestavina).exec();
+        res.status(200).json({});
     }catch (err) {
         res.status(500).json({error_message: err});
     }
-
 }
 
 const izbrisiSestavino = async (req,res) => {
