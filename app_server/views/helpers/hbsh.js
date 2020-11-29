@@ -82,10 +82,10 @@ hbs.registerHelper('nadzorna_plosca_menu_by_role', (zaposleni_role, uporabnik_id
   var racunovodja= [0,0,0,0,0,1,1];
   var vloga;
 
-  var url_dodatek = "?uporabnik_id=" + uporabnik_id + "&vloga=" + zaposleni_role;
+  var url_dodatek = "";
   if (!zaposleni_role) {
     vloga=vodja;
-    url_dodatek = "?uporabnik_id=" + uporabnik_id;
+    url_dodatek = "";
   } else {
     vloga=vodja;
     zaposleni_role.localeCompare("vodja") == 0 ? vloga=vodja : vloga=vloga;
@@ -113,7 +113,7 @@ hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role, uporabnik_i
   var presledek = '<div class="w-100"></div><div class="col">&nbsp;</div><div class="col">&nbsp;</div><div class="w-100"></div>';
   var url_dodatek;
   if (!zaposleni_role) {
-    url_dodatek = "?uporabnik_id=" + uporabnik_id;
+    url_dodatek = "";
     meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/urnik' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="far fa-calendar-alt"></i><br>Urnik</a></div>';
     meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/rezervacije' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a></div>';
     meni_sestavljen += presledek;
@@ -126,7 +126,7 @@ hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role, uporabnik_i
     meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/zasluzek' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-coins"></i><br>Zaslužek</a></div>';
     meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/zaposleni' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a></div>';
   } else {
-    url_dodatek = "?uporabnik_id=" + uporabnik_id + "&vloga=" + zaposleni_role;
+    url_dodatek = "";
     meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/urnik' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="far fa-calendar-alt"></i><br>Urnik</a></div>';
     if (zaposleni_role.localeCompare("vodja") == 0) {
       meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/rezervacije' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a></div>';
@@ -288,7 +288,6 @@ hbs.registerHelper("time_to_string", function (datum){
   return datum.toString();
 });
 hbs.registerHelper("dodaj_mesec_leto", function (mesec, leto){
-  console.log(mesec + "123123" + leto)
   if (mesec && leto) {
     return "?leto=" + leto + "&mesec=" + mesec;
   }

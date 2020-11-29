@@ -1,7 +1,8 @@
 const mongoose=require("mongoose");
 const Narocila = mongoose.model("Narocilo");
 const Zaposleni = mongoose.model("Zaposlen");
-const Test = mongoose.model("TestDate");
+const MeniItem = mongoose.model("MeniItem");
+
 
 const narediPrazenUrnik = (st_dni) => {
     var dnevi = new Array(st_dni);
@@ -169,40 +170,79 @@ const pridobiNarocilo = (req, res) => {
                     zaposleni_strosek += uporabnik[i].placa;
                 }
 
-                return res.status(200).send({
-                    "ostevilceni_dnevi": ostevilceniDnevi,
-                    "zasluzek_dnevi": zasluzekDnevi,
-                    "dnevi": dnevi,
-                    "skupno_prilivi":skupno_prilivi,
-                    "mesec":mesec,
-                    "leto":leto,
-                    "zac_dan":zac_dan,
-                    "uporabnik_id":id,
-                    "st_dni":st_dnevov,
-                    "tabele_placanil":tabelaPlacani,
-                    "tabele_ne_placanil":tabelaNePlacani,
-                    "zaposleni_strosek":zaposleni_strosek
+                MeniItem.find().exec( (napaka3, items) => {
+                    if (!items || !items[0]) {
+                        return res.status(404).json({
+                            "sporocilo": "Ne najdem nobenega menu itema, ko generiram racun."
+                        });
+                    } else if (napaka3) {
+                        return res.status(500).json(napaka3);
+                    }
+
+                    //match z id
+                    //dodaj name pa cena
+                    var k;
+                    var z;
+
+                    var tabelaPlacani_2 = JSON.parse(JSON.stringify(tabelaPlacani));
+
+                    for (i = 0; i < tabelaPlacani_2.length; i++) {
+                        for (k = 0; k < tabelaPlacani_2[i].meni_items.length; k++) {
+                            for (z = 0; z < items.length; z++) {
+                                if (items[z]._id.toString().localeCompare(tabelaPlacani_2[i].meni_items[k].meni_item.toString()) == 0) {
+                                    tabelaPlacani_2[i].meni_items[k].cena = items[z].cena;
+                                    tabelaPlacani_2[i].meni_items[k].ime = items[z].ime;
+                                }
+                            }
+                        }
+                    }
+
+                    var tabelaNePlacani_2 = JSON.parse(JSON.stringify(tabelaNePlacani));
+
+                    for (i = 0; i < tabelaNePlacani_2.length; i++) {
+                        for (k = 0; k < tabelaNePlacani_2[i].meni_items.length; k++) {
+                            for (z = 0; z < items.length; z++) {
+                                if (items[z]._id.toString().localeCompare(tabelaNePlacani_2[i].meni_items[k].meni_item.toString()) == 0) {
+                                    tabelaNePlacani_2[i].meni_items[k].cena = items[z].cena;
+                                    tabelaNePlacani_2[i].meni_items[k].ime = items[z].ime;
+                                }
+                            }
+                        }
+                    }
+
+                    return res.status(200).send({
+                        "ostevilceni_dnevi": ostevilceniDnevi,
+                        "zasluzek_dnevi": zasluzekDnevi,
+                        "dnevi": dnevi,
+                        "skupno_prilivi":skupno_prilivi,
+                        "mesec":mesec,
+                        "leto":leto,
+                        "zac_dan":zac_dan,
+                        "uporabnik_id":id,
+                        "st_dni":st_dnevov,
+                        "tabele_placanil":tabelaPlacani_2,
+                        "tabele_ne_placanil":tabelaNePlacani_2,
+                        "zaposleni_strosek":zaposleni_strosek
+                    });
+
                 });
 
+
+
+                /*
+                -dodat za urnik urejat
+                -popravit menus generatro da nebo id pa vloge dodajal kot parameter url
+
+                reci: ce je lahko ime uporabnika in vloga tudi v session tko kot id
+
+                 */
+
             });
-        }
-    });
-}
-const test = (req, res) => {
-    Test.create({
-        stanje: req.body.stanje,
-        cena:req.body.cena
-    }, (napaka, dodano) => {
-        if (napaka) {
-            res.status(400).json(napaka);
-        } else {
-            res.status(201).json(dodano);
         }
     });
 }
 
 
 module.exports = {
-    pridobiNarocilo,
-    test
+    pridobiNarocilo
 }

@@ -42,6 +42,8 @@ router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
 //URNIK
 router.get("/urnik", urnik.pridobiUrnik);
 router.put("/urnik", urnik.posodobiUrnik);
+router.delete("/urnik", urnik.deleteUrnik);
+router.post("/urnik", urnik.createUrnik);
 
 //ZAPOSLENI
 router.get("/zaposleni", zaposleni.pridobiZaposlenega);
@@ -58,7 +60,6 @@ router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
 //ZASLUZEK
 router.get("/zasluzek", zasluzek.pridobiNarocilo);
-router.post("/zasluzek", zasluzek.test);
 
 //ZALOGA
 router.get("/zaloga", zaloga.pridobiSestavine);
