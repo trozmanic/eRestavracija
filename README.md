@@ -36,7 +36,20 @@ se morata obe polji ujemati.
 - Aplikacija deluje na zaslonih majhne velikosti (npr. tablice Ipad)
 - Aplikacija deluje na zaslosnih zelo majhne velikosti (npr. telefon Iphone X)
 
-  
+# /db uporabniške vloge za testiranje
+  - Navigrate na /db in z pritiskom na gumb izbrišete vsebino podatkovne baze in jo nato z drugim gumbom nastavite.
+    - Natakar: 
+      - email: natakar@aldente.si
+      - geslo: geslo1234
+    - Kuhar:
+      - email: kuhar@aldente.si
+      - geslo: geslo1234
+    - Admin:
+      - email: admin@aldente.si
+      - geslo: geslo1234
+    - Gost:
+      - email: gost@aldente.si
+      - geslo: geslo1234
 
 
 
