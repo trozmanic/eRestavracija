@@ -82,7 +82,28 @@ const prikaziUrnik = function (req, res, urnik, sporocilo) {
 }
 const prikaziZasluzek=function(req,res, urnik, sporocilo){
     if (sporocilo) {
-        res.render('error',{layout:'layout_nadzorna_plosca.hbs',title:'Napaka',zaposleni_role:req.query.vloga, message:sporocilo});
+
+        var mesec = req.query.mesec;
+        var leto = req.query.leto;
+
+        var dan = new Date();
+        if (!mesec || mesec > 11 || mesec < 0) {
+            mesec = dan.getMonth();
+        }
+        if (!leto || leto > 2099 || leto < 1901) {
+            leto = dan.getFullYear();
+        }
+
+        res.render('nadzorna_plosca_zasluzek2', {layout:'layout_nadzorna_plosca.hbs',
+            title: 'Nadzorna plošča - Zasluzek',
+            zaposleni_role:req.session.vloga,
+            leto:leto,
+            mesec:mesec,
+            uporabnik_id:req.session.uporabnik_id,
+            u_ime: req.session.ime,
+            sporocilo:sporocilo
+        });
+
     } else {
         res.render('nadzorna_plosca_zasluzek', {layout:'layout_nadzorna_plosca.hbs',
             title: 'Nadzorna plošča - Zasluzek',
@@ -391,6 +412,12 @@ const read_json = (pathJSON) => {
         })
     })
 }
+
+const odjava = (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
+};
+
 module.exports = {
     menu,
     rezervacije,
@@ -404,5 +431,6 @@ module.exports = {
     strezba,
     zasluzek,
     zasluzel_brisi_racun,
-    admin
+    admin,
+    odjava
 }
