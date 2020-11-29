@@ -39,6 +39,23 @@ se morata obe polji ujemati.
 - Aplikacija deluje na zaslosnih zelo majhne velikosti (npr. telefon Iphone X)
 
   
+# /db uporabniski racuni generirani za lokalno testiranje
+  - Ob obisku /db s pritiskom gumba pobrišemo bazo in jo nato z drugim gumbom ponovno nastavimo
+  - Natakar:
+    - email: natakar@aldente.si
+    - geslo: geslo1234
+    
+  - Kuhar:
+      - email: kuhar@aldente.si
+      - geslo: geslo1234
+
+  - Gost:
+      - email: gost@aldente.si
+      - geslo: geslo1234
+
+  - Admin:
+      - email: admin@aldente.si
+      - geslo: geslo1234
 
 
 
