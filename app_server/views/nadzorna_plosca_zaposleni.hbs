@@ -20,44 +20,72 @@
               </div>
               <div class="modal-body">
               <form>
-                <div class="form-group is-invalid">
-                    <label for="ImeForm1">Ime in priimek</label>
-                    <input type="text" class="form-control is-invalid" id="ImeForm1" placeholder="Npr.: Chuck Norris" autofocus>
-                    <div class="invalid-feedback" id="neveljavnoIme1">
-                        Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                  <div class="form-row">
+                     <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="ImeForm1">Ime in priimek</label>
+                            <input type="text" class="form-control is-invalid" id="ImeForm1" placeholder="Npr.: Chuck Norris" autofocus>
+                            <div class="invalid-feedback" id="neveljavnoIme1">
+                                Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                            </div>
+                        </div>
+                      </div>
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="TelefonForm1">Telefonska številka</label>
+                            <input type="text" class="form-control is-invalid" id="TelefonForm1" placeholder="Npr.: 040 123 456">
+                            <div class="invalid-feedback" id="neveljavenTelefon1">
+                                Telefonska številka vsebuje samo števke brez simbolov!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group is-invalid">
-                    <label for="PostaForm1">E-pošta</label>
-                    <input type="text" class="form-control is-invalid" id="PostaForm1" placeholder="Npr.: chuck.norris@gmail.com">
-                    <div class="invalid-feedback" id="neveljavnaPosta1">
-                        E-pošta mora biti oblike: primer@domena!
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="PostaForm1">E-pošta</label>
+                            <input type="text" class="form-control is-invalid" id="PostaForm1" placeholder="Npr.: chuck.norris@gmail.com">
+                            <div class="invalid-feedback" id="neveljavnaPosta1">
+                                E-pošta mora biti oblike: primer@domena!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group is-invalid">
-                    <label for="TelefonForm1">Telefonska številka</label>
-                    <input type="text" class="form-control is-invalid" id="TelefonForm1" placeholder="Npr.: 040 123 456">
-                    <div class="invalid-feedback" id="neveljavenTelefon1">
-                        Telefonska številka vsebuje samo števke brez simbolov!
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="GesloForm1">Geslo</label>
+                            <input type="text" class="form-control is-invalid" id="GesloForm1" placeholder="Npr.: geslo1234">
+                            <div class="invalid-feedback" id="neveljavnoGeslo1">
+                                Geslo lahko vsebuje črke, števke, znake in simbole!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group is-invalid">
-                    <label for="GesloForm1">Geslo</label>
-                    <input type="text" class="form-control is-invalid" id="GesloForm1">
-                    <div class="invalid-feedback" id="neveljavnoGeslo1">
-                        Geslo lahko vsebuje črke, števke, znake in simbole!
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="VlogaForm1">Vloga</label>
+                            <select class="custom-select is-invalid" id="VlogaForm1" required>
+                                <option option value="" disabled selected>Izberi vlogo:</option>
+                                <option value="1">admin</option>
+                                <option value="2">kuhar</option>
+                                <option value="3">natakar</option>
+                            </select>
+                            <div class="invalid-feedback" id="neveljavnaVloga1">Izberite vlogo!</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="PlacaForm1">Placa</label>
+                            <input type="text" class="form-control is-invalid" id="PlacaForm1" placeholder="Npr.: 1000">
+                            <div class="invalid-feedback" id="neveljavnaPlaca1">
+                                Plača lahko vsebuje samo števke brez simbola valute!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="VlogaForm1">Vloga</label>
-                    <select class="custom-select is-invalid" id="VlogaForm1" required>
-                        <option option value="" disabled selected>Izberi vlogo:</option>
-                        <option value="1">admin</option>
-                        <option value="2">kuhar</option>
-                        <option value="3">natakar</option>
-                    </select>
-                    <div class="invalid-feedback" id="neveljavnaVloga1">Izberite vlogo!</div>
-                </div>
+                <a href="" class="btn btn-dark btn-block" role="button">Izberi urnik <i class="far fa-calendar-alt"></i></a>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-dark mr-auto" id="dodajZaposlenegaPotrdi" data-dismiss="modal" disabled>Dodaj</button>
@@ -74,49 +102,77 @@
         <div class="modal fade" id="ZaposlenModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog bel" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Uredi sestavino</h5>
-              </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Uredi sestavino</h5>
+                </div>
                 <div class="modal-body">
-                <form>
-                <div class="form-group is-invalid">
-                    <label for="ImeForm2">Ime in priimek</label>
-                    <input type="text" class="form-control is-invalid" id="ImeForm2" placeholder="Npr.: Chuck Norris">
-                    <div class="invalid-feedback" id="neveljavnoIme2">
-                        Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+              <form>
+                  <div class="form-row">
+                     <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="ImeForm2">Ime in priimek</label>
+                            <input type="text" class="form-control is-invalid" id="ImeForm2" placeholder="Npr.: Chuck Norris" autofocus>
+                            <div class="invalid-feedback" id="neveljavnoIme2">
+                                Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                            </div>
+                        </div>
+                      </div>
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="TelefonForm2">Telefonska številka</label>
+                            <input type="text" class="form-control is-invalid" id="TelefonForm2" placeholder="Npr.: 040 123 456">
+                            <div class="invalid-feedback" id="neveljavenTelefon2">
+                                Telefonska številka vsebuje samo števke brez simbolov!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group is-invalid">
-                    <label for="PostaForm2">E-pošta</label>
-                    <input type="text" class="form-control is-invalid" id="PostaForm2" placeholder="Npr.: chuck.norris@gmail.com">
-                    <div class="invalid-feedback" id="neveljavnaPosta2">
-                        E-pošta mora biti oblike: primer@domena!
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="PostaForm2">E-pošta</label>
+                            <input type="text" class="form-control is-invalid" id="PostaForm2" placeholder="Npr.: chuck.norris@gmail.com">
+                            <div class="invalid-feedback" id="neveljavnaPosta2">
+                                E-pošta mora biti oblike: primer@domena!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group is-invalid">
-                    <label for="TelefonForm2">Telefonska številka</label>
-                    <input type="text" class="form-control is-invalid" id="TelefonForm2" placeholder="Npr.: 040 123 456">
-                    <div class="invalid-feedback" id="neveljavenTelefon2">
-                        Telefonska številka vsebuje samo števke brez simbolov!
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="GesloForm2">Geslo</label>
+                            <input type="text" class="form-control is-invalid" id="GesloForm2" placeholder="Npr.: geslo1234">
+                            <div class="invalid-feedback" id="neveljavnoGeslo2">
+                                Geslo lahko vsebuje črke, števke, znake in simbole!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group is-invalid">
-                    <label for="GesloForm2">Geslo</label>
-                    <input type="text" class="form-control is-invalid" id="GesloForm2">
-                    <div class="invalid-feedback" id="neveljavnoGeslo2">
-                        Geslo lahko vsebuje črke, števke, znake in simbole!
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="VlogaForm2">Vloga</label>
+                            <select class="custom-select is-invalid" id="VlogaForm2" required>
+                                <option option value="" disabled selected>Izberi vlogo:</option>
+                                <option value="1">admin</option>
+                                <option value="2">kuhar</option>
+                                <option value="3">natakar</option>
+                            </select>
+                            <div class="invalid-feedback" id="neveljavnaVloga2">Izberite vlogo!</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group is-invalid">
+                            <label for="PlacaForm2">Placa</label>
+                            <input type="text" class="form-control is-invalid" id="PlacaForm2" placeholder="Npr.: 1000">
+                            <div class="invalid-feedback" id="neveljavnaPlaca2">
+                                Plača lahko vsebuje samo števke brez simbola valute!
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="VlogaForm2">Vloga</label>
-                    <select class="custom-select is-invalid" id="VlogaForm2" required>
-                        <option option value="" disabled selected>Izberi vlogo:</option>
-                        <option value="1">admin</option>
-                        <option value="2">kuhar</option>
-                        <option value="3">natakar</option>
-                    </select>
-                    <div class="invalid-feedback" id="neveljavnaVloga2">Izberite vlogo!</div>
-                </div>
+                <a href="" class="btn btn-dark btn-block" role="button">Izberi urnik <i class="far fa-calendar-alt"></i></a>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-dark mr-auto" data-dismiss="modal" id="urediZaposlenegaPotrdi" disabled>Potrdi</button>

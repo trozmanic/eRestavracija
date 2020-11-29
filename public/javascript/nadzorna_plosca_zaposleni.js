@@ -3,6 +3,7 @@ var preveriPosto;
 var preveriTelefon;
 var preveriGeslo;
 var preveriVlogo;
+var preveriPlaco;
     
 //Ko odpremo modal window se focusiramo na prvo vnosno polje
 $(document).ready(function(){
@@ -17,6 +18,7 @@ $(document).ready(function(){
     preveriTelefon = false;
     preveriGeslo = false;
     preveriVlogo = false;
+    preveriPlaco = false;
 });
 
 //Najdi vrednosti izbranega checkboxa
@@ -30,10 +32,12 @@ gumbUredi.addEventListener("click", function(){
     var ime = vrstica.getElementsByTagName("td")[0].innerHTML;
     var posta = vrstica.getElementsByTagName("td")[1].innerHTML;
     var telefon = vrstica.getElementsByTagName("td")[2].innerHTML;
+    //var placa = vrstica.getElementsByTagName("td")[3].innerHTML;
     
     document.getElementById("ImeForm2").placeholder = ime;
     document.getElementById("PostaForm2").placeholder = posta;
     document.getElementById("TelefonForm2").placeholder = telefon;
+    //document.getElementById("PlacaForm2").placeholder = placa;
 });
 
 //Preveri koliko checkboxov je obkljukanih in omogoči oziroma onemogoči gumba uredi ter izbriši
@@ -66,6 +70,7 @@ dodaj.addEventListener("click", function(){
     var geslo = document.getElementById("GesloForm1").value;
     var vloga = document.getElementById("VlogaForm1");
     var izbranaVloga = vloga.options[vloga.selectedIndex].text;
+    var placa = document.getElementById("PlacaForm1").value;
     
     var novZaposlen = {ime:ime, email_naslov:posta, telefonska_stevilka:telefon, geslo:geslo, vloga:izbranaVloga};
 	
@@ -74,12 +79,20 @@ dodaj.addEventListener("click", function(){
         type: 'POST',
         data: novZaposlen,
         success: function(odgovor) {
-            console.log("Odgovor: "+odgovor);
-            document.getElementById("ImeForm1").value = "";
-            document.getElementById("PostaForm1").value = "";
-            document.getElementById("TelefonForm1").value = "";
-            document.getElementById("GesloForm1").value = "";
-            location.reload();
+            var novaPlaca = {uporabnik_id:odgovor._id, placa:placa};
+            
+            $.ajax({
+                url: '/api/zaposleni/',
+                type: 'PUT',
+                data: novaPlaca,
+                success: function(odgovor) {
+                    document.getElementById("ImeForm1").value = "";
+                    document.getElementById("PostaForm1").value = "";
+                    document.getElementById("TelefonForm1").value = "";
+                    document.getElementById("GesloForm1").value = "";
+                    location.reload();
+                }
+            });
         }
     });
 });
@@ -99,7 +112,8 @@ uredi.addEventListener("click", function(){
     var telefon = document.getElementById("TelefonForm2").value;
     var geslo = document.getElementById("GesloForm2").value;
     var vloga = document.getElementById("VlogaForm2");
-    var izbranaVloga = vloga.options[vloga.selectedIndex].text; 
+    var izbranaVloga = vloga.options[vloga.selectedIndex].text;
+    var placa = document.getElementById("PlacaForm2").value;
     
     for(var i=0; i<steviloVrstic; i++){
         if(checkboxi[i].checked) {
@@ -127,11 +141,22 @@ uredi.addEventListener("click", function(){
                 data: posodobljenZaposlen,
                 success: function(odgovor) {
                     console.log("Odgovor: "+odgovor);
-                    document.getElementById("ImeForm2").value = "";
-                    document.getElementById("PostaForm2").value = "";
-                    document.getElementById("TelefonForm2").value = "";
-                    document.getElementById("GesloForm2").value = "";
-                    location.reload();
+                    if(placa > 0){
+                        var novaPlaca = {uporabnik_id:id, placa:placa};
+                    
+                        $.ajax({
+                            url: '/api/zaposleni/',
+                            type: 'PUT',
+                            data: novaPlaca,
+                            success: function(odgovor) {
+                                document.getElementById("ImeForm2").value = "";
+                                document.getElementById("PostaForm2").value = "";
+                                document.getElementById("TelefonForm2").value = "";
+                                document.getElementById("GesloForm2").value = "";
+                                location.reload();
+                            }
+                        });
+                    }
                 }
             });
         }
@@ -245,7 +270,7 @@ vnosImena1.addEventListener("input", function(){
     
     if(reg.test(ime)){
         preveriIme = true;
-        if(preveriVlogo && preveriPosto && preveriTelefon && preveriGeslo){
+        if(preveriVlogo && preveriPosto && preveriTelefon && preveriGeslo && preveriPlaco){
             gumbPotrdi.disabled = false;
         }
         vnosnoPolje.setCustomValidity("");
@@ -270,7 +295,7 @@ vnosPoste1.addEventListener("input", function(){
     
     if(reg.test(posta)){
         preveriPosto = true;
-        if(preveriIme && preveriVlogo && preveriTelefon && preveriGeslo){
+        if(preveriIme && preveriVlogo && preveriTelefon && preveriGeslo && preveriPlaco){
             gumbPotrdi.disabled = false;
         }
         vnosnoPolje.setCustomValidity("");
@@ -295,7 +320,7 @@ vnosTelefona1.addEventListener("input", function(){
     
     if(reg.test(telefon)){
         preveriTelefon = true;
-        if(preveriIme && preveriPosto && preveriVlogo && preveriGeslo){
+        if(preveriIme && preveriPosto && preveriVlogo && preveriGeslo && preveriPlaco){
             gumbPotrdi.disabled = false;
         }
         vnosnoPolje.setCustomValidity("");
@@ -320,7 +345,7 @@ vnosGesla1.addEventListener("input", function(){
     
     if(reg.test(telefon)){
         preveriGeslo = true;
-        if(preveriIme && preveriPosto && preveriTelefon && preveriVlogo){
+        if(preveriIme && preveriPosto && preveriTelefon && preveriVlogo && preveriPlaco){
             gumbPotrdi.disabled = false;
         }
         vnosnoPolje.setCustomValidity("");
@@ -344,7 +369,32 @@ vnosVloge1.addEventListener("input", function(){
     
     if(!vnosVloge1.defaultSelected){
         preveriVlogo = true;
-        if(preveriIme && preveriPosto && preveriTelefon && preveriGeslo){
+        if(preveriIme && preveriPosto && preveriTelefon && preveriGeslo && preveriPlaco){
+            gumbPotrdi.disabled = false;
+        }
+        vnosnoPolje.setCustomValidity("");
+        vnosnoPolje.classList.remove("is-invalid");
+        vnosnoPolje.classList.add("is-valid");
+    } else {
+        gumbPotrdi.disabled = true;
+        vnosnoPolje.setCustomValidity("Nepravilen vnos!");
+        vnosnoPolje.classList.remove("is-valid");
+        vnosnoPolje.classList.add("is-invalid");
+    }
+});
+
+//Preveri, če je vnos place pravilen Modal DODAJ
+var vnosPlace1 = document.getElementById("PlacaForm1");
+
+vnosPlace1.addEventListener("input", function(){
+    var reg = /^[0-9]*$/;
+    var placa = vnosPlace1.value;
+    var gumbPotrdi = document.getElementById("dodajZaposlenegaPotrdi");
+    var vnosnoPolje = document.getElementById("PlacaForm1");
+    
+    if(reg.test(placa)){
+        preveriPlaco = true;
+        if(preveriIme && preveriPosto && preveriTelefon && preveriVlogo && preveriGeslo){
             gumbPotrdi.disabled = false;
         }
         vnosnoPolje.setCustomValidity("");
@@ -455,6 +505,28 @@ vnosVloge2.addEventListener("input", function(){
     var vnosnoPolje = document.getElementById("VlogaForm2");
     
     if(!vnosVloge2.defaultSelected){
+        gumbPotrdi.disabled = false;
+        vnosnoPolje.setCustomValidity("");
+        vnosnoPolje.classList.remove("is-invalid");
+        vnosnoPolje.classList.add("is-valid");
+    } else {
+        gumbPotrdi.disabled = true;
+        vnosnoPolje.setCustomValidity("Nepravilen vnos!");
+        vnosnoPolje.classList.remove("is-valid");
+        vnosnoPolje.classList.add("is-invalid");
+    }
+});
+
+//Preveri, če je izbor place pravilen Modal UREDI
+var vnosPlace2 = document.getElementById("PlacaForm2");
+
+vnosPlace2.addEventListener("input", function(){
+    var reg = /^[0-9]*$/;
+    var placa = vnosPlace2.value;
+    var gumbPotrdi = document.getElementById("urediZaposlenegaPotrdi");
+    var vnosnoPolje = document.getElementById("PlacaForm2");
+    
+    if(reg.test(placa)){
         gumbPotrdi.disabled = false;
         vnosnoPolje.setCustomValidity("");
         vnosnoPolje.classList.remove("is-invalid");

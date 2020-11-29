@@ -73,7 +73,7 @@ const ustvariZaposlenega = (req, res) => {
 }
 const posodobiZaposlenega = async (req, res) => {
     try {
-        const id = req.body.id;
+        const id = req.body.uporabnik_id;
         if (!id) {
             return res.status(400).json({error_message: "Vnesite id zaposlenega"});
         }
