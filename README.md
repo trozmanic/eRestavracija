@@ -21,6 +21,23 @@ stevke locene z '-' ali presledki), 'Geslo' in 'Ponovite geslo', pa zahtevata po
 se morata obe polji ujemati.
   - Pri prijavi se vnosna polja 'Email naslov' in 'Geslo' ne preverjajo, ob napacnih podatkih dobimo le obvestilo da je 
   prijava spodletela (napacni podatki)
+ 
+- Nadzorna ploošča:
+  - Meni: Pri dodajanju nove jedi mora uporabnik vnesti 'ime' jedi, ki jo bo dodal 'opis', 'ceno'. Za 'kalorije' ima 2 opciji ali vnese njemu znano vrednost v okence ali pa pusti prazno in kalorije izračuna z food api in sicer tako, da v prvo okno v angleščini vpiše ime sestavine in v drugo okence količino v gramih, ki je vsebovana v porciji jedi in pritisne gumb ob okencu, ki sestavino doda. To ponovi za vse sestavine v jedi, ko jed shrani se kalorije izračunajo s pomočjo zunanjega vira. Uporabnik dodaj tudi fotografijo formata '.jpeg' . Pri urejanju je zgodba ista, le da so tukaj predhodne vredosti že prisotne v okencih.
+  
+  
+  
+# DODATNA KNJIZNICA SOCKET.IO
+  - https://www.npmjs.com/package/socket.io
+  - S knjiznico socket.io smo implementirali dvomsmerno komunikacijo med natakarji in kuharjem. Natakar ima opcijo kreiranja novega narocila, kjer izbere katero jed iz menija je stranka narocilo ter stevilko mize. Kuharja ki ima ves cas odprto aplikacijo na svojem racunalniku/telefonu ob vsaki spremembi naroicl (ce natakar doda narocilo ali se zmoti in ga izbrise) obvesti glasovno sporocilo zvonca, po dolocenem casu se pa stran osvezi in na voljo ima pregled novega stanja narocil. Na podoben nacin sporoci kuhar natakarju, ki je ustvaril narocilo kaj se trenutno dogaja z njegovim narocilom. Narocilo je lahko bodisi sprejeto, v pripravi, prirpavljeno, postrezeno ali placano. Ko kuhar pridobi informacijo o novo kreiranem narocilu je to narocilo sprejeto s klikom na ikono na uporabniskem vmesniku kuhar spremeni status narocila v 'v pripravi', kar pomeni, da se je lotil priprave narocila. Ko konca s pripravo spremeni spet s klikom stanje v 'pripravljeno'. V celotni fazi spreminjanja stanja narocila je natakar, cigar narocilo je bilo spremenjeno obvescen prek vtica.
+
+# DELOVANJE NA 3 RAZLICNIH NAPRAVAH
+- Aplikacija deluje na namiznih racunalnikih zaslonih srednje velikosti (npr. namizni racunalniki)
+- Aplikacija deluje na zaslonih majhne velikosti (npr. tablice Ipad)
+- Aplikacija deluje na zaslosnih zelo majhne velikosti (npr. telefon Iphone X)
+
+  
+
 
 
 
