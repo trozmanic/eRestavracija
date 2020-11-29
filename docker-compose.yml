@@ -6,7 +6,7 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    image: AlDente-js
+    image: aldente-js
     build:
       context: ./
       dockerfile: Dockerfile
