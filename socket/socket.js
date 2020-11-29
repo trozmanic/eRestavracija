@@ -8,7 +8,7 @@ const start = (io) => {
         socket.on('narociloNatakar', function (message) {
             console.log(message);
             const msgOBJ = JSON.parse(message);
-            const msg = "Kuhar je spremenil stanje narocila iz stanja: " + msgOBJ.staroStanje + " v " + msgOBJ.novoStanje
+            const msg = "Kuhar je spremenil stanje narocila iz stanja: " +  "'" + msgOBJ.staroStanje + "' "  + " v " +  "'" + msgOBJ.novoStanje + "'";
             io.emit('narociloNatakar-' + msgOBJ.id_uporabnika, msg)
         })
 
