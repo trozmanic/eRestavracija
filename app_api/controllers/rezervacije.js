@@ -11,7 +11,7 @@ const ustvariRezervacijo = function (req, res) {
     let uporabnik_id = req.body.uporabnik_id;
 
     let errors = [];
-    if (cas == null || cas<(new Date())) errors.push("ure in datuma");
+    if (cas == null) errors.push("ure in datuma");
     if (stOseb < 1) errors.push("stevila oseb");
 
     if (errors.length == 0 && uporabnik_id) {

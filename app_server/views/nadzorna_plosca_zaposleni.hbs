@@ -3,173 +3,203 @@
 <link rel="stylesheet" href="/stylesheets/nadzorna_plosca_zaposleni.css">
 
 <br>
+<!-- Gumbi in iskanje ZAČETEK -->
 <div class="container">
     <h1 class="text-center">Zaposleni</h1>
     <br>
     <div class="row">
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik"><i class="fas fa-plus"></i> DODAJ</button></div>
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik"><i class="fas fa-edit"></i> UREDI</button></div>
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik"><i class="fas fa-trash"></i> IZBRIŠI</button></div>
-        <!-- obrazec za iskanje -->
+        <div class="col-4 col-lg-2">
+           <button type="button" class="btn btn-dark btn-block razmik" data-toggle="modal" data-target="#ZaposlenModal1"><i class="fas fa-plus"></i> DODAJ</button>
+        </div>
+        <!-- ZAČETEK dodaj sestavino -->
+        <div class="modal fade" id="ZaposlenModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog bel" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dodaj zaposlenega</h5>
+              </div>
+              <div class="modal-body">
+              <form>
+                <div class="form-group is-invalid">
+                    <label for="ImeForm1">Ime in priimek</label>
+                    <input type="text" class="form-control is-invalid" id="ImeForm1" placeholder="Npr.: Chuck Norris" autofocus>
+                    <div class="invalid-feedback" id="neveljavnoIme1">
+                        Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="PostaForm1">E-pošta</label>
+                    <input type="text" class="form-control is-invalid" id="PostaForm1" placeholder="Npr.: chuck.norris@gmail.com">
+                    <div class="invalid-feedback" id="neveljavnaPosta1">
+                        E-pošta mora biti oblike: primer@domena!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="TelefonForm1">Telefonska številka</label>
+                    <input type="text" class="form-control is-invalid" id="TelefonForm1" placeholder="Npr.: 040 123 456">
+                    <div class="invalid-feedback" id="neveljavenTelefon1">
+                        Telefonska številka vsebuje samo števke brez simbolov!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="GesloForm1">Geslo</label>
+                    <input type="text" class="form-control is-invalid" id="GesloForm1">
+                    <div class="invalid-feedback" id="neveljavnoGeslo1">
+                        Geslo lahko vsebuje črke, števke, znake in simbole!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="VlogaForm1">Vloga</label>
+                    <select class="custom-select is-invalid" id="VlogaForm1" required>
+                        <option option value="" disabled selected>Izberi vlogo:</option>
+                        <option value="1">admin</option>
+                        <option value="2">kuhar</option>
+                        <option value="3">natakar</option>
+                    </select>
+                    <div class="invalid-feedback" id="neveljavnaVloga1">Izberite vlogo!</div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark mr-auto" id="dodajZaposlenegaPotrdi" data-dismiss="modal" disabled>Dodaj</button>
+                    <button type="button" class="btn btn-dark" id="dodajZaposlenegaPreklici" data-dismiss="modal">Prekliči</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- KONEC dodaj sestavino -->
+        
+        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik" data-toggle="modal" data-target="#ZaposlenModal2" id="uredi" disabled><i class="fas fa-edit"></i> UREDI</button></div>
+        <!-- ZAČETEK uredi sestavino -->
+        <div class="modal fade" id="ZaposlenModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog bel" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Uredi sestavino</h5>
+              </div>
+                <div class="modal-body">
+                <form>
+                <div class="form-group is-invalid">
+                    <label for="ImeForm2">Ime in priimek</label>
+                    <input type="text" class="form-control is-invalid" id="ImeForm2" placeholder="Npr.: Chuck Norris">
+                    <div class="invalid-feedback" id="neveljavnoIme2">
+                        Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="PostaForm2">E-pošta</label>
+                    <input type="text" class="form-control is-invalid" id="PostaForm2" placeholder="Npr.: chuck.norris@gmail.com">
+                    <div class="invalid-feedback" id="neveljavnaPosta2">
+                        E-pošta mora biti oblike: primer@domena!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="TelefonForm2">Telefonska številka</label>
+                    <input type="text" class="form-control is-invalid" id="TelefonForm2" placeholder="Npr.: 040 123 456">
+                    <div class="invalid-feedback" id="neveljavenTelefon2">
+                        Telefonska številka vsebuje samo števke brez simbolov!
+                    </div>
+                </div>
+                <div class="form-group is-invalid">
+                    <label for="GesloForm2">Geslo</label>
+                    <input type="text" class="form-control is-invalid" id="GesloForm2">
+                    <div class="invalid-feedback" id="neveljavnoGeslo2">
+                        Geslo lahko vsebuje črke, števke, znake in simbole!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="VlogaForm2">Vloga</label>
+                    <select class="custom-select is-invalid" id="VlogaForm2" required>
+                        <option option value="" disabled selected>Izberi vlogo:</option>
+                        <option value="1">admin</option>
+                        <option value="2">kuhar</option>
+                        <option value="3">natakar</option>
+                    </select>
+                    <div class="invalid-feedback" id="neveljavnaVloga2">Izberite vlogo!</div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-dark mr-auto" data-dismiss="modal" id="urediZaposlenegaPotrdi" disabled>Potrdi</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal" id="urediZaposlenegaPreklici">Prekliči</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- KONEC uredi sestavino -->
+        
+        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik" id="izbrisiZaposlenega" data-toggle="modal" data-target="#SestavinaModal3" disabled><i class="fas fa-trash"></i> IZBRIŠI</button></div>
+        <!-- ZAČETEK izbriši sestavino -->
+        <div class="modal fade" id="SestavinaModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog bel" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Opozorilo!</h5>
+              </div>
+              <div class="modal-body">
+                  <p>Ali res želite izbrisati izbrane zaposlene?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark mr-auto" id="izbrisiZaposlenegaPotrdi" data-dismiss="modal">Da</button>
+                <button type="button" class="btn btn-dark" id="izbrisiZaposlenegaPreklici" data-dismiss="modal">Ne</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- KONEC izbriši sestavino -->
+        
+        <!-- obrazec za iskanje ZAČETEK -->
         <div class="col-12 col-lg-6">
             <div class="input-group mb-2">
-                <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZalogi">
+                <div class="input-group-prepend">
+                    <select class="custom-select input-group-text izberi" id="iskanjePo">
+                        <option selected>Ime</option>
+                        <option value="1">E-pošta</option>
+                        <option value="2">GSM</option>
+                        <option value="3">Vloga</option>
+                    </select>
+                </div>
+                <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZaposlenih">
                 <div class="input-group-append">
                     <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
+        <!-- obrazec za iskanje KONEC -->
     </div>
-    <!-- obrazec za iskanje -->
     <!-- zacetek tabele -->
     <div class="row justify-content-center">
         <div class="col-12 table-responsive">
-        <table class="table table-dark table-striped table-bordered text-center">
+        <table class="table table-dark table-striped table-bordered text-center" id="tabela">
           <thead class="thead">
             <tr>
-              <th scope="col">Izberi</th>
-              <th scope="col">Uporabniško ime</th>
-              <th scope="col">Ime in Priimek</th>
-              <th scope="col">E-pošta</th>
-              <th scope="col">Vloga</th>
+                <th scope="col">Izberi</th>
+                <th scope="col">Ime in Priimek</th>
+                <th scope="col">E-pošta</th>
+                <th scope="col">GSM</th>
+                <th scope="col">Vloga</th>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            </thead>
+            <tbody>
+            {{#each zaposleni as | podatek |}}
+                <tr>
+                <th scope="row">
+                    <div class="custom-control custom-checkbox">    
+                        <input type="checkbox" class="custom-control-input" id="customCheck{{stevec @index}}" idzaposlenega="{{podatek._id}}">
+                        <label class="custom-control-label" for="customCheck{{stevec @index}}"></label>
                     </div>
-              </th>
-              <td>ChuckNorris</td>
-              <td>Chuck Norris</td>
-              <td>chuck.norris@gmail.com</td>
-              <td>Admin</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>roman_garrett</td>
-              <td>Roman Garrett</td>
-              <td>garrett.roman@live.com</td>
-              <td>Natakar</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>ElsaForrest</td>
-              <td>Elsa Forrest</td>
-              <td>elsa.forrest@yahoo.com</td>
-              <td>Natakarica</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>EdSpooner</td>
-              <td>Ed Spooner</td>
-              <td>ed.spooner1990@gmail.com</td>
-              <td>Kuhar</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>NellaOchoa</td>
-              <td>Nella Ochoa</td>
-              <td>nella.ochoa@gmail.com</td>
-              <td>Kuharica</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>ERobson</td>
-              <td>Edward Robson</td>
-              <td>edward.robson@live.com</td>
-              <td>Kuhar</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>Amalie</td>
-              <td>Amalie Curtis</td>
-              <td>amalie.curtis@live.com</td>
-              <td>Natakarica</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>GregoryBrooks</td>
-              <td>Gregory Brooks</td>
-              <td>gregory.brooks@yahoo.com</td>
-              <td>Kuhar</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-              </th>
-              <td>TeriPeel</td>
-              <td>Teri Peel</td>
-              <td>teri.peel@gmail.com</td>
-              <td>Natakar</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-                    </th>
-              <td>MuhamedMckeown</td>
-              <td>Muhamed Mckeown</td>
-              <td>Muhamed.Mckeown@hotmail.com</td>
-              <td>Natakar</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div>
-                    </th>
-              <td>Tina</td>
-              <td>Tina Hagan</td>
-              <td>tina.hagan@gmail.com</td>
-              <td>Kuharica</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                  <div class="form-check">    
-                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  </div>
-              </th>
-              <td>NadaHarvey</td>
-              <td>Nada Harvey</td>
-              <td>nada.harvey@live.com</td>
-              <td>Kuharica</td>
-            </tr>
-          </tbody>
+                </th>
+                <td iskanje="Ime">{{podatek.ime}}</td>
+                <td iskanje="E-pošta">{{podatek.email_naslov}}</td>
+                <td iskanje="GSM">{{podatek.telefonska_stevilka}}</td>
+                <td iskanje="Vloga">{{podatek.vloga}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
         </table>
         <!-- konec tabele -->
         </div>
     </div>
 </div>
+
+<script src="/javascript/nadzorna_plosca_zaposleni.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

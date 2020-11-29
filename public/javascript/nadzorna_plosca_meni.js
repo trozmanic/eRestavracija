@@ -40,7 +40,7 @@ function init(){
                     ime: document.getElementById("name").value,
                     opis: document.getElementById("description").value,
                     cena: document.getElementById("price").value,
-                    kalorije: document.getElementById("calories").value,
+                    kalorije: (document.getElementById("calories").value  === '') ? '0' : document.getElementById("calories").value,
                     sestavine: sestavine_send
                 }
 
@@ -112,7 +112,7 @@ function init(){
            console.log("Editttt");
 
            if(formActive){
-               alert("Samo ena jed se lahko dodaja/ureja na enkrat.");
+               alert("Samo ena jed se lahko dodaja ali  ureja na enkrat.");
            }else{
 
                var pointer = 0;
@@ -152,7 +152,7 @@ function init(){
                        ime: document.getElementById("name").value,
                        opis: document.getElementById("description").value,
                        cena: document.getElementById("price").value,
-                       kalorije: document.getElementById("calories").value,
+                       kalorije: (document.getElementById("calories").value  === '') ? '0' : document.getElementById("calories").value ,
                        sestavine: sestavine_send
                    }
 
@@ -260,16 +260,16 @@ function appendForm(element, value){
         "        </div>\n" +
         "        <div class=\"form-group\">\n" +
         "            <label>Cena</label>\n" +
-        "            <input type=\"text\" id=\"price\" name=\"price\" value=\""+value.cena+"\" >\n" +
+        "            <input type=\"number\" id=\"price\" name=\"price\" value=\""+value.cena+"\" >\n" +
         "        </div>\n" +
         "        <div class=\"form-group\">\n" +
         "            <label>Kalorije</label>\n" +
-        "            <input type=\"text\" id=\"calories\" name=\"calories\" value=\""+value.kalorije+"\">\n" +
+        "            <input type=\"number\" id=\"calories\" name=\"calories\" value=\""+value.kalorije+"\">\n" +
         "        </div>\n" +
         "        <div class=\"form-group\">\n" +
         "            <label>Food API</label>\n" +
         "            <input type=\"text\" id=\"ingredient\" placeholder=\"Vnesi sestavino\">\n" +
-        "            <input type=\"text\" id=\"quantity\" placeholder=\"Vnesi količino\">\n" +
+        "            <input type=\"text\" id=\"quantity\" placeholder=\"Vnesi količino v gramih\">\n" +
         "            <i role=\"button\" id=\"add-sestavina\" class=\"fas fa-search ikone-stil-posamezna\"></i>\n" +
         "        </div>\n" +
         "       <div class=\"sestavine\">" +
@@ -281,7 +281,7 @@ function appendForm(element, value){
         "        </div>\n" +
         "        <div class=\"form-group gor-margin\">\n" +
         "                    <div class=\"ikone-stil\">\n" +
-        "                        <button type=\"button\" id=\"discard\" class=\"btn btn-dark\"><i class=\"fas fa-trash-alt\"></i></button>\n" +
+        "                        <button type=\"button\" id=\"discard\" class=\"btn btn-dark\"><i class=\"fas fa-ban\"></i></button>\n" +
         "                        <button type=\"button\" id=\"save\" class=\"btn btn-dark btn-block\"><i class=\"fas fa-save\"></i> SHRANI</button>\n" +
         "                    </div>\n" +
         "        </div>\n" +

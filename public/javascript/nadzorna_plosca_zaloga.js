@@ -1,8 +1,24 @@
-var gumbUredi = document.getElementById("uredi");
-var gumbPotrdiUrejanje = 0;
-var gumbPotrdiDodajanje = 0;
+var preveriIme;
+var preveriKolicino;
+var preveriCeno;
+
+//Ko odpremo modal window se focusiramo na prvo vnosno polje
+$(document).ready(function(){
+    $("#SestavinaModal1").on('shown.bs.modal', function(){
+        $(this).find('#SestavinaForm1').focus();
+    });
+    $("#SestavinaModal2").on("shown.bs.modal", function () {
+        $(this).find('#SestavinaForm2').focus();
+    })
+    
+    preveriIme = false;
+    preveriKolicino = false;
+    preveriCeno = false;
+});
 
 //Najdi vrednosti izbranega checkboxa
+var gumbUredi = document.getElementById("uredi");
+
 gumbUredi.addEventListener("click", function(){
     
     var oznaceni = document.querySelectorAll("input:checked");
@@ -10,9 +26,11 @@ gumbUredi.addEventListener("click", function(){
     var vrstica = oznaceni[0].parentElement.parentElement.parentElement;
     var sestavina = vrstica.getElementsByTagName("td")[0].innerHTML;
     var kolicina = vrstica.getElementsByTagName("td")[1].innerHTML;
+    var cena = vrstica.getElementsByTagName("td")[2].innerHTML;
     
     document.getElementById("SestavinaForm2").placeholder = sestavina;
     document.getElementById("KolicinaForm2").placeholder = kolicina;
+    document.getElementById("CenaForm2").placeholder = cena;
 });
 
 //Preveri koliko checkboxov je obkljukanih in omogoči oziroma onemogoči gumba uredi ter izbriši
@@ -47,13 +65,6 @@ dodaj.addEventListener("click", function(){
     var enota = razdeli[1];
     
     var novaSestavina = {ime:ime, kolicina:kolicina, enota:enota, cena:cena};
-    
-    /*console.log(JSON.stringify(novaSestavina));
-    
-    $.post("/api/zaloga", novaSestavina, function(data, status, jqXHR) {
-        console.log("Status: "+status+", podatki: " + data);
-	});
-	*/
 	
 	$.ajax({
         url: '/api/zaloga/',
@@ -118,9 +129,22 @@ uredi.addEventListener("click", function(){
     }
 });
 
+//Izbriši vnosna polja pri dodajanju sestavine, če kliknemo gumb Prekliči
+var prekliciDodajanje = document.getElementById("dodajSestavinoPreklici");
+prekliciDodajanje.addEventListener("click", function() {
+    var vnesiSestavino = document.getElementById("SestavinaForm1");
+    var vnesiKolicino = document.getElementById("KolicinaForm1");
+    vnesiSestavino.value = "";
+    vnesiKolicino.value = "";
+    vnesiSestavino.classList.add("is-invalid");
+    vnesiSestavino.classList.remove("is-valid");
+    vnesiKolicino.classList.add("is-invalid");
+    vnesiKolicino.classList.remove("is-valid");
+});
+
 //Izbriši vnosna polja pri urejanju sestavine, če kliknemo gumb Prekliči
-var preklici = document.getElementById("urediSestavinoPreklici");
-preklici.addEventListener("click", function() {
+var prekliciUrejanje = document.getElementById("urediSestavinoPreklici");
+prekliciUrejanje.addEventListener("click", function() {
     var vnesiSestavino = document.getElementById("SestavinaForm2");
     var vnesiKolicino = document.getElementById("KolicinaForm2");
     vnesiSestavino.value = "";
@@ -129,7 +153,7 @@ preklici.addEventListener("click", function() {
     vnesiSestavino.classList.remove("is-valid");
     vnesiKolicino.classList.add("is-invalid");
     vnesiKolicino.classList.remove("is-valid");
-})
+});
 
 //Izbrisi vse izbrane vrstice
 var gumbPotrdi = document.getElementById("izbrisiSestavinoPotrdi");
@@ -183,7 +207,10 @@ vnosSestavine1.addEventListener("input", function(){
     var vnosnoPolje = document.getElementById("SestavinaForm1");
     
     if(reg.test(sestavina)){
-        gumbPotrdi.disabled = false;
+        preveriIme = true;
+        if(preveriCeno && preveriKolicino){
+            gumbPotrdi.disabled = false;
+        }
         vnosnoPolje.setCustomValidity("");
         vnosnoPolje.classList.remove("is-invalid");
         vnosnoPolje.classList.add("is-valid");
@@ -199,13 +226,16 @@ vnosSestavine1.addEventListener("input", function(){
 var vnosKolicine1 = document.getElementById("KolicinaForm1");
 
 vnosKolicine1.addEventListener("input", function(){
-    var reg = new RegExp("^[0-9]+.?[a-žA-Ž]{1,5}$");
+    var reg = new RegExp("^[0-9]*.[0-9]*.?[a-žA-Ž]{1,5}$");
     var kolicina = vnosKolicine1.value;
     var gumbPotrdi = document.getElementById("dodajSestavinoPotrdi");
     var vnosnoPolje = document.getElementById("KolicinaForm1");
     
     if(reg.test(kolicina)){
-        gumbPotrdi.disabled = false;
+        preveriKolicino = true;
+        if(preveriIme && preveriCeno){
+            gumbPotrdi.disabled = false;
+        }
         vnosnoPolje.setCustomValidity("");
         vnosnoPolje.classList.remove("is-invalid");
         vnosnoPolje.classList.add("is-valid");
@@ -222,12 +252,15 @@ var vnosCene1 = document.getElementById("CenaForm1");
 
 vnosCene1.addEventListener("input", function(){
     var reg = new RegExp("^[0-9]*.[0-9]*$");
-    var kolicina = vnosCene1.value;
+    var cena = vnosCene1.value;
     var gumbPotrdi = document.getElementById("dodajSestavinoPotrdi");
     var vnosnoPolje = document.getElementById("CenaForm1");
     
-    if(reg.test(kolicina)){
-        gumbPotrdi.disabled = false;
+    if(reg.test(cena)){
+        preveriCeno = true;
+        if(preveriIme && preveriKolicino){
+            gumbPotrdi.disabled = false;
+        }
         vnosnoPolje.setCustomValidity("");
         vnosnoPolje.classList.remove("is-invalid");
         vnosnoPolje.classList.add("is-valid");
@@ -265,7 +298,7 @@ vnosSestavine2.addEventListener("input", function(){
 var vnosKolicine2 = document.getElementById("KolicinaForm2");
 
 vnosKolicine2.addEventListener("input", function(){
-    var reg = new RegExp("^[0-9]+.?[a-žA-Ž]{1,5}$");
+    var reg = new RegExp("^[0-9]*.[0-9]*.?[a-žA-Ž]{1,5}$");
     var kolicina = vnosKolicine2.value;
     var gumbPotrdi = document.getElementById("urediSestavinoPotrdi");
     var vnosnoPolje = document.getElementById("KolicinaForm2");
@@ -305,11 +338,35 @@ vnosCene2.addEventListener("input", function(){
     }
 });
 
-//Ko odpremo modal window se focusiramo na prvo vnosno polje
-$("#SestavinaModal1").on("shown.bs.modal", function () {
-    $("#SestavinaForm1").focus();
-})
 
-$("#SestavinaModal2").on("shown.bs.modal", function () {
-    $("#SestavinaForm2").focus();
-})
+//Iskanje po tabeli
+var iskanje = document.getElementById("IskanjePoZalogi");
+
+iskanje.addEventListener("keyup", function (){
+  // Declare variables
+  var td, i, iskalnaVrednost, tdVrednost;
+  
+  var filter = iskanje.value.toUpperCase();
+  var tabela = document.getElementById("tabela");
+  var tr = tabela.getElementsByTagName("tr");
+  var iskanjePo = document.getElementById("iskanjePo");
+  iskanjePo = iskanjePo.options[iskanjePo.selectedIndex].text;
+  
+  for (i = 1; i < tr.length; i++) {
+      for(var j = 0; j < 3; j++){
+          td = tr[i].getElementsByTagName("td")[j];
+          tdVrednost = td.getAttribute("iskanje");
+          if(tdVrednost === iskanjePo){
+              break;
+          }
+      }
+    if (td) {
+      iskalnaVrednost = td.textContent || td.innerText;
+      if (iskalnaVrednost.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+});

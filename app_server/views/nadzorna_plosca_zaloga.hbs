@@ -22,7 +22,7 @@
               <form>
                 <div class="form-group is-invalid">
                     <label for="SestavinaForm1">Sestavina</label>
-                    <input type="text" class="form-control is-invalid" id="SestavinaForm1" placeholder="Npr.: krompir">
+                    <input type="text" class="form-control is-invalid" id="SestavinaForm1" placeholder="Npr.: krompir" autofocus>
                     <div class="invalid-feedback" id="neveljavnaSestavina1">
                         Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
                     </div>
@@ -43,7 +43,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark mr-auto" id="dodajSestavinoPotrdi" data-dismiss="modal">Dodaj</button>
+                    <button type="submit" class="btn btn-dark mr-auto" id="dodajSestavinoPotrdi" data-dismiss="modal" disabled>Dodaj</button>
                     <button type="button" class="btn btn-dark" id="dodajSestavinoPreklici" data-dismiss="modal">Prekliči</button>
                 </div>
               </form>
@@ -118,7 +118,7 @@
         <div class="col-12 col-lg-6">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <select class="custom-select input-group-text izberi">
+                    <select class="custom-select input-group-text izberi" id="iskanjePo">
                         <option selected>Sestavina</option>
                         <option value="1">Količina</option>
                         <option value="2">Cena</option>
@@ -142,10 +142,9 @@
                 <th scope="col">Izberi</th>
                 <th scope="col">Sestavina</th>
                 <th scope="col">Količina</th>
-                <th scope="col">Cena na enoto</th>
+                <th scope="col">Nabavna cena (na enoto)</th>
               </tr>
             </thead>
-            <!-- Od tu naprej vstavi generiranje s pomocjo hbsh helperja -->
             <tbody>
             {{#each sestavine as | podatek |}}
               <tr>
@@ -155,9 +154,9 @@
                         <label class="custom-control-label" for="customCheck{{stevec @index}}"></label>
                     </div>
                 </th>
-                <td>{{podatek.ime}}</td>
-                <td>{{podatek.kolicina}} {{podatek.enota}}</td>
-                <td>{{podatek.cena}} €</td>
+                <td iskanje="Sestavina">{{podatek.ime}}</td>
+                <td iskanje="Količina">{{podatek.kolicina}} {{podatek.enota}}</td>
+                <td iskanje="Cena">{{podatek.cena}} €</td>
               </tr>
               {{/each}}
             </tbody>
