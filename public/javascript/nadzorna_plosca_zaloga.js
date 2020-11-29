@@ -305,6 +305,35 @@ vnosCene2.addEventListener("input", function(){
     }
 });
 
+
+//Iskanje po tabeli
+var iskanje = document.getElementById("IskanjePoZalogi");
+
+iskanje.addEventListener("keyup", function (){
+  // Declare variables
+  var td, i, iskalnaVrednost, tdVrednost;
+  
+   var filter = iskanje.value.toUpperCase();
+  var tabela = document.getElementById("myTable");
+  var tr = tabela.getElementsByTagName("tr");
+  var iskanjePo = document.getElementById("iskanjePo");
+  iskanjePo = iskanjePo.value;
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    tdVrednost = td.getAttribute("iskanje");
+    if (td && tdVrednost == iskanjePo) {
+      iskalnaVrednost = td.textContent || td.innerText;
+      if (iskalnaVrednost.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+});
+
 //Ko odpremo modal window se focusiramo na prvo vnosno polje
 $("#SestavinaModal1").on("shown.bs.modal", function () {
     $("#SestavinaForm1").focus();

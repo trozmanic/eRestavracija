@@ -118,7 +118,7 @@
         <div class="col-12 col-lg-6">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                    <select class="custom-select input-group-text izberi">
+                    <select class="custom-select input-group-text izberi" id="iskanjePo">
                         <option selected>Sestavina</option>
                         <option value="1">Količina</option>
                         <option value="2">Cena</option>
@@ -155,9 +155,9 @@
                         <label class="custom-control-label" for="customCheck{{stevec @index}}"></label>
                     </div>
                 </th>
-                <td>{{podatek.ime}}</td>
-                <td>{{podatek.kolicina}} {{podatek.enota}}</td>
-                <td>{{podatek.cena}} €</td>
+                <td iskanje="Sestavina">{{podatek.ime}}</td>
+                <td iskanje="Količina">{{podatek.kolicina}} {{podatek.enota}}</td>
+                <td iskanje="Cena">{{podatek.cena}} €</td>
               </tr>
               {{/each}}
             </tbody>
