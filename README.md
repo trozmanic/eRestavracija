@@ -10,4 +10,17 @@ Lastnike restavracije v Ljubljani nas je kontaktiral da zeli v popolnosti digita
 - Direktor ima enake funkcionalnosti kot natakar in kuhar, le da ima vpogled na finančno stanje (možnost vpogleda v zaslužek, prihodke, odhodke itd...)
 
 
+# SEZNAM DOVOLJENIH VNOSOV ZA UPORABNISKA VNOSNA POLJA
+
+- Pristajalna stran: ob vstopu na spletno stran lahko izberemo ali se bomo registrirali ali
+prijavili v obstojeci uporabniski racun. 
+  - Pri registraciji je potrebno vnesti vrednost 'Ime in priimek', 
+ki je poljubno zaporedje znakov, 'Email naslov', ki se preveri z regularnim izrazom (v postev pridejo le veljavni
+elektronski naslovi), 'Telefonska stevilka', ki se preveri z regularnim izrazom (v postev pridejo le stevilke ki vsebujejo 
+stevke locene z '-' ali presledki), 'Geslo' in 'Ponovite geslo', pa zahtevata poljubno zaporedje znakov, za uspesno registracijo
+se morata obe polji ujemati.
+  - Pri prijavi se vnosna polja 'Email naslov' in 'Geslo' ne preverjajo, ob napacnih podatkih dobimo le obvestilo da je 
+  prijava spodletela (napacni podatki)
+
+
 
