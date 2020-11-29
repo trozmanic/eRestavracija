@@ -247,7 +247,6 @@
                         <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
 
                         <p class="levo-text kartica-padding">
-                            Stranka: <strong>TO DO</strong>
                             <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
                         </p>
 
@@ -263,7 +262,6 @@
                         </ul>
                         <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
                             <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
                             <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
                         </div>
@@ -283,7 +281,6 @@
                         <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
 
                         <p class="levo-text kartica-padding">
-                            Stranka: <strong>TO DO</strong>
                             <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
                         </p>
 
@@ -299,7 +296,6 @@
                         </ul>
                         <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
                         <div class="ikone-stil">
-                            <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal" data-target="#kontaktstranke"></i>
                             <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
                             <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
                         </div>
@@ -317,10 +313,6 @@
                     <div class="modal-body">
                         <h1 class="legendheader">Legenda</h1>
                         <div class="iconsflex">
-                            <div class="iconmodal">
-                                <i class="far fa-address-book"></i>
-                                <p>Kontakt stranke</p>
-                            </div>
                             <div class="iconmodal">
                                 <i class="fas fa-trash"></i>
                                 <p>Sturniraj</p>
@@ -344,22 +336,6 @@
                         </div>
                         <div class="butlegenda">
                             <button type="submit" class="but" data-dismiss="modal">Zapri</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="kontaktstranke" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h1 class="legendheader">Kontakt stranke</h1>
-                        <textarea class="kontaktinput" type="text"></textarea>
-                        <div class="butkontakt">
-                            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
-                            <button type="submit" class="but">Pošlji</button>
                         </div>
                     </div>
                 </div>
