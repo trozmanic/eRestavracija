@@ -40,10 +40,10 @@ window.addEventListener("load", () => {
     const narocilaZavrniHandler = (id, socket) => {
         axios.delete("/api/narocila/" + id)
             .then((response) => {
-                window.location.reload;
                 socket.emit("narociloKuhar", JSON.stringify({
                     "izbrisano":true
                 }))
+                window.location.reload();
             })
             .catch((err) => {
                 console.log("Narocila ni bilo moc izbrisari")
@@ -107,10 +107,11 @@ window.addEventListener("load", () => {
     const ustvariNaorciloButton = document.getElementById("saveData");
     const socket = io ();
     socket.on("narociloNatakar-" + credentials.uporabnik_id, (msg) => {
-        setTimeout(location.reload.bind(location), 5000);
+        setTimeout(location.reload.bind(location), 4000);
         var audio = new Audio('/sounds/notification.mp3');
         audio.play();
-        alert(msg);
+        swal("Obvestilo", msg, "success", {
+        });
     })
 
     ustvariNaorciloButton.addEventListener("click", (event) => {

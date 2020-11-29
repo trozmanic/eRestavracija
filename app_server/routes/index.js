@@ -28,6 +28,7 @@ router.get('/nadzorna_plosca/meni', nadzorna_plosca.meni)
 router.get('/nadzorna_plosca/zasluzek', nadzorna_plosca.zasluzek)
 router.get('/nadzorna_plosca/zasluzek/delete/:id',nadzorna_plosca.zasluzel_brisi_racun)
 router.get('/nadzorna_plosca/zaloga',nadzorna_plosca.seznamZaloge)
+router.get('/nadzorna_plosca/admin', nadzorna_plosca.admin)
 
 /* POST login / register */
 router.post("/login", login.login);

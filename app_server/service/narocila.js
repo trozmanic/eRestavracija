@@ -16,8 +16,9 @@ const prepKuhar = (narocila) => {
         for (let index =0; index < narocila.length ; index ++) {
             const narocilo = narocila[index];
             const datum = new Date(narocilo.datum_in_ura);
-            narocilo.datum = datum.getDate() + '/' + datum.getMonth() + '/' + datum.getFullYear();
-
+            narocilo.date = datum.getDate() + "/" + (datum.getMonth() + 1) + "/" + datum.getFullYear();
+            const minute = datum.getUTCMinutes() < 10 ? '0'+datum.getUTCMinutes(): datum.getUTCMinutes();
+            narocilo.ura = (datum.getUTCHours()+1) + ":" + minute;
             if (narocilo.stanje === "sprejeto" || narocilo.stanje === "v pripravi") {
                 for (let indexJedi = 0; indexJedi < narocilo.meni_items.length; indexJedi ++) {
                     const idJedi = narocilo.meni_items[indexJedi].meni_item;
@@ -80,8 +81,9 @@ const prepNatakar = (narocila, idUporabnika) => {
         for (let index = 0; index < narocila.length ; index ++) {
             let narocilo = narocila[index];
             const datum = new Date(narocilo.datum_in_ura);
+            const minute = datum.getUTCMinutes() < 10 ? '0'+datum.getUTCMinutes(): datum.getUTCMinutes();
             narocilo.datum =  datum.getDate() + '/' + datum.getMonth() + '/' + datum.getFullYear();
-            narocilo.ura = datum.getUTCHours() + ":" + datum.getUTCMinutes();
+            narocilo.ura = (datum.getUTCHours()+1) + ":" + minute;
 
 
 

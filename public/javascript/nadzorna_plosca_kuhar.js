@@ -35,6 +35,7 @@ window.addEventListener("load", () => {
             .then((response) => {
                 socket.emit("narociloNatakar", JSON.stringify({
                     "id": id,
+                    "staroStanje":"sprejeto",
                     "novoStanje": "v pripravi",
                     "id_uporabnika": natakarid
                 }))
@@ -57,6 +58,7 @@ window.addEventListener("load", () => {
                 window.location.reload();
                 socket.emit("narociloNatakar", JSON.stringify({
                     "id": id,
+                    "staroStanje": "v pripravi",
                     "novoStanje": "pripravljeno",
                     "id_uporabnika": natakarid
                 }))
@@ -87,10 +89,13 @@ window.addEventListener("load", () => {
     const socket = io ();
 
     socket.on("narociloKuhar", (message) => {
-        setTimeout(location.reload.bind(location), 5000);
+        setTimeout(location.reload.bind(location), 4000);
         var audio = new Audio('/sounds/notification.mp3');
         audio.play();
-        alert("Novo narocilo");
+        setTimeout(()=> {
+            swal("Obvestilo", "Narocila so bila posodobljena", "success", {
+            });
+        },1000)
     })
 
     addEventListeners("narocila", narocilaSprejmiHandler, narocilaZavrniHandler, socket);

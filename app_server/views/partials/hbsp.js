@@ -41,7 +41,7 @@ hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
-    "                        <span class=\"desno-float\">Datum: <strong>{{datum}}</strong></strong></span>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{date}}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Sprejem naročila: <strong>{{ ura }}</strong>\n" +
@@ -62,13 +62,13 @@ hbs.registerPartial('narociloItemPriprava', "<div class=\"rezervacija-skatla\" i
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
-    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ date }}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
+    "                        Sprejem naročila: <strong>{{ ura }}</strong>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Začetek priprave: <strong>{{ zacetek_priprave }}</strong></span>\n" +
+    "                        \n" +
     "                    </p>\n" +
     "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
     "                    <ul>\n" +
@@ -86,7 +86,7 @@ hbs.registerPartial('narociloItemPripravljeno', "<div class=\"rezervacija-skatla
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
-    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ date }}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
@@ -111,10 +111,10 @@ hbs.registerPartial('narociloItemPostrezeno', "<div class=\"rezervacija-skatla\"
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
-    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{ date }}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Naročilo postreženo: <strong>{{ narocilo_postezeno }}</strong>\n" +
+    "                        \n" +
     "                    </p>\n" +
     "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
     "                    <ul>\n" +

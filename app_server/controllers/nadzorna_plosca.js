@@ -272,6 +272,16 @@ const meni = async function (req, res) {
     }
 }
 
+const admin = async function (req, res) {
+    try {
+        res.render('admin',
+            {layout: 'layout_nadzorna_plosca.hbs', title: 'Al dente', izbrano_ime: 'admin'})
+    }
+    catch (err) {
+        res.render('error');
+    }
+}
+
 const read_json = (pathJSON) => {
     return new Promise((resolve, reject) => {
         fs.readFile(pathJSON, (err, data) => {
@@ -295,5 +305,6 @@ module.exports = {
     meni,
     strezba,
     zasluzek,
-    zasluzel_brisi_racun
+    zasluzel_brisi_racun,
+    admin
 }

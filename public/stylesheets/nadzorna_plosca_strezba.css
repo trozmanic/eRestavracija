@@ -52,8 +52,8 @@
 }
 
 #dodajNaorcilo {
-    margin: 5%;
-    margin-left: 50%;
+    margin: 5% 30%;
+    width: 40%;
     background:none;
     padding: 1%;
     border: 1px solid white;
@@ -74,9 +74,12 @@
     border-radius: 12px;
     text-align: center;
 }
+
+
 .cena h1 {
     color: white;
-    margin-left: 45%;
+    width: 50%;
+    margin: 5% 25%;
 }
 
 body {
