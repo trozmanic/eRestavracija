@@ -11,6 +11,7 @@ const narocila = require('../controllers/narocila');
 const zaloga = require('../controllers/zaloga');
 const zasluzek = require('../controllers/zasluzek');
 const slike = require('../controllers/image');
+const database = require('../controllers/database');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -68,5 +69,8 @@ router.put("/zaloga", zaloga.posodobiSestavino);
 router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
 
 router.post('/image', slike.shraniSliko)
+
+router.get('/database/drop', database.dropDB);
+
 
 module.exports=router
