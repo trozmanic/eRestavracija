@@ -276,10 +276,33 @@ const deleteUrnik = (req, res) => {
     });
 }
 
+const urnik_uporabnik = (req, res) => {
+    var id = req.params.id;
+    if (!id) {
+        return res.status(404).json({
+            "sporocilo": "Ni podanga id."
+        });
+    } else {
+        Urnik.find({id_uporabnika:id}).sort({leto: 'descending'}).exec( (napaka, urniki) => {
+            if (napaka) {
+                return res.status(500).json(napaka);
+            }
+            else if (urniki.length < 1) {
+                return res.status(404).json({
+                    "sporocilo": "Ni najdu nobenega urnika z tem id zaposlenega."
+                });
+            } else {
+                return res.status(200).send(urniki);
+            }
+        });
+    }
+}
+
 
 module.exports = {
     pridobiUrnik,
     posodobiUrnik,
     deleteUrnik,
-    createUrnik
+    createUrnik,
+    urnik_uporabnik
 }

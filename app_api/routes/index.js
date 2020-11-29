@@ -45,6 +45,7 @@ router.get("/urnik", urnik.pridobiUrnik);
 router.put("/urnik", urnik.posodobiUrnik);
 router.delete("/urnik", urnik.deleteUrnik);
 router.post("/urnik", urnik.createUrnik);
+router.get("/urnik/:id", urnik.urnik_uporabnik);
 
 //ZAPOSLENI
 router.get("/zaposleni", zaposleni.pridobiZaposlene);

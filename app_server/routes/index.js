@@ -22,6 +22,12 @@ router.get("/odjava", pristajlna_stran.logout)
 router.get('/nadzorna_plosca',nadzorna_plosca.menu)
 router.get('/nadzorna_plosca/rezervacije',nadzorna_plosca.rezervacije)
 router.get('/nadzorna_plosca/urnik',nadzorna_plosca.urnik)
+
+router.get('/nadzorna_plosca/urnik/:id',nadzorna_plosca.urnik_uporabnik)
+router.get('/nadzorna_plosca/urnik/:id/delete/:id_urnik',nadzorna_plosca.urnik_brisi)
+router.get('/nadzorna_plosca/urnik/:id/edit/:id_urnik',nadzorna_plosca.urnik_edit)
+router.get('/nadzorna_plosca/urnik/:id/create',nadzorna_plosca.urnik_create)
+
 router.get('/nadzorna_plosca/zaposleni',nadzorna_plosca.seznamZaposlenih)
 router.get('/nadzorna_plosca/strezba',nadzorna_plosca.strezba)
 router.get('/nadzorna_plosca/kuhar', nadzorna_plosca.narocila_kuhar)
