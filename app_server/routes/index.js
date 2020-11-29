@@ -42,7 +42,7 @@ router.put("/nadzorna_plosca/meni/:id", meni.editMeni)
 router.post("/nadzorna_plosca/meni", meni.addDish)
 
 
-router.get('/database/init', database.initDB)
-router.get('/database', database.db)
+router.get('/db/init', database.initDB)
+router.get('/db', database.db)
 
 module.exports = router;
