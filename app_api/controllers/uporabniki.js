@@ -21,7 +21,7 @@ const ustvariUporabnika=async (req,res)=>{
         //vloga specified
         await uporabnik_model.save();
         await vlogaModel.save();
-        res.status(200).json(uporabnik);
+        res.status(200).json(uporabnik_model);
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});
