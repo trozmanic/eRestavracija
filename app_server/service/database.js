@@ -3,7 +3,7 @@ const apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
 if (process.env.NODE_ENV === 'production') {
-    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com/';
+    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com';
 }
 
 const initDB = async function(req, res){
