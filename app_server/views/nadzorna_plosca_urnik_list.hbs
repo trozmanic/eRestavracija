@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
+<!-- Zacetek Zasluzka -->
+
+<div class="col-xl-12 title">
+    <h3 class="sredina-text text-white">Seznam urnikov uporabnika</h3>
+</div>
+
+<div class="col-xl-12">
+
+    {{#each urniki as |urnik|}}
+        <div class="rezervacija-skatla" id="{{racun._id}}">
+            <p class="levo-text kartica-padding">
+                Leto: <strong>{{urnik.leto}}</strong>
+                <span class="desno-float">Mesec : <strong>{{mesec_to_string mesec}}</strong></span>
+            </p>
+
+            <div class="ikone-stil">
+                <a href="/nadzorna_plosca/urnik/{{../zaposleni_id}}/delete/{{urnik._id}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
+                <a href="/nadzorna_plosca/urnik/{{../zaposleni_id}}/edit/{{urnik._id}}"><i class="fas fa-edit ikone-stil-posamezna"></i></a>
+            </div>
+        </div>
+    {{/each}}
+
+
+</div>

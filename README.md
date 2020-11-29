@@ -41,3 +41,25 @@ se morata obe polji ujemati.
 # Zagon aplikacije
 - Z ukazom docker-compose up zaženemo Docker container
 - Spletna stran je nato dosegljiva na localhost:3000
+  
+# /db uporabniski racuni generirani za lokalno testiranje
+  - Ob obisku /db s pritiskom gumba pobrišemo bazo in jo nato z drugim gumbom ponovno nastavimo
+  - Natakar:
+    - email: natakar@aldente.si
+    - geslo: geslo1234
+    
+  - Kuhar:
+      - email: kuhar@aldente.si
+      - geslo: geslo1234
+
+  - Gost:
+      - email: gost@aldente.si
+      - geslo: geslo1234
+
+  - Admin:
+      - email: admin@aldente.si
+      - geslo: geslo1234
+
+
+
+
