@@ -77,16 +77,18 @@ const posljiNarocilo = function (dogodek) {
                 xhttp2.onload=()=>{
                     if(xhttp2.status==200){
                         window.alert("Rezervacija uspešno oddana");
+                        window.location.replace("/nadzorna_plosca/rezervacije");
                     }else{
                         window.alert("Prišlo je do napake");
+                        window.location.replace("/nadzorna_plosca/rezervacije");
                     }
                 }
                 xhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 xhttp2.send();
             } else {
                 window.alert("Prišlo je do napake");
+                window.location.replace("/nadzorna_plosca/rezervacije");
             }
-            window.location.replace("/nadzorna_plosca/rezervacije");
         }
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.send(JSON.stringify({

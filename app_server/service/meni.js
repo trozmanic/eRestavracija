@@ -3,8 +3,7 @@ const apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
 if (process.env.NODE_ENV === 'production') {
-    //TODO: include heroku
-    apiParametri.streznik = "";
+    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com/';
 }
 
 const foodApiId = "fe73ca9c";

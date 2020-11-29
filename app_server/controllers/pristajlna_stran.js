@@ -1,14 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
+const meni = require('../service/meni');
+
 const apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
-const meni = require('../service/meni');
+
 if (process.env.NODE_ENV === 'production') {
-    //TODO: include heroku
-    apiParametri.streznik = "";
+    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com/';
 }
+
 //NOTE: temporary function to get JSON data hardcoded on disk
 const read_json = (pathJSON) => {
     return new Promise((resolve, reject) => {

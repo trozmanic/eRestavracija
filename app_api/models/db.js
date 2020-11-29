@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 let dbURI = 'mongodb://localhost/AlDente';
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_CLOUD_URI;
+} else if (process.env.NODE_ENV === 'docker') {
+    dbURI = 'mongodb://AlDente-mongoDB/EduGeoCache';
 }
 
 mongoose.connect(dbURI, {
