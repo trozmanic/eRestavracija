@@ -123,11 +123,7 @@ const urnikShema = new mongoose.Schema({
         }
     }
 })
-const testDate = new mongoose.Schema({
-    datum_in_ura: { type: Date, default: Date.now },
-    stanje: { type: String, required:true, enum: ['sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'], default:'sprejeto' },
-    cena: { type: Number, required:true }
-})
+
 
 
 mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");
@@ -138,4 +134,4 @@ mongoose.model("MeniItem", meniItemShema, "MeniItems");
 mongoose.model("Surovina", surovinaShema, "Surovine");
 mongoose.model("Zaposlen", zaposleniShema, "Zaposleni");
 mongoose.model("Urnik", urnikShema, "Urniki");
-mongoose.model("TestDate", testDate, "TestDate");
+

@@ -70,7 +70,7 @@
                 <i role="button" class="far fa-address-book ikone-stil-posamezna" data-toggle="modal"
                     data-target="#kontaktstranke"></i>
                 <i role="button" class="fas fa-utensils ikone-stil-posamezna" data-toggle="modal"
-                    data-target="#dodajnarocilo" data-narocilo="{{rezervacija.narocilo._id}}"></i>
+                    data-target="#dodajnarocilo" data-narocilo="{{rezervacija.narocilo._id}}" data-rezervacija="{{rezervacija._id}}"></i>
                 <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
             </div>
         </div>
@@ -142,11 +142,11 @@
                 <div class="inputfieldtop">
                     <div class="inputfield">
                         <lebel>Natakar</lebel>
-                        <select id="natakar"></select>
+                        <input id="natakar" value="{{uporabnik_ime}}" disabled></input>
                     </div>
                     <div class="inputfield">
                         <lebel>Miza</lebel>
-                        <select id="miza"></select>
+                        <input id="miza" type="number" min="1"></input>
                     </div>
                 </div>
                 <div class="butkontakt">

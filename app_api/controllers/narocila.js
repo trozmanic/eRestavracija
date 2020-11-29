@@ -64,8 +64,9 @@ const pridobiNarocilo = (req,res)=>{
 }
 
 const posodobiNarocilo = async (req, res) => {
+    console.log(req.body)
     try {
-        const id = req.body.id;
+        const id = req.body.id || req.params.idNarocila;
         const narocilo = await Narocila.findByIdAndUpdate(id, req.body);
         res.status(200).json(narocilo);
     }catch (err) {

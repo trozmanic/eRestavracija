@@ -196,7 +196,90 @@ const posodobiUrnik = (req, res) => {
     }
 }
 
+
+
+const createUrnik = (req, res) => {
+    try {
+        var id = req.query.uporabnik_id;
+        var mesec = req.query.mesec;
+        var leto = req.query.leto;
+        //preveri ce uporabnik obstaja
+        if (id) {
+            Zaposleni.find({id_uporabnika:id}).exec( (napaka, uporabnik) => {
+                if (!uporabnik || !uporabnik[0]) {
+                    return res.status(404).json({
+                        "sporocilo": "Ne najdem uporabnika s tem id."
+                    });
+                } else if (napaka) {
+                    return res.status(500).json(napaka);
+                }
+                //preveri mesec, leto, in set ce ni prov
+                var dan = new Date();
+                if (!mesec || mesec > 11 || mesec < 0) {
+                    mesec = dan.getMonth();
+                }
+                if (!leto || leto > 2099 || leto < 1901) {
+                    leto = dan.getFullYear();
+                }
+                //preveri ce je ta urnik ze
+                Urnik.find({id_uporabnika:id,leto:leto,mesec:mesec}, (napaka2, urnik) => {
+                    if (napaka2) {
+                        return res.status(500).json(napaka2);
+                    }
+                    if (urnik.length < 1) {
+                        //nimamo urnika, ustvari
+                        //leto, mesec, id_uporabnika imamo
+                        var st_dni = daysInMonth(mesec, leto);
+                        var dneviArr = narediPrazenUrnik(st_dni);
+                        var zac_dan = priviDanVMesecu(mesec, leto);
+                        Urnik.create({
+                            id_uporabnika: id,
+                            dnevi: dneviArr,
+                            leto: leto,
+                            mesec: mesec,
+                            st_dni: st_dni,
+                            zac_dan: zac_dan
+                        }, (napaka3, urnik2) => {
+                            if (napaka3) {
+                                return res.status(500).json(napaka3);
+                            } else {
+                                //preoblikuj
+                                urnik2.dnevi = preoblikuj(urnik2.dnevi, urnik2.zac_dan);
+                                return res.status(201).send(urnik2);
+                            }
+                        });
+                    } else {
+                        return res.status(404).json({
+                            "sporocilo": "Urnik ze obstaja."
+                        });
+                    }
+                });
+            });
+        } else {
+            return res.status(400).send({"error_message": "Specify user ID"})
+        }
+    } catch (err) {
+        return res.status(500).json({"error_message": err});
+    }
+}
+
+const deleteUrnik = (req, res) => {
+    var id = req.query.id;
+
+    Urnik.findByIdAndDelete(id, function (napaka, docs) {
+        if (napaka){
+            return res.status(500).json(napaka);
+        }
+        else{
+            return res.status(204).send();
+        }
+    });
+}
+
+
 module.exports = {
     pridobiUrnik,
-    posodobiUrnik
+    posodobiUrnik,
+    deleteUrnik,
+    createUrnik
 }

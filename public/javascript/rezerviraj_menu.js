@@ -28,6 +28,7 @@ let klikRezerviraj=function(dogodek){
     let datum=sessionStorage.getItem("datum");
     let datum_in_ura=new Date(datum);
     datum_in_ura.setHours(ura.split(":")[0],ura.split(":")[1]);
+
     const credentials = JSON.parse(localStorage.getItem("credentials"));
     let payload={
         "datum_in_ura":datum_in_ura.toJSON(),
