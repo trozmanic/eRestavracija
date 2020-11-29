@@ -33,12 +33,13 @@ const menu = function (req, res) {
 
 const rezervacije = function (req, res) {
     let uporabnik_id=req.session.uporabnik_id;
+    let uporabnik_ime=req.session.ime;
     if(uporabnik_id)
         axios.get('/api/rezervacija').then((rezervacije) => {
             axios.get('/api/meni').then((meni) => {
                 let caka = rezervacije.data.filter(el => el.stanje == 'caka');
                 let potrjene = rezervacije.data.filter(el => el.stanje == 'potrjena');
-                res.render('nadzorna_plosca_rezervacije', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Rezervacije', caka: caka, potrjene: potrjene, meni:meni.data, zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id })
+                res.render('nadzorna_plosca_rezervacije', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Rezervacije', caka: caka, potrjene: potrjene, meni:meni.data, zaposleni_role: req.query.vloga, uporabnik_id: uporabnik_id, uporabnik_ime:uporabnik_ime })
             }).catch((napaka) => {
                 console.log(napaka);
             })

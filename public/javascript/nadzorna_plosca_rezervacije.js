@@ -58,28 +58,48 @@ const posljiNarocilo = function (dogodek) {
         }
         return prev;
     }, [])
-    console.log(meni_items);
-    let xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/api/narocila/" + id);
-    xhttp.onload = () => {
-        if (xhttp.status == 200) {
-            window.alert("Rezervacija uspešno oddana");
-        } else {
-            window.alert("Prišlo je do napake");
+    let miza=document.getElementById("miza").value;
+
+    let errors=[];
+    if(miza<1) errors.push("napačna število mize");
+    if(meni_items.length==0) errors.push("ni jedi");
+
+    if(errors.length>0){
+        window.alert("Napake: "+errors.join(", "));
+    }else{
+        let credentials = JSON.parse(localStorage.getItem("credentials"));
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("PUT", "/api/narocila/" + id);
+        xhttp.onload = () => {
+            if (xhttp.status == 200) {
+                let xhttp2=new XMLHttpRequest();
+                xhttp2.open("PUT","/api/rezervacija/"+rezervacija_id+"/narocilo");
+                xhttp2.onload=()=>{
+                    if(xhttp2.status==200){
+                        window.alert("Rezervacija uspešno oddana");
+                    }else{
+                        window.alert("Prišlo je do napake");
+                    }
+                }
+                xhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                xhttp2.send();
+            } else {
+                window.alert("Prišlo je do napake");
+            }
+            window.location.replace("/nadzorna_plosca/rezervacije");
         }
-        window.location.replace("/nadzorna_plosca/rezervacije");
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send(JSON.stringify({
+            "$set": { "meni_items": meni_items, stanje: "sprejeto", natakar: { id_uporabnika: credentials.uporabnik_id }, miza:miza }
+        }));
     }
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify({
-        "$set": { "meni_items": meni_items }
-    }));
 }
 
 const izracunajCeno = function () {
     let cena = [].reduce.call(document.getElementsByClassName("meniitemflex"), (prev, cur) => {
-        return prev+meni_items.find((el)=>el._id==cur.children[0].id).cena*cur.children[1].innerHTML;
+        return prev + meni_items.find((el) => el._id == cur.children[0].id).cena * cur.children[1].innerHTML;
     }, 0)
-    document.getElementById("vrednostcena").innerHTML=cena+"€";
+    document.getElementById("vrednostcena").innerHTML = cena + "€";
 }
 
 for (let but of document.getElementsByClassName("potrdi_rezervacijo")) {
@@ -93,6 +113,7 @@ for (let but of document.getElementsByClassName("zavrni_rezervacijo")) {
 document.getElementById("narociloposli").addEventListener("click", posljiNarocilo)
 
 let id = "";
+let rezervacija_id;
 let meni_items
 let xhttp = new XMLHttpRequest();
 xhttp.open("GET", "/api/meni/");
@@ -104,6 +125,7 @@ xhttp.send();
 
 $("#dodajnarocilo").on("show.bs.modal", function (e) {
     id = $(e.relatedTarget).data("narocilo");
+    rezervacija_id = $(e.relatedTarget).data("rezervacija");
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "/api/narocila/" + id);
     xhttp.onload = () => {

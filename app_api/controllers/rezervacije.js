@@ -11,7 +11,7 @@ const ustvariRezervacijo = function (req, res) {
     let uporabnik_id = req.body.uporabnik_id;
 
     let errors = [];
-    if (datum_in_ura = null) errors.push("ure in datuma");
+    if (cas == null || cas<(new Date())) errors.push("ure in datuma");
     if (stOseb < 1) errors.push("stevila oseb");
 
     if (errors.length == 0 && uporabnik_id) {
@@ -118,7 +118,7 @@ const pridobiRezervacije = function (req, res) {
 }
 
 const posodobiRezervacijo=function(req,res){
-    const allowed=['potrdi','zavrni','preklici']
+    const allowed=['potrdi','zavrni','preklici',"narocilo"]
     if(allowed.includes(req.params.operacija)){
         console.log(req.params.idRezervacije);
         Gost.find({"rezervacije._id":req.params.idRezervacije}).exec((napaka,gost)=>{
@@ -134,6 +134,8 @@ const posodobiRezervacijo=function(req,res){
                     rezervacija.stanje="zavrnjena";
                 }else if(req.params.operacija=="preklici"){
                     rezervacija.stanje="preklicana";
+                }else if(req.params.operacija=="narocilo"){
+                    rezervacija.stanje="narocilo";
                 }
                 gost[0].save((napaka)=>{
                     if(napaka){
