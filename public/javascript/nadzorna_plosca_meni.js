@@ -268,8 +268,8 @@ function appendForm(element, value){
         "        </div>\n" +
         "        <div class=\"form-group\">\n" +
         "            <label>Food API</label>\n" +
-        "            <input type=\"text\" id=\"ingredient\" placeholder=\"Vnesi sestavino\">\n" +
-        "            <input type=\"text\" id=\"quantity\" placeholder=\"Vnesi količino v gramih\">\n" +
+        "            <input type=\"text\" id=\"ingredient\" placeholder=\"Vnesi sestavino v anglescini\">\n" +
+        "            <input type=\"number\" id=\"quantity\" placeholder=\"Vnesi količino v gramih\">\n" +
         "            <i role=\"button\" id=\"add-sestavina\" class=\"fas fa-search ikone-stil-posamezna\"></i>\n" +
         "        </div>\n" +
         "       <div class=\"sestavine\">" +

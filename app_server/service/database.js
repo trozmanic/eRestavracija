@@ -3,8 +3,7 @@ const apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
 if (process.env.NODE_ENV === 'production') {
-    //TODO: include heroku
-    apiParametri.streznik = "";
+    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com/';
 }
 
 const initDB = async function(req, res){
@@ -28,7 +27,7 @@ const initDB = async function(req, res){
             }
         ]
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     })
 
 
@@ -49,7 +48,7 @@ const initDB = async function(req, res){
             }
         ]
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     })
 
     axios.post(apiParametri.streznik + '/api/meni', {
@@ -69,7 +68,7 @@ const initDB = async function(req, res){
             }
         ]
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     })
 
 
@@ -90,7 +89,7 @@ const initDB = async function(req, res){
             }
         ]
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     })
 
 
@@ -111,7 +110,7 @@ const initDB = async function(req, res){
             }
         ]
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     })
 
     axios.post(apiParametri.streznik + '/api/meni', {
@@ -131,7 +130,7 @@ const initDB = async function(req, res){
             }
         ]
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     })
 
     // surovine
@@ -144,7 +143,7 @@ const initDB = async function(req, res){
     }).then((res) => {
 
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/zaloga', {
@@ -155,7 +154,7 @@ const initDB = async function(req, res){
     }).then((res) => {
 
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+         return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/zaloga', {
@@ -166,7 +165,7 @@ const initDB = async function(req, res){
     }).then((res) => {
 
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+         return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/zaloga', {
@@ -177,7 +176,7 @@ const initDB = async function(req, res){
     }).then((res) => {
 
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+         return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/zaloga', {
@@ -188,34 +187,9 @@ const initDB = async function(req, res){
     }).then((res) => {
 
     }).catch((err) => {
-        res.status(500).json({"error_message": err});
+        return res.status(500).json({"error_message": err});
     });
 
-/*
-    axios.get(apiParametri.streznik+'/api/meni')
-        .then((res) => {
-            var len = res.data.length;
-
-            var id1 = res.data[0]._id;
-            var id2 = res.data[len - 1]._id;
-
-            axios.post(apiParametri.streznik+'/api/narocila', {
-                meni_items: [
-                    {
-                        meniItemID: id1,
-                        kolicina: 2
-                    },
-                    {
-                        meniItemID: "5fb7d63f53a6420da45b5150",
-                        kolicina: 6
-                    }
-                ],
-                cena : 31,
-                miza: 12,
-                stanje: "postrezeno"
-            });
-        })
-*/
     axios.post(apiParametri.streznik+'/api/uporabniki', {
         ime: 'kuhar',
         email_naslov: 'kuhar@aldente.si',
@@ -223,7 +197,11 @@ const initDB = async function(req, res){
         geslo: 'geslo1234',
         vloga: 'kuhar'
     }).then((response) => {
-        axios.get(apiParametri.streznik+'/api/urnik/?uporabnik_id='+response.data._id+'&leto=2020&mesec=11');
+        axios.get(apiParametri.streznik+'/api/urnik/?uporabnik_id='+response.data._id+'&leto=2020&mesec=11').catch((err) => {
+            return res.status(500).json({"error_message": err});
+        });
+    }).catch((err) => {
+        return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/uporabniki', {
@@ -233,7 +211,11 @@ const initDB = async function(req, res){
         geslo: 'geslo1234',
         vloga: 'natakar'
     }).then((response) => {
-        axios.get(apiParametri.streznik+'/api/urnik/?uporabnik_id='+response.data._id+'&leto=2020&mesec=11');
+        axios.get(apiParametri.streznik+'/api/urnik/?uporabnik_id='+response.data._id+'&leto=2020&mesec=11').catch((err) => {
+            return res.status(500).json({"error_message": err});
+        });
+    }).catch((err) => {
+        return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/uporabniki', {
@@ -255,6 +237,8 @@ const initDB = async function(req, res){
         }).catch((err) => {
             console.log(err);
         });
+    }).catch((err) => {
+        return res.status(500).json({"error_message": err});
     });
 
     axios.post(apiParametri.streznik+'/api/uporabniki', {
@@ -266,7 +250,7 @@ const initDB = async function(req, res){
     });
 
 
-    return res;
+    return res.status(200);
 
 }
 

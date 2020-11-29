@@ -237,40 +237,24 @@ hbs.registerHelper('datum_to_sting', (dan, index, zac_dan, st_dni) => {
   }
 });
 
-hbs.registerHelper('nadzorna_urnik_prev', (leto, mesec, uporabnik_id, zaposleni_role) => {
+hbs.registerHelper('nadzorna_urnik_prev', (leto, mesec) => {
   mesec--;
   if (mesec < 0) {
     leto--;
     mesec = 11;
   }
-  var url_dodatek =  "?uporabnik_id=" + uporabnik_id;
-  if(leto) {
-    url_dodatek =  url_dodatek + "&leto=" + leto;
-  }
-  if(mesec != null) {
-    url_dodatek =  url_dodatek + "&mesec=" + mesec;
-  }
-  if(zaposleni_role) {
-    url_dodatek =  url_dodatek + "&vloga=" + zaposleni_role;
-  }
+  var url_dodatek = "?leto=" + leto;
+  url_dodatek +=  "&mesec=" + mesec;
   return url_dodatek;
 });
-hbs.registerHelper('nadzorna_urnik_next', (leto, mesec, uporabnik_id, zaposleni_role) => {
+hbs.registerHelper('nadzorna_urnik_next', (leto, mesec) => {
   mesec++;
   if (mesec > 11) {
     leto++;
     mesec = 0;
   }
-  var url_dodatek = "?uporabnik_id=" + uporabnik_id;
-  if(leto) {
-    url_dodatek =  url_dodatek + "&leto=" + leto;
-  }
-  if(mesec != null) {
-    url_dodatek =  url_dodatek + "&mesec=" + mesec;
-  }
-  if(zaposleni_role) {
-    url_dodatek =  url_dodatek + "&vloga=" + zaposleni_role;
-  }
+  var url_dodatek = "?leto=" + leto;
+  url_dodatek +=  "&mesec=" + mesec;
   return url_dodatek;
 });
 hbs.registerHelper('nadzorna_urnik_aldante', (zaposleni_role, uporabnik_id) => {
@@ -301,4 +285,11 @@ hbs.registerHelper("dodaj_mesec_leto", function (mesec, leto){
     return "?leto=" + leto + "&mesec=" + mesec;
   }
   return "";
+});
+hbs.registerHelper("sestej", function (prvi, drugi){
+  if (prvi && drugi) {
+    return parseInt(prvi) - parseInt(drugi);
+  }
+
+  return 0;
 });
