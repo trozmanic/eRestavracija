@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const util = require('util')
 var apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
@@ -225,16 +226,21 @@ const strezba= async function(req,res){
     }
     try {
         let narocila = await axios.get(apiParametri.streznik + "/api/narocila");
-        const natakarData = narocilaService.prepNatakar(narocila.data, idUporabnika);
-        let meni = await axios.get(apiParametri.streznik + "/api/meni");
-
-        res.render('nadzorna_plosca_strezba', {
-            layout: 'layout_nadzorna_plosca.hbs',
-            title: 'Nadzorna plošča - Strežba',
-            zaposleni_role: req.query.vloga,
-            narocila: natakarData,
-            jedi: meni.data
-        })
+        console.log(narocila);
+        try {
+            const natakarData = await narocilaService.prepNatakar(narocila.data, idUporabnika);
+            let meni = await axios.get(apiParametri.streznik + "/api/meni");
+            console.log(util.inspect(natakarData, false, null, true /* enable colors */))
+            res.render('nadzorna_plosca_strezba', {
+                layout: 'layout_nadzorna_plosca.hbs',
+                title: 'Nadzorna plošča - Strežba',
+                zaposleni_role: req.query.vloga,
+                narocila: natakarData,
+                jedi: meni.data
+            })
+        }catch (err) {
+            console.log(err);
+        }
     } catch (err) {
         res.render('error');
     }
@@ -247,7 +253,7 @@ const narocila_kuhar = async function (req, res) {
     }
     try {
         const data = await axios.get(apiParametri.streznik + "/api/narocila");
-        const narocila = narocilaService.prepKuhar(data.data);
+        const narocila = await narocilaService.prepKuhar(data.data);
         res.render('nadzorna_plosca_kuhar', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Narocila kuhinja', uporabnik_id: req.query.uporabnik_id, zaposleni_role: req.query.vloga, narocila });
     } catch (err) {
         console.log(err);
