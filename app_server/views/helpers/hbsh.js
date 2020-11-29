@@ -82,13 +82,17 @@ hbs.registerHelper('nadzorna_plosca_menu_by_role', (zaposleni_role, uporabnik_id
   var racunovodja= [0,0,0,0,0,1,1];
   var vloga;
 
+  if (!zaposleni_role || zaposleni_role.localeCompare("gost") == 0) {
+    return "";
+  }
+
   var url_dodatek = "";
   if (!zaposleni_role) {
     vloga=vodja;
     url_dodatek = "";
   } else {
     vloga=vodja;
-    zaposleni_role.localeCompare("vodja") == 0 ? vloga=vodja : vloga=vloga;
+    zaposleni_role.localeCompare("admin") == 0 ? vloga=vodja : vloga=vloga;
     zaposleni_role.localeCompare("natakar") == 0 ? vloga=natakar : vloga=vloga;
     zaposleni_role.localeCompare("kuhar") == 0 ? vloga=kuhar : vloga=vloga;
     zaposleni_role.localeCompare("racunovodja") == 0 ? vloga=racunovodja : vloga=vloga;
@@ -106,9 +110,13 @@ hbs.registerHelper('nadzorna_plosca_menu_by_role', (zaposleni_role, uporabnik_id
 });
 
 hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role, uporabnik_id) => {
+
+  if (!zaposleni_role || zaposleni_role.localeCompare("gost") == 0) {
+    return "";
+  }
+
   //urnik imajo vsi
   //rezervacije,narocila_strezba,narocila_kuhinja,meni,zaloga,zasluzek,zaposleni
-  console.log("TEST "+zaposleni_role);
   var meni_sestavljen = "";
   var presledek = '<div class="w-100"></div><div class="col">&nbsp;</div><div class="col">&nbsp;</div><div class="w-100"></div>';
   var url_dodatek;
@@ -128,7 +136,7 @@ hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role, uporabnik_i
   } else {
     url_dodatek = "";
     meni_sestavljen = '<div class="col"><a href="/nadzorna_plosca/urnik' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="far fa-calendar-alt"></i><br>Urnik</a></div>';
-    if (zaposleni_role.localeCompare("vodja") == 0) {
+    if (zaposleni_role.localeCompare("admin") == 0) {
       meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/rezervacije' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-clock"></i><br>Rezervacije</a></div>';
       meni_sestavljen += presledek;
       meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/strezba' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-utensils"></i><br>Naročila strežba</a></div>';
