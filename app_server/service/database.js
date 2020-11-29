@@ -243,10 +243,18 @@ const initDB = async function(req, res){
         geslo: 'geslo1234',
         vloga: 'gost'
     }).then((response) => {
+        var datum = new Date();
+        datum.setFullYear(new Date().getFullYear());
+        datum.setMonth(new Date().getMonth());
+        datum.setDate(new Date().getDate() +3 );
+        datum.setHours(12);
         axios.post(apiParametri.streznik+'/api/rezervacija', {
+            datum_in_ura: datum,
             stOseb: 4,
             uporabnik_id: response.data._id
-        })
+        }).catch((err) => {
+            console.log(err);
+        });
     });
 
     axios.post(apiParametri.streznik+'/api/uporabniki', {
@@ -258,7 +266,7 @@ const initDB = async function(req, res){
     });
 
 
-
+    return res;
 
 }
 
