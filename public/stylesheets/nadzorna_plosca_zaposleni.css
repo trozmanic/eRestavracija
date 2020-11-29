@@ -40,11 +40,46 @@ h1 {
     backdrop-filter: blur(5px);
 }
 .input-group input[type="text"]:focus:not([readonly]) {
-    box-shadow: 0 0 0 1px white;
+    box-shadow: 0 0 1px 1px white inset;
 }
-.form-control::-webkit-input-placeholder {
+.input-group .form-control::-webkit-input-placeholder {
   color: white;
 }
 .razmik {
     margin-bottom: 8px;
+}
+.bel {
+    color: white;
+}
+.izberi {
+    font-family: 'Raleway', sans-serif;
+    background: none;
+    border: 1px solid white;
+    border-radius: 12px;
+    color: white;
+}
+select:hover {
+    transition: 1s;
+    color:#5F3C50;
+    background:none;
+    border: 1px solid white;
+    background-color: white;
+}
+select:focus:not([readonly]) {
+    color:#5F3C50;
+    background:none;
+    border: 1px solid white;
+    background-color: white;
+    box-shadow: 0 0 1px 1px white inset;
+}
+.box {
+  background: #666666;
+  color: #ffffff;
+  width: 250px;
+  padding: 10px;
+  margin: 1em auto;
+}
+p {
+  margin: 1.5em 0;
+  padding: 0;
 }

@@ -12,7 +12,6 @@ const axios = require('axios').create({
     timeout: 5000
 });
 const narocilaService = require('../service/narocila');
-const zalogaService = require("../service/zaloga");
 
 const ime_priimek_uporabnik = function (id) {
     axios.get('/api/uporabniki/' + id, {
@@ -149,7 +148,7 @@ const zasluzel_brisi_racun=function(req,res){
         prikaziZasluzek(req, res, [], "Ni podan id za brisat racun.");
     }
 }
-const urnik=function(req,res){
+const urnik=function(req, res){
     var id = req.query.uporabnik_id;
     var mesec = req.query.mesec;
     var leto = req.query.leto;
@@ -193,7 +192,7 @@ const seznamZaloge = (req, res) => {
     });
 };
 
-const zaloga= function(req,res, seznamSestavin){
+const zaloga = function(req, res, seznamSestavin){
     const idUporabnika = req.session.id;
     if (!idUporabnika) {
         return res.render("404 NOT FOUND");
@@ -212,8 +211,32 @@ const zaloga= function(req,res, seznamSestavin){
     }
 }
 
-const zaposleni = function (req, res) {
-    res.render('nadzorna_plosca_zaposleni', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Zaposleni', zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id })
+//ZAPOSLENI
+const seznamZaposlenih = (req, res) => {
+  axios
+    .get('/api/zaposleni')
+    .then((odgovor) => {
+      zaposleni(req, res, odgovor.data);
+    });
+};
+
+const zaposleni = function(req, res, seznam){
+    const idUporabnika = req.session.id;
+    if (!idUporabnika) {
+        return res.render("404 NOT FOUND");
+    }
+    try {
+        res.render('nadzorna_plosca_zaposleni',{
+            layout:'layout_nadzorna_plosca.hbs',
+            title:'Nadzorna plošča - Zaposleni',
+            zaposleni: seznam,
+            zaposleni_role:req.query.vloga,
+            uporabnik_id:req.query.uporabnik_id
+        })
+    }catch (err) {
+        console.log(err);
+        res.render("error");
+    }
 }
 
 
@@ -284,6 +307,7 @@ module.exports = {
     urnik,
     seznamZaloge,
     zaloga,
+    seznamZaposlenih,
     zaposleni,
     narocila_kuhar,
     meni,

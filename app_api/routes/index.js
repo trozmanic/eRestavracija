@@ -44,9 +44,11 @@ router.get("/urnik", urnik.pridobiUrnik);
 router.put("/urnik", urnik.posodobiUrnik);
 
 //ZAPOSLENI
-router.get("/zaposleni", zaposleni.pridobiZaposlenega);
+router.get("/zaposleni", zaposleni.pridobiZaposlene);
+router.get("/zaposleni/:uporabnik_id", zaposleni.pridobiZaposlenega);
 router.put("/zaposleni", zaposleni.posodobiZaposlenega);
 router.post("/zaposleni", zaposleni.ustvariZaposlenega);
+router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
 
 //NAROCILA
 router.post("/narocila", narocila.ustvariNarocilo);
