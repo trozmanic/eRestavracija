@@ -41,7 +41,7 @@ hbs.registerPartial('narociloItem', "<div class=\"rezervacija-skatla\" id='{{_id
     "                    <h5 class=\"sredina-text\">Naročilo {{ _id }}</h5>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Miza: <strong>{{ miza }}</strong>\n" +
-    "                        <span class=\"desno-float\">Datum: <strong>{{ datum }}</strong></strong></span>\n" +
+    "                        <span class=\"desno-float\">Datum: <strong>{{datum}}</strong></strong></span>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
     "                        Sprejem naročila: <strong>{{ ura }}</strong>\n" +
@@ -92,7 +92,7 @@ hbs.registerPartial('narociloItemPripravljeno', "<div class=\"rezervacija-skatla
     "                        Sprejem naročila: <strong>{{ sprejem_narocila }}</strong>\n" +
     "                    </p>\n" +
     "                    <p class=\"levo-text kartica-padding\">\n" +
-    "                        Konec priprave: <strong>{{ konec_priprave }}</strong></span>\n" +
+    "                        <strong>{{ konec_priprave }}</strong></span>\n" +
     "                    </p>\n" +
     "                    <h6 class=\"sredina-text\"><strong>Jedi:</strong></h6>\n" +
     "                    <ul>\n" +

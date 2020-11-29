@@ -20,16 +20,6 @@
                 <span class="desno-float"><strong>-{{zaposleni_strosek}}€</strong></span>
             </p>
 
-            <p class="levo-text kartica-padding">
-                surovine
-                <span class="desno-float"><strong>-TO DO ??€</strong></span>
-            </p>
-
-            <p class="levo-text kartica-padding">
-                ostali tekoci stroski
-                <span class="desno-float"><strong>-TO DO ??€</strong></span>
-            </p>
-
             <p class="levo-text kartica-padding border-top">
                 <strong>Skupni zasluzek ta mesec</strong>
                 <span class="desno-float"><strong>$1231</strong></span>
@@ -257,7 +247,7 @@
                         <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
                         <ul>
                             {{#each racun.meni_items as |meni_item|}}
-                                <li>TO DO name <strong>{{meni_item.kolicina}}x(TO DO cena)</strong></li>
+                                <li>{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
                             {{/each}}
                         </ul>
                         <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
@@ -291,7 +281,7 @@
                         <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
                         <ul>
                             {{#each racun.meni_items as |meni_item|}}
-                                <li>TO DO name <strong>{{meni_item.kolicina}}x(TO DO cena)</strong></li>
+                                <li>{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
                             {{/each}}
                         </ul>
                         <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>

@@ -6,6 +6,7 @@ var nadzorna_plosca=require('../controllers/nadzorna_plosca');
 var login = require('../service/login')
 var register = require('../service/register')
 var meni = require('../service/meni')
+var database = require('../service/database')
 
 /* GET home page. */
 router.get('/', pristajlna_stran.index);
@@ -38,5 +39,9 @@ router.post("/register", register.register)
 
 router.put("/nadzorna_plosca/meni/:id", meni.editMeni)
 router.post("/nadzorna_plosca/meni", meni.addDish)
+
+
+router.get('/database/init', database.initDB)
+router.get('/database', database.db)
 
 module.exports = router;

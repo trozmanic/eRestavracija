@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const util = require('util')
 var apiParametri = {
     streznik: 'http://localhost:' + (process.env.PORT || 3000)
 };
@@ -27,17 +28,29 @@ const ime_priimek_uporabnik = function (id) {
 }
 
 const menu = function (req, res) {
-    res.render('nadzorna_plosca_menu', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča', zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id });
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+    res.render('nadzorna_plosca_menu', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča', zaposleni_role: vloga, uporabnik_id: id_u, u_ime:u_ime });
 }
 
 const rezervacije = function (req, res) {
+
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+
     let uporabnik_id=req.session.uporabnik_id;
+    let uporabnik_ime=req.session.ime;
     if(uporabnik_id)
         axios.get('/api/rezervacija').then((rezervacije) => {
             axios.get('/api/meni').then((meni) => {
                 let caka = rezervacije.data.filter(el => el.stanje == 'caka');
                 let potrjene = rezervacije.data.filter(el => el.stanje == 'potrjena');
-                res.render('nadzorna_plosca_rezervacije', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Rezervacije', caka: caka, potrjene: potrjene, meni:meni.data, zaposleni_role: req.query.vloga, uporabnik_id: req.query.uporabnik_id })
+                res.render('nadzorna_plosca_rezervacije', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Rezervacije', caka: caka, potrjene: potrjene, meni:meni.data, zaposleni_role: vloga, uporabnik_id: id_u, uporabnik_ime:uporabnik_ime, u_ime:u_ime })
             }).catch((napaka) => {
                 console.log(napaka);
             })
@@ -56,13 +69,14 @@ const prikaziUrnik = function (req, res, urnik, sporocilo) {
         res.render('nadzorna_plosca_urnik', {
             layout: 'layout_nadzorna_plosca.hbs',
             title: 'Nadzorna plošča - Urnik',
-            zaposleni_role: req.query.vloga,
+            zaposleni_role:req.session.vloga,
             urnik: urnik.dnevi,
             leto: urnik.leto,
             mesec: urnik.mesec,
             zac_dan: urnik.zac_dan,
-            uporabnik_id: urnik.id_uporabnika,
-            st_dni: urnik.st_dni
+            uporabnik_id:req.session.uporabnik_id,
+            st_dni: urnik.st_dni,
+            u_ime: req.session.ime
         });
     }
 }
@@ -72,23 +86,31 @@ const prikaziZasluzek=function(req,res, urnik, sporocilo){
     } else {
         res.render('nadzorna_plosca_zasluzek', {layout:'layout_nadzorna_plosca.hbs',
             title: 'Nadzorna plošča - Zasluzek',
-            zaposleni_role:req.query.vloga,
+            zaposleni_role:req.session.vloga,
             urnik:urnik.dnevi,
             leto:urnik.leto,
             mesec:urnik.mesec,
             zac_dan:urnik.zac_dan,
-            uporabnik_id:urnik.uporabnik_id,
+            uporabnik_id:req.session.uporabnik_id,
             st_dni:urnik.st_dni,
             ostevilceni_dnevi: {osi:urnik.ostevilceni_dnevi},
             zasluzek_dnevi: {podatki:urnik.zasluzek_dnevi},
             skupno_prilivi:urnik.skupno_prilivi,
             tabele_placanil:urnik.tabele_placanil,
             tabele_ne_placanil:urnik.tabele_ne_placanil,
-            zaposleni_strosek:urnik.zaposleni_strosek
+            zaposleni_strosek:urnik.zaposleni_strosek,
+            u_ime: req.session.ime
         });
     }
 }
 const zasluzek=function(req,res){
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
     var id = req.query.uporabnik_id;
     var mesec = req.query.mesec;
     var leto = req.query.leto;
@@ -131,6 +153,13 @@ const zasluzek=function(req,res){
 const zasluzel_brisi_racun=function(req,res){
     var id = req.params.id;
 
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
     if (id) {
         axios.delete('/api/narocila/' + id, {
         })
@@ -148,8 +177,16 @@ const zasluzel_brisi_racun=function(req,res){
         prikaziZasluzek(req, res, [], "Ni podan id za brisat racun.");
     }
 }
-const urnik=function(req, res){
-    var id = req.query.uporabnik_id;
+const urnik=function(req,res){
+
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
+    var id = req.session.uporabnik_id;
     var mesec = req.query.mesec;
     var leto = req.query.leto;
     if (id && mesec && leto) {
@@ -192,7 +229,14 @@ const seznamZaloge = (req, res) => {
     });
 };
 
-const zaloga = function(req, res, seznamSestavin){
+const zaloga= function(req,res, seznamSestavin){
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
     const idUporabnika = req.session.id;
     if (!idUporabnika) {
         return res.render("404 NOT FOUND");
@@ -202,8 +246,9 @@ const zaloga = function(req, res, seznamSestavin){
             layout:'layout_nadzorna_plosca.hbs',
             title:'Nadzorna plošča - Zaloga',
             sestavine: seznamSestavin,
-            zaposleni_role:req.query.vloga,
-            uporabnik_id:req.query.uporabnik_id
+            zaposleni_role:vloga,
+            uporabnik_id:id_u,
+            u_ime:u_ime
         })
     }catch (err) {
         console.log(err);
@@ -221,9 +266,11 @@ const seznamZaposlenih = (req, res) => {
 };
 
 const zaposleni = function(req, res, seznam){
-    const idUporabnika = req.session.id;
-    if (!idUporabnika) {
-        return res.render("404 NOT FOUND");
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
     }
     try {
         res.render('nadzorna_plosca_zaposleni',{
@@ -241,37 +288,62 @@ const zaposleni = function(req, res, seznam){
 
 
 const strezba= async function(req,res){
+
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
+
     const idUporabnika = req.session.uporabnik_id;
     console.log("iz seje " + idUporabnika)
     if (!idUporabnika) {
-        return res.render("error");
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Ni uporabnika."});
     }
     try {
         let narocila = await axios.get(apiParametri.streznik + "/api/narocila");
-        const natakarData = narocilaService.prepNatakar(narocila.data, idUporabnika);
-        let meni = await axios.get(apiParametri.streznik + "/api/meni");
-
-        res.render('nadzorna_plosca_strezba', {
-            layout: 'layout_nadzorna_plosca.hbs',
-            title: 'Nadzorna plošča - Strežba',
-            zaposleni_role: req.query.vloga,
-            narocila: natakarData,
-            jedi: meni.data
-        })
+        console.log(narocila);
+        try {
+            const natakarData = await narocilaService.prepNatakar(narocila.data, idUporabnika);
+            let meni = await axios.get(apiParametri.streznik + "/api/meni");
+            console.log(util.inspect(natakarData, false, null, true /* enable colors */))
+            res.render('nadzorna_plosca_strezba', {
+                layout: 'layout_nadzorna_plosca.hbs',
+                title: 'Nadzorna plošča - Strežba',
+                zaposleni_role: vloga,
+                narocila: natakarData,
+                jedi: meni.data,
+                uporabnik_id: id_u,
+                u_ime:u_ime
+            })
+        }catch (err) {
+            console.log(err);
+        }
     } catch (err) {
         res.render('error');
     }
 }
 
 const narocila_kuhar = async function (req, res) {
+
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
+
     const idUporabnika = req.session.id;
     if (!idUporabnika) {
         return res.render("404 NOT FOUND");
     }
     try {
         const data = await axios.get(apiParametri.streznik + "/api/narocila");
-        const narocila = narocilaService.prepKuhar(data.data);
-        res.render('nadzorna_plosca_kuhar', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Narocila kuhinja', uporabnik_id: req.query.uporabnik_id, zaposleni_role: req.query.vloga, narocila });
+        const narocila = await narocilaService.prepKuhar(data.data);
+        res.render('nadzorna_plosca_kuhar', { layout: 'layout_nadzorna_plosca.hbs', title: 'Nadzorna plošča - Narocila kuhinja', uporabnik_id: id_u, zaposleni_role: vloga, u_ime:u_ime ,narocila });
     } catch (err) {
         console.log(err);
         res.render("error");
@@ -279,10 +351,18 @@ const narocila_kuhar = async function (req, res) {
 }
 
 const meni = async function (req, res) {
+
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error',{layout:'layout_nadzorna_plosca',message:"Potrebna prijava"});
+    }
+
     try {
         const meniItems = await axios.get(apiParametri.streznik + "/api/meni");
         res.render('nadzorna_plosca_meni',
-            { layout: 'layout_nadzorna_plosca.hbs', title: 'Al dente', izbrano_ime: 'menu', menu_items: meniItems.data, uporabnik_id: req.query.uporabnik_id, zaposleni_role: req.query.vloga });
+            { layout: 'layout_nadzorna_plosca.hbs', title: 'Al dente', izbrano_ime: 'menu', menu_items: meniItems.data, uporabnik_id: id_u, zaposleni_role: vloga, u_ime:u_ime});
     } catch (err) {
         console.log(err);
         res.render('error');

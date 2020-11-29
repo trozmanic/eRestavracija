@@ -262,7 +262,7 @@ canvas#chLine {
     text-align: center;
 }
 
-.inputfield select{
+.inputfield input{
     border-radius: 12px;
     display:block;
     width:100%;
