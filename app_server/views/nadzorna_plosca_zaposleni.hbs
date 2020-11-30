@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="/stylesheets/nadzorna_plosca_main_style.css">
 <link rel="stylesheet" href="/stylesheets/nadzorna_plosca_zaposleni.css">
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <br>
 <!-- Gumbi in iskanje ZAČETEK -->
 <div class="container">
@@ -85,7 +87,6 @@
                         </div>
                     </div>
                 </div>
-                <a href="" class="btn btn-dark btn-block" role="button">Izberi urnik <i class="far fa-calendar-alt"></i></a>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-dark mr-auto" id="dodajZaposlenegaPotrdi" data-dismiss="modal" disabled>Dodaj</button>
@@ -172,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="" class="btn btn-dark btn-block" role="button">Izberi urnik <i class="far fa-calendar-alt"></i></a>
+                <a href="" class="btn btn-dark btn-block" role="button" id="uredi_urnik" target="_blank">Izberi urnik <i class="far fa-calendar-alt"></i></a>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-dark mr-auto" data-dismiss="modal" id="urediZaposlenegaPotrdi" disabled>Potrdi</button>

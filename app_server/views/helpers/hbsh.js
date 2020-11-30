@@ -162,7 +162,6 @@ hbs.registerHelper('nadzorna_plosca_gumbi_by_role', (zaposleni_role, uporabnik_i
       meni_sestavljen = meni_sestavljen + '<div class="col"><a href="/nadzorna_plosca/zaposleni' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Zaposleni</a></div>';
     }
   }
-  meni_sestavljen += ('<div class="col"><a href="/nadzorna_plosca/admin' + url_dodatek +'" role="button" class="btn btn-dark btn-block"><i class="fas fa-user-cog"></i><br>Upravljanje s podatki</a></div>');
   return meni_sestavljen;
 });
 
