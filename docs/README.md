@@ -155,3 +155,6 @@ Ni bistvenih razlik v primerjavi s Google Chrome, to je pričakovano, saj Edge b
 ## 1.4 Zunanji vir
 Za zunanji vir bomo uporabljali https://developer.edamam.com/food-database-api-docs. To bo integrirano v nadzorna plošča meni, kje se pri dodajanju novih jedi vpiše ime sestavin in pa njeno količino skupaj z mersko enoto, v odgovor pa prejmemo kalorično vrednost za to sestavino. Primer url za redeče jabolko 'https://api.edamam.com/api/food-database/v2/parser?ingr=red%20apple&app_id={your app_id}&app_key={your app_key} 
 
+## 1.5 Master detail vzorec
+Master detail vzorec je pri nasem projektu: stranka ko prebira menije hrane, pritisne na sliko menija, pod sliko se prikazejo podrobnosti o tem meniju, ko kliknemo na sliko ponovno, se pa podrobnosti skrijejo.
+

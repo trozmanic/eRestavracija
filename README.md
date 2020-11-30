@@ -26,7 +26,9 @@ se morata obe polji ujemati.
 - Nadzorna ploošča:
   - Meni: Pri dodajanju nove jedi mora uporabnik vnesti 'ime' jedi, ki jo bo dodal 'opis', 'ceno'. Za 'kalorije' ima 2 opciji ali vnese njemu znano vrednost v okence ali pa pusti prazno in kalorije izračuna z food api in sicer tako, da v prvo okno v angleščini vpiše ime sestavine in v drugo okence količino v gramih, ki je vsebovana v porciji jedi in pritisne gumb ob okencu, ki sestavino doda. To ponovi za vse sestavine v jedi, ko jed shrani se kalorije izračunajo s pomočjo zunanjega vira. Uporabnik dodaj tudi fotografijo formata '.jpeg' . Pri urejanju je zgodba ista, le da so tukaj predhodne vredosti že prisotne v okencih.
   - Rezervacije: Pri rezervacijah so edina vnosna polja v dodajanju rezervacij k naročilom, in sicer natakar in število mize. Natakar je že izpoljen in je trenutno prijavljen uporabnik, število mize pa je veljavno vsako število večje od 0.
-  
+  - Urnik: dovoljena vnosna polja so " ", "d", "p", "?".
+  - Zaloga: Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov, količina mora vsebovati število ter enoto, cena vsebuje samo števke brez simbola valute.
+  - Zaposleni: Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov, telefonska številka vsebuje samo števke brez simbolov, e-pošta mora biti oblike: primer@domena, geslo lahko vsebuje črke, števke, znake in simbole, vlogo je potrebno izbrati in mora imeti eno od naslednjih vrednosti: admin, kuhar, natakar, plača lahko vsebuje samo števke brez simbola valute.
   
   
 # DODATNA KNJIZNICA SOCKET.IO
