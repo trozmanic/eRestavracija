@@ -40,6 +40,9 @@ se morata obe polji ujemati.
 - Aplikacija deluje na zaslonih majhne velikosti (npr. tablice Ipad)
 - Aplikacija deluje na zaslosnih zelo majhne velikosti (npr. telefon Iphone X)
 
+# Heroku
+- Povezava do spletne strani na Heroku: https://aldente-sp-20-21.herokuapp.com/
+
 # Zagon aplikacije
 - Z ukazom docker-compose up zaženemo Docker container
 - Spletna stran je nato dosegljiva na localhost:3000
