@@ -81,7 +81,7 @@ const posodobiZaposlenega = async (req, res) => {
         if (!placa) {
             return res.status(400).json({error_message: "Vnesite placo zaposlenega"});
         }
-        await Zaposleni.findByIdAndUpdate(id, placa).exec();
+        await Zaposleni.findOneAndUpdate({id_uporabnika:id}, req.body).exec();
         res.status(200).json({});
     }catch (err) {
         res.status(500).json({error_message: err});

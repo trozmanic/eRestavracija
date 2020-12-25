@@ -1,0 +1,18 @@
+<a class="dodaj" routerLink="/rezerviraj/podatki"><i class="fas fa-plus"></i></a>
+
+<div class="rescontainer" *ngFor="let rezervacija of rezervacije">
+    <div class="rezervacija-skatla" id={{rezervacija._id}}>
+
+        <div class="rezervacija-info">
+            <p>Datum: {{rezervacija.datum | date:'d.M.y'}}</p>
+            <p>Ura: {{rezervacija.datum | date:'H:mm'}}</p>
+            <p>St. oseb: {{rezervacija.st_oseb}} osebe</p>
+        </div>
+
+        <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
+        <div class="rezervacija-status">
+            <p>Status: {{rezervacija.stanje | rezervacijaStanje}}</p>
+            <p class="preklici" id="{{rezervacija._id}}" *ngIf="rezervacija.stanje=='caka' || rezervacija.stanje=='potrjena'" (click)="rezervacijaPreklici($event)">Prekliči <i role="button" class="fas fa-ban preklici_rezervacijo"></i></p>
+        </div>
+    </div>
+</div>

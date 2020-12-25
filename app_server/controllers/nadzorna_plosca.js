@@ -6,7 +6,7 @@ var apiParametri = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com/';
+    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com';
 }
 
 const axios = require('axios').create({
@@ -95,14 +95,15 @@ const prikaziZasluzek = function (req, res, urnik, sporocilo) {
             leto = dan.getFullYear();
         }
 
-        res.render('nadzorna_plosca_zasluzek2', {layout:'layout_nadzorna_plosca.hbs',
+        res.render('nadzorna_plosca_zasluzek2', {
+            layout: 'layout_nadzorna_plosca.hbs',
             title: 'Nadzorna plošča - Zasluzek',
-            zaposleni_role:req.session.vloga,
-            leto:leto,
-            mesec:mesec,
-            uporabnik_id:req.session.uporabnik_id,
+            zaposleni_role: req.session.vloga,
+            leto: leto,
+            mesec: mesec,
+            uporabnik_id: req.session.uporabnik_id,
             u_ime: req.session.ime,
-            sporocilo:sporocilo
+            sporocilo: sporocilo
         });
 
     } else {
@@ -300,8 +301,9 @@ const zaposleni = function (req, res, seznam) {
             layout: 'layout_nadzorna_plosca.hbs',
             title: 'Nadzorna plošča - Zaposleni',
             zaposleni: seznam,
-            zaposleni_role: req.query.vloga,
-            uporabnik_id: req.query.uporabnik_id
+            zaposleni_role: vloga,
+            uporabnik_id: id_u,
+            u_ime: u_ime
         })
     } catch (err) {
         console.log(err);
@@ -420,6 +422,119 @@ const odjava = (req, res) => {
     return res.redirect("/");
 };
 
+const urnik_prikazi = (zaposleni_id, req, res, urnik, sporocilo) => {
+    if (sporocilo) {
+        res.render('error', { layout: 'layout_nadzorna_plosca.hbs', title: 'Napaka', zaposleni_role: req.session.vloga, uporabnik_id: req.session.uporabnik_id, u_ime: req.session.ime, message: sporocilo });
+    } else {
+        res.render('nadzorna_plosca_urnik_list', {
+            layout: 'layout_nadzorna_plosca.hbs',
+            title: 'Nadzorna plošča - Urnik list',
+            zaposleni_role: req.session.vloga,
+            uporabnik_id: req.session.uporabnik_id,
+            u_ime: req.session.ime,
+            urniki: urnik,
+            zaposleni_id: zaposleni_id
+        });
+    }
+};
+
+const urnik_uporabnik = (req, res) => {
+    ///nadzorna_plosca/urnik/:id
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Potrebna prijava" });
+    }
+
+    var zasleni_id = req.params.id;
+    if (!zasleni_id) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Ni zaposleni id" });
+    }
+
+
+    axios.get('/api/urnik/' + zasleni_id)
+        .then((odgovor) => {
+            urnik_prikazi(zasleni_id, req, res, odgovor.data);
+        })
+        .catch((error) => {
+            if (error.response && error.response.data && error.response.data.sporocilo) {
+                urnik_prikazi(zasleni_id, req, res, [], error.response.data.sporocilo);
+            } else {
+                urnik_prikazi(zasleni_id, req, res, [], "Napaka API-ja pri iskanju urnikov zaposlenega.");
+            }
+        });
+};
+
+const urnik_brisi = (req, res) => {
+    ///nadzorna_plosca/urnik/:id/delete/:id_urnik
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Potrebna prijava" });
+    }
+
+    var urnik_id = req.params.id_urnik;
+    if (!urnik_id) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Ni urnik_id" });
+    }
+
+    var zasleni_id = req.params.id;
+    if (!zasleni_id) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Ni zaposleni id" });
+    }
+
+
+    axios.delete('/api/urnik?id=' + urnik_id)
+        .then((odgovor) => {
+            axios.get('/api/urnik/' + zasleni_id)
+                .then((odgovor2) => {
+                    urnik_prikazi(zasleni_id, req, res, odgovor2.data);
+                })
+                .catch((error2) => {
+                    if (error2.response && error2.response.data && error2.response.data.sporocilo) {
+                        urnik_prikazi(zasleni_id, req, res, [], error2.response.data.sporocilo);
+                    } else {
+                        urnik_prikazi(zasleni_id, req, res, [], "Napaka API-ja pri iskanju urnikov zaposlenega.");
+                    }
+                });
+        })
+        .catch((error) => {
+            if (error.response && error.response.data && error.response.data.sporocilo) {
+                urnik_prikazi(zasleni_id, req, res, [], error.response.data.sporocilo);
+            } else {
+                urnik_prikazi(zasleni_id, req, res, [], "Napaka API-ja pri brisanju urnika");
+            }
+        });
+
+};
+
+const urnik_edit = (req, res) => {
+    ///nadzorna_plosca/urnik/:id/edit/:id_urnik
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Potrebna prijava" });
+    }
+
+
+};
+
+const urnik_create = (req, res) => {
+    ///nadzorna_plosca/urnik/:id/create
+    var id_u = req.session.uporabnik_id;
+    var vloga = req.session.vloga;
+    var u_ime = req.session.ime;
+    if (!id_u) {
+        res.render('error', { layout: 'layout_nadzorna_plosca', message: "Potrebna prijava" });
+    }
+
+
+};
+
+
 module.exports = {
     menu,
     rezervacije,
@@ -434,5 +549,9 @@ module.exports = {
     zasluzek,
     zasluzel_brisi_racun,
     admin,
-    odjava
+    odjava,
+    urnik_uporabnik,
+    urnik_brisi,
+    urnik_edit,
+    urnik_create
 }

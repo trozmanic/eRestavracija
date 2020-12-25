@@ -8,7 +8,7 @@ const apiParametri = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com/';
+    apiParametri.streznik = 'https://aldente-sp-20-21.herokuapp.com';
 }
 
 //NOTE: temporary function to get JSON data hardcoded on disk

@@ -62,6 +62,7 @@ const pridobiUporabnika=async (req,res)=>{
 
 
 const posodbiUporabnika= async (req,res)=>{
+    console.log(req.body);
     try {
         const user = req.body;
         console.log(req.body.id);
