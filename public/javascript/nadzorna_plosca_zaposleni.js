@@ -115,6 +115,8 @@ uredi.addEventListener("click", function(){
     var izbranaVloga = vloga.options[vloga.selectedIndex].text;
     var placa = document.getElementById("PlacaForm2").value;
     
+    var uporabnik_id;
+    
     for(var i=0; i<steviloVrstic; i++){
         if(checkboxi[i].checked) {
             var id = checkboxi[i].getAttribute("idzaposlenega");
@@ -136,29 +138,34 @@ uredi.addEventListener("click", function(){
             }
             
             $.ajax({
-                url: '/api/uporabniki/',
+                url: '/api/uporabniki',
                 type: 'PUT',
                 data: posodobljenZaposlen,
-                success: function(odgovor) {
-                    console.log("Odgovor: "+odgovor);
-                    if(placa > 0){
-                        var novaPlaca = {uporabnik_id:id, placa:placa};
-                    
-                        $.ajax({
-                            url: '/api/zaposleni/',
-                            type: 'PUT',
-                            data: novaPlaca,
-                            success: function(odgovor) {
-                                document.getElementById("ImeForm2").value = "";
-                                document.getElementById("PostaForm2").value = "";
-                                document.getElementById("TelefonForm2").value = "";
-                                document.getElementById("GesloForm2").value = "";
-                                location.reload();
-                            }
-                        });
-                    }
+                success: function() {
+                    document.getElementById("ImeForm2").value = "";
+                    document.getElementById("PostaForm2").value = "";
+                    document.getElementById("TelefonForm2").value = "";
+                    document.getElementById("GesloForm2").value = "";
+                    location.reload();
                 }
             });
+            
+            if(placa > 0){
+                var novaPlaca = {uporabnik_id:id, placa:placa};
+            
+                $.ajax({
+                    url: '/api/zaposleni',
+                    type: 'PUT',
+                    data: novaPlaca,
+                    success: function(odgovor) {
+                        document.getElementById("ImeForm2").value = "";
+                        document.getElementById("PostaForm2").value = "";
+                        document.getElementById("TelefonForm2").value = "";
+                        document.getElementById("GesloForm2").value = "";
+                        location.reload();
+                    }
+                });
+            }
         }
     }
 });
