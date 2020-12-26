@@ -4,7 +4,7 @@ const Gost = mongoose.model("Gost");
 const Zaposleni = mongoose.model("Zaposlen");
 var ObjectId = require('mongoose').Types.ObjectId;
 
-const ustvariUporabnika=async (req,res)=>{
+/*const ustvariUporabnika=async (req,res)=>{
     try {
         let uporabnik = req.body;
         console.log(uporabnik);
@@ -26,7 +26,7 @@ const ustvariUporabnika=async (req,res)=>{
         console.log(err);
         res.status(500).json({"error_message": err});
     }
-}
+}*/
 
 const pridobiUporabnike=async (req,res)=>{
     let email = req.query.email;
@@ -106,7 +106,7 @@ const izbrisiUporabnika = async (req,res) => {
 module.exports={
     pridobiUporabnike,
     pridobiUporabnika,
-    ustvariUporabnika,
+    //ustvariUporabnika,
     posodbiUporabnika,
     izbrisiUporabnika
 }

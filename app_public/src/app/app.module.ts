@@ -12,6 +12,7 @@ import { RezervacijaMeniPipe } from './skupno/cevi/rezervacija-meni.pipe';
 import { RezervacijaPodatkiComponent } from './skupno/komponente/rezervacija-podatki/rezervacija-podatki.component';
 import { RezervacijaMeniComponent } from './skupno/komponente/rezervacija-meni/rezervacija-meni.component';
 import { ClearStorageService } from './skupno/storitve/clear-storage.service';
+import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ClearStorageService } from './skupno/storitve/clear-storage.service';
     RezervacijaStanjePipe,
     RezervacijaMeniPipe,
     RezervacijaPodatkiComponent,
-    RezervacijaMeniComponent
+    RezervacijaMeniComponent,
+    NadzornaPloscaComponent
   ],
   imports: [
     BrowserModule,

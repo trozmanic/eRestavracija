@@ -1,6 +1,13 @@
 const express=require('express');
 const router=express.Router();
 
+const jwt = require('express-jwt');
+const avtentikacija = jwt({
+  secret: process.env.JWT_GESLO,
+  userProperty: 'payload',
+  algorithms: ['HS256']
+});
+
 const uporabniki=require('../controllers/uporabniki');
 const rezervacije=require('../controllers/rezervacije')
 const meni = require('../controllers/meni');
@@ -12,11 +19,12 @@ const zaloga = require('../controllers/zaloga');
 const zasluzek = require('../controllers/zasluzek');
 const slike = require('../controllers/image');
 const database = require('../controllers/database');
+const ctrlAvtentikacija = require('../controllers/avtentikacija');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
 router.get("/uporabniki/:idUporabnika",uporabniki.pridobiUporabnika);
-router.post("/uporabniki",uporabniki.ustvariUporabnika);
+//router.post("/uporabniki",uporabniki.ustvariUporabnika);
 router.put("/uporabniki",uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
 
@@ -73,6 +81,10 @@ router.put("/zaloga", zaloga.posodobiSestavino);
 router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
 
 router.post('/image', slike.shraniSliko)
+
+// AVTENTIKACIJA
+router.post('/registracija', ctrlAvtentikacija.registracija);
+router.post('/prijava', ctrlAvtentikacija.prijava);
 
 router.get('/database/drop', database.dropDB);
 
