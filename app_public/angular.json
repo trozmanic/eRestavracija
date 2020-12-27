@@ -145,5 +145,8 @@
       }
     }
   },
-  "defaultProject": "AlDente"
+  "defaultProject": "AlDente",
+  "cli": {
+    "analytics": false
+  }
 }
