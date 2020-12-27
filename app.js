@@ -1,9 +1,12 @@
+require('dotenv').config();
+var passport = require('passport');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('./app_api/models/db')
+require('./app_api/konfiguracija/passport');
 var indexRouter = require('./app_server/routes/index');
 var indexApi = require('./app_api/routes/index');
 require('./app_server/views/helpers/hbsh.js');
@@ -22,10 +25,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(passport.initialize());
+
 app.use('/api', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS, AUTHORIZATION');
   next();
 });
 
@@ -41,6 +46,13 @@ app.use('/api', indexApi);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
+});
+
+// Obvladovanje napak zaradi avtentikacije
+app.use((err, req, res, next) => {
+  if (err.name == "UnauthorizedError") {
+    res.status(401).json({"sporočilo": err.name + ": " + err.message});
+  }
 });
 
 // error handler

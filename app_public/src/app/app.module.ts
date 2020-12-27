@@ -12,8 +12,12 @@ import { RezervacijaMeniPipe } from './skupno/cevi/rezervacija-meni.pipe';
 import { RezervacijaPodatkiComponent } from './skupno/komponente/rezervacija-podatki/rezervacija-podatki.component';
 import { RezervacijaMeniComponent } from './skupno/komponente/rezervacija-meni/rezervacija-meni.component';
 import { ClearStorageService } from './skupno/storitve/clear-storage.service';
+<<<<<<< HEAD
 import { StevecPipe } from './skupno/cevi/stevec.pipe';
 import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
+=======
+import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
+>>>>>>> 3e170fffa67734133beba9ffb83edd4120565e62
 
 @NgModule({
   declarations: [
@@ -25,8 +29,12 @@ import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plos
     RezervacijaMeniPipe,
     RezervacijaPodatkiComponent,
     RezervacijaMeniComponent,
+<<<<<<< HEAD
     StevecPipe,
     NadzornaPloscaZalogaComponent
+=======
+    NadzornaPloscaComponent
+>>>>>>> 3e170fffa67734133beba9ffb83edd4120565e62
   ],
   imports: [
     BrowserModule,
