@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Zaloga } from '../../razredi/zaloga';
 import { ZalogaService } from '../../storitve/zaloga.service';
 import { Router } from '@angular/router';
+//import Any = jasmine.Any;
 
 @Component({
   selector: 'app-nadzorna-plosca-zaloga',
@@ -12,13 +13,13 @@ import { Router } from '@angular/router';
 export class NadzornaPloscaZalogaComponent implements OnInit {
 
   constructor(private zalogaStoritev: ZalogaService, private router: Router) { }
-  
+
   vsebinaStrani = {
     naslov: "Zaloga"
   }
-  
+
   public sestavine: Zaloga[]
-  
+
   private pridobiSestavine(): void {
     this.zalogaStoritev
       .pridobiSestavine()
@@ -51,12 +52,14 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
     this.novaSestavina.cena = 10;
   }
 
+
   public dodajNovoSestavino(): void {
     this.obrazecNapaka = "";
+    /*
     if (this.soPodatkiUstrezni()) {
       this.zalogaStoritev
-        .dodajKomentarLokaciji(this.lokacija._id, this.novKomentar)
-        .then((komentar: Komentar) => {
+        .dodajKomentarLokaciji(null, null)
+        .then((komentar: any) => {
           console.log("Komentar shranjen", komentar);
           let komentarji = this.lokacija.komentarji.slice(0);
           komentarji.unshift(komentar);
@@ -67,15 +70,18 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
     } else {
       this.obrazecNapaka = "Zahtevani so vsi podatki, prosim poskusite ponovno!";
     }
+    */
   }
 
   public jePrijavljen(): boolean {
-    return this.avtentikacijaStoritev.jePrijavljen();
+    //return this.avtentikacijaStoritev.jePrijavljen();
+    return false;
   }
 
   public vrniUporabnika(): string {
-    const { ime } = this.avtentikacijaStoritev.vrniTrenutnegaUporabnika();
-    return ime ? ime : 'Gost';
+    //const { ime } = this.avtentikacijaStoritev.vrniTrenutnegaUporabnika();
+    //return ime ? ime : 'Gost';
+    return null;
   }
 
   ngOnInit(): void {

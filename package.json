@@ -25,10 +25,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "socket.io": "^3.0.3",
-<<<<<<< HEAD
     "tslib": "^2.0.3",
-=======
->>>>>>> 3e170fffa67734133beba9ffb83edd4120565e62
     "ws": "^7.4.0"
   }
 }
