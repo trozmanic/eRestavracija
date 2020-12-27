@@ -15,6 +15,7 @@ import { ClearStorageService } from './skupno/storitve/clear-storage.service';
 import { StevecPipe } from './skupno/cevi/stevec.pipe';
 import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
 import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
+import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosca-urnik/nadzorna-plosca-urnik.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nad
     RezervacijaMeniComponent,
     StevecPipe,
     NadzornaPloscaZalogaComponent,
-    NadzornaPloscaComponent
+    NadzornaPloscaComponent,
+    NadzornaPloscaUrnikComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,10 @@ import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nad
       {
         path: 'nadzorna-plosca/zaloga',
         component: NadzornaPloscaZalogaComponent  /* TREBA POPRAVT! */
+      },
+      {
+        path: 'nadzorna-plosca/urnik',
+        component: NadzornaPloscaUrnikComponent
       }
     ]),
     HttpClientModule
