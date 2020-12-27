@@ -16,6 +16,7 @@ import { StevecPipe } from './skupno/cevi/stevec.pipe';
 import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
 import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
 import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosca-urnik/nadzorna-plosca-urnik.component';
+import { MainComponent } from './skupno/komponente/main/main.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +31,53 @@ import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosc
     StevecPipe,
     NadzornaPloscaZalogaComponent,
     NadzornaPloscaComponent,
-    NadzornaPloscaUrnikComponent
+    NadzornaPloscaUrnikComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: PristajalnaStranComponent,
+        children:[{
+          path: '',
+          component: LoginComponent
+        },
+        {
+          path: 'onas',
+          component: OnasComponent
+        },
+        {
+          path: 'rezerviraj',
+          component: RezervacijaComponent,
+        },
+        {
+          path: 'rezerviraj/podatki',
+          component: RezervacijaPodatkiComponent
+        },
+        {
+          path: 'rezerviraj/meni',
+          component: RezervacijaMeniComponent,
+          canDeactivate: [ClearStorageService]
+        }]
+      },
+      {
+        path: 'nadzorna_plosca',
+        component: NadzornaPloscaComponent,
+        children: [
+          {
+            path: 'zaloga',
+            component: NadzornaPloscaZalogaComponent
+          },
+          {
+            path: 'urnik',
+            component: NadzornaPloscaUrnikComponent
+          }
+        ]
+      }
+    ]),
+    /*RouterModule.forRoot([
       {
         path: '',
         component: LoginComponent
@@ -58,16 +101,16 @@ import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosc
       },
       {
         path: 'nadzorna-plosca/zaloga',
-        component: NadzornaPloscaZalogaComponent  /* TREBA POPRAVT! */
+        component: NadzornaPloscaZalogaComponent
       },
       {
         path: 'nadzorna-plosca/urnik',
         component: NadzornaPloscaUrnikComponent
       }
-    ]),
+    ]),*/
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [PristajalnaStranComponent]
+  bootstrap: [MainComponent]
 })
 export class AppModule { }

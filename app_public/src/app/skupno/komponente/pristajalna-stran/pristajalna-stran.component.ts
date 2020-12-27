@@ -16,6 +16,7 @@ export class PristajalnaStranComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((data) => {
       if (data instanceof RoutesRecognized) {
+        console.log(data.state.root.firstChild.url);
         if(data.state.root.firstChild.url.length>0){
           this.izbrano_ime=data.state.root.firstChild.url[0].path;
         }else{
