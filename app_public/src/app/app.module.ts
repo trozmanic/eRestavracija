@@ -17,6 +17,8 @@ import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plos
 import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
 import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosca-urnik/nadzorna-plosca-urnik.component';
 import { MainComponent } from './skupno/komponente/main/main.component';
+import { MesecToStringPipe } from './skupno/cevi/mesec-to-string.pipe';
+import { DatumToStingPipe } from './skupno/cevi/datum-to-sting.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MainComponent } from './skupno/komponente/main/main.component';
     NadzornaPloscaZalogaComponent,
     NadzornaPloscaComponent,
     NadzornaPloscaUrnikComponent,
-    MainComponent
+    MainComponent,
+    MesecToStringPipe,
+    DatumToStingPipe
   ],
   imports: [
     BrowserModule,
