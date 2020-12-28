@@ -25,6 +25,10 @@ import { DatumToStingZasluzekPipe } from './skupno/cevi/datum-to-sting-zasluzek.
 import { OdstejPipe } from './skupno/cevi/odstej.pipe';
 import { ChartDataPipe } from './skupno/cevi/chart-data.pipe';
 import { ChartLabelsPipe } from './skupno/cevi/chart-labels.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from "@angular/forms";
+import { AuthService } from  './skupno/storitve/auth.service';
+import { InfoComponent } from './skupno/komponente/info/info.component';
 
 @NgModule({
   declarations: [
@@ -47,89 +51,92 @@ import { ChartLabelsPipe } from './skupno/cevi/chart-labels.pipe';
     DatumToStingZasluzekPipe,
     OdstejPipe,
     ChartDataPipe,
-    ChartLabelsPipe
+    ChartLabelsPipe,
+    InfoComponent,
   ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: PristajalnaStranComponent,
-        children:[{
-          path: '',
-          component: LoginComponent
-        },
-        {
-          path: 'onas',
-          component: OnasComponent
-        },
-        {
-          path: 'rezerviraj',
-          component: RezervacijaComponent,
-        },
-        {
-          path: 'rezerviraj/podatki',
-          component: RezervacijaPodatkiComponent
-        },
-        {
-          path: 'rezerviraj/meni',
-          component: RezervacijaMeniComponent,
-          canDeactivate: [ClearStorageService]
-        }]
-      },
-      {
-        path: 'nadzorna_plosca',
-        component: NadzornaPloscaComponent,
-        children: [
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot([
+            {
+                path: '',
+                component: PristajalnaStranComponent,
+                children: [{
+                    path: '',
+                    component: LoginComponent
+                },
+                    {
+                        path: 'onas',
+                        component: OnasComponent
+                    },
+                    {
+                        path: 'rezerviraj',
+                        component: RezervacijaComponent,
+                    },
+                    {
+                        path: 'rezerviraj/podatki',
+                        component: RezervacijaPodatkiComponent
+                    },
+                    {
+                        path: 'rezerviraj/meni',
+                        component: RezervacijaMeniComponent,
+                        canDeactivate: [ClearStorageService]
+                    }]
+            },
+            {
+                path: 'nadzorna_plosca',
+                component: NadzornaPloscaComponent,
+                children: [
+                    {
+                        path: 'zaloga',
+                        component: NadzornaPloscaZalogaComponent
+                    },
+                    {
+                        path: 'urnik',
+                        component: NadzornaPloscaUrnikComponent
+                    },
+                    {
+                        path: 'zasluzek',
+                        component: NadzornaPloscaZasluzekComponent
+                    }
+                ]
+            }
+        ]),
+        /*RouterModule.forRoot([
           {
-            path: 'zaloga',
+            path: '',
+            component: LoginComponent
+          },
+          {
+            path: 'onas',
+            component: OnasComponent
+          },
+          {
+            path: 'rezerviraj',
+            component: RezervacijaComponent,
+          },
+          {
+            path: 'rezerviraj/podatki',
+            component: RezervacijaPodatkiComponent
+          },
+          {
+            path: 'rezerviraj/meni',
+            component: RezervacijaMeniComponent,
+            canDeactivate: [ClearStorageService]
+          },
+          {
+            path: 'nadzorna-plosca/zaloga',
             component: NadzornaPloscaZalogaComponent
           },
           {
-            path: 'urnik',
+            path: 'nadzorna-plosca/urnik',
             component: NadzornaPloscaUrnikComponent
-          },
-          {
-            path: 'zasluzek',
-            component: NadzornaPloscaZasluzekComponent
           }
-        ]
-      }
-    ]),
-    /*RouterModule.forRoot([
-      {
-        path: '',
-        component: LoginComponent
-      },
-      {
-        path: 'onas',
-        component: OnasComponent
-      },
-      {
-        path: 'rezerviraj',
-        component: RezervacijaComponent,
-      },
-      {
-        path: 'rezerviraj/podatki',
-        component: RezervacijaPodatkiComponent
-      },
-      {
-        path: 'rezerviraj/meni',
-        component: RezervacijaMeniComponent,
-        canDeactivate: [ClearStorageService]
-      },
-      {
-        path: 'nadzorna-plosca/zaloga',
-        component: NadzornaPloscaZalogaComponent
-      },
-      {
-        path: 'nadzorna-plosca/urnik',
-        component: NadzornaPloscaUrnikComponent
-      }
-    ]),*/
-    HttpClientModule,
-    ChartsModule
-  ],
+        ]),*/
+        HttpClientModule,
+        ChartsModule,
+        BrowserAnimationsModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [MainComponent]
 })
