@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
 
 import { PristajalnaStranComponent } from './skupno/komponente/pristajalna-stran/pristajalna-stran.component';
 import { RezervacijaComponent } from './skupno/komponente/rezervacija/rezervacija.component';
@@ -19,6 +20,11 @@ import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosc
 import { MainComponent } from './skupno/komponente/main/main.component';
 import { MesecToStringPipe } from './skupno/cevi/mesec-to-string.pipe';
 import { DatumToStingPipe } from './skupno/cevi/datum-to-sting.pipe';
+import { NadzornaPloscaZasluzekComponent } from './skupno/komponente/nadzorna-plosca-zasluzek/nadzorna-plosca-zasluzek.component';
+import { DatumToStingZasluzekPipe } from './skupno/cevi/datum-to-sting-zasluzek.pipe';
+import { OdstejPipe } from './skupno/cevi/odstej.pipe';
+import { ChartDataPipe } from './skupno/cevi/chart-data.pipe';
+import { ChartLabelsPipe } from './skupno/cevi/chart-labels.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +42,12 @@ import { DatumToStingPipe } from './skupno/cevi/datum-to-sting.pipe';
     NadzornaPloscaUrnikComponent,
     MainComponent,
     MesecToStringPipe,
-    DatumToStingPipe
+    DatumToStingPipe,
+    NadzornaPloscaZasluzekComponent,
+    DatumToStingZasluzekPipe,
+    OdstejPipe,
+    ChartDataPipe,
+    ChartLabelsPipe
   ],
   imports: [
     BrowserModule,
@@ -77,6 +88,10 @@ import { DatumToStingPipe } from './skupno/cevi/datum-to-sting.pipe';
           {
             path: 'urnik',
             component: NadzornaPloscaUrnikComponent
+          },
+          {
+            path: 'zasluzek',
+            component: NadzornaPloscaZasluzekComponent
           }
         ]
       }
@@ -112,7 +127,8 @@ import { DatumToStingPipe } from './skupno/cevi/datum-to-sting.pipe';
         component: NadzornaPloscaUrnikComponent
       }
     ]),*/
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [MainComponent]
