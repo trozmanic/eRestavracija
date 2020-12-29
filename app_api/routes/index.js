@@ -20,6 +20,7 @@ const zasluzek = require('../controllers/zasluzek');
 const slike = require('../controllers/image');
 const database = require('../controllers/database');
 const ctrlAvtentikacija = require('../controllers/avtentikacija');
+const gostSelf = require('../controllers/gostSelf');
 
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
@@ -87,5 +88,8 @@ router.post('/registracija', ctrlAvtentikacija.registracija);
 router.post('/prijava', ctrlAvtentikacija.prijava);
 
 router.get('/database/drop', database.dropDB);
+
+//GOST-SELF
+router.get('/self/meni', gostSelf.pridobiMeni);
 
 module.exports=router
