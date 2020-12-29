@@ -190,7 +190,7 @@ const initDB = async function(req, res){
         return res.status(500).json({"error_message": err});
     });
 
-    axios.post(apiParametri.streznik+'/api/uporabniki', {
+    axios.post(apiParametri.streznik+'/api/registracija', {
         ime: 'kuhar',
         email_naslov: 'kuhar@aldente.si',
         telefonska_stevilka: '070000878',
@@ -204,7 +204,7 @@ const initDB = async function(req, res){
         return res.status(500).json({"error_message": err});
     });
 
-    axios.post(apiParametri.streznik+'/api/uporabniki', {
+    axios.post(apiParametri.streznik+'/api/registracija', {
         ime: 'natakar',
         email_naslov: 'natakar@aldente.si',
         telefonska_stevilka: '070000111',
@@ -218,7 +218,7 @@ const initDB = async function(req, res){
         return res.status(500).json({"error_message": err});
     });
 
-    axios.post(apiParametri.streznik+'/api/uporabniki', {
+    axios.post(apiParametri.streznik+'/api/registracija', {
         ime: 'gost',
         email_naslov: 'gost@aldente.si',
         telefonska_stevilka: '070000222',
@@ -241,7 +241,7 @@ const initDB = async function(req, res){
         return res.status(500).json({"error_message": err});
     });
 
-    axios.post(apiParametri.streznik+'/api/uporabniki', {
+    axios.post(apiParametri.streznik+'/api/registracija', {
         ime: 'admin',
         email_naslov: 'admin@aldente.si',
         telefonska_stevilka: '070000333',

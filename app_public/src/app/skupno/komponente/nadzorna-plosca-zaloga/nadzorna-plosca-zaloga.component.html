@@ -1,161 +1,252 @@
 <br>
 <!-- Gumbi in iskanje ZAČETEK -->
 <div class="container">
-    <h1 class="text-center">{{vsebinaStrani.naslov}}</h1>
-    <br>
-    <div class="row">
-        <div class="col-4 col-lg-2">
-           <button type="button" class="btn btn-dark btn-block razmik" data-toggle="modal" data-target="#SestavinaModal1"><i class="fas fa-plus"></i> DODAJ</button>
-        </div>
-        <!-- ZAČETEK dodaj sestavino -->
-        <div class="modal fade" id="SestavinaModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog bel" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Dodaj sestavino</h5>
+  <h1 class="text-center">{{vsebinaStrani.naslov}}</h1>
+  <br>
+  <div class="row">
+    <div class="col-4 col-lg-2">
+      <button type="button" class="btn btn-dark btn-block razmik" (click)="odpriModal(modal1)"><i
+        class="fas fa-plus"></i> DODAJ
+      </button>
+    </div>
+    <!-- ZAČETEK dodaj sestavino -->
+    <ng-template #modal1 let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Dodaj sestavino</h5>
+      </div>
+      <div class="modal-body">
+        <form id="obrazec1" (ngSubmit)="dodajSestavino(dodajForm)" #dodajForm="ngForm">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="SestavinaForm1">Sestavina</label>
+                <input [(ngModel)]="novaSestavina.ime" name="imeSestavine1" type="text" class="form-control"
+                       id="SestavinaForm1"
+                       placeholder="Npr.: krompir" pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" #ime="ngModel"
+                       autofocus required>
+                <div class="napaka" *ngIf="ime.errors?.pattern">
+                  Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                </div>
               </div>
-              <div class="modal-body">
-                <form>
-                  <div class="form-group is-invalid">
-                      <label for="SestavinaForm1">Sestavina</label>
-                      <input type="text" class="form-control is-invalid" id="SestavinaForm1" placeholder="Npr.: krompir" autofocus>
-                      <div class="invalid-feedback" id="neveljavnaSestavina1">
-                          Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="KolicinaForm1">Količina</label>
+                <input [(ngModel)]="novaSestavina.kolicina" name="kolicinaSestavine1" type="number"
+                       class="form-control" id="KolicinaForm1"
+                       #kolicina="ngModel" placeholder="Npr.: 1" min="1" required>
+                <div class="napaka" *ngIf="kolicina.dirty && !kolicina.valid">
+                  Količina mora vsebovati število brez enote ter posebnih znakov!
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="EnotaForm1">Enota</label>
+                <input [(ngModel)]="novaSestavina.enota" name="enotaSestavine1" type="text" class="form-control"
+                       id="EnotaForm1"
+                       placeholder="Npr.: kg" pattern="^[a-žA-Ž]{1,}$" #enota="ngModel" required>
+                <div class="napaka" *ngIf="enota.errors?.pattern">
+                  Enota ne sme vsebovati številk ter posebnih znakov!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="CenaForm1">Cena (€)</label>
+                <input [(ngModel)]="novaSestavina.cena" name="cenaSestavine1" type="text" class="form-control"
+                       id="CenaForm1"
+                       placeholder="Npr.: 5" pattern="^[0-9]*.[0-9]*$" #cena="ngModel" required>
+                <div class="napaka" *ngIf="cena.errors?.pattern">
+                  Cena vsebuje samo števke brez simbola valute!
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
+        {{ obrazecNapaka }}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-dark mr-auto" data-dismiss="modal" id="dodajSestavinoPotrdi"
+                form="obrazec1" [disabled]="!dodajForm.valid">Dodaj
+        </button>
+        <button type="button" class="btn btn-dark" id="dodajSestavinoPreklici" data-dismiss="modal"
+                (click)="dodajForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+        </button>
+      </div>
+    </ng-template>
+    <!-- KONEC dodaj sestavino -->
+
+    <div class="col-4 col-lg-2">
+      <button type="button" class="btn btn-dark btn-block razmik" id="uredi" (click)="odpriModal(modal2)" disabled>
+        <i class="fas fa-edit"></i> UREDI
+      </button>
+    </div>
+    <!-- ZAČETEK uredi sestavino -->
+    <ng-template #modal2 let-modal>
+      <div class="modal fade" id="SestavinaModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+           aria-hidden="true">
+        <div class="modal-dialog bel" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel2">Uredi sestavino</h5>
+            </div>
+            <div class="modal-body">
+              <form id="obrazec2" (ngSubmit)="posodobiSestavino(urediForm)" #urediForm="ngForm">
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="SestavinaForm2">Sestavina</label>
+                      <input [(ngModel)]="novaSestavina.ime" name="imeSestavine2" type="text" class="form-control"
+                             id="SestavinaForm2"
+                             placeholder="Npr.: krompir" pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" #ime="ngModel"
+                             autofocus>
+                      <div class="napaka" *ngIf="ime.dirty && ime.errors?.pattern">
+                        Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
                       </div>
+                    </div>
                   </div>
-                  <div class="form-group is-invalid">
-                      <label for="KolicinaForm1">Količina</label>
-                      <input type="text" class="form-control is-invalid" id="KolicinaForm1" placeholder="Npr.: 10 kg">
-                      <div class="invalid-feedback" id="neveljavnaKolicina1">
-                          Količina mora vsebovati število ter enoto!
+                </div>
+
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="KolicinaForm2">Količina</label>
+                      <input [(ngModel)]="novaSestavina.kolicina" name="kolicinaSestavine2" type="text"
+                             class="form-control" id="KolicinaForm2"
+                             placeholder="Npr.: 10" pattern="^[0-9]*.[0-9]*$" #kolicina="ngModel">
+                      <div class="napaka" *ngIf="kolicina.dirty && kolicina.errors?.pattern">
+                        Količina mora vsebovati število brez enote ter posebnih znakov!
                       </div>
+                    </div>
                   </div>
-                  <div class="form-group is-invalid">
-                      <label for="CenaForm1">Cena (€)</label>
-                      <input type="text" class="form-control is-invalid" id="CenaForm1" placeholder="Npr.: 5">
-                      <div class="invalid-feedback" id="neveljavnaCena1">
-                          Cena vsebuje samo števke brez simbola valute!
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="EnotaForm2">Enota</label>
+                      <input [(ngModel)]="novaSestavina.enota" name="enotaSestavine2" type="text" class="form-control"
+                             id="EnotaForm2"
+                             placeholder="Npr.: kg" pattern="^[a-žA-Ž]{1,}$" #enota="ngModel">
+                      <div class="napaka" *ngIf="enota.dirty && enota.errors?.pattern">
+                        Enota ne sme vsebovati številk ter posebnih znakov!
                       </div>
+                    </div>
                   </div>
-                <!--</div>-->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark mr-auto" id="dodajSestavinoPotrdi" data-dismiss="modal" disabled>Dodaj</button>
-                    <button type="button" class="btn btn-dark" id="dodajSestavinoPreklici" data-dismiss="modal">Prekliči</button>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="CenaForm2">Cena (€)</label>
+                      <input [(ngModel)]="novaSestavina.cena" name="cenaSestavine2" type="text" class="form-control"
+                             id="CenaForm2"
+                             placeholder="Npr.: 5" pattern="^[0-9]*.[0-9]*$" #cena="ngModel">
+                      <div class="napaka" *ngIf="cena.dirty && cena.errors?.pattern">
+                        Cena vsebuje samo števke brez simbola valute!
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
-          </div>
-        </div>
-        <!-- KONEC dodaj sestavino -->
-        
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik" data-toggle="modal" data-target="#SestavinaModal2" id="uredi" disabled><i class="fas fa-edit"></i> UREDI</button></div>
-        <!-- ZAČETEK uredi sestavino -->
-        <div class="modal fade" id="SestavinaModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog bel" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Uredi sestavino</h5>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group is-invalid">
-                        <label for="SestavinaForm">Sestavina</label>
-                        <input type="text" class="form-control is-invalid" id="SestavinaForm2" placeholder="Npr.: krompir">
-                        <div class="invalid-feedback" id="neveljavnaSestavina2">
-                            Ime sestavine mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
-                        </div>
-                    </div>
-                    
-                    <div class="form-group is-invalid">
-                        <label for="KolicinaForm">Količina</label>
-                        <input type="text" class="form-control is-invalid" id="KolicinaForm2" placeholder="Npr.: 10 kg">
-                        <div class="invalid-feedback" id="neveljavnaKolicina2">
-                            Količina mora vsebovati število ter enoto!
-                        </div>
-                    </div>
-                    <div class="form-group is-invalid">
-                        <label for="CenaForm1">Cena (€)</label>
-                        <input type="text" class="form-control is-invalid" id="CenaForm2" placeholder="Npr.: 5">
-                        <div class="invalid-feedback" id="neveljavnaCena2">
-                            Cena vsebuje samo števke brez simbola valute!
-                        </div>
-                    </div>
-                <!-- </div> -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-dark mr-auto" data-dismiss="modal" id="urediSestavinoPotrdi" disabled>Potrdi</button>
-                  <button type="button" class="btn btn-dark" data-dismiss="modal" id="urediSestavinoPreklici">Prekliči</button>
-                </div>
-            <!-- </div> -->
-          <!-- </div> -->
-        <!-- </div> -->
-        <!-- KONEC uredi sestavino -->
-        
-        <div class="col-4 col-lg-2"><button type="button" class="btn btn-dark btn-block razmik" id="izbrisiSestavino" data-toggle="modal" data-target="#SestavinaModal3" disabled><i class="fas fa-trash"></i> IZBRIŠI</button></div>
-        <!-- ZAČETEK izbriši sestavino -->
-        <div class="modal fade" id="SestavinaModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog bel" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Opozorilo!</h5>
-              </div>
-              <div class="modal-body">
-                  <p>Ali res želite izbrisati izbrane sestavine?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-dark mr-auto" id="izbrisiSestavinoPotrdi" data-dismiss="modal">Da</button>
-                <button type="button" class="btn btn-dark" id="izbrisiSestavinoPreklici" data-dismiss="modal">Ne</button>
-              </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-dark mr-auto" data-dismiss="modal" id="urediSestavinoPotrdi"
+                      form="obrazec2" (click)="urediForm.reset()">Potrdi
+              </button>
+              <button type="button" class="btn btn-dark" data-dismiss="modal" id="urediSestavinoPreklici"
+                      (click)="urediForm.reset()">Prekliči
+              </button>
             </div>
           </div>
-        </div>
-        <!-- KONEC izbriši sestavino -->
-        
-        <!-- obrazec za iskanje ZAČETEK -->
-        <div class="col-12 col-lg-6">
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <select class="custom-select input-group-text izberi" id="iskanjePo">
-                        <option selected>Sestavina</option>
-                        <option value="1">Količina</option>
-                        <option value="2">Cena</option>
-                    </select>
-                </div>
-                <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZalogi">
-                <div class="input-group-append">
-                    <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-        </div>
-        <!-- obrazec za iskanje KONEC
-    </div> -->
-    <!-- Gumbi in iskanje KONEC -->
-    <!-- ZAČETEK tabele -->
-    <div class="row justify-content-center">
-        <div class="col-12 table-responsive">
-            <table class="table table-dark table-striped table-bordered text-center" id="tabela">
-            <thead class="thead">
-              <tr>
-                <th scope="col">Izberi</th>
-                <th scope="col">Sestavina</th>
-                <th scope="col">Količina</th>
-                <th scope="col">Nabavna cena (na enoto)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let sestavina of sestavine; index as i">
-                <th scope="row">
-                    <div class="custom-control custom-checkbox">    
-                        <input type="checkbox" class="custom-control-input" id="customCheck{{stevec [attr.data-index]='i'}}" idsestavine="{{sestavina._id}}">
-                        <label class="custom-control-label" for="customCheck{{stevec [attr.data-index]='i'}}"></label>
-                    </div>
-                </th>
-                <td iskanje="Sestavina">{{sestavina.ime}}</td>
-                <td iskanje="Količina">{{sestavina.kolicina}} {{sestavina.enota}}</td>
-                <td iskanje="Cena">{{sestavina.cena}} €</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
-    <!-- KONEC tabele
-</div> -->
+    </ng-template>
+    <!-- KONEC uredi sestavino -->
+    <!-- ZAČETEK izbriši sestavino -->
+    <div class="col-4 col-lg-2">
+      <button type="button" class="btn btn-dark btn-block razmik" id="izbrisiSestavino" (click)="odpriModal(modal3)"
+              disabled><i class="fas fa-trash"></i> IZBRIŠI
+      </button>
+    </div>
+    <ng-template #modal3 let-modal>
+      <div class="modal fade" id="SestavinaModal3" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog bel" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Opozorilo!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Ali res želite izbrisati izbrane sestavine?</p>
+            </div>
+            <div class="modal-footer">
+              <button (click)="odstraniSestavino()" type="button" class="btn btn-dark mr-auto"
+                      id="izbrisiSestavinoPotrdi"
+                      data-dismiss="modal">Da
+              </button>
+              <button type="button" class="btn btn-dark" id="izbrisiSestavinoPreklici" data-dismiss="modal">
+                Ne
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <!-- KONEC izbriši sestavino -->
+    <!-- obrazec za iskanje ZAČETEK -->
+    <div class="col-12 col-lg-6">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <select class="custom-select input-group-text izberi" id="iskanjePo">
+            <option selected>Sestavina</option>
+            <option value="1">Količina</option>
+            <option value="2">Cena</option>
+          </select>
+        </div>
+        <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZalogi">
+        <div class="input-group-append">
+          <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- obrazec za iskanje KONEC -->
+  </div>
+  <!-- Gumbi in iskanje KONEC -->
+  <!-- ZAČETEK tabele -->
+  <div class="row justify-content-center">
+    <div class="col-12 table-responsive">
+      <table class="table table-dark table-striped table-bordered text-center" id="tabela">
+        <thead class="thead">
+        <tr>
+          <th scope="col">Izberi</th>
+          <th scope="col">Sestavina</th>
+          <th scope="col">Količina</th>
+          <th scope="col">Nabavna cena (na enoto)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let sestavina of sestavine; index as i">
+          <th scope="row">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" (change)="obkljukan($event, i)"
+                     [value]="sestavina._id"
+                     id="customCheck{{i | stevec}}">
+              <label class="custom-control-label"
+                     for="customCheck{{i | stevec}}"></label>
+            </div>
+          </th>
+          <td iskanje="Sestavina">{{sestavina.ime}}</td>
+          <td iskanje="Količina">{{sestavina.kolicina}} {{sestavina.enota}}</td>
+          <td iskanje="Cena">{{sestavina.cena}} €</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- KONEC tabele -->
+</div>

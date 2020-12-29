@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Uporabnik } from '../../razredi/uporabnik';
+import { User } from '../../razredi/user';
+import { AuthService } from '../../storitve/auth.service';
 import { UporabnikService } from '../../storitve/uporabnik.service';
 
 @Component({
@@ -11,16 +12,15 @@ import { UporabnikService } from '../../storitve/uporabnik.service';
 })
 export class RezervacijaPodatkiComponent implements OnInit {
 
-  public uporabnik: Uporabnik;
+  public uporabnik: User;
 
   private date: Date = new Date();
   private today: Date = new Date();
 
-  constructor(private uporabnikService: UporabnikService,private router: Router) { }
+  constructor(private uporabnikService: UporabnikService,private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
-    let id = JSON.parse(localStorage.getItem("credentials")).uporabnik_id;
-    this.uporabnikService.pridobiUporabnike(id).then(uporabnik => this.uporabnik = uporabnik);
+    this.uporabnik=this.authService.vrniTrenutnegaUporabnika();
 
     this.drawCalander(this.date.getFullYear(), this.date.getMonth());
     document.getElementsByClassName("calander")[0].getElementsByTagName("tbody")[0].addEventListener('click', this.klicKolendar.bind(this));
@@ -37,7 +37,7 @@ export class RezervacijaPodatkiComponent implements OnInit {
     let numOfDaysCurrent = this.getDaysInMonth(year, month);
     let numOfDaysPrevious = this.getDaysInMonth(year, month - 1);
     let dayArray = Array.from(new Array(firstDay - 1), (x, i) => [numOfDaysPrevious - firstDay + i + 2, true]);
-    dayArray.push(...Array.from(new Array(numOfDaysCurrent), (x, i) => [i + 1,this.today.getDay()>i+1 && year==this.today.getFullYear() && month==this.today.getMonth() ? true : false]));
+    dayArray.push(...Array.from(new Array(numOfDaysCurrent), (x, i) => [i + 1,this.today.getDate()>i && year==this.today.getFullYear() && month==this.today.getMonth() ? true : false]));
     dayArray.push(...Array.from(new Array(42 - dayArray.length), (x, i) => [i + 1, true]));
     let res = '';
     for (let i = 0; i < 6; i++) {
@@ -77,7 +77,6 @@ export class RezervacijaPodatkiComponent implements OnInit {
   private klickKolendarNazaj() {
     let newDate = new Date(this.date);
     newDate.setMonth(this.date.getMonth() - 1);
-    console.log(newDate);
     if (newDate >= this.today) {
       this.date.setMonth(this.date.getMonth() - 1);
       this.drawCalander(this.date.getFullYear(), this.date.getMonth());

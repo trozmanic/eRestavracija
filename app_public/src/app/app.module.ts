@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { PristajalnaStranComponent } from './skupno/komponente/pristajalna-stran/pristajalna-stran.component';
 import { RezervacijaComponent } from './skupno/komponente/rezervacija/rezervacija.component';
@@ -23,11 +25,9 @@ import { DatumToStingPipe } from './skupno/cevi/datum-to-sting.pipe';
 import { NadzornaPloscaZasluzekComponent } from './skupno/komponente/nadzorna-plosca-zasluzek/nadzorna-plosca-zasluzek.component';
 import { DatumToStingZasluzekPipe } from './skupno/cevi/datum-to-sting-zasluzek.pipe';
 import { OdstejPipe } from './skupno/cevi/odstej.pipe';
-import { ChartDataPipe } from './skupno/cevi/chart-data.pipe';
-import { ChartLabelsPipe } from './skupno/cevi/chart-labels.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule} from "@angular/forms";
-import { AuthService } from  './skupno/storitve/auth.service';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
 import { MeniComponent } from './skupno/komponente/meni/meni.component';
 import { MeniItemComponent } from './skupno/komponente/meni-item/meni-item.component';
@@ -38,6 +38,11 @@ import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalRatingComponent } from './skupno/komponente/modal-rating/modal-rating.component';
 import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
+import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
+import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
+import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
+import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -58,8 +63,6 @@ import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
     NadzornaPloscaZasluzekComponent,
     DatumToStingZasluzekPipe,
     OdstejPipe,
-    ChartDataPipe,
-    ChartLabelsPipe,
     InfoComponent,
     MeniComponent,
     MeniItemComponent,
@@ -122,42 +125,78 @@ import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
             }
         ]),
         /*RouterModule.forRoot([
+=======
+    NadzornaPloscaMeniComponent,
+    EditIdPipe,
+    DeleteIdPipe,
+    NadzornaPloscaRezervacijaComponent,
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: PristajalnaStranComponent,
+        children: [{
+          path: '',
+          component: LoginComponent
+        },
+        {
+          path: 'onas',
+          component: OnasComponent
+        },
+        {
+          path: 'rezerviraj',
+          component: RezervacijaComponent,
+        },
+        {
+          path: 'rezerviraj/podatki',
+          component: RezervacijaPodatkiComponent
+        },
+        {
+          path: 'rezerviraj/meni',
+          component: RezervacijaMeniComponent,
+          canDeactivate: [ClearStorageService]
+        }]
+      },
+      {
+        path: 'nadzorna_plosca',
+        component: NadzornaPloscaComponent,
+        children: [
+>>>>>>> 5fd487f128762b35bc180524824dcebaa3103ead
           {
-            path: '',
-            component: LoginComponent
-          },
-          {
-            path: 'onas',
-            component: OnasComponent
-          },
-          {
-            path: 'rezerviraj',
-            component: RezervacijaComponent,
-          },
-          {
-            path: 'rezerviraj/podatki',
-            component: RezervacijaPodatkiComponent
-          },
-          {
-            path: 'rezerviraj/meni',
-            component: RezervacijaMeniComponent,
-            canDeactivate: [ClearStorageService]
-          },
-          {
-            path: 'nadzorna-plosca/zaloga',
+            path: 'zaloga',
             component: NadzornaPloscaZalogaComponent
           },
           {
-            path: 'nadzorna-plosca/urnik',
+            path: 'urnik',
             component: NadzornaPloscaUrnikComponent
+          },
+          {
+            path: 'zasluzek',
+            component: NadzornaPloscaZasluzekComponent
+          },
+          {
+            path: 'rezervacija',
+            component: NadzornaPloscaRezervacijaComponent
+          },
+          {
+            path: 'urnik/:id',
+            component: NadzornaPloscaUrnikComponent
+          },
+          {
+            path: 'meni',
+            component: NadzornaPloscaMeniComponent
           }
+<<<<<<< HEAD
         ]),*/
-        HttpClientModule,
-        ChartsModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        NgbModule
-    ],
+    HttpClientModule,
+    ChartsModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
+  ],
   providers: [],
   bootstrap: [MainComponent]
 })

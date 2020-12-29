@@ -145,6 +145,7 @@ uporabnikShema.methods.generirajJWT=function(){
 
     return jwt.sign({
         _id:this._id,
+        ime:this.ime,
         email_naslov:this.email_naslov,
         telefonska_stevilka:this.telefonska_stevilka,
         vloga:this.vloga,
