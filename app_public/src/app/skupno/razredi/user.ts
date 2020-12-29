@@ -1,5 +1,6 @@
 export class User {
   _id: string;
+  ime: string;
   email_naslov: string;
   telefonska_stevilka:string;
   vloga:string;
