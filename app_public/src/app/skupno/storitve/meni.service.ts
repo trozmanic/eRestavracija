@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment'
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
-import { MeniItem } from '../razredi/meniItem'
+import { MeniItemGost, MeniItem } from '../razredi/meniItem';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +12,30 @@ export class MeniService {
 
   private api_url = environment.api_url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  public pridobiMeni() {
-    return this.http.get(this.api_url + '/meni').toPromise().then(odgovor => odgovor as MeniItem[])
-      .catch(napaka => this.obdelajNapako(napaka))
+  public pridobiMeniGost(): Promise<MeniItemGost []> {
+    const httpOptions = {
+      headers: this.initHeaders()
+    };
+
+    return this.http.get(this.api_url + '/self/meni', httpOptions).toPromise().then(odgovor => odgovor as MeniItemGost[])
+      .catch(napaka => this.obdelajNapako(napaka));
   }
 
+  public pridobiMeni(): Promise<MeniItem []> {
+    return this.http.get(this.api_url + '/meni').toPromise().then(odgovor => odgovor as MeniItem[])
+      .catch(napaka => this.obdelajNapako(napaka));
+  }
+
+  // tslint:disable-next-line:typedef
   public obdelajNapako(napaka) {
-    console.log("Napaka pri pridobivanju menijev");
+    console.log('Napaka pri pridobivanju menijev');
     return Promise.reject(napaka.message || napaka);
+  }
+
+  private initHeaders(): HttpHeaders {
+    return  new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
   }
 
 }

@@ -1,0 +1,25 @@
+  <div class="modal-dialog modal_rating hidden" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">OCENI JED</h5>
+      </div>
+      <div class="modal-body">
+        <div id='rating-svg' [innerHTML]="currentRating-1 | nasmesek">
+
+        </div>
+        <div id='rating-number'>
+          Ocena jedi: {{currentRating}}
+        </div>
+        <div class="slidecontainer">
+
+          <input type="range" min="1" max="5" value="3" class="slider" id="myRange" [(ngModel)]="currentRating" oninput="" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button btn-review" data-dismiss="modal" (click)="close()" >ZAPRI</button>
+        <button type="button" class="button btn-review" id="posljiOceno" (click)="posljiOceno()">POSLJI</button>
+      </div>
+    </div>
+  </div>
+
+

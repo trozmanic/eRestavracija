@@ -29,7 +29,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule} from "@angular/forms";
 import { AuthService } from  './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
-
+import { MeniComponent } from './skupno/komponente/meni/meni.component';
+import { MeniItemComponent } from './skupno/komponente/meni-item/meni-item.component';
+import { TransformPictureLinkPipe } from './skupno/cevi/transform-picture-link.pipe';
+import { ZvedaPipe } from './skupno/cevi/zveda.pipe';
+import { OcenaParserPipe } from './skupno/cevi/ocena-parser.pipe';
+import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalRatingComponent } from './skupno/komponente/modal-rating/modal-rating.component';
+import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -53,6 +61,14 @@ import { InfoComponent } from './skupno/komponente/info/info.component';
     ChartDataPipe,
     ChartLabelsPipe,
     InfoComponent,
+    MeniComponent,
+    MeniItemComponent,
+    TransformPictureLinkPipe,
+    ZvedaPipe,
+    OcenaParserPipe,
+    ZvezdaComponent,
+    ModalRatingComponent,
+    NasmesekPipe,
   ],
     imports: [
         BrowserModule,
@@ -75,6 +91,10 @@ import { InfoComponent } from './skupno/komponente/info/info.component';
                     {
                         path: 'rezerviraj/podatki',
                         component: RezervacijaPodatkiComponent
+                    },
+                    {
+                      path: 'meni',
+                      component: MeniComponent
                     },
                     {
                         path: 'rezerviraj/meni',
@@ -135,7 +155,8 @@ import { InfoComponent } from './skupno/komponente/info/info.component';
         HttpClientModule,
         ChartsModule,
         BrowserAnimationsModule,
-        FormsModule
+        FormsModule,
+        NgbModule
     ],
   providers: [],
   bootstrap: [MainComponent]

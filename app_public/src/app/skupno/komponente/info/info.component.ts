@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../razredi/user";
-import {AuthService} from "../../storitve/auth.service";
+import {User} from '../../razredi/user';
+import {AuthService} from '../../storitve/auth.service';
 
 @Component({
   selector: 'app-info',
@@ -9,12 +9,16 @@ import {AuthService} from "../../storitve/auth.service";
 })
 export class InfoComponent implements OnInit {
 
-  public user:User;
+  public user: User;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.user = this.authService.vrniTrenutnegaUporabnika()
+    this.user = this.authService.vrniTrenutnegaUporabnika();
+  }
+
+  odjavi(): void {
+    this.authService.odjava();
   }
 
 }

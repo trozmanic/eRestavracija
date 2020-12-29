@@ -7,16 +7,24 @@ export class MeniItem {
     kalorije: Number;
     slika: String;
     cena: Number;
-    sestavine:[{
+    sestavine: [{
         _id: String;
         kolicina: Number;
-    }]
+    }];
+}
+
+export class MeniItemGost extends MeniItem {
+  ocenjena: boolean;
+  constructor(ocenjena: boolean) {
+    super();
+    this.ocenjena = ocenjena;
+  }
 }
 
 export class MeniItemRezervacija extends MeniItem {
     kolicina: number;
-    constructor(x:any){
+    constructor(x: any){
         super();
-        Object.assign(this,x);
+        Object.assign(this, x);
     }
 }
