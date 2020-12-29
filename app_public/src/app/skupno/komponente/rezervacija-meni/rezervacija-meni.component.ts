@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MeniItem, MeniItemRezervacija } from '../../razredi/meniItem';
+import { AuthService } from '../../storitve/auth.service';
 import { MeniService } from '../../storitve/meni.service';
 import { RezervacijeService } from '../../storitve/rezervacije.service';
 
@@ -14,7 +15,7 @@ export class RezervacijaMeniComponent implements OnInit {
 
   public meni_items: MeniItemRezervacija[];
 
-  constructor(private meniService: MeniService, private rezervacijeService: RezervacijeService, private router: Router) { }
+  constructor(private meniService: MeniService, private rezervacijeService: RezervacijeService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.checkStorage();
@@ -55,13 +56,13 @@ export class RezervacijaMeniComponent implements OnInit {
     let datum = sessionStorage.getItem("datum");
     let datum_in_ura = new Date(datum);
     datum_in_ura.setHours(parseInt(ura.split(":")[0]), parseInt(ura.split(":")[1]));
-    const credentials = JSON.parse(localStorage.getItem("credentials"));
+    const uporabnik_id=this.authService.vrniTrenutnegaUporabnika()._id;
 
     let payload = {
       "datum_in_ura": datum_in_ura.toJSON(),
       "stOseb": stOseb,
       "jedi": jedi,
-      "uporabnik_id": credentials.uporabnik_id
+      "uporabnik_id": uporabnik_id
     }
     this.rezervacijeService.ustvariRezervacijo(payload).then(odgovor=>{
       if(odgovor.ok){

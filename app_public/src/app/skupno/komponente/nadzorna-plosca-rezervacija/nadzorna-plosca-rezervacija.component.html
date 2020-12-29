@@ -1,0 +1,127 @@
+<!-- Tukaj vstavi vsebino -->
+<div class="col-xl-12 title">
+    <h1>Upravljanje Rezervacij</h1>
+    <i class="fas fa-question-circle" (click)="odpriLegendaModal(legenda)"></i>
+</div>
+<!-- Zacetek rezervacij -->
+
+<!-- Source oseb: wikipedia: najpogostejsi imena + priimki -->
+
+<alert [type]="rezervacijeAlert.type" [isOpen]="rezervacijeAlert.open"><span
+        [innerHtml]="rezervacijeAlert.sporocilo"></span></alert>
+
+<div class="row">
+
+    <div class="col-12 col-md-6">
+        <div class="col-xl-12">
+            <h3 class="sredina-text text-white">Nove rezervacije</h3>
+        </div>
+
+        <div *ngFor="let rezervacija of rezervacijeCaka" class="rezervacija-skatla">
+            <h5 class="sredina-text">Rezervacija<i class="fas fa-check"></i></h5>
+
+            <p class="levo-text kartica-padding">
+                Stranka: <strong>{{rezervacija.ime_stranke}}</strong>
+                <span class="desno-float">St. mest: <strong>{{rezervacija.st_oseb}}</strong></span>
+            </p>
+
+            <p class="levo-text kartica-padding">
+                Datum: <strong>{{rezervacija.datum | date:'d.M.y'}}</strong>
+                <span class="desno-float">Ura: <strong>{{rezervacija.datum | date:'H:mm'}}</strong></span>
+            </p>
+
+            <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
+
+            <div class="ikone-stil">
+                <i role="button" class="far fa-check-circle ikone-stil-posamezna potrdi_rezervacijo"
+                    (click)="potrdiRezervacijo(rezervacija._id)"></i>
+
+                <i role="button" class="fas fa-ban ikone-stil-posamezna zavrni_rezervacijo"
+                    (click)="zavrniRezervacijo(rezervacija._id)"></i>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-12 col-md-6">
+        <div class="col-xl-12">
+            <h3 class="sredina-text text-white">Potrjene rezervacije</h3>
+        </div>
+
+        <div *ngFor="let rezervacija of rezervacijePotrjene" class="rezervacija-skatla">
+            <h5 class="sredina-text">Potrjena rezervacja <i class="fas fa-times"></i></h5>
+
+            <p class="levo-text kartica-padding">
+                Stranka: <strong>{{rezervacija.ime_stranke}}</strong>
+                <span class="desno-float">St. mest: <strong>{{rezervacija.st_oseb}}</strong></span>
+            </p>
+
+            <p class="levo-text kartica-padding">
+                Datum: <strong>{{rezervacija.datum | date:'d.M.y'}}</strong>
+                <span class="desno-float">Ura: <strong>{{rezervacija.datum | date:'H:mm'}}</strong></span>
+            </p>
+
+            <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
+
+            <div class="ikone-stil">
+                <i role="button" class="fas fa-utensils ikone-stil-posamezna"
+                    (click)="odpriPotrditevModal(potrditev,rezervacija._id)"></i>
+                <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<ng-template #legenda>
+    <div class="modal-body">
+        <h1 class="legendheader">Legenda</h1>
+        <div class="iconsflex">
+            <div class="iconmodal">
+                <i class="far fa-address-book"></i>
+                <p>Kontakt stranke</p>
+            </div>
+            <div class="iconmodal">
+                <i class="far fa-check-circle"></i>
+                <p>Potrdi</p>
+            </div>
+            <div class="iconmodal">
+                <i class="fas fa-ban"></i>
+                <p>Zavrni</p>
+            </div>
+            <div class="iconmodal">
+                <i class="fas fa-utensils"></i>
+                <p>Dodaj med naročila</p>
+            </div>
+        </div>
+        <div class="butlegenda">
+            <button type="submit" class="but" (click)="zapriLegendaModal()">Zapri</button>
+        </div>
+    </div>
+</ng-template>
+
+<!--<ng-template #potrditev>
+    <div class="modal-body">
+        <h1 class="modalheader">Meni:</h1>
+        <div id="meni">
+        </div>
+        <div class="inputfieldtop">
+            <div class="inputfield">
+                <lebel>Natakar</lebel>
+                <input id="natakar" value="{{uporabnik_ime}}" disabled></input>
+            </div>
+            <div class="inputfield">
+                <lebel>Miza</lebel>
+                <input id="miza" type="number" min="1"></input>
+            </div>
+        </div>
+        <div class="butkontakt">
+            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+            <button type="submit" class="but" id="narociloposli">Pošlji</button>
+        </div>
+    </div>
+</ng-template>-->

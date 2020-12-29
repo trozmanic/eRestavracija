@@ -11,7 +11,7 @@ export class InfoComponent implements OnInit {
 
   public user:User;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     this.user = this.authService.vrniTrenutnegaUporabnika()
