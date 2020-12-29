@@ -29,6 +29,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule} from "@angular/forms";
 import { AuthService } from  './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
+import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
+import {EditIdPipe} from "./skupno/cevi/edit-delete-id.pipe";
+import {DeleteIdPipe} from "./skupno/cevi/edit-delete-id.pipe";
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { InfoComponent } from './skupno/komponente/info/info.component';
     ChartDataPipe,
     ChartLabelsPipe,
     InfoComponent,
+    NadzornaPloscaMeniComponent,
+    EditIdPipe,
+    DeleteIdPipe
   ],
     imports: [
         BrowserModule,
@@ -97,6 +103,10 @@ import { InfoComponent } from './skupno/komponente/info/info.component';
                     {
                         path: 'zasluzek',
                         component: NadzornaPloscaZasluzekComponent
+                    },
+                    {
+                      path: 'meni',
+                      component: NadzornaPloscaMeniComponent
                     }
                 ]
             }

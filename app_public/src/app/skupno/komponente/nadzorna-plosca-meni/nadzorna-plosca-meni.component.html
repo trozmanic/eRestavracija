@@ -1,0 +1,22 @@
+
+<a>
+  <div class="col-4 col-sm-4"><button id="dodaj" type="button" class="btn btn-dark btn-block add"><i class="fas fa-plus"></i> DODAJ</button></div>
+</a>
+
+<br>
+<br>
+<br>
+<div class="menu-items" *ngFor="let menuItem of menuItems">
+  <div class="rezervacija-skatla" >
+    <h4>{{ menuItem.ime }}</h4>
+    <span class="desno-float">
+      <button type="button" (click)="edit(menuItem)" class="btn btn-dark btn-block edit"><i class="fas fa-edit"></i> UREDI</button>
+      <button type="button" (click)="delete(menuItem._id)" class="btn btn-dark btn-block delete"><i class="fas fa-trash"></i> IZBRIŠI</button>
+    </span>
+    <h6>Cena: {{ menuItem.cena }}€</h6>
+    <h6>Kalorije: {{ menuItem.kalorije }}kcal</h6>
+    <p>{{ menuItem.opis }}</p>
+  </div>
+</div>
+
+

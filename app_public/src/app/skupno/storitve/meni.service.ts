@@ -23,4 +23,19 @@ export class MeniService {
     return Promise.reject(napaka.message || napaka);
   }
 
+  public deleteItem(_id: string){
+    return this.http.delete(this.api_url + '/meni/'+_id).toPromise().catch(napaka => this.obdelajNapako(napaka))
+  }
+
+
+  public editItem(menuItem: MeniItem){
+    return this.http.put(this.api_url + '/meni/'+menuItem._id, menuItem)
+      .toPromise()
+      .then(odgovor => odgovor as MeniItem)
+      .catch(napaka => this.obdelajNapako(napaka))
+  }
+
+  public addItem(){}
+
+  public postImage(){}
 }
