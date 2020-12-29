@@ -26,13 +26,13 @@ import { NadzornaPloscaZasluzekComponent } from './skupno/komponente/nadzorna-pl
 import { DatumToStingZasluzekPipe } from './skupno/cevi/datum-to-sting-zasluzek.pipe';
 import { OdstejPipe } from './skupno/cevi/odstej.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
 import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
-import {EditIdPipe} from "./skupno/cevi/edit-delete-id.pipe";
-import {DeleteIdPipe} from "./skupno/cevi/edit-delete-id.pipe";
-import {NadzornaPloscaRezervacijaComponent} from "./skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component";
+import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
+import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
+import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
 
 @NgModule({
   declarations: [
