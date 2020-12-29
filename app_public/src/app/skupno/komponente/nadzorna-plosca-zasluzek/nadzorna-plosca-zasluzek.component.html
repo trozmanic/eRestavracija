@@ -7,8 +7,8 @@
   <h3 class="sredina-text text-white"><i class="fas fa-arrow-left ikone-stil-posamezna" (click)="prev()"></i><span id="naslov_datum">{{mesec | mesecToString}} {{leto}}</span><i class="fas fa-arrow-right ikone-stil-posamezna" (click)="next()"></i></h3>
 </div>
 
-<div class="col-xl-12 title" *ngIf="!zasluzek">
-  <h3 class="sredina-text text-white">Ne najdem niti enega narocila s tem mescom in letom.</h3>
+<div class="col-xl-12 title" *ngIf="sporocilo">
+  <h3 class="sredina-text text-white">{{sporocilo}}</h3>
 </div>
 
 <div class="col-xl-12 rezervacija-skatla" *ngIf="zasluzek">

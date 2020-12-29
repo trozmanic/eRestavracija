@@ -15,9 +15,15 @@ export class ZasluzekService {
 
   public pridobiZasluzek(mesec, leto, uporabnik_id) {
     return this.http.get(this.api_url + '/zasluzek?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id)
-      .toPromise().then(odgovor => odgovor as ZasluzekRazred)
-      .catch(napaka => this.obdelajNapako(napaka))
+      .toPromise().then(odgovor => odgovor as ZasluzekRazred);
   }
+
+  public izbrisiRacun(id) {
+    return this.http.delete(this.api_url + '/narocila/' + id)
+      .toPromise().then(odgovor => odgovor as ZasluzekRazred);
+    //TODO {"id":"5fc18197fdd6f02d1f330109"}  naredi razred
+  }
+
 
   /*
   public posodobiRezervacije(id, operacija) {

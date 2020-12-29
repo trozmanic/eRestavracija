@@ -6,9 +6,12 @@
 <div class="col-xl-12 title">
   <h3 class="sredina-text text-white"><i class="fas fa-arrow-left ikone-stil-posamezna" (click)="prev()"></i><span id="naslov_datum">{{mesec | mesecToString}} {{leto}}</span><i class="fas fa-arrow-right ikone-stil-posamezna" (click)="next()"></i></h3>
 </div>
-<!-- Zacetek Urnika -->
 
-<div class="col-xl-12">
+<div class="col-xl-12 title" *ngIf="sporocilo">
+  <h3 class="sredina-text text-white">{{sporocilo}}</h3>
+</div>
+
+<div class="col-xl-12" *ngIf="urnik">
 
   <div class="row rezervacija-skatla sredina-text">
 
