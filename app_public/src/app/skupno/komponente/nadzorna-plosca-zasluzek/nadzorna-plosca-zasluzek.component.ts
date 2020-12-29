@@ -6,6 +6,8 @@ import { ZasluzekRazred } from "../../razredi/zasluzek-razred";
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
+import { IdRazred } from "../../razredi/id-razred";
+
 @Component({
   selector: 'app-nadzorna-plosca-zasluzek',
   templateUrl: './nadzorna-plosca-zasluzek.component.html',
@@ -21,6 +23,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   public uporabnik_id: String;
 
   public sporocilo: String;
+  public sporocilo_delete: String;
 
   lineChartData: ChartDataSets[];
   lineChartLabels: Label[];
@@ -69,6 +72,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   constructor(private zasluzekService: ZasluzekService) { }
 
   public nastaviSpremenljivke(z: ZasluzekRazred) {
+    this.sporocilo_delete = null;
     this.sporocilo = null;
     this.zasluzek = z;
     this.lineChartData= [
@@ -82,6 +86,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sporocilo_delete = null;
     this.zasluzek = null;
     this.sporocilo="Pridobivam podatke iz API.";
 
@@ -103,6 +108,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   }
 
   prev(): void {
+    this.sporocilo_delete = null;
     this.zasluzek = null;
     this.sporocilo="Pridobivam podatke iz API.";
     this.mesec--;
@@ -124,6 +130,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   }
 
   next(): void {
+    this.sporocilo_delete = null;
     this.zasluzek = null;
     this.sporocilo="Pridobivam podatke iz API.";
     this.mesec++;
@@ -145,24 +152,61 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   }
 
   izbrisi_racun(id, tabela): void {
+    this.sporocilo_delete = "Brisem racun;";
     this.zasluzekService.izbrisiRacun(id)
-      .then(z => {
-        //TODO {"id":"5fc18197fdd6f02d1f330109"}  naredi razred
-        //napisi uspesno zbrisano, iz zasluzga narocila odstrani iz taprave tabele objekt
-        //this.nastaviSpremenljivke(z)
+      .then(idr => {
+        let id_izbrisan: IdRazred;
+        id_izbrisan = idr;
+
+        let i;
+        if(tabela == 0) {
+          for (i=0; i < this.zasluzek.tabele_placanil.length; i++) {
+            if (this.zasluzek.tabele_placanil[i]._id.localeCompare(idr.id) == 0) {
+              this.zasluzek.tabele_placanil = this.zasluzek.tabele_placanil.splice(i, 1);
+              break;
+            }
+          }
+
+        }
+        if (tabela == 1) {
+          for (i=0; i < this.zasluzek.tabele_ne_placanil; i++) {
+            if (this.zasluzek.tabele_ne_placanil[i]._id.localeCompare(idr.id) == 0) {
+              this.zasluzek.tabele_ne_placanil = this.zasluzek.tabele_ne_placanil.splice(i, 1);
+              break;
+            }
+          }
+        }
+        this.sporocilo_delete = "Racun izbrisan";
       })
       .catch(napaka => {
-        //napisi napaka brisanja
         if (napaka.status && napaka.status == 404) {
-          this.sporocilo="Ne najdem niti enega narocila s tem mescom in letom.";
-          this.zasluzek = null;
+          this.sporocilo_delete = "Ne ne najdem tega racuna.";
         } else {
-          this.sporocilo="Napaka pri pridobivanju podatkov iz API.";
-          this.zasluzek = null;
+          this.sporocilo_delete = "API napaka.";
         }
       });
   }
 
-}
+  print_racun(id): void {
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
-//zbrisi v modul.ts urnik/:id route
+    mywindow.document.write('<html><head><title>' + 'Racun'  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + 'Racun'  + '</h1>');
+    mywindow.document.write(document.getElementById(id).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return;
+  }
+
+  zapri_sporocilo(): void {
+    this.sporocilo_delete = null;
+  }
+
+}

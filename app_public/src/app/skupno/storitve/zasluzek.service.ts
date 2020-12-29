@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 
 import { ZasluzekRazred } from "../razredi/zasluzek-razred";
+import { IdRazred } from "../razredi/id-razred";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,7 @@ export class ZasluzekService {
 
   public izbrisiRacun(id) {
     return this.http.delete(this.api_url + '/narocila/' + id)
-      .toPromise().then(odgovor => odgovor as ZasluzekRazred);
-    //TODO {"id":"5fc18197fdd6f02d1f330109"}  naredi razred
+      .toPromise().then(odgovor => odgovor as IdRazred);
   }
 
 

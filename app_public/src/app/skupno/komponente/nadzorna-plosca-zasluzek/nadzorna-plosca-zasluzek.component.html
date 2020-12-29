@@ -238,80 +238,84 @@
 </div>
 
 
-<!--
-<div class="row collapse racun-collapse" id="skrij-racun2" *ngIf="zasluzek">
+
 <div class="row racun-collapse" id="skrij-racun2" *ngIf="zasluzek">
 
+  <div class="col-xl-12 title" *ngIf="sporocilo_delete">
+    <h3 class="sredina-text text-white">{{sporocilo_delete}}<i role="button" class="fas fa-check-circle ikone-stil-posamezna" (click)="zapri_sporocilo()"></i></h3>
+  </div>
+
+<div class="row racun-collapse">
+
   <div class="col-12 col-md-6">
     <div class="col-xl-12">
-      <h3 class="sredina-text text-white">Placani (placano) ({{dolzina_tabele tabele_placanil}})</h3>
+      <h3 class="sredina-text text-white">Placani (placano) ({{zasluzek.tabele_placanil.length}})</h3>
     </div>
 
-    {{#each tabele_placanil as |racun|}}
-    <div class="rezervacija-skatla" id="{{racun._id}}">
-      <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+    <div class="rezervacija-skatla" *ngFor="let racun of zasluzek.tabele_placanil">
+      <div class="col-xl-12" id="{{racun._id}}">
+        <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
 
-      <p class="levo-text kartica-padding">
-        <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
-      </p>
+        <p class="levo-text kartica-padding">
+          <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+        </p>
 
-      <p class="levo-text kartica-padding">
-        Datum in ura: <strong>{{time_to_string racun.datum_in_ura}}</strong>
-      </p>
+        <p class="levo-text kartica-padding">
+          Datum in ura: <strong>{{racun.datum_in_ura}}</strong>
+        </p>
 
-      <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-      <ul>
-        {{#each racun.meni_items as |meni_item|}}
-        <li>{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
-        {{/each}}
-      </ul>
-      <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
-      <div class="ikone-stil">
-        <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
-        <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
+        <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+        <ul>
+          <li *ngFor="let meni_item of racun.meni_items">{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
+        </ul>
+        <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+        <div class="ikone-stil">
+          <i class="fas fa-trash ikone-stil-posamezna" (click)="izbrisi_racun(racun._id, 0)"></i>
+          <i role="button" class="fas fa-print ikone-stil-posamezna" (click)="print_racun(racun._id)"></i>
+        </div>
       </div>
     </div>
-    {{/each}}
+
 
 
   </div>
 
   <div class="col-12 col-md-6">
     <div class="col-xl-12">
-      <h3 class="sredina-text text-white">Neplacani (postrezeno) ({{dolzina_tabele tabele_ne_placanil}})</h3>
+      <h3 class="sredina-text text-white">Neplacani (postrezeno) ({{zasluzek.tabele_ne_placanil.length}})</h3>
     </div>
 
-    {{#each tabele_ne_placanil as |racun|}}
-    <div class="rezervacija-skatla" id="{{racun._id}}">
-      <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
+    <div class="rezervacija-skatla" *ngFor="let racun of zasluzek.tabele_ne_placanil">
+      <div class="col-xl-12" id="{{racun._id}}">
+        <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
 
-      <p class="levo-text kartica-padding">
-        <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
-      </p>
+        <p class="levo-text kartica-padding">
+          <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+        </p>
 
-      <p class="levo-text kartica-padding">
-        Datum in ura: <strong>{{time_to_string racun.datum_in_ura}}</strong>
-      </p>
+        <p class="levo-text kartica-padding">
+          Datum in ura: <strong>{{racun.datum_in_ura}}</strong>
+        </p>
 
-      <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-      <ul>
-        {{#each racun.meni_items as |meni_item|}}
-        <li>{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
-        {{/each}}
-      </ul>
-      <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
-      <div class="ikone-stil">
-        <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
-        <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
+        <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+        <ul>
+          <li *ngFor="let meni_item of racun.meni_items">{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
+        </ul>
+        <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+        <div class="ikone-stil">
+          <i class="fas fa-trash ikone-stil-posamezna" (click)="izbrisi_racun(racun._id, 1)"></i>
+          <i role="button" class="fas fa-print ikone-stil-posamezna" (click)="print_racun(racun._id)"></i>
+        </div>
       </div>
     </div>
-    {{/each}}
+
 
 
   </div>
+
 </div>
 
--->
+
 <!-- END Zasluzek -->
 <div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
