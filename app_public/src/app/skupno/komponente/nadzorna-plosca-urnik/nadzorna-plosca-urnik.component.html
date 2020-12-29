@@ -1,0 +1,241 @@
+<!-- Tukaj vstavi vsebino -->
+<div class="col-xl-12 title">
+  <h1>Urnik izmen</h1>
+  <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+</div>
+<div class="col-xl-12 title">
+  <h3 class="sredina-text text-white"><i class="fas fa-arrow-left ikone-stil-posamezna" (click)="prev()"></i><span id="naslov_datum">{{mesec | mesecToString}} {{leto}}</span><i class="fas fa-arrow-right ikone-stil-posamezna" (click)="next()"></i></h3>
+</div>
+<!-- Zacetek Urnika -->
+
+<div class="col-xl-12">
+
+  <div class="row rezervacija-skatla sredina-text">
+
+    <div class="d-none d-lg-block col-lg-11 col-xl-11 ikone-stil-posamezna-no-hover gor-margin">
+      <div class="row">
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Ponedeljek</strong></p>
+        </div>
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Torek</strong></p>
+        </div>
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Sreda</strong></p>
+        </div>
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Cetrtek</strong></p>
+        </div>
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Petek</strong></p>
+        </div>
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Sobota</strong></p>
+        </div>
+        <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+          <p><strong>Nedelja</strong></p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+      <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>1. Teden</strong></p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_0">{{urnik | datumToSting: 0}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_1">{{urnik | datumToSting: 1}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_2">{{urnik | datumToSting: 2}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_3">{{urnik | datumToSting: 3}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_4">{{urnik | datumToSting: 4}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_5">{{urnik | datumToSting: 5}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_6">{{urnik | datumToSting: 6}}</p>
+      </div>
+    </div>
+    <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+      <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>2. Teden</strong></p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_7">{{urnik | datumToSting: 7}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_8">{{urnik | datumToSting: 8}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_9">{{urnik | datumToSting: 9}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_10">{{urnik | datumToSting: 10}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_11">{{urnik | datumToSting: 11}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_12">{{urnik | datumToSting: 12}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_13">{{urnik | datumToSting: 13}}</p>
+      </div>
+    </div>
+    <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+      <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>3. Teden</strong></p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_14">{{urnik | datumToSting: 14}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_15">{{urnik | datumToSting: 15}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_16">{{urnik | datumToSting: 16}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_17">{{urnik | datumToSting: 17}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_18">{{urnik | datumToSting: 18}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_19">{{urnik | datumToSting: 19}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_20">{{urnik | datumToSting: 20}}</p>
+      </div>
+    </div>
+    <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+      <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>4. Teden</strong></p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_21">{{urnik | datumToSting: 21}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_22">{{urnik | datumToSting: 22}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_23">{{urnik | datumToSting: 23}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_24">{{urnik | datumToSting: 24}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_25">{{urnik | datumToSting: 25}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_26">{{urnik | datumToSting: 26}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_27">{{urnik | datumToSting: 27}}</p>
+      </div>
+    </div>
+    <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+      <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>5. Teden</strong></p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_28">{{urnik | datumToSting: 28}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_29">{{urnik | datumToSting: 29}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_30">{{urnik | datumToSting: 30}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_31">{{urnik | datumToSting: 31}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_32">{{urnik | datumToSting: 32}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_33">{{urnik | datumToSting: 33}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_34">{{urnik | datumToSting: 34}}</p>
+      </div>
+    </div>
+    <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+      <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>6. Teden</strong></p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_35">{{urnik | datumToSting: 35}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_36">{{urnik | datumToSting: 36}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_37">{{urnik | datumToSting: 37}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_38">{{urnik | datumToSting: 38}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_39">{{urnik | datumToSting: 39}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_40">{{urnik | datumToSting: 40}}</p>
+      </div>
+      <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p id="p_dan_41">{{urnik | datumToSting: 41}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h1 class="legendheader">Legenda</h1>
+          <div class="iconsflex">
+            <div class="iconmodal">
+              <p>brez: prosto</p>
+            </div>
+            <div class="iconmodal">
+              <p>?: se ni doloceno</p>
+            </div>
+            <div class="iconmodal">
+              <p>D: dopoldan</p>
+            </div>
+            <div class="iconmodal">
+              <p>P: popoldan</p>
+            </div>
+            <div class="iconmodal">
+              <i class="fas fa-arrow-left"></i>
+              <p>naslednji mesec</p>
+            </div>
+            <div class="iconmodal">
+              <i class="fas fa-arrow-right"></i>
+              <p>Prejsnji mesec</p>
+            </div>
+          </div>
+          <div class="butlegenda">
+            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END Urnik -->
+
+
+<!-- Tukaj KONEC vsebino -->

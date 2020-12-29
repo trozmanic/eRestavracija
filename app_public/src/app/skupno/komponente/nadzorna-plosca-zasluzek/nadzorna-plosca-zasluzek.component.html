@@ -1,0 +1,360 @@
+<!-- Zacetek Zasluzka -->
+<div class="col-xl-12 title">
+  <h1>Zasluzek</h1>
+  <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+</div>
+<div class="col-xl-12 title">
+  <h3 class="sredina-text text-white"><i class="fas fa-arrow-left ikone-stil-posamezna" (click)="prev()"></i><span id="naslov_datum">{{mesec | mesecToString}} {{leto}}</span><i class="fas fa-arrow-right ikone-stil-posamezna" (click)="next()"></i></h3>
+</div>
+
+<div class="col-xl-12 title" *ngIf="!zasluzek">
+  <h3 class="sredina-text text-white">Ne najdem niti enega narocila s tem mescom in letom.</h3>
+</div>
+
+<div class="col-xl-12 rezervacija-skatla" *ngIf="zasluzek">
+
+  <p class="levo-text kartica-padding">
+    prilivi
+    <span class="desno-float"><strong>+{{zasluzek.skupno_prilivi}}€</strong></span>
+  </p>
+
+  <p class="levo-text kartica-padding">
+    placa delavcev in prispevki
+    <span class="desno-float"><strong>-{{zasluzek.zaposleni_strosek}}€</strong></span>
+  </p>
+
+  <p class="levo-text kartica-padding border-top">
+    <strong>Skupni zasluzek ta mesec</strong>
+    <span class="desno-float"><strong>{{zasluzek.skupno_prilivi | odstej: zasluzek.zaposleni_strosek}}</strong></span>
+  </p>
+</div>
+<!-- Pregled prilivov -->
+<div class="col-xl-12 title" *ngIf="zasluzek">
+  <h1 class="sredina-text text-white">Prilivi<i role="button" data-toggle="collapse" data-target=".pregled-collapse" aria-expanded="false" aria-controls="skrij-pregled skrij-pregled2" class="fas fa-arrow-down"></i></h1>
+</div>
+
+<!-- <div class="row collapse pregled-collapse rezervacija-skatla sredina-text" id="skrij-pregled2" *ngIf="zasluzek"> -->
+<div class="row pregled-collapse rezervacija-skatla sredina-text" id="skrij-pregled2" *ngIf="zasluzek">
+  <div class="d-none d-lg-block col-lg-11 col-xl-11 ikone-stil-posamezna-no-hover gor-margin">
+    <div class="row">
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Ponedeljek</strong></p>
+      </div>
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Torek</strong></p>
+      </div>
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Sreda</strong></p>
+      </div>
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Cetrtek</strong></p>
+      </div>
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Petek</strong></p>
+      </div>
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Sobota</strong></p>
+      </div>
+      <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+        <p><strong>Nedelja</strong></p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+    <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p><strong>1. Teden</strong></p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_0">{{zasluzek | datumToStingZasluzek: 0}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_1">{{zasluzek | datumToStingZasluzek: 1}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_2">{{zasluzek | datumToStingZasluzek: 2}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_3">{{zasluzek | datumToStingZasluzek: 3}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_4">{{zasluzek | datumToStingZasluzek: 4}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_5">{{zasluzek | datumToStingZasluzek: 5}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_6">{{zasluzek | datumToStingZasluzek: 6}}</p>
+    </div>
+  </div>
+  <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+    <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p><strong>2. Teden</strong></p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_7">{{zasluzek | datumToStingZasluzek: 7}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_8">{{zasluzek | datumToStingZasluzek: 8}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_9">{{zasluzek | datumToStingZasluzek: 9}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_10">{{zasluzek | datumToStingZasluzek: 10}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_11">{{zasluzek | datumToStingZasluzek: 11}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_12">{{zasluzek | datumToStingZasluzek: 12}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_13">{{zasluzek | datumToStingZasluzek: 13}}</p>
+    </div>
+  </div>
+  <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+    <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p><strong>3. Teden</strong></p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_14">{{zasluzek | datumToStingZasluzek: 14}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_15">{{zasluzek | datumToStingZasluzek: 15}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_16">{{zasluzek | datumToStingZasluzek: 16}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_17">{{zasluzek | datumToStingZasluzek: 17}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_18">{{zasluzek | datumToStingZasluzek: 18}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_19">{{zasluzek | datumToStingZasluzek: 19}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_20">{{zasluzek | datumToStingZasluzek: 20}}</p>
+    </div>
+  </div>
+  <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+    <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p><strong>4. Teden</strong></p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_21">{{zasluzek | datumToStingZasluzek: 21}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_22">{{zasluzek | datumToStingZasluzek: 22}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_23">{{zasluzek | datumToStingZasluzek: 23}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_24">{{zasluzek | datumToStingZasluzek: 24}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_25">{{zasluzek | datumToStingZasluzek: 25}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_26">{{zasluzek | datumToStingZasluzek: 26}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_27">{{zasluzek | datumToStingZasluzek: 27}}</p>
+    </div>
+  </div>
+  <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+    <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p><strong>5. Teden</strong></p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_28">{{zasluzek | datumToStingZasluzek: 28}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_29">{{zasluzek | datumToStingZasluzek: 29}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_30">{{zasluzek | datumToStingZasluzek: 30}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_31">{{zasluzek | datumToStingZasluzek: 31}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_32">{{zasluzek | datumToStingZasluzek: 32}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_33">{{zasluzek | datumToStingZasluzek: 33}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_34">{{zasluzek | datumToStingZasluzek: 34}}</p>
+    </div>
+  </div>
+  <div class="col-12 col-sm-5 col-md-3 col-lg-11 col-xl-11 row ikone-stil-posamezna-no-hover gor-margin">
+    <div class="d-block d-lg-none col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p><strong>6. Teden</strong></p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_35">{{zasluzek | datumToStingZasluzek: 35}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_36">{{zasluzek | datumToStingZasluzek: 36}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_37">{{zasluzek | datumToStingZasluzek: 37}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_38">{{zasluzek | datumToStingZasluzek: 38}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_39">{{zasluzek | datumToStingZasluzek: 39}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_40">{{zasluzek | datumToStingZasluzek: 40}}</p>
+    </div>
+    <div class="col-12 col-sm-11 col-md-11 col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
+      <p id="p_dan_41">{{zasluzek | datumToStingZasluzek: 41}}</p>
+    </div>
+  </div>
+
+  <div class="col-xl-11" *ngIf="zasluzek">
+    <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+</div>
+
+<!-- Racuni -->
+<div class="col-xl-12 title" *ngIf="zasluzek">
+  <h1 class="sredina-text text-white">Racuni <i role="button" data-toggle="collapse" data-target=".racun-collapse" aria-expanded="false" aria-controls="skrij-racun skrij-racun2" class="fas fa-arrow-down"></i></h1>
+</div>
+
+
+<!--
+<div class="row collapse racun-collapse" id="skrij-racun2" *ngIf="zasluzek">
+<div class="row racun-collapse" id="skrij-racun2" *ngIf="zasluzek">
+
+  <div class="col-12 col-md-6">
+    <div class="col-xl-12">
+      <h3 class="sredina-text text-white">Placani (placano) ({{dolzina_tabele tabele_placanil}})</h3>
+    </div>
+
+    {{#each tabele_placanil as |racun|}}
+    <div class="rezervacija-skatla" id="{{racun._id}}">
+      <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+
+      <p class="levo-text kartica-padding">
+        <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+      </p>
+
+      <p class="levo-text kartica-padding">
+        Datum in ura: <strong>{{time_to_string racun.datum_in_ura}}</strong>
+      </p>
+
+      <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+      <ul>
+        {{#each racun.meni_items as |meni_item|}}
+        <li>{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
+        {{/each}}
+      </ul>
+      <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+      <div class="ikone-stil">
+        <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
+        <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
+      </div>
+    </div>
+    {{/each}}
+
+
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="col-xl-12">
+      <h3 class="sredina-text text-white">Neplacani (postrezeno) ({{dolzina_tabele tabele_ne_placanil}})</h3>
+    </div>
+
+    {{#each tabele_ne_placanil as |racun|}}
+    <div class="rezervacija-skatla" id="{{racun._id}}">
+      <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
+
+      <p class="levo-text kartica-padding">
+        <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+      </p>
+
+      <p class="levo-text kartica-padding">
+        Datum in ura: <strong>{{time_to_string racun.datum_in_ura}}</strong>
+      </p>
+
+      <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+      <ul>
+        {{#each racun.meni_items as |meni_item|}}
+        <li>{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
+        {{/each}}
+      </ul>
+      <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+      <div class="ikone-stil">
+        <a href="/nadzorna_plosca/zasluzek/delete/{{racun._id}}{{dodaj_mesec_leto ../mesec ../leto}}"><i class="fas fa-trash ikone-stil-posamezna"></i></a>
+        <i role="button" class="fas fa-print ikone-stil-posamezna" id="{{racun._id}}_natisni"></i>
+      </div>
+    </div>
+    {{/each}}
+
+
+  </div>
+</div>
+
+-->
+<!-- END Zasluzek -->
+<div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h1 class="legendheader">Legenda</h1>
+        <div class="iconsflex">
+          <div class="iconmodal">
+            <i class="fas fa-trash"></i>
+            <p>Sturniraj</p>
+          </div>
+          <div class="iconmodal">
+            <i class="fas fa-print"></i>
+            <p>Natisni</p>
+          </div>
+          <div class="iconmodal">
+            <i class="fas fa-arrow-left"></i>
+            <p>naslednji mesec</p>
+          </div>
+          <div class="iconmodal">
+            <i class="fas fa-arrow-right"></i>
+            <p>Prejsnji mesec</p>
+          </div>
+          <div class="iconmodal">
+            <i class="fas fa-arrow-down"></i>
+            <p>Prikazi/skrij vsebino</p>
+          </div>
+        </div>
+        <div class="butlegenda">
+          <button type="submit" class="but" data-dismiss="modal">Zapri</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Tukaj KONEC vsebino -->
+
+<!--<div class="collapse" id="oznake_osi">{{json_to_string ostevilceni_dnevi}}</div>
+<div class="collapse" id="zasluzek_dnevi">{{json_to_string zasluzek_dnevi}}</div>
+<div class="collapse" id="zasluzek_placani">{{json_to_string tabele_placanil}}</div>
+<div class="collapse" id="zasluzek_ne_placani">{{json_to_string tabele_ne_placanil}}</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"> </script>
+<script src="/javascript/nadzorna_plosca_zasluzek.js"></script> -->

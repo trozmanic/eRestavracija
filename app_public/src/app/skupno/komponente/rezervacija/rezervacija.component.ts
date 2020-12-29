@@ -4,6 +4,7 @@ import { MeniService } from '../../storitve/meni.service'
 
 import { Rezervacija } from '../../razredi/rezervacija'
 import { MeniItem } from '../../razredi/meniItem'
+import { AuthService } from '../../storitve/auth.service';
 
 @Component({
   selector: 'app-rezervacija',
@@ -17,10 +18,11 @@ export class RezervacijaComponent implements OnInit {
 
   public meniItems: MeniItem[];
 
-  constructor(private rezervacijeService: RezervacijeService, private meniService: MeniService) { }
+  constructor(private rezervacijeService: RezervacijeService, private meniService: MeniService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    let id=JSON.parse(localStorage.getItem("credentials")).uporabnik_id;
+    console.log();
+    let id=this.authService.vrniTrenutnegaUporabnika()._id;
     this.rezervacijeService.pridobiRezervacije(id)
       .then(rezervacije => this.rezervacije = rezervacije);
     this.meniService.pridobiMeni()

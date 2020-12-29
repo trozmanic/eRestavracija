@@ -21,7 +21,7 @@ const registracija =async (req, res) => {
         //vloga specified
         await uporabnik_model.save();
         await vlogaModel.save();
-        res.status(200).json({ "žeton": uporabnik_model.generirajJWT() });
+        res.status(200).json({ "token": uporabnik_model.generirajJWT() });
     } catch (err) {
         console.log(err);
         res.status(500).json({ "error_message": err });
@@ -29,6 +29,7 @@ const registracija =async (req, res) => {
 }
 
 const prijava = (req, res) => {
+    console.log(req.body)
     if (!req.body.email_naslov || !req.body.geslo) {
         return res.status(400).json({ "sporočilo": "Zahtevani so vsi podatki" });
     }
@@ -36,7 +37,7 @@ const prijava = (req, res) => {
         if (napaka)
             return res.status(500).json(napaka);
         if (uporabnik) {
-            res.status(200).json({ "žeton": uporabnik.generirajJWT() });
+            res.status(200).json({ "token": uporabnik.generirajJWT() });
         } else {
             res.status(401).json(informacije);
         }

@@ -6,5 +6,7 @@ export class Narocilo{
         _id: String;
         meni_item: String;
         kolicina: Number;
+        cena: Number;
+        ime: String;
     }]
 }

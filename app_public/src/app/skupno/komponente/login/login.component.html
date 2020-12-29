@@ -1,1 +1,105 @@
-<p>login works!</p>
+ <div class="login-buttons" *ngIf="!authService.jePrijavljen()">
+    <button class="btn btn-primary"
+            data-toggle="collapse"
+            href="#register"
+            role="button"
+            aria-expanded="true"
+            aria-controls="register"
+            id="register-button" (click)="showRegister()">
+      REGISTRACIJA
+    </button>
+    <button class="btn btn-primary"
+            type="button" data-toggle="collapse"
+            data-target="#login" aria-expanded="false"
+            aria-controls="login"
+            id="login-button" (click)="showLogin()">
+      PRIJAVA
+    </button>
+  </div>
+
+  <div id="register" class="hide" *ngIf="!authService.jePrijavljen()">
+    <div class="form_content">
+      <div class = 'form-text'>
+        <h1>Nimate uporabniskega racuna ?</h1>
+      </div>
+      <div class="form_content__form">
+        <div class="form-group">
+          <label for="InputName">Ime in Priimek</label>
+          <input
+            type="text"
+            class="form-control"
+            id="InputName"
+            [(ngModel)]="registerUser.ime">
+        </div>
+
+        <div class="form-group">
+          <label for="InputEmail">Email naslov</label>
+          <input
+            type="email"
+            class="form-control"
+            id="InputEmail"
+            aria-describedby="emailHelp"
+            [(ngModel)]="registerUser.email_naslov">
+        </div>
+
+        <div class="form-group">
+          <label for="InputPhoneNumber">Telefonska stevilka</label>
+          <input
+            type="text"
+            class="form-control"
+            id="InputPhoneNumber"
+            [(ngModel)]="registerUser.telefonska_stevilka">
+        </div>
+
+        <div class="form-group">
+          <label for="InputPassword">Geslo</label>
+          <input
+            type="password"
+            class="form-control"
+            id="InputPassword"
+            [(ngModel)]="registerUser.geslo">
+        </div>
+
+        <div class="form-group">
+          <label for="InputPasswordRepeat">Ponovite geslo</label>
+          <input
+            type="password"
+            class="form-control"
+            id="InputPasswordRepeat"
+            [(ngModel)]="registerUser.geslo_ponovi">
+        </div>
+
+        <button type="submit" class="btn" (click)="register()">REGISTRIRAJ SE</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="login" class="hide" *ngIf="!authService.jePrijavljen()">
+    <div class="form_content">
+      <div class = 'form-text'>
+        <h1>Imate uporabniski racun ?</h1>
+      </div>
+      <div class="form_content__form">
+        <div class="form-group">
+          <label for="InputEmail">Email naslov</label>
+          <input type="email"
+                 class="form-control"
+                 id="exampleInputEmail1"
+                 aria-describedby="emailHelp"
+                 [(ngModel)]="loginUser.email_naslov">
+        </div>
+
+        <div class="form-group">
+          <label for="InputPassword">Geslo</label>
+          <input type="password"
+                 class="form-control"
+                 id="exampleInputPassword1"
+                 [(ngModel)]="loginUser.geslo">
+        </div>
+
+        <button type="submit" class="btn" (click)="login()">PRIJAVI SE</button>
+      </div>
+    </div>
+  </div>
+
+ <app-info *ngIf="authService.jePrijavljen()"></app-info>
