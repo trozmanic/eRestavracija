@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MeniItem } from '../../razredi/meniItem';
+import { Narocilo } from '../../razredi/narocilo';
 import { Rezervacija } from '../../razredi/rezervacija';
+import { User } from '../../razredi/user';
+import { AuthService } from '../../storitve/auth.service';
 import { MeniService } from '../../storitve/meni.service';
 import { RezervacijeService } from '../../storitve/rezervacije.service';
 
@@ -17,10 +20,14 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
   public rezervacijePotrjene: Rezervacija[];
   public meniItems: MeniItem[];
   public rezervacijeAlert = { 'type': 'info', 'open': true, 'sporocilo': 'Pridobivanje rezervacij' }
+  public uporabnik: User;
+  public rezervacijaPotrditev: Rezervacija;
+  public narociloPotrditev: Narocilo;
 
   private legendaModal: BsModalRef;
+  private potrditevModal: BsModalRef;
 
-  constructor(private rezervacijaService: RezervacijeService, private meniService: MeniService, private modalService: BsModalService) { }
+  constructor(private rezervacijaService: RezervacijeService, private meniService: MeniService, private modalService: BsModalService,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.rezervacijaService.pridobiRezervacije('').then((rezervacije) => {
@@ -34,7 +41,7 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
     }).catch(napaka => {
       this.rezervacijeAlert = { 'type': 'danger', 'open': true, 'sporocilo': 'Napaka pri pridobivanju rezervacij' }
     });
-
+    this.uporabnik=this.authService.vrniTrenutnegaUporabnika();
   }
 
   public odpriLegendaModal(legenda) {
@@ -43,6 +50,69 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
 
   public zapriLegendaModal() {
     this.legendaModal.hide();
+  }
+
+  public odpriPotrditevModal(potrditev,id){
+    this.rezervacijaPotrditev=this.rezervacijePotrjene.find(el=>el._id==id);
+    let narociloTemp=this.rezervacijaPotrditev.narocilo;
+    this.narociloPotrditev=new Narocilo();
+    this.narociloPotrditev._id=narociloTemp._id;
+    this.narociloPotrditev.datum_in_ura=narociloTemp.datum_in_ura;
+    this.narociloPotrditev.stanje='sprejeto';
+    this.narociloPotrditev.meni_items=<any>[];
+    this.narociloPotrditev.miza=0;
+    this.meniItems.forEach((el)=>this.narociloPotrditev.meni_items.push(<any>{
+      meni_item: el._id,
+      cena: el.cena,
+      ime: el.ime,
+      kolicina: narociloTemp.meni_items.find((el2)=>el2.meni_item==el._id) ? narociloTemp.meni_items.find((el2)=>el2.meni_item==el._id).kolicina : 0
+    }));
+    this.posodobiCeno();
+    
+    //console.log(this.rezervacijaPotrditev);
+    this.potrditevModal=this.modalService.show(potrditev);
+  }
+
+  public povecajNarocilo(index){
+    let meni_item=this.narociloPotrditev.meni_items[index];
+    if(meni_item.kolicina<9){
+      meni_item.kolicina++;
+    }
+    this.posodobiCeno();
+  }
+
+  public zmanjsajNarocilo(index){
+    let meni_item=this.narociloPotrditev.meni_items[index];
+    if(meni_item.kolicina>0){
+      meni_item.kolicina--;
+    }
+    this.posodobiCeno();
+  }
+
+  public posljiNarocilo(){
+    let meni_items_reduced=this.narociloPotrditev.meni_items.reduce((acc,cur)=>{
+      if(cur.kolicina>0){
+        acc.push(cur);
+      }
+      return acc;
+    },[])
+    let errors=[];
+    if(meni_items_reduced.length==0) errors.push("ni jedi");
+    if(this.narociloPotrditev.miza<1) errors.push("napačna številka mize");
+    if(errors.length>0){
+      window.alert("Napake: "+errors.join(", "));
+    }
+    /*this.rezervacijaService.posodobiRezervacije(this.rezervacijaPotrditev._id,'narocilo').then(
+      
+    )*/
+  }
+
+  private posodobiCeno(){
+    this.narociloPotrditev.cena=this.narociloPotrditev.meni_items.reduce((acc,cur)=>acc+=cur.cena*cur.kolicina,0);
+  }
+
+  public zapriPotrditevModal(){
+    this.potrditevModal.hide();
   }
 
   public potrdiRezervacijo(id) {

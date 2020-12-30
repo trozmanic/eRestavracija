@@ -2,11 +2,13 @@ export class Narocilo{
     _id: String;
     datum_in_ura: Date;
     stanje: String;
+    miza: number;
+    cena: number;
     meni_items: [{
         _id: String;
         meni_item: String;
-        kolicina: Number;
-        cena: Number;
+        kolicina: number;
+        cena: number;
         ime: String;
     }]
 }

@@ -7,5 +7,5 @@ export class Rezervacija {
     ime_stranke: String;
     st_oseb: Number;
     stanje: String;
-    narocilo: Narocilo[];
+    narocilo: Narocilo;
 }

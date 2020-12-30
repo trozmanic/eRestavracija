@@ -30,6 +30,7 @@ import { FormsModule } from "@angular/forms";
 import { AuthService } from './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
 import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { RezervacijaPotrditevMeniPipe } from './skupno/cevi/rezervacija-potrditev-meni.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna
     OdstejPipe,
     InfoComponent,
     NadzornaPloscaRezervacijaComponent,
+    RezervacijaPotrditevMeniPipe,
   ],
   imports: [
     BrowserModule,
