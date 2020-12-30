@@ -6,6 +6,7 @@ import { Rezervacija } from '../../razredi/rezervacija';
 import { User } from '../../razredi/user';
 import { AuthService } from '../../storitve/auth.service';
 import { MeniService } from '../../storitve/meni.service';
+import { NarociloService } from '../../storitve/narocilo.service';
 import { RezervacijeService } from '../../storitve/rezervacije.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
   public rezervacijeCaka: Rezervacija[];
   public rezervacijePotrjene: Rezervacija[];
   public meniItems: MeniItem[];
-  public rezervacijeAlert = { 'type': 'info', 'open': true, 'sporocilo': 'Pridobivanje rezervacij' }
+  public rezervacijeAlert = { 'type': 'info', 'open': true, 'sporocilo': 'Pridobivanje rezervacij...' };
   public uporabnik: User;
   public rezervacijaPotrditev: Rezervacija;
   public narociloPotrditev: Narocilo;
@@ -27,7 +28,7 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
   private legendaModal: BsModalRef;
   private potrditevModal: BsModalRef;
 
-  constructor(private rezervacijaService: RezervacijeService, private meniService: MeniService, private modalService: BsModalService,private authService: AuthService) { }
+  constructor(private rezervacijaService: RezervacijeService, private meniService: MeniService, private modalService: BsModalService,private authService: AuthService,private narociloService:NarociloService) { }
 
   ngOnInit(): void {
     this.rezervacijaService.pridobiRezervacije('').then((rezervacije) => {
@@ -37,7 +38,7 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
       return this.meniService.pridobiMeni();
     }).then(meni => {
       this.meniItems = meni;
-      this.rezervacijeAlert = { 'type': 'info', 'open': false, 'sporocilo': 'Pridobivanje rezervacij' }
+      this.rezervacijeAlert = { 'type': 'info', 'open': false, 'sporocilo': 'Pridobivanje rezervacij...' }
     }).catch(napaka => {
       this.rezervacijeAlert = { 'type': 'danger', 'open': true, 'sporocilo': 'Napaka pri pridobivanju rezervacij' }
     });
@@ -61,6 +62,7 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
     this.narociloPotrditev.stanje='sprejeto';
     this.narociloPotrditev.meni_items=<any>[];
     this.narociloPotrditev.miza=0;
+    this.narociloPotrditev.natakar={id_uporabnika:this.authService.vrniTrenutnegaUporabnika()._id};
     this.meniItems.forEach((el)=>this.narociloPotrditev.meni_items.push(<any>{
       meni_item: el._id,
       cena: el.cena,
@@ -101,10 +103,19 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
     if(this.narociloPotrditev.miza<1) errors.push("napačna številka mize");
     if(errors.length>0){
       window.alert("Napake: "+errors.join(", "));
+      return;
     }
-    /*this.rezervacijaService.posodobiRezervacije(this.rezervacijaPotrditev._id,'narocilo').then(
-      
-    )*/
+    this.narociloPotrditev.meni_items=<any> meni_items_reduced;
+    this.rezervacijaService.posodobiRezervacije(this.rezervacijaPotrditev._id,'narocilo').then((odgovor)=>{
+      return this.narociloService.posodobiNarocilo(this.narociloPotrditev._id,this.narociloPotrditev);
+    }).then((odgovor)=>{
+      this.potrditevModal.hide();
+      window.alert("Rezervacija uspešno oddana");
+      this.rezervacijePotrjene=this.rezervacijePotrjene.filter((el)=>el._id!=this.rezervacijaPotrditev._id);
+    }).catch((napaka)=>{
+      this.potrditevModal.hide();
+      window.alert("Prišlo je do napake");
+    })
   }
 
   private posodobiCeno(){
@@ -137,6 +148,7 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
   public zavrniRezervacijo(id) {
     this.rezervacijaService.posodobiRezervacije(id, 'zavrni').then((odgovor) => {
       this.rezervacijeCaka=this.rezervacijeCaka.filter(el=>el._id!=id);
+      this.rezervacijePotrjene=this.rezervacijePotrjene.filter(el=>el._id!=id);
       window.alert("Uspešna zavrnitev");
     }).catch(napaka=>{
       window.alert("Prišlo je do napake");

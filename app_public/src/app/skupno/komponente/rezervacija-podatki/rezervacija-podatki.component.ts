@@ -17,7 +17,7 @@ export class RezervacijaPodatkiComponent implements OnInit {
   private date: Date = new Date();
   private today: Date = new Date();
 
-  constructor(private uporabnikService: UporabnikService,private router: Router,private authService: AuthService) { }
+  constructor(private router: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.uporabnik=this.authService.vrniTrenutnegaUporabnika();

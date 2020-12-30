@@ -4,6 +4,7 @@ export class Narocilo{
     stanje: String;
     miza: number;
     cena: number;
+    natakar: any;
     meni_items: [{
         _id: String;
         meni_item: String;

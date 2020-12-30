@@ -7,8 +7,9 @@
 
 <!-- Source oseb: wikipedia: najpogostejsi imena + priimki -->
 
-<!--<alert [type]="rezervacijeAlert.type" [isOpen]="rezervacijeAlert.open"><span-->
-<!--        [innerHtml]="rezervacijeAlert.sporocilo"></span></alert>-->
+<alert [type]="rezervacijeAlert.type" [isOpen]="rezervacijeAlert.open">
+    <span [innerHtml]="rezervacijeAlert.sporocilo"></span>
+</alert>
 
 <div class="row">
 
@@ -26,8 +27,8 @@
             </p>
 
             <p class="levo-text kartica-padding">
-                Datum: <strong>{{rezervacija.datum | date:'d.M.y'}}</strong>
-                <span class="desno-float">Ura: <strong>{{rezervacija.datum | date:'H:mm'}}</strong></span>
+                Datum: <strong>{{rezervacija.narocilo.datum_in_ura | date:'d.M.y'}}</strong>
+                <span class="desno-float">Ura: <strong>{{rezervacija.narocilo.datum_in_ura | date:'H:mm'}}</strong></span>
             </p>
 
             <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
@@ -58,8 +59,8 @@
             </p>
 
             <p class="levo-text kartica-padding">
-                Datum: <strong>{{rezervacija.datum | date:'d.M.y'}}</strong>
-                <span class="desno-float">Ura: <strong>{{rezervacija.datum | date:'H:mm'}}</strong></span>
+                Datum: <strong>{{rezervacija.narocilo.datum_in_ura | date:'d.M.y'}}</strong>
+                <span class="desno-float">Ura: <strong>{{rezervacija.narocilo.datum_in_ura | date:'H:mm'}}</strong></span>
             </p>
 
             <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
@@ -67,7 +68,7 @@
             <div class="ikone-stil">
                 <i role="button" class="fas fa-utensils ikone-stil-posamezna"
                     (click)="odpriPotrditevModal(potrditev,rezervacija._id)"></i>
-                <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
+                <i role="button" class="fas fa-ban ikone-stil-posamezna" (click)="zavrniRezervacijo(rezervacija._id)"></i>
             </div>
         </div>
 
