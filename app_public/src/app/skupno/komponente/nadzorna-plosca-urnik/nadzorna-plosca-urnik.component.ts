@@ -3,6 +3,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { UrnikService } from "../../storitve/urnik.service"
 import { UrnikRazred } from "../../razredi/urnik-razred";
 
+import {User} from "../../razredi/user";
+
+import { AuthService } from "../../storitve/auth.service"
+
 @Component({
   selector: 'app-nadzorna-plosca-urnik',
   templateUrl: './nadzorna-plosca-urnik.component.html',
@@ -16,12 +20,18 @@ export class NadzornaPloscaUrnikComponent implements OnInit {
   public mesec: number;
   public leto: number;
   public uporabnik_id: String;
+  public uporabnik: User;
 
   public sporocilo: String;
 
-  constructor(private urnikService: UrnikService) { }
+  constructor(private urnikService: UrnikService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
+    this.uporabnik = new User();//FIX
+    this.uporabnik.vloga = "admin";//FIX
+    this.uporabnik.ime = "Ime Priimek";//FIX
+
     this.urnik = null;
     this.sporocilo="Pridobivam podatke iz API.";
 

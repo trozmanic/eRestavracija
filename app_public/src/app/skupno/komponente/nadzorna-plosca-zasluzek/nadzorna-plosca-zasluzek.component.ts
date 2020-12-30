@@ -8,6 +8,10 @@ import { Color, Label } from 'ng2-charts';
 
 import { IdRazred } from "../../razredi/id-razred";
 
+import {User} from "../../razredi/user";
+
+import { AuthService } from "../../storitve/auth.service"
+
 @Component({
   selector: 'app-nadzorna-plosca-zasluzek',
   templateUrl: './nadzorna-plosca-zasluzek.component.html',
@@ -24,6 +28,8 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
 
   public sporocilo: String;
   public sporocilo_delete: String;
+
+  public uporabnik: User;
 
   lineChartData: ChartDataSets[];
   lineChartLabels: Label[];
@@ -69,7 +75,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
 
 
 
-  constructor(private zasluzekService: ZasluzekService) { }
+  constructor(private zasluzekService: ZasluzekService, private authService: AuthService) { }
 
   public nastaviSpremenljivke(z: ZasluzekRazred) {
     this.sporocilo_delete = null;
@@ -86,6 +92,11 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
+    this.uporabnik = new User();//FIX
+    this.uporabnik.vloga = "admin";//FIX
+    this.uporabnik.ime = "Ime Priimek";//FIX
+
     this.sporocilo_delete = null;
     this.zasluzek = null;
     this.sporocilo="Pridobivam podatke iz API.";

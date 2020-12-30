@@ -42,6 +42,7 @@ import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca
 import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-p
     ZvezdaComponent,
     ModalRatingComponent,
     NasmesekPipe,
+    NadzornaPloscaMenuComponent,
   ],
     imports: [
         BrowserModule,
@@ -120,6 +122,10 @@ import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-p
                     {
                         path: 'zasluzek',
                         component: NadzornaPloscaZasluzekComponent
+                    },
+                    {
+                      path: '',
+                      component: NadzornaPloscaMenuComponent
                     }
                 ]
             }
