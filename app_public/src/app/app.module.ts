@@ -26,11 +26,24 @@ import { NadzornaPloscaZasluzekComponent } from './skupno/komponente/nadzorna-pl
 import { DatumToStingZasluzekPipe } from './skupno/cevi/datum-to-sting-zasluzek.pipe';
 import { OdstejPipe } from './skupno/cevi/odstej.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
-import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
 import { RezervacijaPotrditevMeniPipe } from './skupno/cevi/rezervacija-potrditev-meni.pipe';
+import { MeniComponent } from './skupno/komponente/meni/meni.component';
+import { MeniItemComponent } from './skupno/komponente/meni-item/meni-item.component';
+import { TransformPictureLinkPipe } from './skupno/cevi/transform-picture-link.pipe';
+import { ZvedaPipe } from './skupno/cevi/zveda.pipe';
+import { OcenaParserPipe } from './skupno/cevi/ocena-parser.pipe';
+import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalRatingComponent } from './skupno/komponente/modal-rating/modal-rating.component';
+import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
+import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
+import { EditIdPipe } from './skupno/cevi/edit-delete-id.pipe';
+import { DeleteIdPipe } from './skupno/cevi/edit-delete-id.pipe';
+import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +66,18 @@ import { RezervacijaPotrditevMeniPipe } from './skupno/cevi/rezervacija-potrdite
     DatumToStingZasluzekPipe,
     OdstejPipe,
     InfoComponent,
+    MeniComponent,
+    MeniItemComponent,
+    TransformPictureLinkPipe,
+    ZvedaPipe,
+    OcenaParserPipe,
+    ZvezdaComponent,
+    ModalRatingComponent,
+    NasmesekPipe,
+    NadzornaPloscaMenuComponent,
+    NadzornaPloscaMeniComponent,
+    EditIdPipe,
+    DeleteIdPipe,
     NadzornaPloscaRezervacijaComponent,
     RezervacijaPotrditevMeniPipe,
   ],
@@ -77,6 +102,10 @@ import { RezervacijaPotrditevMeniPipe } from './skupno/cevi/rezervacija-potrdite
         {
           path: 'rezerviraj/podatki',
           component: RezervacijaPodatkiComponent
+        },
+        {
+          path: 'meni',
+          component: MeniComponent
         },
         {
           path: 'rezerviraj/meni',
@@ -107,6 +136,10 @@ import { RezervacijaPotrditevMeniPipe } from './skupno/cevi/rezervacija-potrdite
           {
             path: 'urnik/:id',
             component: NadzornaPloscaUrnikComponent
+          },
+          {
+            path: 'meni',
+            component: NadzornaPloscaMeniComponent
           }
         ]
       }

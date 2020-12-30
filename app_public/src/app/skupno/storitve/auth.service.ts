@@ -18,13 +18,13 @@ export class AuthService {
   constructor(private http: HttpClient, @Inject(SHRAMBA_BRSKALNIKA) private shramba: Storage) { }
 
   public registrirajUporabnika (uporabnik: userRegister): Promise<RezultatAvtentikacije> {
-    console.log(uporabnik)
+    console.log(uporabnik);
     return this.http.post(this.api_url + '/registracija', uporabnik).toPromise()
       .then((odgovor) => {
         this.shraniZeton(odgovor['token']);
         return odgovor as RezultatAvtentikacije;
       })
-      .catch(this.obdelajNapako)
+      .catch(this.obdelajNapako);
   }
 
   public prijaviUporabnika (uporabnik: userLogin): Promise<RezultatAvtentikacije> {
