@@ -42,9 +42,9 @@ import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca
 import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
-import { NadzornaPloscaKuharComponent } from './skupno/komponenete/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
+import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
 import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
-
+import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -76,6 +76,7 @@ import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.compone
     NasmesekPipe,
     NadzornaPloscaKuharComponent,
     NarociloComponent,
+    NadzornaPloscaMenuComponent,
   ],
     imports: [
         BrowserModule,
@@ -128,6 +129,10 @@ import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.compone
                     {
                       path: 'kuhar',
                       component: NadzornaPloscaKuharComponent
+                    },
+                    {
+                      path: '',
+                      component: NadzornaPloscaMenuComponent
                     }
                 ]
             }

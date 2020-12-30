@@ -15,8 +15,7 @@ export class UrnikService {
 
   public pridobiUrnik(mesec, leto, uporabnik_id) {
     return this.http.get(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id)
-      .toPromise().then(odgovor => odgovor as UrnikRazred)
-      .catch(napaka => this.obdelajNapako(napaka))
+      .toPromise().then(odgovor => odgovor as UrnikRazred);
   }
 
   /*
