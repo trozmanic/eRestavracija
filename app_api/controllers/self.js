@@ -8,9 +8,20 @@ const pridobiMeni = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const user = JSON.parse(atob(token.split('.')[1]));
     const jedi =  await Jed.find({}).exec();
+    let meniRenderData = [];
+
+    if (user.vloga !== 'gost') {
+        jedi.forEach((jed) => {
+            meniRenderData.push({
+                ...jed.toObject(),
+                "ocenjena": false
+            })
+        })
+        return res.status(200).send(meniRenderData)
+    }
+
 
     try {
-        let meniRenderData = [];
         const gost = await Gost.findOne({"id_uporabnika": user._id});
         const gostJedi = gost.ocenjene_jedi;
         jedi.forEach((jed) => {
@@ -32,6 +43,7 @@ const pridobiMeni = async (req, res) => {
         })
         res.status(200).send(meniRenderData);
     }catch (err) {
+        console.log(err)
         res.status(500).send({
             "error": "Napaka na strezniku"
         })
