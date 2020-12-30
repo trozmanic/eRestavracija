@@ -16,7 +16,7 @@ import { RezervacijaPodatkiComponent } from './skupno/komponente/rezervacija-pod
 import { RezervacijaMeniComponent } from './skupno/komponente/rezervacija-meni/rezervacija-meni.component';
 import { ClearStorageService } from './skupno/storitve/clear-storage.service';
 import { StevecPipe } from './skupno/cevi/stevec.pipe';
-//import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
+import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
 import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
 import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosca-urnik/nadzorna-plosca-urnik.component';
 import { MainComponent } from './skupno/komponente/main/main.component';
@@ -44,6 +44,7 @@ import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna
 import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
 import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -55,7 +56,7 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     RezervacijaPodatkiComponent,
     RezervacijaMeniComponent,
     StevecPipe,
-    //NadzornaPloscaZalogaComponent,
+    NadzornaPloscaZalogaComponent,
     NadzornaPloscaComponent,
     NadzornaPloscaUrnikComponent,
     MainComponent,
@@ -117,10 +118,10 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
         path: 'nadzorna_plosca',
         component: NadzornaPloscaComponent,
         children: [
-          /*{
+          {
             path: 'zaloga',
             component: NadzornaPloscaZalogaComponent
-          },*/
+          },
           {
             path: 'urnik',
             component: NadzornaPloscaUrnikComponent
@@ -149,7 +150,8 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     BrowserAnimationsModule,
     FormsModule,
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [MainComponent]
