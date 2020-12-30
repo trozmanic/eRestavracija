@@ -16,7 +16,7 @@ import { RezervacijaPodatkiComponent } from './skupno/komponente/rezervacija-pod
 import { RezervacijaMeniComponent } from './skupno/komponente/rezervacija-meni/rezervacija-meni.component';
 import { ClearStorageService } from './skupno/storitve/clear-storage.service';
 import { StevecPipe } from './skupno/cevi/stevec.pipe';
-import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
+//import { NadzornaPloscaZalogaComponent } from './skupno/komponente/nadzorna-plosca-zaloga/nadzorna-plosca-zaloga.component';
 import { NadzornaPloscaComponent } from './skupno/komponente/nadzorna-plosca/nadzorna-plosca.component';
 import { NadzornaPloscaUrnikComponent } from './skupno/komponente/nadzorna-plosca-urnik/nadzorna-plosca-urnik.component';
 import { MainComponent } from './skupno/komponente/main/main.component';
@@ -29,22 +29,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './skupno/storitve/auth.service';
 import { InfoComponent } from './skupno/komponente/info/info.component';
-import { RezervacijaPotrditevMeniPipe } from './skupno/cevi/rezervacija-potrditev-meni.pipe';
 import { MeniComponent } from './skupno/komponente/meni/meni.component';
 import { MeniItemComponent } from './skupno/komponente/meni-item/meni-item.component';
 import { TransformPictureLinkPipe } from './skupno/cevi/transform-picture-link.pipe';
 import { ZvedaPipe } from './skupno/cevi/zveda.pipe';
 import { OcenaParserPipe } from './skupno/cevi/ocena-parser.pipe';
 import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalRatingComponent } from './skupno/komponente/modal-rating/modal-rating.component';
 import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
 import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
 import { EditIdPipe } from './skupno/cevi/edit-delete-id.pipe';
 import { DeleteIdPipe } from './skupno/cevi/edit-delete-id.pipe';
 import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
+import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
-
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -56,7 +55,7 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     RezervacijaPodatkiComponent,
     RezervacijaMeniComponent,
     StevecPipe,
-    NadzornaPloscaZalogaComponent,
+    //NadzornaPloscaZalogaComponent,
     NadzornaPloscaComponent,
     NadzornaPloscaUrnikComponent,
     MainComponent,
@@ -74,12 +73,13 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     ZvezdaComponent,
     ModalRatingComponent,
     NasmesekPipe,
+    NadzornaPloscaKuharComponent,
+    NarociloComponent,
     NadzornaPloscaMenuComponent,
     NadzornaPloscaMeniComponent,
     EditIdPipe,
     DeleteIdPipe,
-    NadzornaPloscaRezervacijaComponent,
-    RezervacijaPotrditevMeniPipe,
+    NadzornaPloscaRezervacijaComponent
   ],
   imports: [
     BrowserModule,
@@ -117,10 +117,10 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
         path: 'nadzorna_plosca',
         component: NadzornaPloscaComponent,
         children: [
-          {
+          /*{
             path: 'zaloga',
             component: NadzornaPloscaZalogaComponent
-          },
+          },*/
           {
             path: 'urnik',
             component: NadzornaPloscaUrnikComponent
@@ -130,16 +130,16 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
             component: NadzornaPloscaZasluzekComponent
           },
           {
+            path: 'kuhar',
+            component: NadzornaPloscaKuharComponent
+          },
+          {
             path: 'rezervacija',
             component: NadzornaPloscaRezervacijaComponent
           },
           {
-            path: 'urnik/:id',
-            component: NadzornaPloscaUrnikComponent
-          },
-          {
-            path: 'meni',
-            component: NadzornaPloscaMeniComponent
+            path: '',
+            component: NadzornaPloscaMenuComponent
           }
         ]
       }

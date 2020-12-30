@@ -162,8 +162,10 @@ export class LoginComponent implements OnInit {
     if (this.loginUser.email_naslov !== '' && this.loginUser.geslo !== '') {
       this.authService
         .prijaviUporabnika(this.loginUser)
-        .then(()=> {
-          this.router.navigateByUrl("/")
+        .then(() => {
+          if (this.authService.vrniTrenutnegaUporabnika().vloga !== 'gost') {
+            this.router.navigate(['/nadzorna_plosca']);
+          }
         })
         .catch(msg=> alert(msg))
     }

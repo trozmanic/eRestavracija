@@ -53,6 +53,9 @@ export class MeniItemComponent implements OnInit {
     if (!this.authService.jePrijavljen()) {
       return alert('Ce zeliste oceniti jed je potrebna prijava ali registracija');
     }
+    if (this.authService.vrniTrenutnegaUporabnika().vloga !== 'gost') {
+      return alert('Ocenjevanje jedi je na voljo le gostom');
+    }
     this.ocenaService.changeMessage(this.meniItem);
   }
 
