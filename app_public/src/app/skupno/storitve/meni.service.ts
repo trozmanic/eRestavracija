@@ -12,6 +12,9 @@ export class MeniService {
 
   private api_url = environment.api_url;
 
+  private foodApiId = "fe73ca9c";
+  private foodApiKey = "8ec65cd0e8152767e4be9e21f92d0610";
+
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   public pridobiMeniGost(): Promise<MeniItemGost []> {
@@ -60,5 +63,15 @@ export class MeniService {
       .catch(napaka => this.obdelajNapako(napaka))
   }
 
-  public postImage(){}
+  public postImage(data){
+    return this.http.post(this.api_url + '/image',data, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data`,
+      }})
+      .toPromise()
+      .then(odgovor => odgovor)
+      .catch(napaka => this.obdelajNapako(napaka))
+  }
 }
