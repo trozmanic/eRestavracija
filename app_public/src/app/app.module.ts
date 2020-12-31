@@ -84,6 +84,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -141,6 +142,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
           {
             path: '',
             component: NadzornaPloscaMenuComponent
+          },
+          {
+            path: 'meni',
+            component: NadzornaPloscaMeniComponent
           }
         ]
       }

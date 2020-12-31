@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-import { MeniItemGost, MeniItem } from '../razredi/meniItem';
+import {MeniItemGost, MeniItem, MeniItemPOST, MeniItemPUT} from '../razredi/meniItem';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -45,15 +45,20 @@ export class MeniService {
 
 
   // tslint:disable-next-line:typedef
-  public editItem(menuItem: MeniItem){
-    return this.http.put(this.api_url + '/meni/'+menuItem._id, menuItem)
+  public editItem(menuItem: MeniItemPUT){
+    return this.http.put(this.api_url + '/meni/'+menuItem.id, menuItem)
       .toPromise()
       .then(odgovor => odgovor as MeniItem)
       .catch(napaka => this.obdelajNapako(napaka))
   }
 
   // tslint:disable-next-line:typedef
-  public addItem(){}
+  public addItem(menuItem: MeniItemPOST){
+    return this.http.post(this.api_url + '/meni', menuItem)
+      .toPromise()
+      .then(odgovor => odgovor as MeniItem)
+      .catch(napaka => this.obdelajNapako(napaka))
+  }
 
   public postImage(){}
 }
