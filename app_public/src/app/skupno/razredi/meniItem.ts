@@ -54,3 +54,4 @@ export class Sestavina {
     this.kolicina = kolicina
   }
 }
+

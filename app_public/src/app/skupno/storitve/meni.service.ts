@@ -74,4 +74,16 @@ export class MeniService {
       .then(odgovor => odgovor)
       .catch(napaka => this.obdelajNapako(napaka))
   }
+
+  // public foodAPI(){
+  //   return this.http.get('https://api.edamam.com/api/food-database/v2/parser?ingr='+sestavina+'&app_id=' + this.foodApiId + '&app_key=' + this.foodApiKey)
+  //     .toPromise()
+  //     .then((response) => {
+  //       if(response.data.parsed[0] === undefined){
+  //         return 0
+  //       }
+  //       return parseInt(kolicina) * ((parseFloat(response.parsed[0].food.nutrients.ENERC_KCAL)) / 100.0));
+  //
+  //     })
+  // }
 }
