@@ -58,6 +58,7 @@ const ustvariRezervacijo = function (req, res) {
 
 }
 
+
 const pridobiRezervacije = function (req, res) {
     let query = {};
     if (req.params.idUporabnika) {
@@ -111,7 +112,7 @@ const pridobiRezervacije = function (req, res) {
                 rezultat=rezultat.sort((a,b)=>b.datum-a.datum);
                 res.status(200).json(rezultat);
             }).catch((napaka)=>{
-                res.status(400).json(napaka);
+                res.status(500).json(napaka);
             })
         }
     })
