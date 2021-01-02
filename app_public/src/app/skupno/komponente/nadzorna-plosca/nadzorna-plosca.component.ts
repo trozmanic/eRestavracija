@@ -18,10 +18,10 @@ export class NadzornaPloscaComponent implements OnInit {
   public links: LinkRazred[];
 
   ngOnInit(): void {
-    //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
-    this.uporabnik = new User();//FIX
-    this.uporabnik.vloga = "admin";//FIX
-    this.uporabnik.ime = "Ime Priimek";//FIX
+    this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
+    //this.uporabnik = new User();//FIX
+    //this.uporabnik.vloga = "admin";//FIX
+    //this.uporabnik.ime = "Ime Priimek";//FIX
 
     this.links = [];
 
@@ -41,7 +41,7 @@ export class NadzornaPloscaComponent implements OnInit {
 
       tmp = new LinkRazred();
       tmp.icon = "fas fa-utensils";
-      tmp.l = "strezba";
+      tmp.l = "natakar";
       this.links.push(tmp);
 
       tmp = new LinkRazred();
