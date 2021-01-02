@@ -1,19 +1,21 @@
 <div class="rezervacija-skatla">
-  <h5>Narocilo - id</h5>
+  <h5>Narocilo {{narocilo._id}}</h5>
   <p class="levo-text kartica-padding">
-    Miza: <strong> Stevilka mize</strong>
-    <span class="desno-float">Datum: <strong>1.1.2020</strong></span>
+    Miza: <strong>{{narocilo.miza}}</strong>
+    <span class="desno-float">Datum: <strong>{{narocilo.datum_in_ura}}</strong></span>
   </p>
   <p class="levo-text kartica-padding">
-    Sprejem narocila:<strong>12.00</strong>
+    Sprejem narocila:<strong>{{narocilo.datum_in_ura}}</strong>
   </p>
   <h6 class="sredina-text"><strong>Jedi:</strong></h6>
   <ul>
-    <li>JED1 <strong>31x</strong></li>
-    <li>JED2 <strong>12x</strong></li>
+    <li *ngFor="let meniItem of narocilo.meni_items">{{meniItem.ime}}<strong> {{meniItem.kolicina}} x {{meniItem.cena}} $</strong></li>
   </ul>
+  <p class="levo-text kartica-padding">
+    Skupna cena: {{narocilo.cena}} $
+  </p>
   <div class="ikone-stil">
-    <i role="button" class="far fa-check-circle ikone-stil-posamezna"></i>
-    <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
+    <i role="button" class="far fa-check-circle ikone-stil-posamezna" (click)="handlePositive()" *ngIf="showPositive()"></i>
+    <i role="button" class="fas fa-ban ikone-stil-posamezna" (click)="handleNegative()"  *ngIf="showNegative()"></i>
   </div>
 </div>

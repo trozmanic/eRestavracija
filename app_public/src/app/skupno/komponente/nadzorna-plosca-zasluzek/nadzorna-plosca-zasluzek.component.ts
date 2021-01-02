@@ -173,7 +173,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
         if(tabela == 0) {
           for (i=0; i < this.zasluzek.tabele_placanil.length; i++) {
             if (this.zasluzek.tabele_placanil[i]._id.localeCompare(idr.id) == 0) {
-              this.zasluzek.tabele_placanil = this.zasluzek.tabele_placanil.splice(i, 1);
+              this.zasluzek.tabele_placanil.splice(i, 1);
               break;
             }
           }
@@ -182,7 +182,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
         if (tabela == 1) {
           for (i=0; i < this.zasluzek.tabele_ne_placanil; i++) {
             if (this.zasluzek.tabele_ne_placanil[i]._id.localeCompare(idr.id) == 0) {
-              this.zasluzek.tabele_ne_placanil = this.zasluzek.tabele_ne_placanil.splice(i, 1);
+              this.zasluzek.tabele_ne_placanil.splice(i, 1);
               break;
             }
           }

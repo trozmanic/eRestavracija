@@ -3,6 +3,7 @@ import {MeniService} from '../../storitve/meni.service';
 import {MeniItem, MeniItemGost} from '../../razredi/meniItem';
 import {OcenaService} from '../../storitve/ocena.service';
 import {AuthService} from '../../storitve/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-meni-item',
@@ -10,7 +11,6 @@ import {AuthService} from '../../storitve/auth.service';
   styleUrls: ['./meni-item.component.css']
 })
 export class MeniItemComponent implements OnInit {
-
   constructor(meniService: MeniService, private ocenaService: OcenaService, private authService: AuthService) { }
   @Input() meniItem: MeniItemGost;
   message: MeniItemGost;
@@ -20,6 +20,7 @@ export class MeniItemComponent implements OnInit {
       if (this.message) {
         if (this.message._id === this.meniItem._id) {
           this.meniItem = message;
+          this.ocenaService.changeMessage(null);
         }
       }
     });
@@ -51,10 +52,10 @@ export class MeniItemComponent implements OnInit {
   // tslint:disable-next-line:typedef
   newMessage() {
     if (!this.authService.jePrijavljen()) {
-      return alert('Ce zeliste oceniti jed je potrebna prijava ali registracija');
+      return Swal.fire('Potrebna prijava', 'Ce zelite oceniti jed je potrebna prijava ali registracija', 'info');
     }
     if (this.authService.vrniTrenutnegaUporabnika().vloga !== 'gost') {
-      return alert('Ocenjevanje jedi je na voljo le gostom');
+      return Swal.fire('Nedovoljena akcija', 'Ocenjevanje jedi je na voljo le prijavljenim gostom', 'info');
     }
     this.ocenaService.changeMessage(this.meniItem);
   }

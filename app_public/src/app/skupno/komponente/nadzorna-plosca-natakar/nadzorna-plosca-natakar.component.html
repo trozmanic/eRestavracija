@@ -1,0 +1,30 @@
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" id="dodajNaorcilo">-->
+<!--  Ustvari narocilo-->
+<!--</button>-->
+
+<ngbd-modal-component [meniItems]="meniItems" (kreiranoNarocilo)="dodajNarocilo($event)"></ngbd-modal-component>
+
+<div class="row" *ngIf="narocila">
+  <div class="col-12 col-md-4" id="narocila">
+    <h3 class="sredina-text text-white">Naročila</h3>
+    <app-narocilo *ngFor="let narocilo of narocila.vrsta"
+                  [narocilo]="narocilo"
+                  (newStatusEvent)="changeOrders($event, 'sprejeto')">
+
+    </app-narocilo>
+  </div>
+
+  <div class="col-12 col-md-4" id="pripravljeneJedi">
+    <h3 class="sredina-text text-white">Pripravljene jedi</h3>
+    <app-narocilo *ngFor="let narocilo of narocila.priprava"
+                  [narocilo]="narocilo"
+                  (newStatusEvent)="changeOrders($event, 'pripravljeno')"></app-narocilo>
+  </div>
+
+  <div class="col-12 col-md-4" id="postrezeneJedi">
+    <h3 class="sredina-text text-white">Postrežene jedi</h3>
+    <app-narocilo *ngFor="let narocilo of narocila.postrezena"
+                  [narocilo]="narocilo"
+                  (newStatusEvent)="changeOrders($event,'postrezeno')"></app-narocilo>
+  </div>
+</div>

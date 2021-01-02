@@ -45,7 +45,7 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
     this.modalRef = this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  private pridobiSestavine(): void {
+  public pridobiSestavine(): void {
     this.obvestilo = 'Pridobivanje sestavin';
     const podatki = {};
     if (this.iskanje !== undefined) {

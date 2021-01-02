@@ -1,6 +1,7 @@
 const start = (io) => {
     io.on('connection', function (socket) {
         console.log("Socket connected!");
+
         socket.on('narociloKuhar', function (message) {
             io.emit('narociloKuhar', message);
         })

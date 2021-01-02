@@ -27,6 +27,8 @@
     "ngx-bootstrap": "^6.2.0",
     "ngx-smart-modal": "^7.4.1",
     "rxjs": "~6.6.0",
+    "socket.io": "^3.0.4",
+    "sweetalert2": "^10.12.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

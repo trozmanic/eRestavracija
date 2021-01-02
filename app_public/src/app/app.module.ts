@@ -46,6 +46,9 @@ import { NadzornaPloscaZaposleniComponent } from './skupno/komponente/nadzorna-p
 import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
 import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
+import { NadzornaPloscaNatakarComponent } from './skupno/komponente/nadzorna-plosca-natakar/nadzorna-plosca-natakar.component';
+import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -79,85 +82,83 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     NadzornaPloscaKuharComponent,
     NarociloComponent,
     NadzornaPloscaMenuComponent,
+    NadzornaPloscaNatakarComponent,
+    NgbdModalContent,
+    NgbdModalComponent,
     NadzornaPloscaMeniComponent,
-    EditIdPipe,
-    DeleteIdPipe,
-    NadzornaPloscaRezervacijaComponent,
-    NadzornaPloscaZaposleniComponent,
     NadzornaPloscaRezervacijaComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: PristajalnaStranComponent,
-        children: [{
-          path: '',
-          component: LoginComponent
-        },
-        {
-          path: 'onas',
-          component: OnasComponent
-        },
-        {
-          path: 'rezerviraj',
-          component: RezervacijaComponent,
-        },
-        {
-          path: 'rezerviraj/podatki',
-          component: RezervacijaPodatkiComponent
-        },
-        {
-          path: 'meni',
-          component: MeniComponent
-        },
-        {
-          path: 'rezerviraj/meni',
-          component: RezervacijaMeniComponent,
-          canDeactivate: [ClearStorageService]
-        }]
-      },
-      {
-        path: 'nadzorna_plosca',
-        component: NadzornaPloscaComponent,
-        children: [
-          {
-            path: 'zaloga',
-            component: NadzornaPloscaZalogaComponent
-          },
-          {
-            path: 'zaposleni',
-            component: NadzornaPloscaZaposleniComponent
-          },
-          {
-            path: 'urnik',
-            component: NadzornaPloscaUrnikComponent
-          },
-          {
-            path: 'zasluzek',
-            component: NadzornaPloscaZasluzekComponent
-          },
-          {
-            path: 'kuhar',
-            component: NadzornaPloscaKuharComponent
-          },
-          {
-            path: 'rezervacija',
-            component: NadzornaPloscaRezervacijaComponent
-          },
-          {
-            path: '',
-            component: NadzornaPloscaMenuComponent
-          },
-          {
-            path: 'meni',
-            component: NadzornaPloscaMeniComponent
-          }
-        ]
-      }
-    ]),
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot([
+            {
+                path: '',
+                component: PristajalnaStranComponent,
+                children: [{
+                    path: '',
+                    component: LoginComponent
+                },
+                    {
+                        path: 'onas',
+                        component: OnasComponent
+                    },
+                    {
+                        path: 'rezerviraj',
+                        component: RezervacijaComponent,
+                    },
+                    {
+                        path: 'rezerviraj/podatki',
+                        component: RezervacijaPodatkiComponent
+                    },
+                    {
+                      path: 'meni',
+                      component: MeniComponent
+                    },
+                    {
+                        path: 'rezerviraj/meni',
+                        component: RezervacijaMeniComponent,
+                        canDeactivate: [ClearStorageService]
+                    }]
+            },
+            {
+                path: 'nadzorna_plosca',
+                component: NadzornaPloscaComponent,
+                children: [
+                    {
+                        path: 'zaloga',
+                        component: NadzornaPloscaZalogaComponent
+                    },
+                    {
+                        path: 'urnik',
+                        component: NadzornaPloscaUrnikComponent
+                    },
+                    {
+                        path: 'zasluzek',
+                        component: NadzornaPloscaZasluzekComponent
+                    },
+                    {
+                      path: 'kuhar',
+                      component: NadzornaPloscaKuharComponent
+                    },
+                    {
+                      path: '',
+                      component: NadzornaPloscaMenuComponent
+                    },
+                    {
+                      path: 'natakar',
+                      component: NadzornaPloscaNatakarComponent
+                    },
+                    {
+                      path: 'rezervacija',
+                      component: NadzornaPloscaRezervacijaComponent
+                    },
+                    {
+                      path: 'meni',
+                      component: NadzornaPloscaMeniComponent
+                    }
+                ]
+            }
+        ]),
     HttpClientModule,
     ChartsModule,
     BrowserAnimationsModule,
@@ -167,6 +168,7 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     NgbModule
   ],
   providers: [],
-  bootstrap: [MainComponent]
+  bootstrap: [MainComponent],
+  exports: [NgbdModalComponent]
 })
 export class AppModule { }

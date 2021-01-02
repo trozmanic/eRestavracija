@@ -1,0 +1,29 @@
+
+    <div class="modal-header">
+      <h5 class="modal-title" id="title">DODAJ NOVO NAROCILO</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+<!--      {{#each jedi as | jed |}}-->
+      <div class="jed" *ngFor="let jed of this.meniItems; let i = index">
+        <div class="def-number-input number-input safari_only">
+          <input class="quantity" min="0" name="quantity" type="number" [(ngModel)]="narocilo.meni_items[i].kolicina">
+          <div class="jed__ime">Ime: {{jed.ime}} </div>
+          <div class="jed__cena">Cena: {{jed.cena}} $</div>
+        </div>
+      </div>
+<!--      {{/each}}-->
+    </div>
+    <div class="miza">
+      <h3>Stevilka mize:</h3>
+      <input type="value" id="stevilkaMize" [(ngModel)]="narocilo.miza">
+    </div>
+    <div class="footer">
+      <button type="button" data-dismiss="modal" id="dismiss" class="narocilo__button" (click)="activeModal.close('Close click')">Zapri narocilo</button>
+      <button type="button" id="saveData" class="narocilo__button" (click)="createOrder()">Ustvari narocilo</button>
+    </div>
+    <div class="cena">
+      <h1 id="cenaNarocila">{{calculatePrice()}} $</h1>
+    </div>
