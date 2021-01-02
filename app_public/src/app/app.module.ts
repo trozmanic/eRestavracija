@@ -38,13 +38,15 @@ import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
 import { ModalRatingComponent } from './skupno/komponente/modal-rating/modal-rating.component';
 import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
 import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
-import { EditIdPipe } from './skupno/cevi/edit-delete-id.pipe';
-import { DeleteIdPipe } from './skupno/cevi/edit-delete-id.pipe';
-import { NadzornaPloscaRezervacijaComponent } from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
+import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
+import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NadzornaPloscaZaposleniComponent } from './skupno/komponente/nadzorna-plosca-zaposleni/nadzorna-plosca-zaposleni.component';
 import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
 import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -80,6 +82,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NadzornaPloscaMeniComponent,
     EditIdPipe,
     DeleteIdPipe,
+    NadzornaPloscaRezervacijaComponent,
+    NadzornaPloscaZaposleniComponent,
     NadzornaPloscaRezervacijaComponent
   ],
   imports: [
@@ -122,6 +126,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
           {
             path: 'zaloga',
             component: NadzornaPloscaZalogaComponent
+          },
+          {
+            path: 'zaposleni',
+            component: NadzornaPloscaZaposleniComponent
           },
           {
             path: 'urnik',

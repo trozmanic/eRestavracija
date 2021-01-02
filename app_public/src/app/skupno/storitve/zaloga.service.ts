@@ -41,7 +41,7 @@ export class ZalogaService {
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
-  public odstraniSestavino(id: any): Promise<any>{
+  public odstraniSestavino(id: string): Promise<any>{
     /*
     const httpLastnosti = {
       headers: new HttpHeaders({
@@ -49,12 +49,12 @@ export class ZalogaService {
       })
     };
      *//*                                                      , httpLastnosti) */
-    return this.http.delete(this.api_url + '/zaloga/' + id).toPromise()
+    return this.http.delete(this.api_url + '/zaloga/' + id).toPromise().then(null)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
   public obdelajNapako(napaka: any): Promise<any> {
-    console.log('Napaka pri zalogi' + napaka);
+    console.log('Napaka pri zalogi: ' + napaka.stringify);
     return Promise.reject(napaka.message || napaka);
   }
 }

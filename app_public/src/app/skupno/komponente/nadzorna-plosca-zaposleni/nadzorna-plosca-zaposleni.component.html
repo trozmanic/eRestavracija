@@ -1,0 +1,289 @@
+<br>
+<!-- Gumbi in iskanje ZAČETEK -->
+<div class="container">
+  <h1 class="text-center">{{vsebinaStrani.naslov}}</h1>
+  <br>
+  <div class="row">
+    <div class="col-4 col-lg-2">
+      <button type="button" class="btn btn-dark btn-block razmik" (click)="odpriModal(modal1)"><i
+        class="fas fa-plus"></i> DODAJ
+      </button>
+    </div>
+    <!-- ZAČETEK dodaj sestavino -->
+    <ng-template #modal1 let-modal>
+      <div class="modal-header bel">
+        <h5 class="modal-title">Dodaj zaposlenega</h5>
+      </div>
+      <div class="modal-body bel">
+        <form id="obrazec1" (ngSubmit)="dodajZaposlenega(dodajForm)" #dodajForm="ngForm">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="ImeForm1">Ime in priimek</label>
+                <input [(ngModel)]="novZaposleni.ime" type="text" class="form-control" id="ImeForm1"
+                       placeholder="Npr.: Chuck Norris" name="ime"
+                       pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" #ime="ngModel" autofocus required>
+                <div class="napaka" *ngIf="ime.errors?.pattern">
+                  Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="TelefonForm1">Telefonska številka</label>
+                <input [(ngModel)]="novZaposleni.telefonska_stevilka" type="text" class="form-control" id="TelefonForm1"
+                       placeholder="Npr.: 040 123 456" pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+                       #telefon="ngModel" name="tel" required>
+                <div class="napaka" *ngIf="telefon.errors?.pattern">
+                  Telefonska številka vsebuje samo števke brez simbolov!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="PostaForm1">E-pošta</label>
+                <input [(ngModel)]="novZaposleni.email_naslov" type="text" class="form-control" id="PostaForm1"
+                       placeholder="Npr.: chuck.norris@gmail.com" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                       #mail="ngModel" name="email" required>
+                <div class="napaka" *ngIf="mail.errors?.pattern">
+                  E-pošta mora biti oblike: primer@domena!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="GesloForm1">Geslo</label>
+                <input [(ngModel)]="novZaposleni.geslo" type="text" class="form-control" id="GesloForm1"
+                       placeholder="Npr.: geslo1234" #geslo="ngModel"
+                       pattern="^.*$" name="geslo" required>
+                <div class="napaka" *ngIf="geslo.errors?.pattern">
+                  Geslo lahko vsebuje črke, števke, znake in simbole!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="VlogaForm1">Vloga</label>
+                <select [(ngModel)]="novZaposleni.vloga" class="custom-select" id="VlogaForm1" #vloga="ngModel"
+                        name="vloga" required>
+                  <option option value="" disabled selected>Izberi vlogo:</option>
+                  <option value="admin">Admin</option>
+                  <option value="kuhar">Kuhar</option>
+                  <option value="natakar">Natakar</option>
+                </select>
+                <div class="napaka" *ngIf="vloga.dirty && !vloga.valid">Izberite vlogo!</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="PlacaForm1">Placa</label>
+                <input [(ngModel)]="novaPlaca.placa" type="number" class="form-control" id="PlacaForm1" placeholder="Npr.: 1000"
+                       #p="ngModel" min="1" name="placa" required>
+                <div *ngIf="p.dirty && !p.valid">
+                  Plača lahko vsebuje samo števke brez simbola valute!
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
+        {{ obrazecNapaka }}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-dark mr-auto" id="dodajZaposlenegaPotrdi" form="obrazec1"
+                [disabled]="!dodajForm.valid">Dodaj
+        </button>
+        <button type="button" class="btn btn-dark" id="dodajZaposlenegaPreklici"
+                (click)="dodajForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+        </button>
+      </div>
+    </ng-template>
+    <!-- KONEC dodaj sestavino -->
+
+    <div class="col-4 col-lg-2">
+      <button type="button" class="btn btn-dark btn-block razmik" id="uredi"
+              (click)="odpriModal(modal2)" [disabled]="!obkljukanEden"><i class="fas fa-edit"></i> UREDI
+      </button>
+    </div>
+    <!-- ZAČETEK uredi sestavino -->
+    <ng-template #modal2 let-modal>
+      <div class="modal-header bel">
+        <h5 class="modal-title" id="exampleModalLabel2">Uredi sestavino</h5>
+      </div>
+      <div class="modal-body bel">
+        <form id="obrazec2" (ngSubmit)="posodobiZaposlenega(urediForm)" #urediForm="ngForm">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="ImeForm2">Ime in priimek</label>
+                <input [(ngModel)]="novZaposleni.ime" type="text" class="form-control" id="ImeForm2"
+                       placeholder="Npr.: Chuck Norris"
+                       pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" #ime="ngModel" autofocus>
+                <div class="napaka" *ngIf="ime.errors?.pattern">
+                  Ime mora biti dolgo vsaj 3 črke in ne sme vsebovati števil ter posebnih znakov!
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="TelefonForm2">Telefonska številka</label>
+                <input [(ngModel)]="novZaposleni.telefonska_stevilka" type="text" class="form-control" id="TelefonForm2"
+                       placeholder="Npr.: 040 123 456"
+                       pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" #telefon="ngModel">
+                <div class="napaka" *ngIf="telefon.errors?.pattern">
+                  Telefonska številka vsebuje samo števke brez simbolov!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="PostaForm2">E-pošta</label>
+                <input [(ngModel)]="novZaposleni.email_naslov" type="text" class="form-control" id="PostaForm2"
+                       placeholder="Npr.: chuck.norris@gmail.com" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                       #mail="ngModel">
+                <div class="napaka" *ngIf="mail.errors?.pattern">
+                  E-pošta mora biti oblike: primer@domena!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="GesloForm2">Geslo</label>
+                <input [(ngModel)]="novZaposleni.geslo" type="text" class="form-control" id="GesloForm2"
+                       placeholder="Npr.: geslo1234" #geslo="ngModel"
+                       pattern="^.*$">
+                <div class="napaka" *ngIf="geslo.errors?.pattern">
+                  Geslo lahko vsebuje črke, števke, znake in simbole!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group is-invalid">
+                <label for="VlogaForm2">Vloga</label>
+                <select [(ngModel)]="novZaposleni.vloga" class="custom-select" id="VlogaForm2" #vloga="ngModel">
+                  <option option value="" disabled selected>Izberi vlogo:</option>
+                  <option value="admin">Admin</option>
+                  <option value="kuhar">Kuhar</option>
+                  <option value="natakar">Natakar</option>
+                </select>
+                <div class="napaka" *ngIf="vloga.dirty && vloga.errors?.pattern">Izberite vlogo!</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="PlacaForm2">Placa</label>
+                <input [(ngModel)]="novaPlaca.placa" type="text" class="form-control" id="PlacaForm2" placeholder="Npr.: 1000"
+                       #p="ngModel">
+                <div class="napaka" *ngIf="p.dirty && p.errors?.pattern">
+                  Plača lahko vsebuje samo števke brez simbola valute!
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <a href="" class="btn btn-dark btn-block" role="button" id="uredi_urnik" target="_blank">Izberi urnik <i
+          class="far fa-calendar-alt"></i></a>
+      </div>
+      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
+        {{ obrazecNapaka }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark mr-auto" form="obrazec2" id="urediZaposlenegaPotrdi"
+                [disabled]="!urediForm.valid">Potrdi
+        </button>
+        <button type="button" class="btn btn-dark" id="urediZaposlenegaPreklici"
+                (click)="urediForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+        </button>
+      </div>
+    </ng-template>
+    <!-- KONEC uredi sestavino -->
+
+    <div class="col-4 col-lg-2">
+      <button type="button" class="btn btn-dark btn-block razmik" id="izbrisiZaposlenega"
+              (click)="odpriModal(modal3)" [disabled]="!obkljukanihVec"><i class="fas fa-trash"></i> IZBRIŠI
+      </button>
+    </div>
+    <!-- ZAČETEK izbriši sestavino -->
+    <ng-template #modal3 let-modal>
+      <div class="modal-header bel">
+        <h5 class="modal-title" id="exampleModalLabel">Opozorilo!</h5>
+      </div>
+      <div class="modal-body">
+        <p>Ali res želite izbrisati izbrane zaposlene?</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="odstraniZaposlenega()" type="button" class="btn btn-dark mr-auto" id="izbrisiZaposlenegaPotrdi"
+                data-dismiss="modal">Da
+        </button>
+        <button type="button" class="btn btn-dark" id="izbrisiZaposlenegaPreklici" (click)="modal.close('Prekliči')">
+          Ne
+        </button>
+      </div>
+    </ng-template>
+    <!-- KONEC izbriši sestavino -->
+
+    <!-- obrazec za iskanje ZAČETEK -->
+    <div class="col-12 col-lg-6">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <select class="custom-select input-group-text izberi" id="iskanjePo">
+            <option selected>Ime</option>
+            <option value="1">E-pošta</option>
+            <option value="2">GSM</option>
+            <option value="3">Vloga</option>
+          </select>
+        </div>
+        <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZaposlenih">
+        <div class="input-group-append">
+          <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+    <!-- obrazec za iskanje KONEC -->
+  </div>
+  <!-- zacetek tabele -->
+  <div class="row justify-content-center">
+    <div class="col-12 table-responsive">
+      <table class="table table-dark table-striped table-bordered text-center" id="tabela">
+        <thead class="thead">
+        <tr>
+          <th scope="col">Izberi</th>
+          <th scope="col">Ime in Priimek</th>
+          <th scope="col">E-pošta</th>
+          <th scope="col">GSM</th>
+          <th scope="col">Vloga</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let zaposlen of zaposleni; index as i">
+          <th scope="row">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="customCheck{{i | stevec}}"
+                     idzaposlenega="{{zaposlen._id}}" (change)="obkljukan($event, i)">
+              <label class="custom-control-label" for="customCheck{{i | stevec}}"></label>
+            </div>
+          </th>
+          <td iskanje="Ime">{{zaposlen.ime}}</td>
+          <td iskanje="E-pošta">{{zaposlen.email_naslov}}</td>
+          <td iskanje="GSM">{{zaposlen.telefonska_stevilka}}</td>
+          <td iskanje="Vloga" idvloga="{{zaposlen.id_vloga_info}}">{{zaposlen.vloga}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <!-- konec tabele -->
+    </div>
+  </div>
+</div>
