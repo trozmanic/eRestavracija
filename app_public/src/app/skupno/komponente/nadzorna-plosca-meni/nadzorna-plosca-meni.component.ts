@@ -17,7 +17,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
 
   public image: string
 
-  public kal = 0
+  public kal: number = 0
 
   constructor(private meniService: MeniService) { }
 
@@ -34,12 +34,22 @@ export class NadzornaPloscaMeniComponent implements OnInit {
 
   delete(_id: string) {
     this.meniService.deleteItem(_id).then(() => {
-      this.getMenuItems()
+      let newMenuItems = [];
+      for(let i = 0; i < this.menuItems.length; i++){
+        if(this.menuItems[i]._id == _id){
+
+        }else{
+          newMenuItems.push(this.menuItems[i])
+        }
+
+      }
+      this.menuItems = newMenuItems;
     })
   }
 
   editItem(item: MeniItem): void {
     this.selectedItem = item
+    this.kal =  item.kalorije.valueOf()
   }
   discard(){
     this.sestavine = []
@@ -88,8 +98,8 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
   console.log(newMenuItem)
-    this.meniService.addItem(newMenuItem).then(() => {
-      this.getMenuItems()
+    this.meniService.addItem(newMenuItem).then((response) => {
+      this.menuItems.push(response)
       this.selectedItem = null
       this.add = false
       this.sestavine = []
@@ -107,8 +117,18 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
 
-    this.meniService.editItem(newMenuItem).then(() => {
-      this.getMenuItems()
+    this.meniService.editItem(newMenuItem).then((res) => {
+
+      let newMenuItems = [];
+      for(let i = 0; i < this.menuItems.length; i++){
+        if(this.menuItems[i]._id === res._id){
+          newMenuItems.push(res)
+        }else{
+          newMenuItems.push(this.menuItems[i])
+        }
+
+      }
+      this.menuItems = newMenuItems;
       this.selectedItem = null
       this.add = false
       this.sestavine = []
