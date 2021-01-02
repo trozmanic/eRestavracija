@@ -45,6 +45,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     this.sestavine = []
     this.selectedItem = null
     this.add=false
+    this.kal = 0
   }
 
   removeSestavina(index: number){
@@ -92,6 +93,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
       this.selectedItem = null
       this.add = false
       this.sestavine = []
+      this.kal = 0
     }).catch()
   }
 
@@ -110,6 +112,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
       this.selectedItem = null
       this.add = false
       this.sestavine = []
+      this.kal = 0
     }).catch()
   }
 
