@@ -84,7 +84,8 @@
     <!-- KONEC dodaj sestavino -->
 
     <div class="col-4 col-lg-2">
-      <button type="button" class="btn btn-dark btn-block razmik" id="uredi" (click)="odpriModal(modal2)" [disabled]="!obkljukanEden">
+      <button type="button" class="btn btn-dark btn-block razmik" id="uredi" (click)="odpriModal(modal2)"
+              [disabled]="!obkljukanEden">
         <i class="fas fa-edit"></i> UREDI
       </button>
     </div>
@@ -190,15 +191,16 @@
     <div class="col-12 col-lg-6">
       <div class="input-group mb-2">
         <div class="input-group-prepend">
-          <select class="custom-select input-group-text izberi" id="iskanjePo">
-            <option selected>Sestavina</option>
-            <option value="1">Količina</option>
-            <option value="2">Cena</option>
+          <select [(ngModel)]="izbira" class="custom-select input-group-text izberi" id="iskanjePo">
+            <option value="ime">Sestavina</option>
+            <option value="kolicina">Količina</option>
+            <option value="cena">Cena</option>
           </select>
         </div>
-        <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZalogi">
+        <input [(ngModel)]="iskanje" (keyup.enter)="pridobiSestavine()" name="iskanje" class="form-control" type="text" placeholder="Iskanje"
+               id="IskanjePoZalogi">
         <div class="input-group-append">
-          <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i>
+          <button type="button" (click)="pridobiSestavine()" class="btn btn-dark" id="button-addon2"><i class="fas fa-search"></i>
           </button>
         </div>
       </div>
@@ -219,7 +221,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let sestavina of sestavine | slice: (stran-1) * velikostStrani : stran * velikostStrani; index as i">
+        <tr
+          *ngFor="let sestavina of sestavine | slice: (stran-1) * velikostStrani : stran * velikostStrani; index as i">
           <th scope="row">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" (change)="obkljukan($event, i)"
@@ -235,7 +238,8 @@
         </tr>
         </tbody>
       </table>
-      <ngb-pagination class="d-flex justify-content-center" *ngIf="najvecStrani > 10" [collectionSize]="najvecStrani" [(page)]="stran"></ngb-pagination>
+      <ngb-pagination class="d-flex justify-content-center" *ngIf="najvecStrani > 10" [collectionSize]="najvecStrani"
+                      [(page)]="stran"></ngb-pagination>
     </div>
   </div>
   <!-- KONEC tabele -->

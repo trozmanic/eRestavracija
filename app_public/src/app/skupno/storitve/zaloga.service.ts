@@ -12,8 +12,8 @@ export class ZalogaService {
 
   private api_url = environment.api_url;
 
-  public pridobiSestavine(): Promise<Zaloga[]>{
-    return this.http.get(this.api_url + '/zaloga').toPromise().then(odgovor => odgovor as Zaloga[])
+  public pridobiSestavine(query: any): Promise<Zaloga[]>{
+    return this.http.get(this.api_url + '/zaloga?' + query).toPromise().then(odgovor => odgovor as Zaloga[])
       .catch(napaka => this.obdelajNapako(napaka));
   }
 

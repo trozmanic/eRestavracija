@@ -34,7 +34,6 @@ export class NadzornaPloscaZaposleniComponent implements OnInit {
 
   public obrazecNapaka: string;
   public zaposleni: Uporabnik[];
-  public zaposlen: Uporabnik;
   public idZaposlenega: any[] = new Array(50).fill(0);
   private modalRef: NgbModalRef;
   public obkljukaniCheckboxi = 0;

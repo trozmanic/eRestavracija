@@ -4,9 +4,24 @@ let ObjectId = require('mongoose').Types.ObjectId;
 
 const pridobiSestavine = async (req,res) => {
     try {
-        // const sestavine =  await Surovina.find(req.query).skip(req.body.preskoci).limit(10).exec();
-        const sestavine =  await Surovina.find().exec();
-        return res.status(200).json(sestavine);
+        console.log(req.query);
+        let iskanje = {};
+        const kljuc = Object.keys(req.query)[0];
+        const vrednost = Object.values(req.query)[0];
+
+        if (kljuc == 'odmik') {
+            const sestavine =  await Surovina.find().skip(parseInt(req.query.odmik)).limit(10).exec();
+            return res.status(200).json(sestavine);
+        } else {
+            if (kljuc == 'ime'){
+                const regex = new RegExp(vrednost, 'i');
+                iskanje[kljuc] = {$regex: regex};
+            } else {
+                iskanje[kljuc] = vrednost;
+            }
+            const sestavine =  await Surovina.find(iskanje).skip(parseInt(req.query.odmik)).limit(10).exec();
+            return res.status(200).json(sestavine);
+        }
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});

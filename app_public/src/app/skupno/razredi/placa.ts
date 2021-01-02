@@ -1,4 +1,4 @@
 export class Placa {
-  uporabnik_id: string;
+  uporabnik_id: String;
   placa: number;
 }

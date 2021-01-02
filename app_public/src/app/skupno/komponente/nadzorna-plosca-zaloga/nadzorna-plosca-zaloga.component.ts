@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import { Zaloga } from '../../razredi/zaloga';
 import { ZalogaService } from '../../storitve/zaloga.service';
@@ -30,7 +30,7 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
   };
 
   public posodobljenaSestavina: any = {};
-
+  public izbira = 'ime';
   public obrazecNapaka: string;
   public sestavine: Zaloga[];
   public idSestavine: any[] = new Array(50).fill('');
@@ -39,6 +39,7 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
   public obkljukanEden = false;
   public obkljukanihVec = false;
   public obvestilo: string;
+  public iskanje: any;
 
   public odpriModal(modal): void {
     this.modalRef = this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'});
@@ -46,8 +47,18 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
 
   private pridobiSestavine(): void {
     this.obvestilo = 'Pridobivanje sestavin';
+    const podatki = {};
+    if (this.iskanje !== undefined) {
+      console.log(this.izbira);
+      console.log(this.iskanje);
+      podatki[this.izbira] = this.iskanje;
+    }
+    podatki['odmik'] = '0';
+    console.log(podatki);
+    const query = new URLSearchParams(podatki);
+    // console.log(query);
     this.zalogaStoritev
-      .pridobiSestavine()
+      .pridobiSestavine(query)
       .then((najdeneSestavine: Zaloga[]) => {
         this.sestavine = najdeneSestavine;
         this.obvestilo = '';
