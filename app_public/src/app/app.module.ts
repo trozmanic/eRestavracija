@@ -33,6 +33,8 @@ import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca
 import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NadzornaPloscaZaposleniComponent } from './skupno/komponente/nadzorna-plosca-zaposleni/nadzorna-plosca-zaposleni.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-p
     EditIdPipe,
     DeleteIdPipe,
     NadzornaPloscaRezervacijaComponent,
+    NadzornaPloscaZaposleniComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,6 +100,10 @@ import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-p
             component: NadzornaPloscaZalogaComponent
           },
           {
+            path: 'zaposleni',
+            component: NadzornaPloscaZaposleniComponent
+          },
+          {
             path: 'urnik',
             component: NadzornaPloscaUrnikComponent
           },
@@ -124,7 +131,8 @@ import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-p
     BrowserAnimationsModule,
     FormsModule,
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [MainComponent]

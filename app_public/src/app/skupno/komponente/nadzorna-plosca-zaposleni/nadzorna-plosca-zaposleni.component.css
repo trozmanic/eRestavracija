@@ -1,15 +1,18 @@
-/* Začetek Zaloga */
+/* Začetek Zaposleni */
 .table {
   font-size: 20px;
   background-color: #35313b;
 }
+
 h1 {
   color: White;
 }
+
 .thead {
   background-color: #2A272E;
   font-size: 21px;
 }
+
 .btn-dark {
   font-family: 'Raleway', sans-serif;
   background: none;
@@ -21,12 +24,14 @@ h1 {
   backdrop-filter: blur(5px);
   /* END dodatek */
 }
+
 .btn-dark:hover {
   transition: 1s;
-  color:#5F3C50;
+  color: #5F3C50;
   border: 1px solid #5F3C50;
   background: white none;
 }
+
 .input-group input[type="text"] {
   font-family: 'Raleway', sans-serif;
   background: none;
@@ -36,18 +41,23 @@ h1 {
   transition: 1s;
   backdrop-filter: blur(5px);
 }
+
 .input-group input[type="text"]:focus:not([readonly]) {
   box-shadow: 0 0 1px 1px white inset;
 }
+
 .input-group .form-control::-webkit-input-placeholder {
   color: white;
 }
+
 .razmik {
   margin-bottom: 8px;
 }
+
 .bel {
   color: white;
 }
+
 .izberi {
   font-family: 'Raleway', sans-serif;
   background: none;
@@ -55,18 +65,21 @@ h1 {
   border-radius: 12px;
   color: white;
 }
+
 select:hover {
   transition: 1s;
-  color:#5F3C50;
+  color: #5F3C50;
   border: 1px solid white;
   background: white none;
 }
+
 select:focus:not([readonly]) {
-  color:#5F3C50;
+  color: #5F3C50;
   border: 1px solid white;
   background: white none;
   box-shadow: 0 0 1px 1px white inset;
 }
+
 .box {
   background: #666666;
   color: #ffffff;
@@ -74,19 +87,18 @@ select:focus:not([readonly]) {
   padding: 10px;
   margin: 1em auto;
 }
+
 p {
   margin: 1.5em 0;
   padding: 0;
 }
-.napaka {
-  margin-top: 0.5em;
-  color: red;
-}
-/* Konec Zaloga */
+
+/* Konec Zaposleni */
 /* Pisava */
 * {
   font-family: 'Raleway', sans-serif;
 }
+
 /* Slika ozadja */
 body, html {
   padding: 0;
@@ -94,8 +106,9 @@ body, html {
   height: 100%;
   width: 100%;
 }
+
 .bg {
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)),
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)),
   url('../../../../assets/slike/pexels-emre-kuzu-2237189.jpg');
   height: 100%;
   width: 100%;
@@ -110,20 +123,23 @@ body, html {
   /* index ima 5.5% sam je wasted space na nadzorni plosci */
   margin-top: 1%;
 }
+
 .navbar-nadzorna-plosca-ul {
   /* text-align: center; */
   padding: 0;
   width: 100%;
   position: relative;
 }
-.navbar-nadzorna-plosca-levo{
+
+.navbar-nadzorna-plosca-levo {
   position: relative;
   margin-left: auto;
   margin-right: 0;
   float: right;
   text-align: right;
 }
-.navbar-nadzorna-plosca-ul-li-text{
+
+.navbar-nadzorna-plosca-ul-li-text {
   padding: 0;
   color: gray;
   text-decoration: none;
@@ -134,13 +150,16 @@ body, html {
   /* index margin-left: 2%; */
   /* index margin-right: 2%; */
 }
+
 /* TO JE ZA TO SA JE NAVBAR GUMB BEL*/
 .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
+
 .custom-toggler.navbar-toggler {
-  border-color: rgb(255,255,255);
+  border-color: rgb(255, 255, 255);
 }
+
 /* END*/
 .logo-nadzorna-plosca {
   font-family: 'Dancing Script', cursive;
@@ -149,37 +168,41 @@ body, html {
   font-weight: 500;
   font-size: 150%;
 }
+
 .logo-nadzorna-plosca:hover {
   cursor: pointer;
   color: #5F3C50;
   transition: 0.75s;
 }
+
 /* ikone */
 .ikone-stil {
   text-align: center;
   font-size: 150%;
   color: white;
 }
+
 .ikone-stil-posamezna {
   text-align: center;
   color: white;
   margin-right: 2%;
   margin-left: 2%;
 }
+
 .ikone-stil-logout {
   text-align: center;
   font-size: 150%;
   color: white;
   margin-left: 1%;
 }
+
 .ikone-stil-logout:hover {
   cursor: pointer;
   color: #5F3C50;
   transition: 0.75s;
 }
+
 /* END Vrhni Meni */
-
-
 /* Rezervacija kartice */
 .rezervacija-skatla {
   color: white;
@@ -187,97 +210,110 @@ body, html {
   border-radius: 12px;
   /*border: 1px solid white;*/
   margin-bottom: 1em;
-  padding:1em;
+  padding: 1em;
 }
+
 .kartica-padding {
   padding-left: 1%;
   padding-right: 1%;
 }
+
 .sredina-text {
   text-align: center;
 }
+
 .levo-text {
   text-align: left;
 }
+
 .levo-float {
   float: left;
 }
+
 .desno-text {
   text-align: right;
 }
+
 .desno-float {
   float: right;
 }
+
 .gor-margin {
   margin-top: 1%;
 }
+
 .ikone-stil-posamezna-no-center {
   color: white;
   margin-right: 2%;
   margin-left: 2%;
 }
 
-.title{
-  color:white;
-  display:flex;
+.title {
+  color: white;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.title i{
+.title i {
   font-size: 1.5em;
   margin: 0 0.5em 0;
 }
 
-.title i:hover{
+.title i:hover {
   cursor: pointer;
   color: #5F3C50;
   transition: 0.75s;
 }
+
 .ikone-stil-posamezna:hover {
   cursor: pointer;
   color: #5F3C50;
   transition: 0.75s;
 }
+
 .ikone-stil-dodatno:hover {
   cursor: pointer;
   color: #5F3C50;
   transition: 0.75s;
 }
+
 .ikone-stil-posamezna-no-hover {
   text-align: center;
   color: white;
   margin-right: 2%;
   margin-left: 2%;
 }
-.title h1{
-  margin:0;
+
+.title h1 {
+  margin: 0;
 }
 
-.modal-content{
+.modal-content {
   background-color: #35313b;
   border-radius: 12px;
 }
 
-.iconsflex{
-  display:flex;
+.iconsflex {
+  display: flex;
   flex-direction: column;
   margin-left: 0.5em;
 }
 
-.iconmodal{
+.iconmodal {
   display: flex;
   margin-bottom: 1em;
 }
 
-.iconmodal i{
+.iconmodal i {
   font-size: 1.5em;
   color: white;
   width: 1em;
 }
 
-.iconmodal p{
-  margin:0 1em 0;
-  color:white;
+.iconmodal p {
+  margin: 0 1em 0;
+  color: white;
 }
+
 /* END Kartica */

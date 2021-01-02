@@ -24,7 +24,7 @@ const ctrlAvtentikacija = require('../controllers/avtentikacija');
 //UPORABNIKI
 router.get("/uporabniki",uporabniki.pridobiUporabnike);
 router.get("/uporabniki/:idUporabnika",uporabniki.pridobiUporabnika);
-//router.post("/uporabniki",uporabniki.ustvariUporabnika);
+router.post("/uporabniki",uporabniki.ustvariUporabnika);
 router.put("/uporabniki",uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
 

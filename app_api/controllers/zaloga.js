@@ -4,7 +4,8 @@ let ObjectId = require('mongoose').Types.ObjectId;
 
 const pridobiSestavine = async (req,res) => {
     try {
-        const sestavine =  await Surovina.find({}).exec();
+        // const sestavine =  await Surovina.find(req.query).skip(req.body.preskoci).limit(10).exec();
+        const sestavine =  await Surovina.find().exec();
         return res.status(200).json(sestavine);
     }catch (err) {
         console.log(err);
@@ -36,7 +37,7 @@ const ustvariSestavino = async (req,res) => {
         const sestavina = req.body;
         const novaSestavina = new Surovina (sestavina);
         await novaSestavina.save();
-        res.status(201).json(sestavina);
+        res.status(201).json(novaSestavina);
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});
