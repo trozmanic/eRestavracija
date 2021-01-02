@@ -1,4 +1,4 @@
- <div class="login-buttons" *ngIf="!authService.jePrijavljen()">
+ <div class="login-buttons" > //*ngIf="!authService.jePrijavljen()">
     <button class="btn btn-primary"
             data-toggle="collapse"
             href="#register"
@@ -17,7 +17,7 @@
     </button>
   </div>
 
-  <div id="register" class="hide" *ngIf="!authService.jePrijavljen()">
+  <div id="register" class="hide"> //*ngIf="!authService.jePrijavljen()">
     <div class="form_content">
       <div class = 'form-text'>
         <h1>Nimate uporabniskega racuna ?</h1>
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div id="login" class="hide" *ngIf="!authService.jePrijavljen()">
+  <div id="login" class="hide"> //*ngIf="!authService.jePrijavljen()">
     <div class="form_content">
       <div class = 'form-text'>
         <h1>Imate uporabniski racun ?</h1>
@@ -102,4 +102,4 @@
     </div>
   </div>
 
- <app-info *ngIf="authService.jePrijavljen()"></app-info>
+ <app-info> *ngIf="authService.jePrijavljen()"></app-info>

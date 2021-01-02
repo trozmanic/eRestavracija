@@ -1,5 +1,9 @@
 <p class="headcont">Izberite hrano</p>
-
+<div class="alertdiv">
+    <alert [type]="meniAlert.type" [isOpen]="meniAlert.open" style="width: 50%;">
+        <span [innerHtml]="meniAlert.sporocilo"></span>
+    </alert>
+</div>
 <div class="row justify-content-center">
     <ng-template ngFor let-meni_item [ngForOf]="meni_items" let-odd="odd">
         <div class="col-md-3 col-10">

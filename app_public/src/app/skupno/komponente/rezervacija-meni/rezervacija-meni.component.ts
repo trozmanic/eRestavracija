@@ -15,6 +15,8 @@ export class RezervacijaMeniComponent implements OnInit {
 
   public meni_items: MeniItemRezervacija[];
 
+  public meniAlert = { 'type': 'info', 'open': true, 'sporocilo': 'Pridobivanje menija...' };
+
   constructor(private meniService: MeniService, private rezervacijeService: RezervacijeService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -22,7 +24,10 @@ export class RezervacijaMeniComponent implements OnInit {
     this.meniService.pridobiMeni().then((meni_items => {
       this.meni_items = meni_items as MeniItemRezervacija[];
       this.meni_items.forEach(meni_item => meni_item.kolicina = 0);
-    }));
+      this.meniAlert = { 'type': 'info', 'open': false, 'sporocilo': 'Pridobivanje menija...' };
+    })).catch((napaka)=>{
+      this.meniAlert = { 'type': 'danger', 'open': true, 'sporocilo': 'Napaka pri pridobivanju menija' };
+    });
   }
 
   public checkStorage() {
@@ -56,7 +61,7 @@ export class RezervacijaMeniComponent implements OnInit {
     let datum = sessionStorage.getItem("datum");
     let datum_in_ura = new Date(datum);
     datum_in_ura.setHours(parseInt(ura.split(":")[0]), parseInt(ura.split(":")[1]));
-    const uporabnik_id=this.authService.vrniTrenutnegaUporabnika()._id;
+    const uporabnik_id = this.authService.vrniTrenutnegaUporabnika()._id;
 
     let payload = {
       "datum_in_ura": datum_in_ura.toJSON(),
@@ -64,15 +69,13 @@ export class RezervacijaMeniComponent implements OnInit {
       "jedi": jedi,
       "uporabnik_id": uporabnik_id
     }
-    this.rezervacijeService.ustvariRezervacijo(payload).then(odgovor=>{
-      if(odgovor.ok){
-        window.alert("Rezervacija uspešno oddana");
-        this.router.navigate(["rezerviraj"]);
-      }else{
-        window.alert("Pri oddaji rezervacije je prišlo do napake");
-        this.router.navigate(["rezerviraj"]);
-      }
-    })
+    this.rezervacijeService.ustvariRezervacijo(payload).then(odgovor => {
+      window.alert("Rezervacija uspešno oddana");
+      this.router.navigate(["rezerviraj"]);
+    }).catch((napaka) => {
+      window.alert("Pri oddaji rezervacije je prišlo do napake");
+      this.router.navigate(["rezerviraj"]);
+    });
   }
 
   public clearStorage() {

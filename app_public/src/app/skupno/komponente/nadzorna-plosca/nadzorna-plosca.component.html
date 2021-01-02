@@ -14,11 +14,11 @@
                 <div class="navbar-nav navbar-nadzorna-plosca-ul">
 
                     <div class="col-6 col-md-6 nav-item ikone-stil">
-                        <!--{{{nadzorna_plosca_menu_by_role zaposleni_role uporabnik_id}}}-->
+                      <a *ngFor="let link of links" routerLink="/nadzorna_plosca/{{link.l}}"><i class="{{link.icon}} ikone-stil-posamezna"></i></a>
                     </div>
 
                     <div class="col-12 col-md-6 nav-item navbar-nadzorna-plosca-levo">
-                        <!--<span class="navbar-text navbar-nadzorna-plosca-ul-li-text">{{u_ime}}</span>-->
+                        <span class="navbar-text navbar-nadzorna-plosca-ul-li-text">{{uporabnik.ime}}</span>
                         <a href="/nadzorna_plosca/odjava"><i class="fas fa-sign-out-alt ikone-stil-logout"></i></a>
                     </div>
 

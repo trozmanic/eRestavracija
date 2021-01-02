@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 
 import { ZasluzekRazred } from "../razredi/zasluzek-razred";
+import { IdRazred } from "../razredi/id-razred";
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,14 @@ export class ZasluzekService {
 
   public pridobiZasluzek(mesec, leto, uporabnik_id) {
     return this.http.get(this.api_url + '/zasluzek?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id)
-      .toPromise().then(odgovor => odgovor as ZasluzekRazred)
-      .catch(napaka => this.obdelajNapako(napaka))
+      .toPromise().then(odgovor => odgovor as ZasluzekRazred);
   }
+
+  public izbrisiRacun(id) {
+    return this.http.delete(this.api_url + '/narocila/' + id)
+      .toPromise().then(odgovor => odgovor as IdRazred);
+  }
+
 
   /*
   public posodobiRezervacije(id, operacija) {

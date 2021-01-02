@@ -7,6 +7,7 @@ import {RezultatAvtentikacije} from "../razredi/rezultat-avtentikacije";
 import {userLogin} from "../razredi/userLogin";
 import {Uporabnik} from "../razredi/uporabnik";
 import {User} from "../razredi/user";
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,16 @@ export class AuthService {
 
   private api_url = environment.api_url;
 
-  constructor(private http: HttpClient, @Inject(SHRAMBA_BRSKALNIKA) private shramba: Storage) { }
+  constructor(private http: HttpClient, @Inject(SHRAMBA_BRSKALNIKA) private shramba: Storage, private router: Router) { }
 
   public registrirajUporabnika (uporabnik: userRegister): Promise<RezultatAvtentikacije> {
-    console.log(uporabnik)
+    console.log(uporabnik);
     return this.http.post(this.api_url + '/registracija', uporabnik).toPromise()
       .then((odgovor) => {
         this.shraniZeton(odgovor['token']);
         return odgovor as RezultatAvtentikacije;
       })
-      .catch(this.obdelajNapako)
+      .catch(this.obdelajNapako);
   }
 
   public prijaviUporabnika (uporabnik: userLogin): Promise<RezultatAvtentikacije> {
@@ -33,7 +34,7 @@ export class AuthService {
         this.shraniZeton(odgovor['token']);
         return odgovor as RezultatAvtentikacije;
       })
-      .catch(this.obdelajNapako)
+      .catch(this.obdelajNapako);
   }
 
   public obdelajNapako(napaka) {

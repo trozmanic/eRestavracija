@@ -1,0 +1,33 @@
+<div class="card">
+  <img src="{{meniItem.slika | transformPictureLink}}" class="card-img-top" alt="..." (click)="toggleInfo()">
+  <div class="card_body">
+    <h1 class="card-title">{{meniItem.ime}}</h1>
+    <p class="card-text">Za vec informacij pritisnite na sliko</p>
+    <p class="card-text">
+      {{meniItem.opis}}
+    </p>
+    <h2 *ngIf="meniItem.ocenjena === true" style="text-align: center; color: white;">TO JED STE ZE OCENILI</h2>
+    <button type="button"
+            class="button btn-menu"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            (click)="newMessage()"
+            *ngIf="meniItem.ocenjena === false">
+      OCENI JED
+    </button>
+
+    <div class="properties hidden" id="{{meniItem._id}}">
+      <div class="properties-info">
+        <p>Kalorije: {{meniItem.kalorije}}</p>
+        <p style="display: inline-block;">Ocena:
+        <div class="rating-stars">
+          <app-zvezda *ngFor="let i of calculateStars()">
+
+          </app-zvezda>
+        </div>
+        <p>Cena: {{meniItem.cena}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

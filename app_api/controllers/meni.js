@@ -37,7 +37,7 @@ const ustvariJed = async (req,res) => {
         const jed = req.body;
         const novaJed = new Jed (jed);
         await novaJed.save();
-        res.status(200).json(jed);
+        res.status(200).json(novaJed);
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});
