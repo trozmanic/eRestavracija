@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {MeniItem, MeniItemPOST, MeniItemPUT, Sestavina} from "../../razredi/meniItem";
 import {MeniService} from "../../storitve/meni.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-nadzorna-plosca-meni',
@@ -95,7 +96,8 @@ export class NadzornaPloscaMeniComponent implements OnInit {
 
 
     if(data.name == '' || data.price == '' || data.opis == '' || data.calories == ''){
-      alert("Ime, Opis, Cena in Kalorije so obvezni atributi")
+      // alert("Ime, Opis, Cena in Kalorije so obvezni atributi");
+      return Swal.fire('Neveljaven vnos!', 'Za dodajanje jedi je potrebno vnesti Ime, Opis, Ceno in Kalorije.', 'error');
     }else {
       if(this.selectedFiles && this.selectedFiles.length > 0){
         let file = this.selectedFiles.item(0);
@@ -103,6 +105,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
         let image = new FormData();
         image.append('image', file);
         this.meniService.postImage(image).then(odgovor => {
+          // @ts-ignore
           var string = odgovor.image.replaceAll('\\', '/');
           string = string.replace('app_public', '');
           string = string.replace('/src', '');
@@ -143,7 +146,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
     if(data.name == '' || data.price == '' || data.opis == '' || data.calories == ''){
-      alert("Ime, Opis, Cena in Kalorije so obvezni atributi")
+      return Swal.fire('Neveljaven vnos!', 'Za urejanju jedi je potrebno vnesti Ime, Opis, Ceno in Kalorije.', 'error');
     }else {
 
       if(this.selectedFiles && this.selectedFiles.length > 0) {
@@ -153,6 +156,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
         image.append('image', file);
 
         this.meniService.postImage(image).then(odgovor => {
+          // @ts-ignore
           var string = odgovor.image.replaceAll('\\', '/');
           string = string.replace('app_public', '');
           string = string.replace('/src', '');
