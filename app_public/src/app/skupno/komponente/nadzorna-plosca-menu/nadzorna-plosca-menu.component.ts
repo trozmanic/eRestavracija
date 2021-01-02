@@ -22,10 +22,10 @@ export class NadzornaPloscaMenuComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
-    this.uporabnik = new User();//FIX
-    this.uporabnik.vloga = "admin";//FIX
-    this.uporabnik.ime = "Ime Priimek";//FIX
+    this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
+    //this.uporabnik = new User();//FIX
+    //this.uporabnik.vloga = "admin";//FIX
+    //this.uporabnik.ime = "Ime Priimek";//FIX
 
     this.admin = null;
     this.kuhar = null;
