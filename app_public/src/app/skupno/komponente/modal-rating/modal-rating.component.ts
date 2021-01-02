@@ -5,6 +5,7 @@ import {Ocena} from '../../razredi/ocena';
 import {Uporabnik} from '../../razredi/uporabnik';
 import {AuthService} from '../../storitve/auth.service';
 import {User} from '../../razredi/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-rating',
@@ -23,6 +24,7 @@ export class ModalRatingComponent implements OnInit {
     this.ocenaService.currentMessage.subscribe((message) => {
       this.message = message;
       if (message !== null) {
+        console.log(message);
         this.show();
       }
     });
@@ -48,13 +50,14 @@ export class ModalRatingComponent implements OnInit {
     ocena.ocena = this.currentRating;
     this.ocenaService.oceniJed(ocena)
       .then((meniItem) => {
-        alert('Uspesno oddana ocena');
+        Swal.fire('Oddana ocena', 'Uspesno oddana ocena', 'success');
         this.message.ocenjena = true;
         // @ts-ignore
         this.message.ocena_count += 1;
         // @ts-ignore
         this.message.ocena += this.currentRating;
         this.ocenaService.changeMessage(this.message);
+        this.message = null;
         this.close();
       })
       .catch((err) => {

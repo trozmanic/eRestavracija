@@ -1,4 +1,5 @@
 require('dotenv').config();
+var cors = require('cors');
 var passport = require('passport');
 var createError = require('http-errors');
 var express = require('express');
@@ -14,6 +15,7 @@ require('./app_server/views/partials/hbsp.js');
 var session = require('express-session')
 var app = express();
 
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs');

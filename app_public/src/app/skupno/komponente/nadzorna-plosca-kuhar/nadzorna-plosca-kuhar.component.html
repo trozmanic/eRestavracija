@@ -1,1 +1,26 @@
-<app-narocilo></app-narocilo>
+<div class="row" *ngIf="narocila">
+  <div class="col-12 col-md-6" id="narocila">
+    <div class="col-xl-12">
+      <h3 class="sredina-text text-white">Naročila</h3>
+    </div>
+
+    <app-narocilo
+      *ngFor="let narocilo of narocila.vrsta"
+      [narocilo]="narocilo"
+      (newStatusEvent)="changeOrders($event)" >
+    </app-narocilo>
+
+  </div>
+
+
+  <div class="col-12 col-md-6" id="priprava">
+    <div class="col-xl-12">
+      <h3 class="sredina-text text-white">V pripravi</h3>
+    </div>
+    <app-narocilo
+      *ngFor="let narocilo of narocila.priprava"
+      [narocilo]="narocilo"
+      (newStatusEvent)="changeOrders($event)" >
+    </app-narocilo>
+  </div>
+</div>

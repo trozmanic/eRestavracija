@@ -45,6 +45,9 @@ import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-p
 import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
 import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
+import { NadzornaPloscaNatakarComponent } from './skupno/komponente/nadzorna-plosca-natakar/nadzorna-plosca-natakar.component';
+import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/modal.component';
+
 @NgModule({
   declarations: [
     PristajalnaStranComponent,
@@ -77,6 +80,9 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     NadzornaPloscaKuharComponent,
     NarociloComponent,
     NadzornaPloscaMenuComponent,
+    NadzornaPloscaNatakarComponent,
+    NgbdModalContent,
+    NgbdModalComponent
   ],
     imports: [
         BrowserModule,
@@ -133,6 +139,10 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
                     {
                       path: '',
                       component: NadzornaPloscaMenuComponent
+                    },
+                    {
+                      path: 'natakar',
+                      component: NadzornaPloscaNatakarComponent
                     }
                 ]
             }
@@ -211,6 +221,7 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
     AlertModule.forRoot()
   ],
   providers: [],
-  bootstrap: [MainComponent]
+  bootstrap: [MainComponent],
+  exports: [NgbdModalComponent]
 })
 export class AppModule { }
