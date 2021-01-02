@@ -97,14 +97,17 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.cena = data.price;
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
-  console.log(newMenuItem)
-    this.meniService.addItem(newMenuItem).then((response) => {
-      this.menuItems.push(response)
-      this.selectedItem = null
-      this.add = false
-      this.sestavine = []
-      this.kal = 0
-    }).catch()
+    if(data.name == '' || data.price == '' || data.opis == '' || data.calories == ''){
+      alert("Ime, Opis, Cena in Kalorije so obvezni atributi")
+    }else {
+      this.meniService.addItem(newMenuItem).then((response) => {
+        this.menuItems.push(response)
+        this.selectedItem = null
+        this.add = false
+        this.sestavine = []
+        this.kal = 0
+      }).catch()
+    }
   }
 
   onClickSubmitUpdate(data){
@@ -116,24 +119,27 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.cena = data.price;
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
+    if(data.name == '' || data.price == '' || data.opis == '' || data.calories == ''){
+      alert("Ime, Opis, Cena in Kalorije so obvezni atributi")
+    }else {
+      this.meniService.editItem(newMenuItem).then((res) => {
 
-    this.meniService.editItem(newMenuItem).then((res) => {
+        let newMenuItems = [];
+        for (let i = 0; i < this.menuItems.length; i++) {
+          if (this.menuItems[i]._id === res._id) {
+            newMenuItems.push(res)
+          } else {
+            newMenuItems.push(this.menuItems[i])
+          }
 
-      let newMenuItems = [];
-      for(let i = 0; i < this.menuItems.length; i++){
-        if(this.menuItems[i]._id === res._id){
-          newMenuItems.push(res)
-        }else{
-          newMenuItems.push(this.menuItems[i])
         }
-
-      }
-      this.menuItems = newMenuItems;
-      this.selectedItem = null
-      this.add = false
-      this.sestavine = []
-      this.kal = 0
-    }).catch()
+        this.menuItems = newMenuItems;
+        this.selectedItem = null
+        this.add = false
+        this.sestavine = []
+        this.kal = 0
+      }).catch()
+    }
   }
 
   dodaj(){
