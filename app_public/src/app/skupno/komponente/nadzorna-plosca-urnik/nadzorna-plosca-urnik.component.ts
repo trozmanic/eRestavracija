@@ -27,10 +27,10 @@ export class NadzornaPloscaUrnikComponent implements OnInit {
   constructor(private urnikService: UrnikService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
-    this.uporabnik = new User();//FIX
-    this.uporabnik.vloga = "admin";//FIX
-    this.uporabnik.ime = "Ime Priimek";//FIX
+    this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
+    //this.uporabnik = new User();//FIX
+    //this.uporabnik.vloga = "admin";//FIX
+    //this.uporabnik.ime = "Ime Priimek";//FIX
 
     this.urnik = null;
     this.sporocilo="Pridobivam podatke iz API.";
@@ -38,7 +38,7 @@ export class NadzornaPloscaUrnikComponent implements OnInit {
     let dan = new Date();
     this.mesec = dan.getMonth();
     this.leto = dan.getFullYear();
-    this.uporabnik_id = "5fb9bffbe155c41ee1e19cce"; //FIX
+    this.uporabnik_id = this.uporabnik._id;
     this.urnikService.pridobiUrnik(this.mesec, this.leto, this.uporabnik_id)
       .then(u => {
         this.sporocilo = null;

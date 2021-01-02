@@ -7,8 +7,9 @@
 
 <!-- Source oseb: wikipedia: najpogostejsi imena + priimki -->
 
-<!--<alert [type]="rezervacijeAlert.type" [isOpen]="rezervacijeAlert.open"><span-->
-<!--        [innerHtml]="rezervacijeAlert.sporocilo"></span></alert>-->
+<!--<alert [type]="rezervacijeAlert.type" [isOpen]="rezervacijeAlert.open">-->
+<!--    <span [innerHtml]="rezervacijeAlert.sporocilo"></span>-->
+<!--</alert>-->
 
 <div class="row">
 
@@ -26,8 +27,8 @@
             </p>
 
             <p class="levo-text kartica-padding">
-                Datum: <strong>{{rezervacija.datum | date:'d.M.y'}}</strong>
-                <span class="desno-float">Ura: <strong>{{rezervacija.datum | date:'H:mm'}}</strong></span>
+                Datum: <strong>{{rezervacija.narocilo.datum_in_ura | date:'d.M.y'}}</strong>
+                <span class="desno-float">Ura: <strong>{{rezervacija.narocilo.datum_in_ura | date:'H:mm'}}</strong></span>
             </p>
 
             <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
@@ -58,8 +59,8 @@
             </p>
 
             <p class="levo-text kartica-padding">
-                Datum: <strong>{{rezervacija.datum | date:'d.M.y'}}</strong>
-                <span class="desno-float">Ura: <strong>{{rezervacija.datum | date:'H:mm'}}</strong></span>
+                Datum: <strong>{{rezervacija.narocilo.datum_in_ura | date:'d.M.y'}}</strong>
+                <span class="desno-float">Ura: <strong>{{rezervacija.narocilo.datum_in_ura | date:'H:mm'}}</strong></span>
             </p>
 
             <span innerHtml='{{rezervacija.narocilo.meni_items | rezervacijaMeni:meniItems}}'></span>
@@ -67,7 +68,7 @@
             <div class="ikone-stil">
                 <i role="button" class="fas fa-utensils ikone-stil-posamezna"
                     (click)="odpriPotrditevModal(potrditev,rezervacija._id)"></i>
-                <i role="button" class="fas fa-ban ikone-stil-posamezna"></i>
+                <i role="button" class="fas fa-ban ikone-stil-posamezna" (click)="zavrniRezervacijo(rezervacija._id)"></i>
             </div>
         </div>
 
@@ -104,24 +105,36 @@
     </div>
 </ng-template>
 
-<!--<ng-template #potrditev>
+<ng-template #potrditev>
     <div class="modal-body">
         <h1 class="modalheader">Meni:</h1>
         <div id="meni">
+            <div *ngFor="let meniItem of narociloPotrditev.meni_items; index as i" class="meniitem">
+                <div class="meniitemflex">
+                    <p>{{meniItem.ime}}</p>
+                    <p class="menicount">{{meniItem.kolicina}}</p>
+                </div>
+                <i class="fas fa-plus-circle povecajnarocilo" (click)="povecajNarocilo(i)"></i>
+                <i class="fas fa-minus-circle zmanjsajnarocilo" (click)="zmanjsajNarocilo(i)"></i>
+            </div>
+            <div class="meniitem">
+                <p class="cena">Cena:</p>
+                <p class="cena" id="vrednostcena">{{narociloPotrditev.cena}}€</p>
+            </div>
         </div>
         <div class="inputfieldtop">
             <div class="inputfield">
                 <lebel>Natakar</lebel>
-                <input id="natakar" value="{{uporabnik_ime}}" disabled></input>
+                <input id="natakar" [value]="uporabnik.ime" disabled>
             </div>
             <div class="inputfield">
                 <lebel>Miza</lebel>
-                <input id="miza" type="number" min="1"></input>
+                <input id="miza" type="number" min="1" (change)="narociloPotrditev.miza=$event.target.value">
             </div>
         </div>
         <div class="butkontakt">
-            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
-            <button type="submit" class="but" id="narociloposli">Pošlji</button>
+            <button type="submit" class="but" (click)="zapriPotrditevModal()">Zapri</button>
+            <button type="submit" class="but" id="narociloposli" (click)="posljiNarocilo()">Pošlji</button>
         </div>
     </div>
-</ng-template>-->
+</ng-template>

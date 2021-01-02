@@ -37,7 +37,7 @@ const ustvariJed = async (req,res) => {
         const jed = req.body;
         const novaJed = new Jed (jed);
         await novaJed.save();
-        res.status(200).json(jed);
+        res.status(200).json(novaJed);
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});
@@ -51,8 +51,9 @@ const posodobiJed = async (req,res) => {
         if (!jedUpdate.id) {
             return res.status(400).json({error_message: "Specify ID"});
         }
-        await Jed.findByIdAndUpdate(jedUpdate.id, jedUpdate);
-        res.status(200).json();
+        const jed = await Jed.findByIdAndUpdate(jedUpdate.id, jedUpdate, {new: true});
+
+        res.status(200).json(jed);
     }catch (err) {
         res.status(500).json({error_message: err});
     }

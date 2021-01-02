@@ -13,6 +13,23 @@ export class MeniItem {
     }];
 }
 
+export class MeniItemPOST{
+  ime: String;
+  opis: String;
+  kalorije: Number;
+  cena: Number;
+  sestavine: string[]
+}
+
+export class MeniItemPUT{
+  id: String;
+  ime: String;
+  opis: String;
+  kalorije: Number;
+  cena: Number;
+  slika: String;
+}
+
 export class MeniItemGost extends MeniItem {
   ocenjena: boolean;
   constructor(ocenjena: boolean) {
@@ -28,3 +45,25 @@ export class MeniItemRezervacija extends MeniItem {
         Object.assign(this, x);
     }
 }
+
+export class Sestavina {
+  ime: string;
+  kolicina: number;
+  kcal: number;
+  constructor(ime: string, kolicina: number, kcal: number) {
+    this.ime = ime;
+    this.kolicina = kolicina;
+    this.kcal = kcal
+  }
+}
+
+export class APIResponse {
+  parsed: [{
+    food: {
+      nutrients: {
+        ENERC_KCAL: number
+      }
+    }
+  }]
+}
+

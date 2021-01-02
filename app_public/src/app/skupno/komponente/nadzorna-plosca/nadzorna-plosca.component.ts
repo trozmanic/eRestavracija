@@ -21,6 +21,10 @@ export class NadzornaPloscaComponent implements OnInit {
     //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
     this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
     console.log(this.uporabnik);
+    this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
+    //this.uporabnik = new User();//FIX
+    //this.uporabnik.vloga = "admin";//FIX
+    //this.uporabnik.ime = "Ime Priimek";//FIX
 
     this.links = [];
 

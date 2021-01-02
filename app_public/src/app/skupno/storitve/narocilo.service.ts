@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {NarocilaKuhar, NarocilaNatakar, NarociloCreatable, NarociloUpdetable, NarociloZaposleni} from '../razredi/narocilo';
-import {environment} from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { Narocilo } from '../razredi/narocilo';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class NarociloService {
       .catch(err => this.obdelajNapako(err));
   }
 
-  public posodobiNarocilo(narociloUpd: NarociloUpdetable): Promise<any> {
+  public posodobiNarociloAuth(narociloUpd: NarociloUpdetable): Promise<any> {
     const httpOptions = {
       headers: this.auth.initHeaders()
     };
@@ -53,5 +55,10 @@ export class NarociloService {
   public obdelajNapako(napaka) {
     console.log('Napaka pri pridobivanju narocil');
     return Promise.reject(napaka.message || napaka);
+  }
+
+
+  public posodobiNarocilo(id,narocilo:Narocilo){
+    return this.http.put(this.api_url+'/narocila/'+id,narocilo).toPromise().then(odgovor=>odgovor as Narocilo);
   }
 }

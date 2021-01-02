@@ -35,18 +35,20 @@ import { TransformPictureLinkPipe } from './skupno/cevi/transform-picture-link.p
 import { ZvedaPipe } from './skupno/cevi/zveda.pipe';
 import { OcenaParserPipe } from './skupno/cevi/ocena-parser.pipe';
 import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalRatingComponent } from './skupno/komponente/modal-rating/modal-rating.component';
 import { NasmesekPipe } from './skupno/cevi/nasmesek.pipe';
 import { NadzornaPloscaMeniComponent } from './skupno/komponente/nadzorna-plosca-meni/nadzorna-plosca-meni.component';
 import {EditIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {DeleteIdPipe} from './skupno/cevi/edit-delete-id.pipe';
 import {NadzornaPloscaRezervacijaComponent} from './skupno/komponente/nadzorna-plosca-rezervacija/nadzorna-plosca-rezervacija.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NadzornaPloscaZaposleniComponent } from './skupno/komponente/nadzorna-plosca-zaposleni/nadzorna-plosca-zaposleni.component';
 import { NadzornaPloscaKuharComponent } from './skupno/komponente/nadzorna-plosca-kuhar/nadzorna-plosca-kuhar.component';
 import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.component';
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
 import { NadzornaPloscaNatakarComponent } from './skupno/komponente/nadzorna-plosca-natakar/nadzorna-plosca-natakar.component';
 import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/
     NadzornaPloscaMenuComponent,
     NadzornaPloscaNatakarComponent,
     NgbdModalContent,
-    NgbdModalComponent
+    NgbdModalComponent,
+    NadzornaPloscaMeniComponent,
+    NadzornaPloscaRezervacijaComponent
   ],
     imports: [
         BrowserModule,
@@ -143,82 +147,25 @@ import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/
                     {
                       path: 'natakar',
                       component: NadzornaPloscaNatakarComponent
+                    },
+                    {
+                      path: 'rezervacija',
+                      component: NadzornaPloscaRezervacijaComponent
+                    },
+                    {
+                      path: 'meni',
+                      component: NadzornaPloscaMeniComponent
                     }
                 ]
             }
         ]),
-        /*RouterModule.forRoot([
-=======
-    NadzornaPloscaMeniComponent,
-    EditIdPipe,
-    DeleteIdPipe,
-    NadzornaPloscaRezervacijaComponent,
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: PristajalnaStranComponent,
-        children: [{
-          path: '',
-          component: LoginComponent
-        },
-        {
-          path: 'onas',
-          component: OnasComponent
-        },
-        {
-          path: 'rezerviraj',
-          component: RezervacijaComponent,
-        },
-        {
-          path: 'rezerviraj/podatki',
-          component: RezervacijaPodatkiComponent
-        },
-        {
-          path: 'rezerviraj/meni',
-          component: RezervacijaMeniComponent,
-          canDeactivate: [ClearStorageService]
-        }]
-      },
-      {
-        path: 'nadzorna_plosca',
-        component: NadzornaPloscaComponent,
-        children: [
->>>>>>> 5fd487f128762b35bc180524824dcebaa3103ead
-          {
-            path: 'zaloga',
-            component: NadzornaPloscaZalogaComponent
-          },
-          {
-            path: 'urnik',
-            component: NadzornaPloscaUrnikComponent
-          },
-          {
-            path: 'zasluzek',
-            component: NadzornaPloscaZasluzekComponent
-          },
-          {
-            path: 'rezervacija',
-            component: NadzornaPloscaRezervacijaComponent
-          },
-          {
-            path: 'urnik/:id',
-            component: NadzornaPloscaUrnikComponent
-          },
-          {
-            path: 'meni',
-            component: NadzornaPloscaMeniComponent
-          }
-<<<<<<< HEAD
-        ]),*/
     HttpClientModule,
     ChartsModule,
     BrowserAnimationsModule,
     FormsModule,
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [MainComponent],

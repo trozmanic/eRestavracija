@@ -192,6 +192,11 @@ body {
     color: #5F3C50 !important;
 }
 
+.alertdiv{
+    width: 50%;
+    margin: auto;
+}
+
 @media (max-width: 1024px) {
     .card {
         width: 85vw;

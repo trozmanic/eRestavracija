@@ -1,21 +1,100 @@
-
-<a>
-  <div class="col-4 col-sm-4"><button id="dodaj" type="button" class="btn btn-dark btn-block add"><i class="fas fa-plus"></i> DODAJ</button></div>
+<a *ngIf="add === false">
+  <div class="col-4 col-sm-4"><button (click)="dodaj()"  type="button" class="btn btn-dark btn-block add"><i class="fas fa-plus"></i> DODAJ</button></div>
 </a>
+<div class="rezervacija-skatla" *ngIf="add && selectedItem === null">
+  <form #formdata = "ngForm" (ngSubmit) = "onClickSubmitAdd(formdata.value)">
+    <div class="form-group">
+      <label style="color: white">Ime</label>
+      <input type="text"  required name="name" ngModel>
+    </div>
+    <div class="form-group">
+      <label>Opis</label>
+      <textarea  name="description"  class="form-control form-control-lg mb-3" rows="3" ngModel></textarea>
+    </div>
+    <div class="form-group">
+      <label>Cena</label>
+      <input type="number"  name="price"  ngModel>
+    </div>
+    <div class="form-group">
+      <label>Kalorije</label>
+      <input type="number"  name="calories" [(ngModel)]="kal" ngModel>
+    </div>
+    <div class="form-group">
+      <label>Food API</label>
+      <input type="text"  #ime placeholder="Vnesi sestavino v anglescini">
+      <input type="number" #kolicina placeholder="Vnesi količino v gramih">
+      <i role="button" (click)="addSestavina(ime.value, kolicina.value); ime.value = ''; kolicina.value = ''" class="fas fa-search ikone-stil-posamezna"></i>
+    </div>
+    <p *ngFor="let sestavina of sestavine; index as i">
+      {{sestavina.ime}} {{sestavina.kolicina}}g <i (click)="removeSestavina(i)" role="button" class="fas fa-ban ikone-stil-posamezna\"></i>
+    </p>
+    <div class="custom-file">
+      <input  type="file" class="custom-file-input"
+             aria-describedby="inputGroupFileAddon01">
+      <label class="custom-file-label" >Izberi sliko</label>
+    </div>
+    <div class="form-group gor-margin">
+    <div class="ikone-stil">
+      <button type="button" (click)="discard()"  class="btn btn-dark"><i class="fas fa-ban"></i></button>
+      <button type="submit"  class="btn btn-dark btn-block"><i class="fas fa-save"></i> SHRANI</button>
+    </div>
+    </div>
+  </form>
+</div>
 
 <br>
 <br>
 <br>
 <div class="menu-items" *ngFor="let menuItem of menuItems">
-  <div class="rezervacija-skatla" >
+  <div class="rezervacija-skatla"  *ngIf="selectedItem !== menuItem">
     <h4>{{ menuItem.ime }}</h4>
     <span class="desno-float">
-      <button type="button" (click)="edit(menuItem)" class="btn btn-dark btn-block edit"><i class="fas fa-edit"></i> UREDI</button>
+      <button type="button" (click)="editItem(menuItem)" class="btn btn-dark btn-block edit"><i class="fas fa-edit"></i> UREDI</button>
       <button type="button" (click)="delete(menuItem._id)" class="btn btn-dark btn-block delete"><i class="fas fa-trash"></i> IZBRIŠI</button>
     </span>
     <h6>Cena: {{ menuItem.cena }}€</h6>
     <h6>Kalorije: {{ menuItem.kalorije }}kcal</h6>
     <p>{{ menuItem.opis }}</p>
+  </div>
+  <div class="rezervacija-skatla" *ngIf="selectedItem === menuItem">
+    <form #formdata = "ngForm" (ngSubmit) = "onClickSubmitUpdate(formdata.value)">
+      <div class="form-group">
+        <label style="color: white">Ime</label>
+        <input type="text" [(ngModel)]=menuItem.ime name="name" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Opis</label>
+        <textarea  name="description" [(ngModel)]=menuItem.opis class="form-control form-control-lg mb-3" rows="3" ngModel></textarea>
+      </div>
+      <div class="form-group">
+        <label>Cena</label>
+        <input type="number" [(ngModel)]=menuItem.cena name="price"  ngModel>
+      </div>
+      <div class="form-group">
+        <label>Kalorije</label>
+        <input type="number" [(ngModel)]="kal" name="calories" ngModel>
+      </div>
+      <div class="form-group">
+        <label>Food API</label>
+        <input type="text"  #ime placeholder="Vnesi sestavino v anglescini">
+        <input type="number" #kolicina placeholder="Vnesi količino v gramih">
+        <i role="button" (click)="addSestavina(ime.value, kolicina.value); ime.value = ''; kolicina.value = ''" class="fas fa-search ikone-stil-posamezna"></i>
+      </div>
+      <p *ngFor="let sestavina of sestavine; index as i">
+        {{sestavina.ime}} {{sestavina.kolicina}}g <i (click)="removeSestavina(i)" role="button" class="fas fa-ban ikone-stil-posamezna\"></i>
+      </p>
+      <div class="custom-file">
+        <input  type="file" class="custom-file-input"
+                aria-describedby="inputGroupFileAddon01">
+        <label class="custom-file-label" >Izberi sliko</label>
+      </div>
+      <div class="form-group gor-margin">
+        <div class="ikone-stil">
+          <button type="button" (click)="discard()"  class="btn btn-dark"><i class="fas fa-ban"></i></button>
+          <button type="submit"  class="btn btn-dark btn-block"><i class="fas fa-save"></i> SHRANI</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 

@@ -65,7 +65,7 @@ export class NarociloComponent implements OnInit {
     narociloUpd._id = this.narocilo._id.toString();
     narociloUpd.stanje = toStatus.toString();
 
-    this.narociloService.posodobiNarocilo(narociloUpd)
+    this.narociloService.posodobiNarociloAuth(narociloUpd)
       .then(() => {
         this.narocilo.stanje = toStatus;
         this.newStatusEvent.emit(this.narocilo);
