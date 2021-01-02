@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-import {MeniItemGost, MeniItem, MeniItemPOST, MeniItemPUT} from '../razredi/meniItem';
+import {MeniItemGost, MeniItem, MeniItemPOST, MeniItemPUT, APIResponse} from '../razredi/meniItem';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -75,15 +75,10 @@ export class MeniService {
       .catch(napaka => this.obdelajNapako(napaka))
   }
 
-  // public foodAPI(){
-  //   return this.http.get('https://api.edamam.com/api/food-database/v2/parser?ingr='+sestavina+'&app_id=' + this.foodApiId + '&app_key=' + this.foodApiKey)
-  //     .toPromise()
-  //     .then((response) => {
-  //       if(response.data.parsed[0] === undefined){
-  //         return 0
-  //       }
-  //       return parseInt(kolicina) * ((parseFloat(response.parsed[0].food.nutrients.ENERC_KCAL)) / 100.0));
-  //
-  //     })
-  // }
+  public foodAPI(sestavina, kolicina){
+    return this.http.get('https://api.edamam.com/api/food-database/v2/parser?ingr='+sestavina+'&app_id=' + this.foodApiId + '&app_key=' + this.foodApiKey)
+      .toPromise()
+      .then(response => response as APIResponse)
+      .catch(napaka => this.obdelajNapako(napaka))
+  }
 }

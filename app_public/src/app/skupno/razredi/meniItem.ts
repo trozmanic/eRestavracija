@@ -49,9 +49,21 @@ export class MeniItemRezervacija extends MeniItem {
 export class Sestavina {
   ime: string;
   kolicina: number;
-  constructor(ime: string, kolicina: number) {
+  kcal: number;
+  constructor(ime: string, kolicina: number, kcal: number) {
     this.ime = ime;
-    this.kolicina = kolicina
+    this.kolicina = kolicina;
+    this.kcal = kcal
   }
+}
+
+export class APIResponse {
+  parsed: [{
+    food: {
+      nutrients: {
+        ENERC_KCAL: number
+      }
+    }
+  }]
 }
 

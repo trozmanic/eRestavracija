@@ -17,6 +17,8 @@ export class NadzornaPloscaMeniComponent implements OnInit {
 
   public image: string
 
+  public kal = 0
+
   constructor(private meniService: MeniService) { }
 
   public selectedItem: MeniItem
@@ -46,11 +48,13 @@ export class NadzornaPloscaMeniComponent implements OnInit {
   }
 
   removeSestavina(index: number){
+    this.kal = 0
     delete this.sestavine[index]
     var noveSestavine: Sestavina[] = []
     for(var i = 0; i < this.sestavine.length; i++){
       if(this.sestavine[i] != null){
         noveSestavine.push(this.sestavine[i])
+        this.kal += this.sestavine[i].kcal
       }
     }
     this.sestavine = noveSestavine
@@ -58,7 +62,21 @@ export class NadzornaPloscaMeniComponent implements OnInit {
   }
 
   addSestavina(sestavina: string, kolicina: string){
-    this.sestavine.push(new Sestavina(sestavina, parseFloat(kolicina)))
+    console.log(this.kal)
+    let energy = 0;
+    this.meniService.foodAPI(sestavina, kolicina).then(res => {
+      console.log(res);
+      if(res.parsed[0] === undefined){
+        energy = 0
+      }else{
+        energy = parseInt(kolicina) * ((res.parsed[0].food.nutrients.ENERC_KCAL) / 100.0);
+      }
+      this.sestavine.push(new Sestavina(sestavina, parseFloat(kolicina), energy));
+      this.kal += energy
+    });
+
+
+
   }
 
   onClickSubmitAdd(data){
