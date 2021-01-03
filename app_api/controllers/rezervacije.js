@@ -39,7 +39,7 @@ const ustvariRezervacijo = function (req, res) {
                                     if (napaka) {
                                         res.status(400).json(napaka)
                                     } else {
-                                        res.status(200).json();
+                                        res.status(201).json("Success");
                                     }
                                 })
                             }
@@ -57,6 +57,7 @@ const ustvariRezervacijo = function (req, res) {
     }
 
 }
+
 
 const pridobiRezervacije = function (req, res) {
     let query = {};
@@ -111,7 +112,7 @@ const pridobiRezervacije = function (req, res) {
                 rezultat=rezultat.sort((a,b)=>b.datum-a.datum);
                 res.status(200).json(rezultat);
             }).catch((napaka)=>{
-                res.status(400).json(napaka);
+                res.status(500).json(napaka);
             })
         }
     })
@@ -125,7 +126,7 @@ const posodobiRezervacijo=function(req,res){
             if(napaka){
                 res.status(400).json(napaka);
             }else if(gost==null){
-                res.status(400).json("Rezervacije ni mogoče najti");
+                res.status(404).json("Rezervacije ni mogoče najti");
             }else{
                 let rezervacija=gost[0].rezervacije.find(el=>el._id==req.params.idRezervacije);
                 if(req.params.operacija=="potrdi"){
@@ -141,7 +142,7 @@ const posodobiRezervacijo=function(req,res){
                     if(napaka){
                         res.status(400).json(napaka);
                     }else{
-                        res.status(200).json();
+                        res.status(200).json("Success");
                     }
                 })
             }

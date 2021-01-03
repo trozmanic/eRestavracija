@@ -1,5 +1,5 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
 
 const jwt = require('express-jwt');
 const avtentikacija = jwt({
@@ -8,8 +8,8 @@ const avtentikacija = jwt({
   algorithms: ['HS256']
 });
 
-const uporabniki=require('../controllers/uporabniki');
-const rezervacije=require('../controllers/rezervacije')
+const uporabniki = require('../controllers/uporabniki');
+const rezervacije = require('../controllers/rezervacije')
 const meni = require('../controllers/meni');
 const gost = require('../controllers/gost');
 const urnik = require('../controllers/urnik');
@@ -22,6 +22,26 @@ const database = require('../controllers/database');
 const ctrlAvtentikacija = require('../controllers/avtentikacija');
 const self = require('../controllers/self');
 
+/**
+ * Kategorije dostopnih točk
+ * @swagger
+ * tags:
+ *  - name: Rezervacije
+ *    description: Obladovanje rezervaciji
+ */
+
+/**
+* Varnostna shema dostopa
+* @swagger
+* components:
+*  securitySchemes:
+*   jwt:
+*    type: http
+*    scheme: bearer
+*    in: header
+*    bearerFormat: JWT
+*/
+
 //UPORABNIKI
 router.get("/uporabniki", uporabniki.pridobiUporabnike);
 router.get("/uporabniki/:idUporabnika", uporabniki.pridobiUporabnika);
@@ -30,18 +50,152 @@ router.put("/uporabniki", uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
 
 //REZERVACIJE
-router.get("/rezervacija",rezervacije.pridobiRezervacije);
-router.get("/rezervacija/:idUporabnika",rezervacije.pridobiRezervacije)
-router.post("/rezervacija",rezervacije.ustvariRezervacijo);
-router.put("/rezervacija/:idRezervacije/:operacija",rezervacije.posodobiRezervacijo)
+/**
+ * @swagger
+ *  /rezervacija:
+ *    get:
+ *      summary: Seznam vseh rezervacij
+ *      description: Pridobi seznam vseh rezervacij
+ *      tags: [Rezervacije]
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh rezervacij
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/RezervacijaBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+*/
+router.get("/rezervacija", rezervacije.pridobiRezervacije);
+/**
+ * @swagger
+ *  /rezervacija/{idUporabnika}:
+ *    get:
+ *      summary: Seznam rezervacij določenega uporabnika
+ *      description: Pridobi seznam vseh rezervacij določenega uporabnika
+ *      tags: [Rezervacije]
+ *      parameters:
+ *        - in: path
+ *          name: idUporabnika
+ *          description: enolični identifikator uporabnika
+ *          schema:
+ *            type: string
+ *            required: true
+ *            example: 5ded18eb51386c3799833191
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh rezervacij
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/RezervacijaBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Podati morate id uporabnika.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+*/
+router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
+/** 
+ * @swagger
+ *  /rezervacija:
+ *    post:
+ *      summary: Ustvari novo rezervacijo
+ *      description: Ustvari novo rezervacijo
+ *      tags: [Rezervacije]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/RezervacijaPisanje'
+ *      responses:
+ *        "201":
+ *          description: Uspešna ustvarjena rezervacija
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Success
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */ 
+router.post("/rezervacija", rezervacije.ustvariRezervacijo);
+/**
+ * @swagger
+ * /rezervacija/{idUporabnika}/{operacija}:
+ *   put:
+ *     summary: Posodobi stanje rezervacije določenga uporabnika
+ *     description: Posodobi stanje rezervacije določenga uporabnika
+ *     tags: [Rezervacije]
+ *     parameters:
+ *       - in: path
+ *         name: idUporabnika
+ *         description: enolični identifikator uporabnika
+ *         schema:
+ *           type: string
+ *           required: true
+ *           example: 5ded18eb51386c3799833191
+ *       - in: path
+ *         name: operacija
+ *         description: Operacija nad stanjem
+ *         schema:
+ *           type: string
+ *           required: true
+ *           enum: [potrdi,zavrni,preklici,narocilo]
+ *     responses:
+ *       "200":
+ *         description: Uspešna posodobljeno stanje rezervacije
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "Success"
+ *       "500":
+ *         description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *       "400":
+ *         description: Podati morate id uporabnika in/ali operacijo.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ */
+router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
 
 //MENI
-router.get("/meni",meni.pridobiJedi);
-router.get("/meni/:idJedi",meni.pridobiJed);
-router.post("/meni",meni.ustvariJed);
-router.put("/meni/:idJedi",meni.posodobiJed);
-router.post("/meni/dodajOceno", meni.dodajOceno);
-router.delete("/meni/:idJedi", meni.izbrisiJed);
+router.get("/meni", meni.pridobiJedi);
+router.get("/meni/:idJedi", meni.pridobiJed);
+router.route("/meni")
+    .post(avtentikacija, meni.ustvariJed);
+router.route("/meni/:idJedi")
+    .put(avtentikacija, meni.posodobiJed);
+router.route("/meni/dodajOceno")
+    .post(avtentikacija, meni.dodajOceno);
+router.route("/meni/:idJedi")
+    .delete(avtentikacija, meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
@@ -70,7 +224,7 @@ router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
 router.put("/narocila", narocila.posodobiNarocilo);
 router.delete("/narocila/:id", narocila.izbrisiNarocilo);
-router.get("/narocila/:idNarocila",narocila.pridobiNarocilo);
+router.get("/narocila/:idNarocila", narocila.pridobiNarocilo);
 router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
 //ZASLUZEK
@@ -95,4 +249,4 @@ router.get('/database/drop', database.dropDB);
 //GOST-SELF
 router.get('/self/meni', self.pridobiMeni);
 
-module.exports=router
+module.exports = router
