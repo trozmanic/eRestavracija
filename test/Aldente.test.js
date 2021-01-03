@@ -10,12 +10,12 @@
     const expect = require("chai").expect;
 
     // Parametri
-    let aplikacijaUrl = "https://aldente-sp-20-21.herokuapp.com/";
+    let aplikacijaUrl = "http://AlDente:3000/";
     let seleniumStreznikUrl = "http://localhost:4445/wd/hub";
     let brskalnik, jwtZeton;
 
     const axios = require('axios').create({
-        baseURL: "https://aldente-sp-20-21.herokuapp.com/api",
+        baseURL: "http://AlDente:3000/api",
         timeout: 5000
     });
 
