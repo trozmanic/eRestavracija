@@ -37,7 +37,43 @@ const surovinaShema = new mongoose.Schema({
     "enota": { type: String, required: true },
     "cena": { type: Number, required: true, min: 0 }
 })
-
+/**
+ * @Swagger
+ * components:
+ *  schemas:
+ *   MeniItem:
+ *    type: object
+ *    properties:
+ *     ime:
+ *      type: String
+ *     cena:
+ *      type: Number
+ *      minimum: 0
+ *      example: 12
+ *     slika:
+ *      type: String
+ *     opis:
+ *      type: String
+ *     ocena:
+ *      type: Number
+ *      example: 4
+ *     ocena_count:
+ *      type: Number
+ *      example: 2
+ *     kalorije:
+ *      type: Number
+ *      minimum: 0
+ *     sestavine:
+ *      type: array
+ *      items:
+ *       type: sestavina
+ *    required:
+ *      - ime
+ *      - cena
+ *      - opis
+ *      - kalorije
+ *
+ */
 const meniItemShema = new mongoose.Schema({
     ime: { type: String, required: true },
     cena: { type: Number, required: true, min: 0 },
