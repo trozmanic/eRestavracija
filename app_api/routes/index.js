@@ -302,6 +302,8 @@ router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
  *      summary: Seznam vseh narocil za natakarja
  *      description: Pridobi seznam vseh narocil dolocenega natakarja
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
  *      responses:
  *        "200":
  *          description: Uspešna zahteva s seznamom vseh narocil dolocenega natakarja
@@ -328,6 +330,12 @@ router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
  */
 router.get("/narocila/natakar",
     avtentikacija,
@@ -340,6 +348,8 @@ router.get("/narocila/natakar",
  *      summary: Seznam vseh narocil za kuharja
  *      description: Pridobi seznam vseh narocil dolocenega kuharja
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
  *      responses:
  *        "200":
  *          description: Uspešna zahteva s seznamom vseh narocil dolocenega kuharja
@@ -362,6 +372,12 @@ router.get("/narocila/natakar",
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
  */
 router.get("/narocila/kuhar",
     avtentikacija,
@@ -374,6 +390,8 @@ router.get("/narocila/kuhar",
  *      summary: Ustvari novo narocilo
  *      description: Ustvari novo narocilo
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
  *      requestBody:
  *        content:
  *          application/json:
@@ -392,6 +410,12 @@ router.get("/narocila/kuhar",
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
  */
 router.post("/narocila",
     avtentikacija,
@@ -404,6 +428,8 @@ router.post("/narocila",
  *      summary: Pridobi vsa narocila
  *      description: Pridobi vsa narocila
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
  *      responses:
  *        "200":
  *          description: Uspešna pridobljena narocila
@@ -415,6 +441,12 @@ router.post("/narocila",
  *                   $ref: '#/components/schemas/NarociloBranje'
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
  *          content:
  *            application/json:
  *              schema:
@@ -431,6 +463,8 @@ router.get("/narocila",
  *      summary: Posodobi narocilo
  *      description: Posodobi narocilo
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
  *      requestBody:
  *        content:
  *          application/json:
@@ -460,6 +494,12 @@ router.get("/narocila",
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
  */
 router.put("/narocila",
     avtentikacija,
@@ -467,11 +507,20 @@ router.put("/narocila",
     narocila.posodobiNarocilo);
 /**
  * @swagger
- *  /narocila/{id}:
+ *  /narocila/{idNarocila}:
  *    delete:
  *      summary: Izbrisi narocilo s podanim enolicnim identifikatorjem
  *      description: Izbrisi narocilo s podanim enolicnim identifikatorjem
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idNarocila
+ *          description: enolicni identifikator lokacije
+ *          schema:
+ *            type: string
+ *            required: true
  *      responses:
  *        "200":
  *          description: Uspešna izbrisano narocilo
@@ -487,13 +536,54 @@ router.put("/narocila",
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
  */
 router.delete("/narocila/:id",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.izbrisiNarocilo);
 
-//IS THIS NEEDED ???
+/**
+ * @swagger
+ *  /narocila/{idNarocila}:
+ *    get:
+ *      summary: Pridobi narocilo s podanim identifikatorjem
+ *      description: Pridobi narocilo s podanim identifikatorjem
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idNarocila
+ *          description: enolicni identifikator lokacije
+ *          schema:
+ *            type: string
+ *            required: true
+ *      responses:
+ *        "200":
+ *          description: Uspešna pridobljeno narocilo
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila/:idNarocila",
     avtentikacija,
     zaposleniAvtorizacija,
@@ -506,6 +596,15 @@ router.get("/narocila/:idNarocila",
  *      summary: Posodobi narocilo s podanim enolicnim identifikatorjem
  *      description: Posodobi narocilo
  *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idNarocila
+ *          description: enolicni identifikator lokacije
+ *          schema:
+ *            type: string
+ *            required: true
  *      requestBody:
  *        content:
  *          application/json:
@@ -531,6 +630,12 @@ router.get("/narocila/:idNarocila",
  *                   $ref: '#/components/schemas/NarociloBranje'
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
  *          content:
  *            application/json:
  *              schema:
