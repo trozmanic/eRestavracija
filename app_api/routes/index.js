@@ -35,6 +35,10 @@ const kuharAvtorizacija = imaVlogo(['kuhar']);
  * tags:
  *  - name: Rezervacije
  *    description: Obladovanje rezervaciji
+ *  - name: Urnik
+ *    description: Obladovanje urnika
+ *  - name: Zasluzek
+ *    description: Obladovanje zasluzka
  */
 
 /**
@@ -481,11 +485,271 @@ router.get("/gost/:idUporabnika", gost.pridobiGosta);
 router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
 
 //URNIK
-router.get("/urnik", urnik.pridobiUrnik);
-router.put("/urnik", urnik.posodobiUrnik);
-router.delete("/urnik", urnik.deleteUrnik);
-router.post("/urnik", urnik.createUrnik);
-router.get("/urnik/:id", urnik.urnik_uporabnik);
+//URNIK
+/**
+ * @swagger
+ *  /urnik:
+ *    get:
+ *      summary: Urnik za en mesec
+ *      description: Pridobi urnik za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: false
+ *          description: mesec urnika
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: false
+ *          description: leto urnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem uporabnika s tem id, da bi najdel urnik.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/urnik",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    urnik.pridobiUrnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    put:
+ *      summary: Posodobitev Urnika za en mesec
+ *      description: Posodobitev urnika za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Urnik'
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: true
+ *          description: mesec urnika
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: true
+ *          description: leto urnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobitev urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem uporabnika s tem id, da bi najdel urnik ali ne najdem urnika.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.put("/urnik",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.posodobiUrnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    delete:
+ *      summary: Zbrisi Urnik za en mesec
+ *      description: Zbrisi urnik za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id urnika
+ *      responses:
+ *        "204":
+ *          description: Uspešna Zbrisan urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.delete("/urnik",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.deleteUrnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    post:
+ *      summary: Ustvaritev Urnika za en mesec
+ *      description: Ustvaritev urnika za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Urnik'
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: true
+ *          description: mesec urnika
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: true
+ *          description: leto urnika
+ *      responses:
+ *        "201":
+ *          description: Uspešna ustvaritev urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem uporabnika s tem id ali Urnik ze obstaja.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.post("/urnik",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.createUrnik);
+/**
+ * @swagger
+ *  /urnik/{id}:
+ *    get:
+ *      summary: Urniki od uporabnika
+ *      description: Pridobi urnike za uporabnika
+ *      tags: [Urnik]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva urnikov
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ni posanega id ali Ne najdem uporabnika s tem id, da bi najdel urnike.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/urnik/:id",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.urnik_uporabnik);
+
 
 //ZAPOSLENI
 router.get("/zaposleni", zaposleni.pridobiZaposlene);
@@ -847,7 +1111,59 @@ router.put("/narocila/:idNarocila",
     narocila.posodobiNarocilo);
 
 //ZASLUZEK
-router.get("/zasluzek", zasluzek.pridobiNarocilo);
+//ZASLUZEK
+
+/**
+ * @swagger
+ *  /zasluzek:
+ *    get:
+ *      summary: Zasluzek za en mesec
+ *      description: Pridobi zasluzek za ta mesec leto
+ *      tags: [Zasluzek]
+ *      parameters:
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: true
+ *          description: mesec zasluzka
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: true
+ *          description: leto zasluzka
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva zasluzka
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Zasluzek'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem niti enega narocila za to mesec/leto ali Ne najdem nobenega zaposlenega da bi zracunal strosek place ali Ne najdem nobenega menu itema, ko generiram racun.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/zasluzek",
+    avtentikacija,
+    adminAvtorizacija,
+    zasluzek.pridobiNarocilo);
+
 
 //ZALOGA
 router.get("/zaloga", zaloga.pridobiSestavine);

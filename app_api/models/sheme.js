@@ -386,6 +386,52 @@ const gostShema = new mongoose.Schema({
     ocenjene_jedi: [meniItemShema]
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Urnik:
+ *       type: object
+ *       description: Podatki o urniku
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator Urnika
+ *           example: 5fecb3329a977b43c4e98894
+ *         id_uporabnika:
+ *           type: string
+ *           description: Enolični indetifikator Uporabnika ki ima ta urnik
+ *           example: 5fecb3329a977b43c4e98894
+ *         dnevi:
+ *           type: array
+ *           items:
+ *              type: string;
+ *           description: Tabela kdaj zaposleni dela vsak dan
+ *         leto:
+ *           type: number
+ *           description: katero leto je ta urnik
+ *           example: 2020
+ *         mesec:
+ *           type: number
+ *           description: kateri mesec je ta urnik (0-11)
+ *           example: 11
+ *         st_dni:
+ *           type: number
+ *           description: stevilo dni v mesecu
+ *           example: 31
+ *         zac_dan:
+ *           type: string
+ *           description: prve 3 crke prvega dneva v mescu
+ *           example: tor
+ *       required:
+ *         - _id
+ *         - id_uporabnika
+ *         - dnevi
+ *         - mesec
+ *         - leto
+ *         - st_dni
+ *         - zac_dan
+ */
 const urnikShema = new mongoose.Schema({
     id_uporabnika: {type: mongoose.ObjectId},
     dnevi: [{
@@ -471,3 +517,76 @@ mongoose.model("Surovina", surovinaShema, "Surovine");
 mongoose.model("Zaposlen", zaposleniShema, "Zaposleni");
 mongoose.model("Urnik", urnikShema, "Urniki");
 
+
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Zasluzek:
+ *       type: object
+ *       description: Podatki o zasluzku
+ *       properties:
+ *         ostevilceni_dnevi:
+ *           type: array
+ *           items:
+ *              type: number;
+ *           description: Tabela dni v mescu 1...(28-31)
+ *         zasluzek_dnevi:
+ *           type: array
+ *           items:
+ *              type: number;
+ *           description: Tabela zasluzka na dan
+ *         dnevi:
+ *           type: array
+ *           items:
+ *              type: string;
+ *           description: Tabela kdaj zaposleni dela vsak dan
+ *         skupno_prilivi:
+ *           type: number
+ *           description: Skupni prilivi ta mesec
+ *           example: 230
+ *         mesec:
+ *           type: number
+ *           description: kateri mesec je ta zasluzek(0-11)
+ *           example: 11
+ *         leto:
+ *           type: number
+ *           description: kater0 leto je ta zasluzek
+ *           example: 2020
+ *         zac_dan:
+ *           type: string
+ *           description: prve 3 crke prvega dneva v mescu
+ *           example: tor
+ *         st_dni:
+ *           type: number
+ *           description: stevilo dni v mesecu
+ *           example: 31
+ *         zaposleni_strosek:
+ *           type: number
+ *           description: Strosek za zaposlene ta mesec
+ *           example: 350
+ *         tabele_placanil:
+ *           type: array
+ *           items:
+ *              $ref: '#/components/schemas/NarociloBranje'
+ *           description: Tabela placanih racunov
+ *         tabele_ne_placanil:
+ *           type: array
+ *           items:
+ *              $ref: '#/components/schemas/NarociloBranje'
+ *           description: Tabela ne placanih racunov
+ *         zac_dan:
+ *           type: string
+ *           description: sporocilo napake
+ *           example: napaka
+ *       required:
+ *         - _id
+ *         - id_uporabnika
+ *         - dnevi
+ *         - mesec
+ *         - leto
+ *         - st_dni
+ *         - zac_dan
+ */
