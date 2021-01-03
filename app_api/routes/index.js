@@ -28,6 +28,7 @@ const adminAvtorizacija = imaVlogo(['admin']);
 const zaposleniAvtorizacija = imaVlogo(['admin', 'kuhar', 'natakar']);
 const natakarAvtorizacija = imaVlogo(['natakar']);
 const kuharAvtorizacija = imaVlogo(['kuhar']);
+const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
 
 /**
  * Kategorije dostopnih točk
@@ -144,7 +145,7 @@ router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
  *              schema:
  *                type: string
 */
-router.get("/rezervacija", rezervacije.pridobiRezervacije);
+router.get("/rezervacija", avtentikacija, prijavljenAvtorizacija, rezervacije.pridobiRezervacije);
 /**
  * @swagger
  *  /rezervacija/{idUporabnika}:
@@ -188,7 +189,7 @@ router.get("/rezervacija", rezervacije.pridobiRezervacije);
  *              schema:
  *                type: string
 */
-router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
+router.get("/rezervacija/:idUporabnika", avtentikacija, prijavljenAvtorizacija, rezervacije.pridobiRezervacije)
 /** 
  * @swagger
  *  /rezervacija:
@@ -222,7 +223,7 @@ router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
  *              schema:
  *                type: string
  */ 
-router.post("/rezervacija", rezervacije.ustvariRezervacijo);
+router.post("/rezervacija", avtentikacija, prijavljenAvtorizacija, rezervacije.ustvariRezervacijo);
 /**
  * @swagger
  * /rezervacija/{idUporabnika}/{operacija}:
@@ -272,7 +273,7 @@ router.post("/rezervacija", rezervacije.ustvariRezervacijo);
  *              schema:
  *                type: string
  */
-router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
+router.put("/rezervacija/:idRezervacije/:operacija", avtentikacija, prijavljenAvtorizacija, rezervacije.posodobiRezervacijo)
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);

@@ -66,11 +66,17 @@ const pridobiNarocilo = (req,res)=>{
 
 const posodobiNarocilo = async (req, res) => {
     console.log(req.body)
+    let payload={};
+    if(req.body.miza){
+        payload=req.body;
+    }else{
+        payload={
+            "stanje": req.body.stanje
+        }
+    }
     try {
         const id = req.body._id || req.params.idNarocila;
-        const narocilo = await Narocila.findByIdAndUpdate(id, {
-            "stanje": req.body.stanje
-        });
+        const narocilo = await Narocila.findByIdAndUpdate(id, payload);
         res.status(200).json(narocilo);
     }catch (err) {
         return res.status(500).json({"error_message": err});
