@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class RezervacijaStanjePipe implements PipeTransform {
 
   transform(value: any, ...args: unknown[]): unknown {
-    const stanja={caka:"Čaka na potrditev",potrjena:"Potrjena",zavrnjena:"Zavrnjena",preklicana:"Preklicana",pretekla:"Pretekla"};
+    const stanja={caka:"Čaka na potrditev",potrjena:"Potrjena",zavrnjena:"Zavrnjena",preklicana:"Preklicana",narocilo:"Pretekla"};
     return stanja[value];
   }
 

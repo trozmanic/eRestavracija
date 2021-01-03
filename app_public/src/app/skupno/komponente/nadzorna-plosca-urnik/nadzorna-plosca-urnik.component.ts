@@ -9,6 +9,7 @@ import { AuthService } from "../../storitve/auth.service"
 import {BsModalRef} from "ngx-bootstrap/modal";
 
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nadzorna-plosca-urnik',

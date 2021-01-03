@@ -59,6 +59,9 @@ export class NarociloService {
 
 
   public posodobiNarocilo(id,narocilo:Narocilo){
-    return this.http.put(this.api_url+'/narocila/'+id,narocilo).toPromise().then(odgovor=>odgovor as Narocilo);
+    const httpOptions = {
+      headers: this.auth.initHeaders()
+    };
+    return this.http.put(this.api_url+'/narocila/'+id,narocilo,httpOptions).toPromise().then(odgovor=>odgovor as Narocilo);
   }
 }
