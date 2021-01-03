@@ -34,7 +34,11 @@ const kuharAvtorizacija = imaVlogo(['kuhar']);
  * @swagger
  * tags:
  *  - name: Rezervacije
- *    description: Obladovanje rezervaciji
+ *    description: Obvladovanje rezervaciji
+ *  - name: Zaposleni
+ *    description: Obvladovanje zaposlenih
+ *  - name: Zaloga
+ *    description: Obvladovanje zaloge
  */
 
 /**
@@ -108,11 +112,11 @@ router.delete("/meni/:idJedi",
     avtentikacija,
     zaposleniAvtorizacija,
     meni.izbrisiJed);
-router.get("/uporabniki", uporabniki.pridobiUporabnike);
-router.get("/uporabniki/:idUporabnika", uporabniki.pridobiUporabnika);
-router.post("/uporabniki", uporabniki.ustvariUporabnika);
-router.put("/uporabniki", uporabniki.posodbiUporabnika);
-router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
+router.get("/uporabniki", avtentikacija, adminAvtorizacija, uporabniki.pridobiUporabnike);
+router.get("/uporabniki/:idUporabnika", avtentikacija, adminAvtorizacija, uporabniki.pridobiUporabnika);
+router.post("/uporabniki", avtentikacija, adminAvtorizacija, uporabniki.ustvariUporabnika);
+router.put("/uporabniki", avtentikacija, adminAvtorizacija, uporabniki.posodbiUporabnika);
+router.delete("/uporabniki/:idUporabnika", avtentikacija, adminAvtorizacija, uporabniki.izbrisiUporabnika);
 
 //REZERVACIJE
 /**
@@ -271,6 +275,7 @@ router.post("/rezervacija", rezervacije.ustvariRezervacijo);
  *            application/json:
  *              schema:
  *                type: string
+ *                example: No authorization token was found
  */
 router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
 
@@ -288,11 +293,231 @@ router.post("/urnik", urnik.createUrnik);
 router.get("/urnik/:id", urnik.urnik_uporabnik);
 
 //ZAPOSLENI
-router.get("/zaposleni", zaposleni.pridobiZaposlene);
-router.get("/zaposleni/:uporabnik_id", zaposleni.pridobiZaposlenega);
-router.put("/zaposleni", zaposleni.posodobiZaposlenega);
-router.post("/zaposleni", zaposleni.ustvariZaposlenega);
-router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
+/**
+ * @swagger
+ *  /zaposleni:
+ *    get:
+ *      summary: Seznam zaposlenih
+ *      description: Pridobi seznam vseh zaposlenih
+ *      tags: [Zaposleni]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: query
+ *          name: iskanje
+ *          schema:
+ *            type: string
+ *          description: Za iskanje po zaposlenih
+ *        - in: query
+ *          name: odmik
+ *          schema:
+ *            type: integer
+ *          description: Določimo od katerega dalje bomo pridobili podatke
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh zaposlenih
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/ZaposleniBranje'
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: No authorization token was found
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/zaposleni", avtentikacija, adminAvtorizacija, zaposleni.pridobiZaposlene);
+/**
+ * @swagger
+ *  /zaposleni/{uporabnik_id}:
+ *    get:
+ *      summary: Zaposleni
+ *      description: Pridobi zaposlenega s podanim enoličnim identifikatorjem
+ *      tags: [Zaposleni]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *       - in: path
+ *         name: uporabnik_id
+ *         description: enolični identifikator zaposlenega
+ *         schema:
+ *           type: string
+ *           required: true
+ *           example: 69lol18eb51386c379983319
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva z zaposlenim
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/ZaposleniBranje'
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: No authorization token was found
+ *        "404":
+ *          description: Napaka zahteve, zaposleni s podanim id-jem ne obstaja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/zaposleni/:uporabnik_id", avtentikacija, adminAvtorizacija, zaposleni.pridobiZaposlenega);
+/**
+ * @swagger
+ *  /zaposleni:
+ *    put:
+ *      summary: Posodobi zaposlenega
+ *      description: Posodobi atribute določenega zaposlenega
+ *      tags: [Zaposleni]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        description: Podatki o zaposlenemu
+ *        required: false
+ *        content:
+ *          application/x-www-form-urlencoded:
+ *            schema:
+ *              $ref: "#/components/schemas/ZaposleniBranje"
+ *      responses:
+ *        "200":
+ *          description: Uspešno posodobljen zaposleni
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: No authorization token was found
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.put("/zaposleni", avtentikacija, adminAvtorizacija, zaposleni.posodobiZaposlenega);
+/**
+ * @swagger
+ *  /zaposleni:
+ *    post:
+ *      summary: Ustvari zaposlenega
+ *      description: Ustvari novega zaposlenega
+ *      tags: [Zaposleni]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        description: Podatki o zaposlenem
+ *        required: true
+ *        content:
+ *          application/x-www-form-urlencoded:
+ *            schema:
+ *              $ref: "#/components/schemas/ZaposleniUstvari"
+ *      responses:
+ *        "201":
+ *          description: Uspešno ustvarjen zaposleni
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Uporabnik s podanim id-jem ne obstaja.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: ID ali placa manjka
+ *        "404":
+ *          description: Napaka pri kreiranju zaposlenega.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Ne najdem uporabnika z id.
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: No authorization token was found
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.post("/zaposleni", avtentikacija, adminAvtorizacija, zaposleni.ustvariZaposlenega);
+/**
+ * @swagger
+ *  /zaposleni/{uporabnik_id}:
+ *    delete:
+ *      summary: Brisanje izbranega zaposlenga.
+ *      tags: [Zaposleni]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          description: enolični identifikator zaposlenega
+ *          schema:
+ *          type: string
+ *          required: true
+ *      responses:
+ *        "204":
+ *          description: Uspešno odstranjevanje zaposlenega
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Vnesti je potrebno id zaposlenega.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Vnesite id zaposlenega
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: No authorization token was found
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.delete("/zaposleni/:uporabnik_id", avtentikacija, adminAvtorizacija, zaposleni.izbrisiZaposlenega);
 
 //NAROCILA
 router.get("/narocila/natakar",
@@ -339,6 +564,19 @@ router.get("/zasluzek", zasluzek.pridobiNarocilo);
  *      summary: Seznam zaloge
  *      description: Pridobi seznam vseh surovin
  *      tags: [Zaloga]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: query
+ *          name: iskanje
+ *          schema:
+ *            type: string
+ *          description: Za iskanje po zaposlenih
+ *        - in: query
+ *          name: odmik
+ *          schema:
+ *            type: integer
+ *          description: Določimo od katerega dalje bomo pridobili podatke
  *      responses:
  *        "200":
  *          description: Uspešna zahteva s seznamom vseh surovin
@@ -354,6 +592,7 @@ router.get("/zasluzek", zasluzek.pridobiNarocilo);
  *            application/json:
  *              schema:
  *                type: string
+ *                example: No authorization token was found
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *          content:
@@ -361,14 +600,16 @@ router.get("/zasluzek", zasluzek.pridobiNarocilo);
  *              schema:
  *                type: string
  */
-router.get("/zaloga", zaloga.pridobiSestavine);
+router.get("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.pridobiSestavine);
 /**
  * @swagger
  *  /zaloga/{surovinaId}:
  *    get:
- *      summary: Seznam zaloge
- *      description: Pridobi seznam vseh surovin
+ *      summary: Surovina
+ *      description: Pridobi surovino s podanim enoličnim identifikatorjem
  *      tags: [Zaloga]
+ *      security:
+ *        - jwt: []
  *      parameters:
  *       - in: path
  *         name: surovinaId
@@ -379,21 +620,22 @@ router.get("/zaloga", zaloga.pridobiSestavine);
  *           example: 69lol18eb51386c379983319
  *      responses:
  *        "200":
- *          description: Uspešna zahteva s seznamom vseh surovin
+ *          description: Uspešna zahteva s surovino
  *          content:
  *            application/json:
  *              schema:
  *                type: array
  *                items:
- *                  $ref: '#/components/schemas/SurovinaBranje'
+ *                  $ref: '#/components/schemas/SurovinaAžuriranje'
  *        "401":
  *          description: Napaka pri dostopu.
  *          content:
  *            application/json:
  *              schema:
  *                type: string
+ *                example: No authorization token was found
  *        "404":
- *          description: Napaka zahteve, sestavina s podanim id-jem ne obstaja
+ *          description: Napaka zahteve, surovina s podanim id-jem ne obstaja
  *          content:
  *            application/json:
  *              schema:
@@ -405,10 +647,10 @@ router.get("/zaloga", zaloga.pridobiSestavine);
  *              schema:
  *                type: string
  */
-router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
+router.get("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.pridobiSestavino);
 /**
  * @swagger
- *  /rezervacija:
+ *  /zaloga:
  *    post:
  *      summary: Ustvari novo surovino
  *      description: Ustvari novo surovino
@@ -421,7 +663,7 @@ router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
  *        content:
  *          application/x-www-form-urlencoded:
  *            schema:
- *              $ref: "#/components/schemas/SurovinaPisanje"
+ *              $ref: "#/components/schemas/SurovinaAžuriranje"
  *      responses:
  *        "201":
  *          description: Uspešno ustvarjena surovina
@@ -435,6 +677,7 @@ router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
  *            application/json:
  *              schema:
  *                type: string
+ *                example: No authorization token was found
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *          content:
@@ -442,7 +685,7 @@ router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
  *              schema:
  *                type: string
  */
-router.post("/zaloga", zaloga.ustvariSestavino);
+router.post("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.ustvariSestavino);
 /**
  * @swagger
  *  /zaloga:
@@ -450,13 +693,15 @@ router.post("/zaloga", zaloga.ustvariSestavino);
  *      summary: Posodobi določeno surovino
  *      description: Posodobi atribute določene surovine
  *      tags: [Zaloga]
+ *      security:
+ *        - jwt: []
  *      requestBody:
  *        description: Podatki o surovini
  *        required: false
  *        content:
  *          application/x-www-form-urlencoded:
  *            schema:
- *              $ref: "#/components/schemas/SurovinaPisanje"
+ *              $ref: "#/components/schemas/SurovinaPosodobitev"
  *      responses:
  *        "200":
  *          description: Uspešno posodobljena surovina
@@ -470,6 +715,7 @@ router.post("/zaloga", zaloga.ustvariSestavino);
  *            application/json:
  *              schema:
  *                type: string
+ *                example: No authorization token was found
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *          content:
@@ -477,12 +723,12 @@ router.post("/zaloga", zaloga.ustvariSestavino);
  *              schema:
  *                type: string
  */
-router.put("/zaloga", zaloga.posodobiSestavino);
+router.put("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.posodobiSestavino);
 /**
  * @swagger
  *  /zaloga/{surovinaId}:
  *    delete:
- *      summary: Brisanje izbranege surovine iz zaloge.
+ *      summary: Brisanje izbrane surovine iz zaloge.
  *      tags: [Zaloga]
  *      security:
  *        - jwt: []
@@ -506,12 +752,14 @@ router.put("/zaloga", zaloga.posodobiSestavino);
  *            application/json:
  *              schema:
  *                type: string
+ *                example: Vnesite id sestavine
  *        "401":
  *          description: Napaka pri dostopu.
  *          content:
  *            application/json:
  *              schema:
  *                type: string
+ *                example: No authorization token was found
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *          content:
@@ -519,7 +767,7 @@ router.put("/zaloga", zaloga.posodobiSestavino);
  *              schema:
  *                type: string
  */
-router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
+router.delete("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.izbrisiSestavino);
 
 router.post('/image', slike.shraniSliko)
 
