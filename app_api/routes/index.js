@@ -188,10 +188,14 @@ router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezerva
 //MENI
 router.get("/meni", meni.pridobiJedi);
 router.get("/meni/:idJedi", meni.pridobiJed);
-router.post("/meni", meni.ustvariJed);
-router.put("/meni/:idJedi", meni.posodobiJed);
-router.post("/meni/dodajOceno", meni.dodajOceno);
-router.delete("/meni/:idJedi", meni.izbrisiJed);
+router.route("/meni")
+    .post(avtentikacija, meni.ustvariJed);
+router.route("/meni/:idJedi")
+    .put(avtentikacija, meni.posodobiJed);
+router.route("/meni/dodajOceno")
+    .post(avtentikacija, meni.dodajOceno);
+router.route("/meni/:idJedi")
+    .delete(avtentikacija, meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
