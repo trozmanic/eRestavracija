@@ -65,6 +65,13 @@ se morata obe polji ujemati.
       - email: admin@aldente.si
       - geslo: geslo1234
 
+# Razlike med uporabniki
+  - Nasa aplikacija ima 4 vloge, gost, admin, kuhar in natakar.
 
+  - Gost, lahko vidi meni restavracije (GET: "/api/meni"), lahko pregleda svoje rezervacije (GET: "/api/rezervacija") in lahko sebi ustvari nove (POST: "/api/rezervacija"). Gost lahko tudi vsak meni oceni enkrat (POST: "/api/meni/dodajOceno").
+  - Vse vloge razen gosta, lahko vidijo svoj urnik (GET: "/api/urnik"). Ostale vloge ne morejo ocenjevati jedi.
+  - Kuhar lahko opravlja z narocili (GET: "/api/narocila/kuhar", PUT: "/api/narocila") in zalogo ("CRUD": "/api/zaloga"). 
+  - Natakar lahko opravlja z rezervacijami ("CRUD": "/api/rezervacija") in narocili (GET: "/api/"/api/narocila/natakar", POST/PUT: "/api/narocila")
+  - Admin lahko pocne vse, razen upravljati z narocili (poleg ostalih omenjenih funkcionalnosti lahko tudi ureja zaposlene ("CRUD": "/api/zaposleni") ).
 
 
