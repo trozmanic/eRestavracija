@@ -93,8 +93,8 @@ router.delete("/uporabniki/:idUporabnika",
 router.get("/meni",meni.pridobiJedi);
 router.get("/meni/:idJedi",meni.pridobiJed);
 router.post("/meni",
-    //avtentikacija,
-    //zaposleniAvtorizacija,
+    avtentikacija,
+    zaposleniAvtorizacija,
     meni.ustvariJed);
 router.put("/meni/:idJedi",
     avtentikacija,
@@ -221,7 +221,7 @@ router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
  *            application/json:
  *              schema:
  *                type: string
- */ 
+ */
 router.post("/rezervacija", rezervacije.ustvariRezervacijo);
 /**
  * @swagger
@@ -273,6 +273,206 @@ router.post("/rezervacija", rezervacije.ustvariRezervacijo);
  *                type: string
  */
 router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
+
+//MENI
+
+/**
+ * @swagger
+ *  /meni:
+ *    get:
+ *      summary: Seznam jedi na meniju
+ *      description: Pridobitev seznama jedi, ki so na voljo meniju.
+ *      tags: [Meni]
+ *     response:
+ *        "200":
+ *         description: Uspešna zahteva s seznamom jedi na meniju.
+ *          content:
+ *            application/json:
+ *              schema:
+ *               type: array
+ *                 items:
+ *                    $ref: "#/components/schemas/MeniItem
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *
+ */
+router.get("/meni", meni.pridobiJedi);
+
+/**
+ * @swagger
+ *  /meni/{idJedi}:
+ *    get:
+ *      summary: Posamezna jed
+ *      description: Pridobitev posamezne jedi, ki je na voljo na meniju.
+ *      tags: [Meni]
+ *      parameters:
+ *        - in: path
+ *          name: idJedi
+ *          description: enolični identifikator jedi
+ *          schema:
+ *            type: string
+ *          required: true
+ *          example: 5ff0d494ec999c3f4475631b
+ *      response:
+ *        "200":
+ *          description: Uspešna zahteva z jedjo v rezultatu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/MeniItem"
+ *        "404":
+ *          description: Napaka zahteve, zahtevane jedi ni mogoče najti.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.get("/meni/:idJedi", meni.pridobiJed);
+
+
+/**
+ * @swagger
+ * /meni:
+ *  post:
+ *    summary: Dodajanje nove jedi.
+ *    description: Dodajanje nove jedi na jedilnik s podatki o imenu, opisu, ceni, kalorijah in sliki.
+ *    tags: [Meni]
+ *    security:
+ *      - jwt: []
+ *    requestBody:
+ *      description: Podatki od jedi
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: "#/components/schemas/MeniItem"
+ *    responses:
+ *      "200":
+ *        description: Uspešno dodana jed, ki se vrne v rezultatu.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/MeniItem"
+ *      "500":
+ *        description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.route("/meni")
+    .post(avtentikacija, meni.ustvariJed);
+
+/**
+ * @swagger
+ *  /meni/{idJedi}:
+ *    put:
+ *      summary: Posodablanje izbaranje jedi
+ *      description: Posodobitev izbranje jedi s podatki o imenu, opisu, ceni, kalorijah in sliki.
+ *      tags: [Meni]
+ *      security:
+ *        - jwt: []
+ *    requestBody:
+ *      description: Podatki od jedi
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: "#/components/schemas/MeniItem"
+ *    parameters:
+ *      - in: path
+ *        name: idJedi
+ *        description: enolični identifikator jedi.
+ *        schema:
+ *          type: string
+ *        required: true
+ *        example: 5ff0d494ec999c3f4475631b
+ *    responses:
+ *      "200":
+ *        description: Uspešno posodobljena jed, ki se vrne v rezultatu.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/MeniItem"
+ *      "400":
+ *        description: Napaka zahteve, manjkajo obvezni parametri.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: string
+ *      "500":
+ *        description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.route("/meni/:idJedi")
+    .put(avtentikacija, meni.posodobiJed);
+
+/**
+ *  @swagger
+ *    /meni/dodajOceno:
+ *      post:
+ *        summary: Dodajanje ocene izbrani jedi
+ *        description: Dodajanje ocene izbarani jedi.
+ *        tags: [Meni]
+ *        security:
+ *          - jwt: []
+ *        requestBody:
+ *          description: Id jedi in uporabnika ter ocena.
+ *          required: true
+ *          content:
+ *            application/json:
+ *              schema:
+ *                id:
+ *                  type: string
+ *                  example: 5ff0d494ec999c3f4475631b
+ *                id_uporabnika:
+ *                  type: string
+ *                  example: 5ff0d494ec999c3f4475644c
+ *                ocena:
+ *                  type: string
+ *                  example: 4
+ *        responses:
+ *          "200":
+ *            description: Uspešno posodobljena jed z oceno.
+ *            content:
+ *              application/json:
+ *                schema:
+ *                  $ref: "#/components/schemas/MeniItem"
+ *          "500":
+ *            description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *
+ */
+router.route("/meni/dodajOceno")
+    .post(avtentikacija, meni.dodajOceno);
+
+/**
+ * @swagger
+ *  /meni/{idJedi}:
+ *    delete:
+ *      summary: Brisanje izbranje jedi
+ *      description: Brisanje **izbranje jedi**
+ *      tags [Meni]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idJedi
+ *          description: enolični identifikator jedi.
+ *          schema:
+ *            type: string
+ *          required: true
+ *          example: 5ff0d494ec999c3f4475631b
+ *      responses:
+ *        "200":
+ *          description: Uspešno zbrisana jed.
+ *        "400":
+ *          description: Napaka zahteve, manjkajo obvezni parametri.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.route("/meni/:idJedi")
+    .delete(avtentikacija, meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
@@ -656,6 +856,33 @@ router.post("/zaloga", zaloga.ustvariSestavino);
 router.put("/zaloga", zaloga.posodobiSestavino);
 router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
 
+
+/**
+ * @swagger
+ *  /image:
+ *    post:
+ *      summary: Dodajanje slike
+ *      description: Dodajanje slike jeedi za prikaz v meniju.
+ *      tags: [Image]
+ *      requestBody:
+ *        description: Slika jedi
+ *        required: true
+ *        content:
+ *          application/x-www-form-urlencoded:
+ *            schema:
+ *              image:
+ *                type: File
+ *      response:
+ *        "200":
+ *          description: Slika uspešno dodoana.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                image:
+ *                  type: string
+ *        "500":
+ *          description: Napaka na strežniku.
+ */
 router.post('/image', slike.shraniSliko)
 
 // AVTENTIKACIJA
