@@ -1,17 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ZaposleniService} from '../../storitve/zaposleni.service';
 import {Uporabnik} from '../../razredi/uporabnik';
 import {Placa} from '../../razredi/placa';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nadzorna-plosca-zaposleni',
   templateUrl: './nadzorna-plosca-zaposleni.component.html',
-  styleUrls: ['./nadzorna-plosca-zaposleni.component.css']
+  styleUrls: ['./nadzorna-plosca-zaposleni.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NadzornaPloscaZaposleniComponent implements OnInit {
+
+  @Input() stran = 1;
+  @Input() velikostStrani = 10;
+  @Input() najvecStrani: number;
 
   vsebinaStrani = {
     naslov: 'Zaposleni'
@@ -31,32 +37,18 @@ export class NadzornaPloscaZaposleniComponent implements OnInit {
   };
 
   public posodobljenZaposleni: any = {};
-
-  public obrazecNapaka: string;
   public zaposleni: Uporabnik[];
-  public idZaposlenega: any[] = new Array(50).fill(0);
+  public idZaposlenega: any[] = new Array(50).fill('');
   private modalRef: NgbModalRef;
   public obkljukaniCheckboxi = 0;
   public obkljukanEden = false;
   public obkljukanihVec = false;
-  public obvestilo: string;
+  public izbira = 'ime';
+  public iskanje: any;
+  public vnesiPodatke: string;
 
   public odpriModal(modal): void {
     this.modalRef = this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'});
-  }
-
-  private pridobiZaposlene(): void {
-    this.obvestilo = 'Pridobivanje sestavin';
-    this.zaposleniStoritev
-      .pridobiZaposlene()
-      .then((najdeniZaposleni: Uporabnik[]) => {
-        console.log('Pridobljeni zaposleni:');
-        console.log(najdeniZaposleni);
-        this.zaposleni = najdeniZaposleni;
-        this.obvestilo = '';
-        // this.najvecStrani = this.zaposleni.length;
-      })
-      .catch(napaka => this.obrazecNapaka = napaka);
   }
 
   private soPodatkiUstrezni(): boolean {
@@ -94,43 +86,59 @@ export class NadzornaPloscaZaposleniComponent implements OnInit {
     this.novZaposleni.vloga = '';
     this.novaPlaca.uporabnik_id = '';
     this.novaPlaca.placa = null;
-    this.obvestilo = '';
     obrazec.resetForm();
   }
 
+  public pridobiZaposlene(): void {
+    const podatki = {};
+    if (this.iskanje !== undefined && this.iskanje !== '') {
+      // console.log(this.izbira);
+      // console.log(this.iskanje);
+      podatki[this.izbira] = this.iskanje;
+    }
+    /* tslint:disable:no-string-literal */
+    podatki['odmik'] = (this.stran - 1) * this.velikostStrani;
+    /* tslint:enable:no-string-literal */
+    // console.log(podatki);
+    const query = new URLSearchParams(podatki);
+    this.zaposleniStoritev
+      .pridobiZaposlene(query)
+      .subscribe(
+        (res: any) => {
+          this.zaposleni = res.body;
+          this.najvecStrani = res.headers.get('Stevilo');
+        },
+        napaka => Swal.fire('Napaka pri pridobivanju sestavin', napaka.message, 'error')
+      );
+  }
+
   public dodajZaposlenega(obrazec: NgForm): void {
-    this.obrazecNapaka = '';
-    this.obvestilo = 'Dodajanje zaposlenega';
     if (this.soPodatkiUstrezni()) {
-      console.log(this.novZaposleni);
+      // console.log(this.novZaposleni);
       this.zaposleniStoritev
         .dodajZaposlenega(this.novZaposleni)
         .then((zaposleni: Uporabnik) => {
-          console.log('HERE!');
+          // console.log('HERE!');
           console.log('Zaposlen shranjen', zaposleni);
           this.novaPlaca.uporabnik_id = zaposleni._id;
           this.zaposleni.push(zaposleni);
-          // this.najvecStrani = this.sestavine.length;
           this.zaposleniStoritev
             .posodobiPlaco(this.novaPlaca)
             .then((placa: Placa) => {
-              console.log('HERE!');
-              console.log('Placa shranjena', placa);
+              Swal.fire('Dodajanje uspešno', 'Zaposleni uspešno dodan', 'success');
+              this.najvecStrani++;
               this.ponastavi(obrazec);
               this.modalRef.close();
-          }).catch(napaka => this.obrazecNapaka = napaka);
+          }).catch(napaka => Swal.fire('Dodajanje plače neuspešno', napaka, 'error'));
         })
-        .catch(napaka => this.obrazecNapaka = napaka);
+        .catch(napaka => Swal.fire('Dodajanje zaposlenega neuspešno', napaka, 'error'));
     } else {
-      console.log('HERE!');
-      this.obrazecNapaka = 'Vnesti je treba vse podatke!';
-      this.obvestilo = '';
+      // console.log('HERE!');
+      this.vnesiPodatke  = 'Vnesti je treba vse podatke!';
     }
   }
 
   public posodobiZaposlenega(obrazec: NgForm): void {
-    this.obrazecNapaka = '';
-    this.obvestilo = 'Posodabljanje zaposlenega';
     let indeks = 0;
     for (const id of this.idZaposlenega) {
       if (id !== '') {
@@ -162,69 +170,62 @@ export class NadzornaPloscaZaposleniComponent implements OnInit {
       this.posodobljenZaposleni.vloga = this.novZaposleni.vloga;
       this.zaposleni[indeks].vloga = this.novZaposleni.vloga;
     }
-    console.log(this.posodobljenZaposleni);
+    // console.log(this.posodobljenZaposleni);
 
-    console.log(this.novZaposleni);
-    if (this.soPodatkiUstrezni()) {
-      this.zaposleniStoritev
-        .posodobiZaposlenega(this.posodobljenZaposleni)
-        .then((zaposleni: Uporabnik) => {
-          console.log('Zaposlen shranjen', zaposleni);
-          if (this.novaPlaca.placa != null) {
-            this.novaPlaca.uporabnik_id = this.posodobljenZaposleni.id;
-            this.zaposleniStoritev
-              .posodobiPlaco(this.novaPlaca)
-              .then((placa: Placa) => {
-                console.log('Placa shranjena', placa);
-              }).catch(napaka => this.obrazecNapaka = napaka);
-          }
-          this.ponastavi(obrazec);
-          this.modalRef.close();
-        })
-        .catch(napaka => this.obrazecNapaka = napaka);
-    } else {
-      this.obrazecNapaka = 'Vnesti je treba vse podatke!';
-      this.obvestilo = '';
-    }
+    // console.log(this.novZaposleni);
+    this.zaposleniStoritev
+      .posodobiZaposlenega(this.posodobljenZaposleni)
+      .then((zaposleni: Uporabnik) => {
+        console.log('Zaposlen shranjen', zaposleni);
+        if (this.novaPlaca.placa != null) {
+          this.novaPlaca.uporabnik_id = this.posodobljenZaposleni.id;
+          this.zaposleniStoritev
+            .posodobiPlaco(this.novaPlaca)
+            .then((placa: Placa) => {
+              console.log('Placa shranjena', placa);
+            }).catch(napaka => Swal.fire('Posodobitev plače neuspešna', napaka, 'error'));
+        }
+        Swal.fire('Posodobitev uspešna', 'zaposleni je bil uspešno posodobljen', 'success');
+        this.ponastavi(obrazec);
+        this.modalRef.close();
+      })
+      .catch(napaka => {
+        Swal.fire('Posodobitev neuspešna', napaka, 'error');
+        this.zaposleni[indeks] = backup;
+      });
   }
 
   public odstraniZaposlenega(): void {
-    this.obrazecNapaka = '';
-    this.obvestilo = 'Brisanje zaposlenega';
     const stevilo = this.zaposleni.length;
     let izbrisani = 0;
+    const backup = this.zaposleni;
+    // console.log('STEVILO VSEH ZAPOSLENIH: ' + stevilo);
     for (let i = 0; i < stevilo; i++) {
+      // console.log(this.idZaposlenega[i]);
       if (this.idZaposlenega[i] !== '') {
         this.zaposleni.splice(i - izbrisani, 1);
-        // this.najvecStrani = this.sestavine.length;
+        this.najvecStrani--;
         this.zaposleniStoritev
           .odstraniZaposlenega(this.idZaposlenega[i])
           .then((odgovor: any) => {
-            console.log('Sestavina odstranjena', odgovor);
+            Swal.fire('Brisanje uspešno', 'Brisanje zaposlenega je bilo uspešno', 'success');
+            console.log('Zaposleni odstranjen', odgovor);
+            this.obkljukanEden = false;
+            this.obkljukanihVec = false;
+            this.obkljukaniCheckboxi = 0;
             this.modalRef.close();
           })
-          .catch(napaka => this.obrazecNapaka = napaka);
+          .catch((napaka) => {
+            Swal.fire('Brisanje neuspešno', napaka, 'error');
+            this.zaposleni = backup;
+            this.najvecStrani += izbrisani;
+          });
         izbrisani++;
       }
     }
   }
 
-  /*
-  public jePrijavljen(): boolean {
-    return this.avtentikacijaStoritev.jePrijavljen();
-  }
-
-  public vrniUporabnika(): string {
-    const { ime } = this.avtentikacijaStoritev.vrniTrenutnegaUporabnika();
-    return ime ? ime : 'Gost';
-  }
-
-   */
-
-  constructor(private zaposleniStoritev: ZaposleniService, private router: Router, private modalService: NgbModal) {
-  }
-
-  /*private avtentikacijaStoritev: AvtentikacijaService, private povezavaStoritev: PovezavaService */
+  constructor(private zaposleniStoritev: ZaposleniService, private router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.pridobiZaposlene();

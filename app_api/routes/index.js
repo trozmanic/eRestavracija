@@ -23,10 +23,10 @@ const ctrlAvtentikacija = require('../controllers/avtentikacija');
 const self = require('../controllers/self');
 
 //UPORABNIKI
-router.get("/uporabniki",uporabniki.pridobiUporabnike);
-router.get("/uporabniki/:idUporabnika",uporabniki.pridobiUporabnika);
-router.post("/uporabniki",uporabniki.ustvariUporabnika);
-router.put("/uporabniki",uporabniki.posodbiUporabnika);
+router.get("/uporabniki", uporabniki.pridobiUporabnike);
+router.get("/uporabniki/:idUporabnika", uporabniki.pridobiUporabnika);
+router.post("/uporabniki", uporabniki.ustvariUporabnika);
+router.put("/uporabniki", uporabniki.posodbiUporabnika);
 router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
 
 //REZERVACIJE
@@ -85,6 +85,7 @@ router.post('/image', slike.shraniSliko)
 
 // AVTENTIKACIJA
 router.post('/registracija', ctrlAvtentikacija.registracija);
+router.post('/kreiraj', ctrlAvtentikacija.kreiraj);
 router.post('/prijava', ctrlAvtentikacija.prijava);
 
 router.get('/database/drop', database.dropDB);

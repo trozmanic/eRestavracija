@@ -69,15 +69,15 @@
           </div>
         </form>
       </div>
-      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
-        {{ obrazecNapaka }}
+      <div *ngIf="vnesiPodatke" class="alert alert-danger" role="alert">
+        {{ vnesiPodatke }}
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-dark mr-auto" id="dodajSestavinoPotrdi"
                 form="obrazec1" [disabled]="!dodajForm.valid">Dodaj
         </button>
         <button type="button" class="btn btn-dark" id="dodajSestavinoPreklici"
-                (click)="dodajForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+                (click)="dodajForm.reset(); modal.close('Prekliči'); vnesiPodatke=''">Prekliči
         </button>
       </div>
     </ng-template>
@@ -150,15 +150,12 @@
           </div>
         </form>
       </div>
-      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
-        {{ obrazecNapaka }}
-      </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-dark mr-auto" id="urediSestavinoPotrdi"
                 form="obrazec2" [disabled]="!urediForm.valid">Potrdi
         </button>
         <button type="button" class="btn btn-dark" id="urediSestavinoPreklici"
-                (click)="urediForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+                (click)="urediForm.reset(); modal.close('Prekliči')">Prekliči
         </button>
       </div>
     </ng-template>
@@ -197,10 +194,12 @@
             <option value="cena">Cena</option>
           </select>
         </div>
-        <input [(ngModel)]="iskanje" (keyup.enter)="pridobiSestavine()" name="iskanje" class="form-control" type="text" placeholder="Iskanje"
+        <input [(ngModel)]="iskanje" (keyup.enter)="pridobiSestavine()" name="iskanje" class="form-control" type="text"
+               placeholder="Iskanje"
                id="IskanjePoZalogi">
         <div class="input-group-append">
-          <button type="button" (click)="pridobiSestavine()" class="btn btn-dark" id="button-addon2"><i class="fas fa-search"></i>
+          <button type="button" (click)="pridobiSestavine()" class="btn btn-dark" id="button-addon2"><i
+            class="fas fa-search"></i>
           </button>
         </div>
       </div>
@@ -222,7 +221,7 @@
         </thead>
         <tbody>
         <tr
-          *ngFor="let sestavina of sestavine | slice: (stran-1) * velikostStrani : stran * velikostStrani; index as i">
+          *ngFor="let sestavina of sestavine; index as i">
           <th scope="row">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" (change)="obkljukan($event, i)"
@@ -238,8 +237,9 @@
         </tr>
         </tbody>
       </table>
-      <ngb-pagination class="d-flex justify-content-center" *ngIf="najvecStrani > 10" [collectionSize]="najvecStrani"
-                      [(page)]="stran"></ngb-pagination>
+      <ngb-pagination *ngIf="najvecStrani > 10" class="d-flex justify-content-center" [(page)]="stran"
+                      [pageSize]="velikostStrani" [collectionSize]="najvecStrani"
+                      (pageChange)="pridobiSestavine()"></ngb-pagination>
     </div>
   </div>
   <!-- KONEC tabele -->

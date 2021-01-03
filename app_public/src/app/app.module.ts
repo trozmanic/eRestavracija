@@ -144,7 +144,7 @@ import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca
             component: NadzornaPloscaKuharComponent
           },
           {
-            path: 'rezervacija',
+            path: 'rezervacije',
             component: NadzornaPloscaRezervacijaComponent
           },
           {
