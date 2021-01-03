@@ -65,6 +65,7 @@ const config: SocketIoConfig = { url: environment.socket_url, options: {} };
     RezervacijaMeniComponent,
     StevecPipe,
     NadzornaPloscaZalogaComponent,
+    NadzornaPloscaZaposleniComponent,
     NadzornaPloscaComponent,
     NadzornaPloscaUrnikComponent,
     MainComponent,
@@ -130,6 +131,10 @@ const config: SocketIoConfig = { url: environment.socket_url, options: {} };
                     {
                         path: 'zaloga',
                         component: NadzornaPloscaZalogaComponent
+                    },
+                    {
+                        path: 'zaposleni',
+                        component: NadzornaPloscaZaposleniComponent
                     },
                     {
                         path: 'urnik',
