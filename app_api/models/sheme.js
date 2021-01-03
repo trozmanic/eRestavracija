@@ -144,7 +144,43 @@ const surovinaShema = new mongoose.Schema({
     "enota": { type: String, required: true },
     "cena": { type: Number, required: true, min: 0 }
 })
-
+/**
+ * @Swagger
+ * components:
+ *  schemas:
+ *   MeniItem:
+ *    type: object
+ *    properties:
+ *     ime:
+ *      type: String
+ *     cena:
+ *      type: Number
+ *      minimum: 0
+ *      example: 12
+ *     slika:
+ *      type: String
+ *     opis:
+ *      type: String
+ *     ocena:
+ *      type: Number
+ *      example: 4
+ *     ocena_count:
+ *      type: Number
+ *      example: 2
+ *     kalorije:
+ *      type: Number
+ *      minimum: 0
+ *     sestavine:
+ *      type: array
+ *      items:
+ *       type: sestavina
+ *    required:
+ *      - ime
+ *      - cena
+ *      - opis
+ *      - kalorije
+ *
+ */
 const meniItemShema = new mongoose.Schema({
     ime: { type: String, required: true },
     cena: { type: Number, required: true, min: 0 },
@@ -158,6 +194,73 @@ const meniItemShema = new mongoose.Schema({
         kolicina: { type: Number, min: 0 }
     })]
 })
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     NarociloZaposleni:
+ *       type: object
+ *       description: Podatki o narocilu namenjeno zaposlenim
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         natakar:
+ *           type: object
+ *           properties:
+ *              _id:
+ *                type: string
+ *                description: Enolični indetifikator
+ *                example: 5fecb3329a977b43c4e98894
+ *              id_uporabnika:
+ *                type: string
+ *                description: Enolični indetifikator natakarja
+ *                example: 5fecb3329a977b43c4e98894
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         cena:
+ *           type: number
+ *           example: 10.12
+ *         stanje:
+ *           type: string
+ *           enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *           example: rezervacija
+ *         miza:
+ *           type: integer
+ *           example: 2
+ *         meni_items:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 description: Enolični indetifikator
+ *                 example: 5fecb3329a977b43c4e98894
+ *               meni_item:
+ *                 type: string
+ *                 description: Ime jedi
+ *                 example: Spageti po mediternasko
+ *               ime:
+ *                  type: string
+ *                  description: Ime jedi
+ *                  example: Spageti po mediternasko
+ *               cena:
+ *                  type: integer
+ *                  example: 65
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *       required:
+ *         - _id
+ *         - natakar
+ *         - datum_in_ura
+ *         - stanje
+ */
 
 /**
  * @swagger
@@ -217,7 +320,55 @@ const meniItemShema = new mongoose.Schema({
  *         - natakar
  *         - datum_in_ura
  *         - stanje
+ *
+ *     NarociloKreiranje:
+ *       type: object
+ *       description: Podatki za ustvarjanje narocila
+ *       properties:
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         jedi:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               meniItemID:
+ *                 type: string
+ *                 description: Enolični indentifikator jedi
+ *                 example: 5fecb3329a977b43c4e98894
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *         id:
+ *           type: string
+ *           description: Enolični indentifikator uporabnika
+ *           example: 5fecb3329a977b43c4e98894
+ *         cena:
+ *           type: integer
+ *           description: skupna cena
+ *           example: 45
+ *         miza:
+ *           type: string
+ *           description: Miza za katero je namenjeno narocilo
+ *           example: 4
+ *         stanje:
+ *           type: string
+ *           description: Stanje v katerem je narocilo
+ *           enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *           example: sprejeto
+ *
+ *       required:
+ *         - datum_in_ura
+ *         - jedi
+ *         - id
+ *         - cena
+ *         - stanje
  */
+
+
+
 const narociloShema = new mongoose.Schema({
     natakar: { type: zaposleniShema },
     datum_in_ura: { type: Date, required: true, default: Date.now },
@@ -319,6 +470,52 @@ const gostShema = new mongoose.Schema({
     ocenjene_jedi: [meniItemShema]
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Urnik:
+ *       type: object
+ *       description: Podatki o urniku
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator Urnika
+ *           example: 5fecb3329a977b43c4e98894
+ *         id_uporabnika:
+ *           type: string
+ *           description: Enolični indetifikator Uporabnika ki ima ta urnik
+ *           example: 5fecb3329a977b43c4e98894
+ *         dnevi:
+ *           type: array
+ *           items:
+ *              type: string;
+ *           description: Tabela kdaj zaposleni dela vsak dan
+ *         leto:
+ *           type: number
+ *           description: katero leto je ta urnik
+ *           example: 2020
+ *         mesec:
+ *           type: number
+ *           description: kateri mesec je ta urnik (0-11)
+ *           example: 11
+ *         st_dni:
+ *           type: number
+ *           description: stevilo dni v mesecu
+ *           example: 31
+ *         zac_dan:
+ *           type: string
+ *           description: prve 3 crke prvega dneva v mescu
+ *           example: tor
+ *       required:
+ *         - _id
+ *         - id_uporabnika
+ *         - dnevi
+ *         - mesec
+ *         - leto
+ *         - st_dni
+ *         - zac_dan
+ */
 const urnikShema = new mongoose.Schema({
     id_uporabnika: {type: mongoose.ObjectId},
     dnevi: [{
@@ -404,3 +601,76 @@ mongoose.model("Surovina", surovinaShema, "Surovine");
 mongoose.model("Zaposlen", zaposleniShema, "Zaposleni");
 mongoose.model("Urnik", urnikShema, "Urniki");
 
+
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Zasluzek:
+ *       type: object
+ *       description: Podatki o zasluzku
+ *       properties:
+ *         ostevilceni_dnevi:
+ *           type: array
+ *           items:
+ *              type: number;
+ *           description: Tabela dni v mescu 1...(28-31)
+ *         zasluzek_dnevi:
+ *           type: array
+ *           items:
+ *              type: number;
+ *           description: Tabela zasluzka na dan
+ *         dnevi:
+ *           type: array
+ *           items:
+ *              type: string;
+ *           description: Tabela kdaj zaposleni dela vsak dan
+ *         skupno_prilivi:
+ *           type: number
+ *           description: Skupni prilivi ta mesec
+ *           example: 230
+ *         mesec:
+ *           type: number
+ *           description: kateri mesec je ta zasluzek(0-11)
+ *           example: 11
+ *         leto:
+ *           type: number
+ *           description: kater0 leto je ta zasluzek
+ *           example: 2020
+ *         zac_dan:
+ *           type: string
+ *           description: prve 3 crke prvega dneva v mescu
+ *           example: tor
+ *         st_dni:
+ *           type: number
+ *           description: stevilo dni v mesecu
+ *           example: 31
+ *         zaposleni_strosek:
+ *           type: number
+ *           description: Strosek za zaposlene ta mesec
+ *           example: 350
+ *         tabele_placanil:
+ *           type: array
+ *           items:
+ *              $ref: '#/components/schemas/NarociloBranje'
+ *           description: Tabela placanih racunov
+ *         tabele_ne_placanil:
+ *           type: array
+ *           items:
+ *              $ref: '#/components/schemas/NarociloBranje'
+ *           description: Tabela ne placanih racunov
+ *         sporocilo:
+ *           type: string
+ *           description: sporocilo napake
+ *           example: napaka
+ *       required:
+ *         - _id
+ *         - id_uporabnika
+ *         - dnevi
+ *         - mesec
+ *         - leto
+ *         - st_dni
+ *         - zac_dan
+ */

@@ -1,10 +1,12 @@
  <div class="login-buttons" *ngIf="!authService.jePrijavljen()">
+   <h1 class="nipovezave" *ngIf="!jePovezava()">Trenutno ni povezave</h1>
     <button class="btn btn-primary"
             data-toggle="collapse"
             href="#register"
             role="button"
             aria-expanded="true"
             aria-controls="register"
+            *ngIf="jePovezava()"
             id="register-button" (click)="showRegister()">
       REGISTRACIJA
     </button>
@@ -12,6 +14,7 @@
             type="button" data-toggle="collapse"
             data-target="#login" aria-expanded="false"
             aria-controls="login"
+            *ngIf="jePovezava()"
             id="login-button" (click)="showLogin()">
       PRIJAVA
     </button>

@@ -28,6 +28,7 @@ const adminAvtorizacija = imaVlogo(['admin']);
 const zaposleniAvtorizacija = imaVlogo(['admin', 'kuhar', 'natakar']);
 const natakarAvtorizacija = imaVlogo(['natakar']);
 const kuharAvtorizacija = imaVlogo(['kuhar']);
+const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
 
 /**
  * Kategorije dostopnih točk
@@ -39,6 +40,10 @@ const kuharAvtorizacija = imaVlogo(['kuhar']);
  *    description: Obvladovanje zaposlenih
  *  - name: Zaloga
  *    description: Obvladovanje zaloge
+ *  - name: Urnik
+ *    description: Obvladovanje urnika
+ *  - name: Zasluzek
+ *    description: Obvladovanje zasluzka
  */
 
 /**
@@ -97,8 +102,8 @@ router.delete("/uporabniki/:idUporabnika",
 router.get("/meni",meni.pridobiJedi);
 router.get("/meni/:idJedi",meni.pridobiJed);
 router.post("/meni",
-    //avtentikacija,
-    //zaposleniAvtorizacija,
+    avtentikacija,
+    zaposleniAvtorizacija,
     meni.ustvariJed);
 router.put("/meni/:idJedi",
     avtentikacija,
@@ -148,7 +153,7 @@ router.delete("/uporabniki/:idUporabnika", avtentikacija, adminAvtorizacija, upo
  *              schema:
  *                type: string
 */
-router.get("/rezervacija", rezervacije.pridobiRezervacije);
+router.get("/rezervacija", avtentikacija, prijavljenAvtorizacija, rezervacije.pridobiRezervacije);
 /**
  * @swagger
  *  /rezervacija/{idUporabnika}:
@@ -192,7 +197,7 @@ router.get("/rezervacija", rezervacije.pridobiRezervacije);
  *              schema:
  *                type: string
 */
-router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
+router.get("/rezervacija/:idUporabnika", avtentikacija, prijavljenAvtorizacija, rezervacije.pridobiRezervacije)
 /** 
  * @swagger
  *  /rezervacija:
@@ -226,7 +231,7 @@ router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
  *              schema:
  *                type: string
  */ 
-router.post("/rezervacija", rezervacije.ustvariRezervacijo);
+router.post("/rezervacija", avtentikacija, prijavljenAvtorizacija, rezervacije.ustvariRezervacijo);
 /**
  * @swagger
  * /rezervacija/{idUporabnika}/{operacija}:
@@ -275,9 +280,208 @@ router.post("/rezervacija", rezervacije.ustvariRezervacijo);
  *            application/json:
  *              schema:
  *                type: string
- *                example: No authorization token was found
  */
-router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
+router.put("/rezervacija/:idRezervacije/:operacija", avtentikacija, prijavljenAvtorizacija, rezervacije.posodobiRezervacijo)
+
+//MENI
+
+/**
+ * @swagger
+ * /meni:
+ *   get:
+ *     summary: Seznam jedi na meniju
+ *     description: Pridobitev seznama jedi, ki so na voljo meniju.
+ *     tags: [Meni]
+ *     response:
+ *       "200":
+ *          description: Uspešna zahteva s seznamom jedi na meniju.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: "#/components/schemas/MeniItem"
+ *       "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *
+ */
+router.get("/meni", meni.pridobiJedi);
+
+/**
+ * @swagger
+ *  /meni/{idJedi}:
+ *    get:
+ *      summary: Posamezna jed
+ *      description: Pridobitev posamezne jedi, ki je na voljo na meniju.
+ *      tags: [Meni]
+ *      parameters:
+ *        - in: path
+ *          name: idJedi
+ *          description: enolični identifikator jedi
+ *          schema:
+ *            type: string
+ *          required: true
+ *          example: 5ff0d494ec999c3f4475631b
+ *      response:
+ *        "200":
+ *          description: Uspešna zahteva z jedjo v rezultatu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: "#/components/schemas/MeniItem"
+ *        "404":
+ *          description: Napaka zahteve, zahtevane jedi ni mogoče najti.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.get("/meni/:idJedi", meni.pridobiJed);
+
+
+/**
+ * @swagger
+ * /meni:
+ *  post:
+ *    summary: Dodajanje nove jedi.
+ *    description: Dodajanje nove jedi na jedilnik s podatki o imenu, opisu, ceni, kalorijah in sliki.
+ *    tags: [Meni]
+ *    security:
+ *      - jwt: []
+ *    requestBody:
+ *      description: Podatki od jedi
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: "#/components/schemas/MeniItem"
+ *    responses:
+ *      "200":
+ *        description: Uspešno dodana jed, ki se vrne v rezultatu.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/MeniItem"
+ *      "500":
+ *        description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.route("/meni")
+    .post(avtentikacija, meni.ustvariJed);
+
+/**
+ * @swagger
+ *  /meni/{idJedi}:
+ *    put:
+ *      summary: Posodablanje izbaranje jedi
+ *      description: Posodobitev izbranje jedi s podatki o imenu, opisu, ceni, kalorijah in sliki.
+ *      tags: [Meni]
+ *      security:
+ *        - jwt: []
+ *    requestBody:
+ *      description: Podatki od jedi
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: "#/components/schemas/MeniItem"
+ *    parameters:
+ *      - in: path
+ *        name: idJedi
+ *        description: enolični identifikator jedi.
+ *        schema:
+ *          type: string
+ *        required: true
+ *        example: 5ff0d494ec999c3f4475631b
+ *    responses:
+ *      "200":
+ *        description: Uspešno posodobljena jed, ki se vrne v rezultatu.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: "#/components/schemas/MeniItem"
+ *      "400":
+ *        description: Napaka zahteve, manjkajo obvezni parametri.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: string
+ *      "500":
+ *        description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.route("/meni/:idJedi")
+    .put(avtentikacija, meni.posodobiJed);
+
+/**
+ *  @swagger
+ *    /meni/dodajOceno:
+ *      post:
+ *        summary: Dodajanje ocene izbrani jedi
+ *        description: Dodajanje ocene izbarani jedi.
+ *        tags: [Meni]
+ *        security:
+ *          - jwt: []
+ *        requestBody:
+ *          description: Id jedi in uporabnika ter ocena.
+ *          required: true
+ *          content:
+ *            application/json:
+ *              schema:
+ *                id:
+ *                  type: string
+ *                  example: 5ff0d494ec999c3f4475631b
+ *                id_uporabnika:
+ *                  type: string
+ *                  example: 5ff0d494ec999c3f4475644c
+ *                ocena:
+ *                  type: string
+ *                  example: 4
+ *        responses:
+ *          "200":
+ *            description: Uspešno posodobljena jed z oceno.
+ *            content:
+ *              application/json:
+ *                schema:
+ *                  $ref: "#/components/schemas/MeniItem"
+ *          "500":
+ *            description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *
+ */
+router.route("/meni/dodajOceno")
+    .post(avtentikacija, meni.dodajOceno);
+
+/**
+ * @swagger
+ *  /meni/{idJedi}:
+ *    delete:
+ *      summary: Brisanje izbranje jedi
+ *      description: Brisanje **izbranje jedi**
+ *      tags: [Meni]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idJedi
+ *          description: enolični identifikator jedi.
+ *          schema:
+ *            type: string
+ *          required: true
+ *          example: 5ff0d494ec999c3f4475631b
+ *      responses:
+ *        "200":
+ *          description: Uspešno zbrisana jed.
+ *        "400":
+ *          description: Napaka zahteve, manjkajo obvezni parametri.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ */
+router.route("/meni/:idJedi")
+    .delete(avtentikacija, meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
@@ -286,11 +490,280 @@ router.get("/gost/:idUporabnika", gost.pridobiGosta);
 router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
 
 //URNIK
-router.get("/urnik", urnik.pridobiUrnik);
-router.put("/urnik", urnik.posodobiUrnik);
-router.delete("/urnik", urnik.deleteUrnik);
-router.post("/urnik", urnik.createUrnik);
-router.get("/urnik/:id", urnik.urnik_uporabnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    get:
+ *      summary: Urnik za en mesec
+ *      description: Pridobi urnik za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: false
+ *          description: mesec urnika
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: false
+ *          description: leto urnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem uporabnika s tem id, da bi najdel urnik.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/urnik",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    urnik.pridobiUrnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    put:
+ *      summary: Posodobitev Urnika za en mesec
+ *      description: Posodobitev urnika za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Urnik'
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: true
+ *          description: mesec urnika
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: true
+ *          description: leto urnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobitev urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem uporabnika s tem id, da bi najdel urnik ali ne najdem urnika.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.put("/urnik",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.posodobiUrnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    delete:
+ *      summary: Zbrisi Urnik za en mesec
+ *      description: Zbrisi urnik za ta mesec leto uporabnik
+ *      security:
+ *        - jwt: []
+ *      tags: [Urnik]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id urnika
+ *      responses:
+ *        "204":
+ *          description: Uspešna Zbrisan urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.delete("/urnik",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.deleteUrnik);
+/**
+ * @swagger
+ *  /urnik:
+ *    post:
+ *      summary: Ustvaritev Urnika za en mesec
+ *      description: Ustvaritev urnika za ta mesec leto uporabnik
+ *      tags: [Urnik]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Urnik'
+ *      parameters:
+ *        - in: path
+ *          name: uporabnik_id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: true
+ *          description: mesec urnika
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: true
+ *          description: leto urnika
+ *      responses:
+ *        "201":
+ *          description: Uspešna ustvaritev urnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem uporabnika s tem id ali Urnik ze obstaja.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.post("/urnik",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.createUrnik);
+/**
+ * @swagger
+ *  /urnik/{id}:
+ *    get:
+ *      summary: Urniki od uporabnika
+ *      description: Pridobi urnike za uporabnika
+ *      tags: [Urnik]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva urnikov
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Urnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ni posanega id ali Ne najdem uporabnika s tem id, da bi najdel urnike.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/urnik/:id",
+    avtentikacija,
+    adminAvtorizacija,
+    urnik.urnik_uporabnik);
+
 
 //ZAPOSLENI
 /**
@@ -520,41 +993,412 @@ router.post("/zaposleni", avtentikacija, adminAvtorizacija, zaposleni.ustvariZap
 router.delete("/zaposleni/:uporabnik_id", avtentikacija, adminAvtorizacija, zaposleni.izbrisiZaposlenega);
 
 //NAROCILA
+/**
+ * @swagger
+ *  /narocila/natakar:
+ *    get:
+ *      summary: Seznam vseh narocil za natakarja
+ *      description: Pridobi seznam vseh narocil dolocenega natakarja
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh narocil dolocenega natakarja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  vrsta:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *                  priprava:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *                  postrezena:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila/natakar",
     avtentikacija,
     natakarAvtorizacija,
     narocila.narocilaNatakar);
+/**
+ * @swagger
+ *  /narocila/kuhar:
+ *    get:
+ *      summary: Seznam vseh narocil za kuharja
+ *      description: Pridobi seznam vseh narocil dolocenega kuharja
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh narocil dolocenega kuharja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  vrsta:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *                  priprava:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila/kuhar",
     avtentikacija,
     kuharAvtorizacija,
     narocila.narocilaKuhar);
+/**
+ * @swagger
+ *  /narocila:
+ *    post:
+ *      summary: Ustvari novo narocilo
+ *      description: Ustvari novo narocilo
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/NarociloKreiranje'
+ *      responses:
+ *        "201":
+ *          description: Uspešna ustvarjeno narocilo
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post("/narocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.ustvariNarocilo);
+/**
+ * @swagger
+ *  /narocila:
+ *    get:
+ *      summary: Pridobi vsa narocila
+ *      description: Pridobi vsa narocila
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      responses:
+ *        "200":
+ *          description: Uspešna pridobljena narocila
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                   $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.pridobiNarocila);
+/**
+ * @swagger
+ *  /narocila:
+ *    put:
+ *      summary: Posodobi narocilo
+ *      description: Posodobi narocilo
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                _id:
+ *                  example: 5fecb3329a977b43c4e98894
+ *                  type: string
+ *                  description: enolicni identfikator narocila
+ *                stanje:
+ *                  type: string
+ *                  description: novo stanje
+ *                  enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobljena narocila
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                   $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.put("/narocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.posodobiNarocilo);
+/**
+ * @swagger
+ *  /narocila/{idNarocila}:
+ *    delete:
+ *      summary: Izbrisi narocilo s podanim enolicnim identifikatorjem
+ *      description: Izbrisi narocilo s podanim enolicnim identifikatorjem
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idNarocila
+ *          description: enolicni identifikator lokacije
+ *          schema:
+ *            type: string
+ *            required: true
+ *      responses:
+ *        "200":
+ *          description: Uspešna izbrisano narocilo
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  []
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.delete("/narocila/:id",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.izbrisiNarocilo);
+
+/**
+ * @swagger
+ *  /narocila/{idNarocila}:
+ *    get:
+ *      summary: Pridobi narocilo s podanim identifikatorjem
+ *      description: Pridobi narocilo s podanim identifikatorjem
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idNarocila
+ *          description: enolicni identifikator lokacije
+ *          schema:
+ *            type: string
+ *            required: true
+ *      responses:
+ *        "200":
+ *          description: Uspešna pridobljeno narocilo
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila/:idNarocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.pridobiNarocilo);
+
+/**
+ * @swagger
+ *  /narocila/{id}:
+ *    put:
+ *      summary: Posodobi narocilo s podanim enolicnim identifikatorjem
+ *      description: Posodobi narocilo
+ *      tags: [Narocila]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: idNarocila
+ *          description: enolicni identifikator lokacije
+ *          schema:
+ *            type: string
+ *            required: true
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                _id:
+ *                  example: 5fecb3329a977b43c4e98894
+ *                  type: string
+ *                  description: enolicni identfikator narocila
+ *                stanje:
+ *                  type: string
+ *                  description: novo stanje
+ *                  enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobljena narocila
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                   $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Uporanbnik ni autenticiran ali pa nima pravic za dostop do dolocenega vira
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.put("/narocila/:idNarocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.posodobiNarocilo);
 
 //ZASLUZEK
-router.get("/zasluzek", zasluzek.pridobiNarocilo);
+
+/**
+ * @swagger
+ *  /zasluzek:
+ *    get:
+ *      summary: Zasluzek za en mesec
+ *      description: Pridobi zasluzek za ta mesec leto
+ *      tags: [Zasluzek]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: mesec
+ *          type: number
+ *          required: true
+ *          description: mesec zasluzka
+ *        - in: path
+ *          name: leto
+ *          type: number
+ *          required: true
+ *          description: leto zasluzka
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva zasluzka
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Zasluzek'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ne najdem niti enega narocila za to mesec/leto ali Ne najdem nobenega zaposlenega da bi zracunal strosek place ali Ne najdem nobenega menu itema, ko generiram racun.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
+router.get("/zasluzek",
+    avtentikacija,
+    adminAvtorizacija,
+    zasluzek.pridobiNarocilo);
+
 
 //ZALOGA
 /**
@@ -769,6 +1613,33 @@ router.put("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalog
  */
 router.delete("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.izbrisiSestavino);
 
+
+/**
+ * @swagger
+ *  /image:
+ *    post:
+ *      summary: Dodajanje slike
+ *      description: Dodajanje slike jeedi za prikaz v meniju.
+ *      tags: [Image]
+ *      requestBody:
+ *        description: Slika jedi
+ *        required: true
+ *        content:
+ *          application/x-www-form-urlencoded:
+ *            schema:
+ *              image:
+ *                type: File
+ *      response:
+ *        "200":
+ *          description: Slika uspešno dodoana.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                image:
+ *                  type: string
+ *        "500":
+ *          description: Napaka na strežniku.
+ */
 router.post('/image', slike.shraniSliko)
 
 // AVTENTIKACIJA
