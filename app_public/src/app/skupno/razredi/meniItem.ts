@@ -18,7 +18,8 @@ export class MeniItemPOST{
   opis: String;
   kalorije: Number;
   cena: Number;
-  sestavine: string[]
+  sestavine: string[];
+  slika: string;
 }
 
 export class MeniItemPUT{
@@ -29,6 +30,7 @@ export class MeniItemPUT{
   cena: Number;
   slika: String;
 }
+
 
 export class MeniItemGost extends MeniItem {
   ocenjena: boolean;
@@ -65,5 +67,9 @@ export class APIResponse {
       }
     }
   }]
+}
+
+export class ImgRes {
+  image: string
 }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-import {MeniItemGost, MeniItem, MeniItemPOST, MeniItemPUT, APIResponse} from '../razredi/meniItem';
+import {MeniItemGost, MeniItem, MeniItemPOST, MeniItemPUT, APIResponse, ImgRes} from '../razredi/meniItem';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -64,14 +64,9 @@ export class MeniService {
   }
 
   public postImage(data){
-    return this.http.post(this.api_url + '/image',data, {
-      headers: {
-        'accept': 'application/json',
-        'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': `multipart/form-data`,
-      }})
+    return this.http.post(this.api_url + '/image',data)
       .toPromise()
-      .then(odgovor => odgovor)
+      .then(odgovor => odgovor as ImgRes)
       .catch(napaka => this.obdelajNapako(napaka))
   }
 

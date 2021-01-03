@@ -3,7 +3,7 @@ import {userRegister} from "../../razredi/userRegister";
 import {userLogin} from "../../razredi/userLogin";
 import {Router} from "@angular/router";
 import {AuthService} from "../../storitve/auth.service";
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -152,7 +152,7 @@ export class LoginComponent implements OnInit {
         .registrirajUporabnika(this.registerUser)
         .then(()=> {
           this.clear();
-          this.router.navigateByUrl("/");
+          Swal.fire('Uspesna registacija', 'Vas racun je uspesno kreiran', 'success');
         })
         .catch(msg => alert(msg))
     }

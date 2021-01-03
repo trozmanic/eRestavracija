@@ -4,6 +4,7 @@ import { Zaloga } from '../../razredi/zaloga';
 import { ZalogaService } from '../../storitve/zaloga.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nadzorna-plosca-zaloga',
@@ -13,10 +14,9 @@ import { NgForm } from '@angular/forms';
 })
 export class NadzornaPloscaZalogaComponent implements OnInit {
 
-  // @Output() zamenjajStran = new EventEmitter<any>(true);
   @Input() stran = 1;
   @Input() velikostStrani = 10;
-  @Input() najvecStrani = 0;
+  @Input() najvecStrani: number;
 
   vsebinaStrani = {
     naslov: 'Zaloga'
@@ -31,40 +31,17 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
 
   public posodobljenaSestavina: any = {};
   public izbira = 'ime';
-  public obrazecNapaka: string;
   public sestavine: Zaloga[];
   public idSestavine: any[] = new Array(50).fill('');
   private modalRef: NgbModalRef;
   public obkljukaniCheckboxi = 0;
   public obkljukanEden = false;
   public obkljukanihVec = false;
-  public obvestilo: string;
   public iskanje: any;
+  public vnesiPodatke: string;
 
   public odpriModal(modal): void {
     this.modalRef = this.modalService.open(modal, {ariaLabelledBy: 'modal-basic-title'});
-  }
-
-  private pridobiSestavine(): void {
-    this.obvestilo = 'Pridobivanje sestavin';
-    const podatki = {};
-    if (this.iskanje !== undefined) {
-      console.log(this.izbira);
-      console.log(this.iskanje);
-      podatki[this.izbira] = this.iskanje;
-    }
-    podatki['odmik'] = '0';
-    console.log(podatki);
-    const query = new URLSearchParams(podatki);
-    // console.log(query);
-    this.zalogaStoritev
-      .pridobiSestavine(query)
-      .then((najdeneSestavine: Zaloga[]) => {
-        this.sestavine = najdeneSestavine;
-        this.obvestilo = '';
-        this.najvecStrani = this.sestavine.length;
-      })
-      .catch(napaka => this.obrazecNapaka = napaka);
   }
 
   private soPodatkiUstrezni(): boolean {
@@ -103,31 +80,49 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
     this.novaSestavina.enota = '';
     this.novaSestavina.cena = null;
     this.posodobljenaSestavina = {};
-    this.obvestilo = '';
     obrazec.resetForm();
   }
 
+  public pridobiSestavine(): void {
+    const podatki = {};
+    if (this.iskanje !== undefined && this.iskanje !== '') {
+      podatki[this.izbira] = this.iskanje;
+    }
+    /* tslint:disable:no-string-literal */
+    podatki['odmik'] = (this.stran - 1) * this.velikostStrani;
+    /* tslint:enable:no-string-literal */
+
+    const query = new URLSearchParams(podatki);
+    this.zalogaStoritev
+      .pridobiSestavine(query)
+      .subscribe(
+        (res: any) => {
+          this.sestavine = res.body;
+          this.najvecStrani = res.headers.get('Stevilo');
+        },
+        napaka => Swal.fire('Napaka pri pridobivanju sestavin', napaka.message, 'error')
+      );
+  }
+
   public dodajSestavino(obrazec: NgForm): void {
-    this.obrazecNapaka = '';
     if (this.soPodatkiUstrezni()) {
-      this.obvestilo = 'Dodajanje sestavine';
       this.zalogaStoritev
         .dodajSestavino(this.novaSestavina)
         .then((sestavina: Zaloga) => {
+          Swal.fire('Dodajanje uspešno', 'Sestavina uspešno dodana', 'success');
           console.log('Sestavina shranjena', sestavina);
           this.sestavine.push(sestavina);
-          this.najvecStrani = this.sestavine.length;
+          this.najvecStrani++;
           this.ponastavi(obrazec);
           this.modalRef.close();
         })
-        .catch(napaka => this.obrazecNapaka = napaka);
+        .catch(napaka => Swal.fire('Dodajanje neuspešno', napaka, 'error'));
     } else {
-      this.obrazecNapaka = 'Vnesti je treba vse podatke!';
+      this.vnesiPodatke = 'Vnesti je treba vse podatke!';
     }
   }
 
   public posodobiSestavino(obrazec: NgForm): void {
-    this.obrazecNapaka = '';
     let indeks = 0;
     for (const id of this.idSestavine) {
       if (id !== '') {
@@ -138,8 +133,6 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
       }
     }
     const backup = this.sestavine[indeks];
-
-    console.log(this.novaSestavina);
 
     if (this.novaSestavina.ime !== '' && this.novaSestavina.ime !== null) {
       this.posodobljenaSestavina.ime = this.novaSestavina.ime;
@@ -157,55 +150,51 @@ export class NadzornaPloscaZalogaComponent implements OnInit {
       this.posodobljenaSestavina.cena = this.novaSestavina.cena;
       this.sestavine[indeks].cena = this.novaSestavina.cena;
     }
-    console.log(this.posodobljenaSestavina);
-    this.obvestilo = 'Posodabljanje sestavine';
+
     this.zalogaStoritev
       .posodobiSestavino(this.posodobljenaSestavina)
       .then((sestavina: Zaloga) => {
+        Swal.fire('Posodobitev uspešna', 'sestavina je bila uspešno posodobljena', 'success');
         console.log('Sestavina posodobljena', sestavina);
         this.ponastavi(obrazec);
         this.modalRef.close();
       })
       .catch((napaka) => {
-        this.obrazecNapaka = napaka;
+        Swal.fire('Posodobitev neuspešna', napaka, 'error');
         this.sestavine[indeks] = backup;
       });
   }
 
   public odstraniSestavino(): void {
-    this.obrazecNapaka = '';
     const stevilo = this.sestavine.length;
     let izbrisani = 0;
+    const backup = this.sestavine;
+    console.log(backup);
     for (let i = 0; i < stevilo; i++) {
       if (this.idSestavine[i] !== '') {
         this.sestavine.splice(i - izbrisani, 1);
-        this.najvecStrani = this.sestavine.length;
+        this.najvecStrani--;
         this.zalogaStoritev
           .odstraniSestavino(this.idSestavine[i])
           .then((odgovor) => {
             console.log('Brisanje uspešno: ' + odgovor);
+            Swal.fire('Brisanje uspešno', 'Brisanje sestavine je bilo uspešno', 'success');
+            this.obkljukanEden = false;
+            this.obkljukanihVec = false;
+            this.obkljukaniCheckboxi = 0;
             this.modalRef.close();
           })
-          .catch(napaka => this.obrazecNapaka = napaka);
+          .catch((napaka) => {
+            Swal.fire('Brisanje neuspešno', napaka, 'error');
+            this.sestavine = backup;
+            this.najvecStrani += izbrisani;
+          });
         izbrisani++;
       }
     }
   }
 
-  /*
-  public jePrijavljen(): boolean {
-    return this.avtentikacijaStoritev.jePrijavljen();
-  }
-
-  public vrniUporabnika(): string {
-    const { ime } = this.avtentikacijaStoritev.vrniTrenutnegaUporabnika();
-    return ime ? ime : 'Gost';
-  }
-
-   */
-
   constructor(private zalogaStoritev: ZalogaService, private router: Router, private modalService: NgbModal) { }
-  /*private avtentikacijaStoritev: AvtentikacijaService, private povezavaStoritev: PovezavaService */
 
   ngOnInit(): void {
     this.pridobiSestavine();

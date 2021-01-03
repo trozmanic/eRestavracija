@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Uporabnik} from '../razredi/uporabnik';
 import {Placa} from '../razredi/placa';
 import {AuthService} from './auth.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +19,25 @@ export class ZaposleniService {
     return  new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
   }
 
-  public pridobiZaposlene(): Promise<Uporabnik[]>{
+  public pridobiZaposlene(query: any): Observable<any>{
+    return this.http.get(this.api_url + '/zaposleni?' + query, { headers: this.initHeaders(), observe: 'response' });
+  }
+
+  /*
+  public pridobiZaposlene(query: any): Promise<Uporabnik[]>{
     const httpOptions = {
       headers: this.initHeaders()
     };
-    return this.http.get(this.api_url + '/zaposleni', httpOptions).toPromise().then(odgovor => odgovor as Uporabnik[])
+    return this.http.get(this.api_url + '/zaposleni?' + query, httpOptions).toPromise().then(odgovor => odgovor as Uporabnik[])
       .catch(napaka => this.obdelajNapako(napaka));
   }
+   */
 
   public dodajZaposlenega(zaposleni: any): Promise<Uporabnik>{
     const httpOptions = {
       headers: this.initHeaders()
     };
-    return this.http.post(this.api_url + '/uporabniki', zaposleni, httpOptions).toPromise().then(odgovor => odgovor as Uporabnik)
+    return this.http.post(this.api_url + '/kreiraj', zaposleni, httpOptions).toPromise().then(odgovor => odgovor as Uporabnik)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 

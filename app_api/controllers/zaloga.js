@@ -4,14 +4,15 @@ let ObjectId = require('mongoose').Types.ObjectId;
 
 const pridobiSestavine = async (req,res) => {
     try {
-        console.log(req.query);
         let iskanje = {};
         const kljuc = Object.keys(req.query)[0];
         const vrednost = Object.values(req.query)[0];
+        let sestavine;
+        let stevilo;
 
         if (kljuc == 'odmik') {
-            const sestavine =  await Surovina.find().skip(parseInt(req.query.odmik)).limit(10).exec();
-            return res.status(200).json(sestavine);
+            stevilo = await Surovina.countDocuments();
+            sestavine = await Surovina.find().skip(parseInt(req.query.odmik)).limit(10).exec();
         } else {
             if (kljuc == 'ime'){
                 const regex = new RegExp(vrednost, 'i');
@@ -19,9 +20,11 @@ const pridobiSestavine = async (req,res) => {
             } else {
                 iskanje[kljuc] = vrednost;
             }
-            const sestavine =  await Surovina.find(iskanje).skip(parseInt(req.query.odmik)).limit(10).exec();
-            return res.status(200).json(sestavine);
+            stevilo = await Surovina.countDocuments(iskanje);
+            sestavine = await Surovina.find(iskanje).skip(parseInt(req.query.odmik)).limit(10).exec();
         }
+        res.setHeader('Stevilo', stevilo);
+        return res.status(200).json(sestavine);
     }catch (err) {
         console.log(err);
         res.status(500).json({"error_message": err});

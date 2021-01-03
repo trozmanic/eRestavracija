@@ -93,6 +93,11 @@ p {
   padding: 0;
 }
 
+.napaka {
+  margin-top: 0.5em;
+  color: red;
+}
+
 /* Konec Zaposleni */
 /* Pisava */
 * {

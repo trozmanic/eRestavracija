@@ -214,6 +214,8 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
 
 //NAROCILA
+router.get("/narocila/natakar", narocila.narocilaNatakar);
+router.get("/narocila/kuhar", narocila.narocilaKuhar);
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
 router.put("/narocila", narocila.posodobiNarocilo);
@@ -235,6 +237,7 @@ router.post('/image', slike.shraniSliko)
 
 // AVTENTIKACIJA
 router.post('/registracija', ctrlAvtentikacija.registracija);
+router.post('/kreiraj', ctrlAvtentikacija.kreiraj);
 router.post('/prijava', ctrlAvtentikacija.prijava);
 
 router.get('/database/drop', database.dropDB);

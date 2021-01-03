@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 import { SHRAMBA_BRSKALNIKA } from '../razredi/shramba';
 import {userRegister} from "../razredi/userRegister";
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   public obdelajNapako(napaka) {
-    console.log("Napaka pri pridobivanju menijev");
+    console.log('Napaka pri pridobivanju menijev');
     return Promise.reject(napaka.message || napaka);
   }
 
@@ -70,6 +70,10 @@ export class AuthService {
       const token: string = this.vrniZeton();
       return JSON.parse(atob(token.split('.')[1]));
     }
+  }
+
+  public initHeaders(): HttpHeaders {
+    return  new HttpHeaders().set('Authorization', 'Bearer ' + this.vrniZeton());
   }
 
   //

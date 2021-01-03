@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Zaloga } from '../razredi/zaloga';
+import {AuthService} from './auth.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZalogaService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   private api_url = environment.api_url;
 
-  public pridobiSestavine(query: any): Promise<Zaloga[]>{
-    return this.http.get(this.api_url + '/zaloga?' + query).toPromise().then(odgovor => odgovor as Zaloga[])
-      .catch(napaka => this.obdelajNapako(napaka));
+  private initHeaders(): HttpHeaders {
+    return  new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
+  }
+
+  public pridobiSestavine(query: any): Observable<any>{
+    return this.http.get(this.api_url + '/zaloga?' + query, { headers: this.initHeaders(), observe: 'response' });
   }
 
   public dodajSestavino(sestavina: any): Promise<Zaloga>{
