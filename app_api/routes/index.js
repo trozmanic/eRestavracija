@@ -282,21 +282,21 @@ router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezerva
 
 /**
  * @swagger
- *  /meni:
- *    get:
- *      summary: Seznam jedi na meniju
- *      description: Pridobitev seznama jedi, ki so na voljo meniju.
- *      tags: [Meni]
+ * /meni:
+ *   get:
+ *     summary: Seznam jedi na meniju
+ *     description: Pridobitev seznama jedi, ki so na voljo meniju.
+ *     tags: [Meni]
  *     response:
- *        "200":
- *         description: Uspešna zahteva s seznamom jedi na meniju.
+ *       "200":
+ *          description: Uspešna zahteva s seznamom jedi na meniju.
  *          content:
  *            application/json:
  *              schema:
- *               type: array
- *                 items:
- *                    $ref: "#/components/schemas/MeniItem
- *        "500":
+ *                type: array
+ *                items:
+ *                  $ref: "#/components/schemas/MeniItem"
+ *       "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
  */
@@ -452,7 +452,7 @@ router.route("/meni/dodajOceno")
  *    delete:
  *      summary: Brisanje izbranje jedi
  *      description: Brisanje **izbranje jedi**
- *      tags [Meni]
+ *      tags: [Meni]
  *      security:
  *        - jwt: []
  *      parameters:
