@@ -4,6 +4,7 @@ import {userLogin} from "../../razredi/userLogin";
 import {Router} from "@angular/router";
 import {AuthService} from "../../storitve/auth.service";
 import Swal from 'sweetalert2';
+import { PovezavaService } from '../../storitve/povezava.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    private povezavaStoritev: PovezavaService
   ) {
     this.registerUser = {
       "ime": "",
@@ -170,6 +172,11 @@ export class LoginComponent implements OnInit {
         .catch(msg=> alert(msg))
     }
 
+  }
+
+  public jePovezava(){
+    console.log("Povezava"+this.povezavaStoritev.jePovezava);
+    return this.povezavaStoritev.jePovezava;
   }
 
 }

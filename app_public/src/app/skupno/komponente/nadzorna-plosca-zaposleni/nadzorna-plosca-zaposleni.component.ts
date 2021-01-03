@@ -138,7 +138,7 @@ export class NadzornaPloscaZaposleniComponent implements OnInit {
     }
   }
 
-  public posodobiZaposlenega(obrazec: NgForm): void {
+  public pridobiIndeks(): number {
     let indeks = 0;
     for (const id of this.idZaposlenega) {
       if (id !== '') {
@@ -148,6 +148,12 @@ export class NadzornaPloscaZaposleniComponent implements OnInit {
         indeks++;
       }
     }
+    return indeks;
+  }
+
+  public posodobiZaposlenega(obrazec: NgForm): void {
+    const indeks = this.pridobiIndeks();
+
     const backup = this.zaposleni[indeks];
 
     if (this.novZaposleni.ime !== '' && this.novZaposleni.ime !== null) {
