@@ -123,7 +123,7 @@ const narociloShema = new mongoose.Schema({
     miza: { type: Number}
 })
 
- /**
+/**
  * @swagger
  * components:
  *   schemas:
@@ -165,6 +165,38 @@ const narociloShema = new mongoose.Schema({
  *         - stanje
  *         - st_oseb
  *         - narocilo
+ *     RezervacijaPisanje:
+ *       type: object
+ *       description: Podatki za ustvarjanje rezervacije
+ *       properties:
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         stOseb:
+ *           type: integer
+ *           example: 2
+ *         jedi:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               meni_item:
+ *                 type: string
+ *                 description: Enolični indentifikator jedi
+ *                 example: 5fecb3329a977b43c4e98894
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *         uporabnik_id:
+ *           type: string
+ *           description: Enolični indentifikator uporabnika
+ *           example: 5fecb3329a977b43c4e98894
+ *       required:
+ *         - datum_in_ura
+ *         - stOseb
+ *         - jedi
+ *         - uporabnik_id
  */  
 const rezervacijaShema = new mongoose.Schema({
     datum: { type: Date, default: Date.now },

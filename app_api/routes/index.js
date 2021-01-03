@@ -112,7 +112,77 @@ router.get("/rezervacija", rezervacije.pridobiRezervacije);
  *                type: string
 */
 router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
+/** 
+ * @swagger
+ *  /rezervacija:
+ *    post:
+ *      summary: Ustvari novo rezervacijo
+ *      description: Ustvari novo rezervacijo
+ *      tags: [Rezervacije]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/RezervacijaPisanje'
+ *      responses:
+ *        "201":
+ *          description: Uspešna ustvarjena rezervacija
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                example: Success
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */ 
 router.post("/rezervacija", rezervacije.ustvariRezervacijo);
+/**
+ * @swagger
+ * /rezervacija/{idUporabnika}/{operacija}:
+ *   put:
+ *     summary: Posodobi stanje rezervacije določenga uporabnika
+ *     description: Posodobi stanje rezervacije določenga uporabnika
+ *     tags: [Rezervacije]
+ *     parameters:
+ *       - in: path
+ *         name: idUporabnika
+ *         description: enolični identifikator uporabnika
+ *         schema:
+ *           type: string
+ *           required: true
+ *           example: 5ded18eb51386c3799833191
+ *       - in: path
+ *         name: operacija
+ *         description: Operacija nad stanjem
+ *         schema:
+ *           type: string
+ *           required: true
+ *           enum: [potrdi,zavrni,preklici,narocilo]
+ *     responses:
+ *       "200":
+ *         description: Uspešna posodobljeno stanje rezervacije
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "Success"
+ *       "500":
+ *         description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *       "400":
+ *         description: Podati morate id uporabnika in/ali operacijo.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ */
 router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
 
 //MENI
