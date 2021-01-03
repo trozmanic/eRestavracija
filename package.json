@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "prod": "nodemon ./bin/www"
+    "prod": "nodemon ./bin/www",
+    "test": "mocha test --bail --reporter mochawesome --reporter-options autoOpen=true,reportDir=test/porocilo,reportFilename=porocilo,json=false"
   },
   "dependencies": {
     "atob": "^2.1.2",
