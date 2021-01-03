@@ -12,6 +12,10 @@ import {User} from "../../razredi/user";
 
 import { AuthService } from "../../storitve/auth.service"
 
+import {BsModalRef} from "ngx-bootstrap/modal";
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+
 @Component({
   selector: 'app-nadzorna-plosca-zasluzek',
   templateUrl: './nadzorna-plosca-zasluzek.component.html',
@@ -33,6 +37,12 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
 
   lineChartData: ChartDataSets[];
   lineChartLabels: Label[];
+
+  public legendaModal: BsModalRef;
+  public potrditevModal: BsModalRef;
+
+  public prikaziRacun: number = 0;
+  public prikaziZasluzek: number = 0;
 
   public lineChartOptions = {
     responsive: true,
@@ -75,7 +85,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
 
 
 
-  constructor(private zasluzekService: ZasluzekService, private authService: AuthService) { }
+  constructor(private zasluzekService: ZasluzekService, private authService: AuthService, private modalService: BsModalService) { }
 
   public nastaviSpremenljivke(z: ZasluzekRazred) {
     this.sporocilo_delete = null;
@@ -218,6 +228,29 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
 
   zapri_sporocilo(): void {
     this.sporocilo_delete = null;
+  }
+
+  public odpriLegendaModal(legenda) {
+    this.legendaModal = this.modalService.show(legenda);
+  }
+
+  public zapriLegendaModal() {
+    this.legendaModal.hide();
+  }
+
+  public switchRacun() {
+    if (this.prikaziRacun == 0) {
+      this.prikaziRacun = 1;
+    } else {
+      this.prikaziRacun = 0;
+    }
+  }
+  public switchZasluzek() {
+    if (this.prikaziZasluzek == 0) {
+      this.prikaziZasluzek = 1;
+    } else {
+      this.prikaziZasluzek = 0;
+    }
   }
 
 }

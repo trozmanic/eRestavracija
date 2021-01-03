@@ -26,6 +26,29 @@ const uporabnikShema = new mongoose.Schema({
     "id_vloga_info": { type: mongoose.ObjectId, required: true }
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     ZaposleniBranje:
+ *       type: object
+ *       description: Podatki o zaposlenem
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         id_uporabnika:
+ *           type: string
+ *           description: Enolični indetifikator, ki se nanaša na shemo uporabnik
+ *           example: 5fecb3329a977b43c4e98894
+ *         placa:
+ *           type: number
+ *           minimum: 0
+ *           example: 1212
+ *       required:
+ *         - id_uporabnika
+ */
 const zaposleniShema = new mongoose.Schema({
     "id_uporabnika" :{type:mongoose.ObjectId},
     "placa": { type: Number, min: 0 }
@@ -402,7 +425,6 @@ uporabnikShema.methods.generirajJWT=function(){
         exp: parseInt(datumPoteka.getTime()/1000,10)
     },process.env.JWT_GESLO)
 }
-
 
 mongoose.model("Uporabnik", uporabnikShema, "Uporabnik");
 mongoose.model("Gost", gostShema, "Gosti");

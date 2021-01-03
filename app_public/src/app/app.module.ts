@@ -51,6 +51,7 @@ import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { environment } from 'src/environments/environment';
+import { NadzornaPloscaUrnikListComponent } from './skupno/komponente/nadzorna-plosca-urnik-list/nadzorna-plosca-urnik-list.component';
 const config: SocketIoConfig = { url: environment.socket_url, options: {} };
 
 @NgModule({
@@ -89,7 +90,9 @@ const config: SocketIoConfig = { url: environment.socket_url, options: {} };
     NgbdModalContent,
     NgbdModalComponent,
     NadzornaPloscaMeniComponent,
-    NadzornaPloscaRezervacijaComponent
+    NadzornaPloscaRezervacijaComponent,
+    NadzornaPloscaZaposleniComponent,
+    NadzornaPloscaUrnikListComponent
   ],
     imports: [
         BrowserModule,
@@ -152,12 +155,20 @@ const config: SocketIoConfig = { url: environment.socket_url, options: {} };
                       component: NadzornaPloscaNatakarComponent
                     },
                     {
-                      path: 'rezervacija',
+                      path: 'rezervacije',
                       component: NadzornaPloscaRezervacijaComponent
                     },
                     {
                       path: 'meni',
                       component: NadzornaPloscaMeniComponent
+                    },
+                    {
+                      path: 'zaposleni',
+                      component: NadzornaPloscaZaposleniComponent
+                    },
+                    {
+                      path: 'uredi_urnik',
+                      component: NadzornaPloscaUrnikListComponent
                     }
                 ]
             }

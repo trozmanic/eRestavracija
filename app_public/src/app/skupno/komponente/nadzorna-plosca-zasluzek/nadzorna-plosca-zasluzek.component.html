@@ -1,7 +1,7 @@
 <!-- Zacetek Zasluzka -->
 <div class="col-xl-12 title">
   <h1>Zasluzek</h1>
-  <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+  <i class="fas fa-question-circle" (click)="odpriLegendaModal(legenda)"></i>
 </div>
 <div class="col-xl-12 title">
   <h3 class="sredina-text text-white"><i class="fas fa-arrow-left ikone-stil-posamezna" (click)="prev()"></i><span id="naslov_datum">{{mesec | mesecToString}} {{leto}}</span><i class="fas fa-arrow-right ikone-stil-posamezna" (click)="next()"></i></h3>
@@ -30,11 +30,11 @@
 </div>
 <!-- Pregled prilivov -->
 <div class="col-xl-12 title" *ngIf="zasluzek">
-  <h1 class="sredina-text text-white">Prilivi<i role="button" data-toggle="collapse" data-target=".pregled-collapse" aria-expanded="false" aria-controls="skrij-pregled skrij-pregled2" class="fas fa-arrow-down"></i></h1>
+  <h1 class="sredina-text text-white">Prilivi<i role="button" data-toggle="collapse" data-target=".pregled-collapse" aria-expanded="false" aria-controls="skrij-pregled skrij-pregled2" class="fas fa-arrow-down" (click)="switchZasluzek()"></i></h1>
 </div>
 
 <!-- <div class="row collapse pregled-collapse rezervacija-skatla sredina-text" id="skrij-pregled2" *ngIf="zasluzek"> -->
-<div class="row pregled-collapse rezervacija-skatla sredina-text" id="skrij-pregled2" *ngIf="zasluzek">
+<div class="row pregled-collapse rezervacija-skatla sredina-text" id="skrij-pregled2" *ngIf="zasluzek && prikaziZasluzek == 1">
   <div class="d-none d-lg-block col-lg-11 col-xl-11 ikone-stil-posamezna-no-hover gor-margin">
     <div class="row">
       <div class="col-lg-1 col-xl-1 ikone-stil-posamezna-no-hover">
@@ -234,82 +234,82 @@
 
 <!-- Racuni -->
 <div class="col-xl-12 title" *ngIf="zasluzek">
-  <h1 class="sredina-text text-white">Racuni <i role="button" data-toggle="collapse" data-target=".racun-collapse" aria-expanded="false" aria-controls="skrij-racun skrij-racun2" class="fas fa-arrow-down"></i></h1>
+  <h1 class="sredina-text text-white">Racuni <i role="button" data-toggle="collapse" data-target=".racun-collapse" aria-expanded="false" aria-controls="skrij-racun skrij-racun2" class="fas fa-arrow-down" (click)="switchRacun()"></i></h1>
 </div>
 
 
 
-<div class="row racun-collapse" id="skrij-racun2" *ngIf="zasluzek">
+<div class="row racun-collapse" id="skrij-racun2" *ngIf="zasluzek && prikaziRacun == 1">
 
   <div class="col-xl-12 title" *ngIf="sporocilo_delete">
     <h3 class="sredina-text text-white">{{sporocilo_delete}}<i role="button" class="fas fa-check-circle ikone-stil-posamezna" (click)="zapri_sporocilo()"></i></h3>
   </div>
 
-<div class="row racun-collapse">
+  <div class="row racun-collapse">
 
-  <div class="col-12 col-md-6">
-    <div class="col-xl-12">
-      <h3 class="sredina-text text-white">Placani (placano) ({{zasluzek.tabele_placanil.length}})</h3>
-    </div>
+    <div class="col-12 col-md-6">
+      <div class="col-xl-12">
+        <h3 class="sredina-text text-white">Placani (placano) ({{zasluzek.tabele_placanil.length}})</h3>
+      </div>
 
-    <div class="rezervacija-skatla" *ngFor="let racun of zasluzek.tabele_placanil">
-      <div class="col-xl-12" id="{{racun._id}}">
-        <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
+      <div class="rezervacija-skatla" *ngFor="let racun of zasluzek.tabele_placanil">
+        <div class="col-xl-12" id="{{racun._id}}">
+          <h5 class="sredina-text">Placano <i class="fas fa-coins"></i></h5>
 
-        <p class="levo-text kartica-padding">
-          <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
-        </p>
+          <p class="levo-text kartica-padding">
+            <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+          </p>
 
-        <p class="levo-text kartica-padding">
-          Datum in ura: <strong>{{racun.datum_in_ura}}</strong>
-        </p>
+          <p class="levo-text kartica-padding">
+            Datum in ura: <strong>{{racun.datum_in_ura}}</strong>
+          </p>
 
-        <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-        <ul>
-          <li *ngFor="let meni_item of racun.meni_items">{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
-        </ul>
-        <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
-        <div class="ikone-stil">
-          <i class="fas fa-trash ikone-stil-posamezna" (click)="izbrisi_racun(racun._id, 0)"></i>
-          <i role="button" class="fas fa-print ikone-stil-posamezna" (click)="print_racun(racun._id)"></i>
+          <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+          <ul>
+            <li *ngFor="let meni_item of racun.meni_items">{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
+          </ul>
+          <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+          <div class="ikone-stil">
+            <i class="fas fa-trash ikone-stil-posamezna" (click)="izbrisi_racun(racun._id, 0)"></i>
+            <i role="button" class="fas fa-print ikone-stil-posamezna" (click)="print_racun(racun._id)"></i>
+          </div>
         </div>
       </div>
+
     </div>
 
+    <div class="col-12 col-md-6">
+      <div class="col-xl-12">
+        <h3 class="sredina-text text-white">Neplacani (postrezeno) ({{zasluzek.tabele_ne_placanil.length}})</h3>
+      </div>
 
+      <div class="rezervacija-skatla" *ngFor="let racun of zasluzek.tabele_ne_placanil">
+        <div class="col-xl-12" id="{{racun._id}}">
+          <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
 
-  </div>
+          <p class="levo-text kartica-padding">
+            <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
+          </p>
 
-  <div class="col-12 col-md-6">
-    <div class="col-xl-12">
-      <h3 class="sredina-text text-white">Neplacani (postrezeno) ({{zasluzek.tabele_ne_placanil.length}})</h3>
-    </div>
+          <p class="levo-text kartica-padding">
+            Datum in ura: <strong>{{racun.datum_in_ura}}</strong>
+          </p>
 
-    <div class="rezervacija-skatla" *ngFor="let racun of zasluzek.tabele_ne_placanil">
-      <div class="col-xl-12" id="{{racun._id}}">
-        <h5 class="sredina-text">Neplacano <i class="fas fa-hand-holding-usd"></i></h5>
-
-        <p class="levo-text kartica-padding">
-          <span class="desno-float">St. racuna: <strong>{{racun._id}}</strong></span>
-        </p>
-
-        <p class="levo-text kartica-padding">
-          Datum in ura: <strong>{{racun.datum_in_ura}}</strong>
-        </p>
-
-        <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
-        <ul>
-          <li *ngFor="let meni_item of racun.meni_items">{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
-        </ul>
-        <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
-        <div class="ikone-stil">
-          <i class="fas fa-trash ikone-stil-posamezna" (click)="izbrisi_racun(racun._id, 1)"></i>
-          <i role="button" class="fas fa-print ikone-stil-posamezna" (click)="print_racun(racun._id)"></i>
+          <h6 class="sredina-text"><strong>Vrsta blaga oz. storitev:</strong></h6>
+          <ul>
+            <li *ngFor="let meni_item of racun.meni_items">{{meni_item.ime}} <strong>{{meni_item.kolicina}}x{{meni_item.cena}}</strong></li>
+          </ul>
+          <h5 class="desno-text kartica-padding">Skupaj: <strong>{{racun.cena}}€</strong></h5>
+          <div class="ikone-stil">
+            <i class="fas fa-trash ikone-stil-posamezna" (click)="izbrisi_racun(racun._id, 1)"></i>
+            <i role="button" class="fas fa-print ikone-stil-posamezna" (click)="print_racun(racun._id)"></i>
+          </div>
         </div>
       </div>
+
+
+
     </div>
-
-
 
   </div>
 
@@ -317,41 +317,39 @@
 
 
 <!-- END Zasluzek -->
-<div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h1 class="legendheader">Legenda</h1>
-        <div class="iconsflex">
-          <div class="iconmodal">
-            <i class="fas fa-trash"></i>
-            <p>Sturniraj</p>
-          </div>
-          <div class="iconmodal">
-            <i class="fas fa-print"></i>
-            <p>Natisni</p>
-          </div>
-          <div class="iconmodal">
-            <i class="fas fa-arrow-left"></i>
-            <p>naslednji mesec</p>
-          </div>
-          <div class="iconmodal">
-            <i class="fas fa-arrow-right"></i>
-            <p>Prejsnji mesec</p>
-          </div>
-          <div class="iconmodal">
-            <i class="fas fa-arrow-down"></i>
-            <p>Prikazi/skrij vsebino</p>
-          </div>
-        </div>
-        <div class="butlegenda">
-          <button type="submit" class="but" data-dismiss="modal">Zapri</button>
-        </div>
+
+
+<ng-template #legenda>
+  <div class="modal-body">
+    <h1 class="legendheader">Legenda</h1>
+    <div class="iconsflex">
+      <div class="iconmodal">
+        <i class="fas fa-trash"></i>
+        <p>Sturniraj</p>
+      </div>
+      <div class="iconmodal">
+        <i class="fas fa-print"></i>
+        <p>Natisni</p>
+      </div>
+      <div class="iconmodal">
+        <i class="fas fa-arrow-left"></i>
+        <p>naslednji mesec</p>
+      </div>
+      <div class="iconmodal">
+        <i class="fas fa-arrow-right"></i>
+        <p>Prejsnji mesec</p>
+      </div>
+      <div class="iconmodal">
+        <i class="fas fa-arrow-down"></i>
+        <p>Prikazi/skrij vsebino</p>
       </div>
     </div>
+    <div class="butlegenda">
+      <button type="submit" class="but" (click)="zapriLegendaModal()">Zapri</button>
+    </div>
   </div>
-</div>
+</ng-template>
+
 
 
 <!-- Tukaj KONEC vsebino -->

@@ -23,7 +23,7 @@ export class NadzornaPloscaNatakarComponent implements OnInit {
     this.narociloService.pridobiNarocilaNatakar()
       .then(res => {
         this.narocila = res;
-        console.log(res);
+        console.log("fsfd"+res);
       })
       .catch(err => {
         Swal.fire('Napaka', 'Napaka pri pridobivanju narocil za uporabnisko vlogo natakar', 'error');

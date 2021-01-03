@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 
 import { UrnikRazred } from "../razredi/urnik-razred";
 import {IdRazred} from "../razredi/id-razred";
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,28 +13,34 @@ export class UrnikService {
 
   private api_url = environment.api_url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService:AuthService) { }
+
+  private httpOptions={ headers: this.initHeaders() };
+
+  private initHeaders(): HttpHeaders {
+    return  new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
+  }
 
   public pridobiUrnik(mesec, leto, uporabnik_id) {
-    return this.http.get(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id)
+    return this.http.get(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id,this.httpOptions)
       .toPromise().then(odgovor => odgovor as UrnikRazred);
   }
   public posodobiUrnik(mesec, leto, uporabnik_id, urnik) {
-    return this.http.put(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id, urnik, { observe: 'response' })
+    return this.http.put(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id, urnik, this.httpOptions)
       .toPromise().catch(napaka => this.obdelajNapako(napaka));
       //.toPromise().then(odgovor => odgovor as UrnikRazred);
 
   }
   public createUrnik(mesec, leto, uporabnik_id, urnik) {
-    return this.http.post(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id, urnik, { observe: 'response' })
+    return this.http.post(this.api_url + '/urnik?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id, urnik,this.httpOptions )
       .toPromise().catch(napaka => this.obdelajNapako(napaka));
   }
   public deleteUrnik(id) {
-    return this.http.delete(this.api_url + '/urnik?id=' + id)
+    return this.http.delete(this.api_url + '/urnik?id=' + id,this.httpOptions)
       .toPromise().then(odgovor => odgovor as IdRazred);
   }
   public urnik_uporabnik(id) {
-    return this.http.get(this.api_url + '/urnik/' + id)
+    return this.http.get(this.api_url + '/urnik/' + id,this.httpOptions)
       .toPromise().then(odgovor => odgovor as UrnikRazred[]);
   }
 
