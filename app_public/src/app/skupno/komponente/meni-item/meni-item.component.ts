@@ -4,6 +4,7 @@ import {MeniItem, MeniItemGost} from '../../razredi/meniItem';
 import {OcenaService} from '../../storitve/ocena.service';
 import {AuthService} from '../../storitve/auth.service';
 import Swal from 'sweetalert2';
+import { PovezavaService } from '../../storitve/povezava.service';
 
 @Component({
   selector: 'app-meni-item',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./meni-item.component.css']
 })
 export class MeniItemComponent implements OnInit {
-  constructor(meniService: MeniService, private ocenaService: OcenaService, private authService: AuthService) { }
+  constructor(meniService: MeniService, private ocenaService: OcenaService, private authService: AuthService, private povezavaStoritev: PovezavaService) { }
   @Input() meniItem: MeniItemGost;
   message: MeniItemGost;
 
@@ -60,4 +61,7 @@ export class MeniItemComponent implements OnInit {
     this.ocenaService.changeMessage(this.meniItem);
   }
 
+  public jePovezava(){
+    return this.povezavaStoritev.jePovezava;
+  }
 }

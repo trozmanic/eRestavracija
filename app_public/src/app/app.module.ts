@@ -47,6 +47,7 @@ import { RezervacijaPodatkiComponent } from './skupno/komponente/rezervacija-pod
 import { RezervacijaComponent } from './skupno/komponente/rezervacija/rezervacija.component';
 import { ZvezdaComponent } from './skupno/komponente/zvezda/zvezda.component';
 import { StranNeObstajaComponent } from './skupno/komponente/stran-ne-obstaja/stran-ne-obstaja.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 const config: SocketIoConfig = { url: environment.socket_url, options: {} };
@@ -102,7 +103,8 @@ const config: SocketIoConfig = { url: environment.socket_url, options: {} };
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     NgbModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [MainComponent],

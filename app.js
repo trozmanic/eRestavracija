@@ -46,6 +46,15 @@ require('./app_server/views/partials/hbsp.js');
 var session = require('express-session')
 var app = express();
 
+// Preusmeritev na HTTPS na Heroku
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    else
+      next();
+  });
+}
 
 app.use(cors());
 // view engine setup
