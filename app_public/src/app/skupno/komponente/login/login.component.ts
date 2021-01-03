@@ -156,7 +156,7 @@ export class LoginComponent implements OnInit {
           this.clear();
           Swal.fire('Uspesna registacija', 'Vas racun je uspesno kreiran', 'success');
         })
-        .catch(msg => alert(msg))
+        .catch(msg => Swal.fire('Napaka', 'Napaka pri registraciji', 'error'));
     }
   }
 
@@ -169,7 +169,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/nadzorna_plosca']);
           }
         })
-        .catch(msg=> alert(msg))
+        .catch(msg => Swal.fire('Napaka', 'Napaka pri prijavi', 'error'));
     }
 
   }
