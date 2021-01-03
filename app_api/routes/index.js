@@ -493,6 +493,8 @@ router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
  *      summary: Urnik za en mesec
  *      description: Pridobi urnik za ta mesec leto uporabnik
  *      tags: [Urnik]
+ *      security:
+ *        - jwt: []
  *      parameters:
  *        - in: path
  *          name: uporabnik_id
@@ -557,6 +559,8 @@ router.get("/urnik",
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Urnik'
+ *      security:
+ *        - jwt: []
  *      parameters:
  *        - in: path
  *          name: uporabnik_id
@@ -615,6 +619,8 @@ router.put("/urnik",
  *    delete:
  *      summary: Zbrisi Urnik za en mesec
  *      description: Zbrisi urnik za ta mesec leto uporabnik
+ *      security:
+ *        - jwt: []
  *      tags: [Urnik]
  *      parameters:
  *        - in: path
@@ -647,6 +653,8 @@ router.delete("/urnik",
  *      summary: Ustvaritev Urnika za en mesec
  *      description: Ustvaritev urnika za ta mesec leto uporabnik
  *      tags: [Urnik]
+ *      security:
+ *        - jwt: []
  *      requestBody:
  *        content:
  *          application/json:
@@ -711,6 +719,8 @@ router.post("/urnik",
  *      summary: Urniki od uporabnika
  *      description: Pridobi urnike za uporabnika
  *      tags: [Urnik]
+ *      security:
+ *        - jwt: []
  *      parameters:
  *        - in: path
  *          name: id
@@ -1120,6 +1130,8 @@ router.put("/narocila/:idNarocila",
  *      summary: Zasluzek za en mesec
  *      description: Pridobi zasluzek za ta mesec leto
  *      tags: [Zasluzek]
+ *      security:
+ *        - jwt: []
  *      parameters:
  *        - in: path
  *          name: mesec

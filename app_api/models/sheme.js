@@ -577,7 +577,7 @@ mongoose.model("Urnik", urnikShema, "Urniki");
  *           items:
  *              $ref: '#/components/schemas/NarociloBranje'
  *           description: Tabela ne placanih racunov
- *         zac_dan:
+ *         sporocilo:
  *           type: string
  *           description: sporocilo napake
  *           example: napaka
