@@ -79,6 +79,73 @@ const meniItemShema = new mongoose.Schema({
  * @swagger
  * components:
  *   schemas:
+ *     NarociloZaposleni:
+ *       type: object
+ *       description: Podatki o narocilu namenjeno zaposlenim
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         natakar:
+ *           type: object
+ *           properties:
+ *              _id:
+ *                type: string
+ *                description: Enolični indetifikator
+ *                example: 5fecb3329a977b43c4e98894
+ *              id_uporabnika:
+ *                type: string
+ *                description: Enolični indetifikator natakarja
+ *                example: 5fecb3329a977b43c4e98894
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         cena:
+ *           type: number
+ *           example: 10.12
+ *         stanje:
+ *           type: string
+ *           enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *           example: rezervacija
+ *         miza:
+ *           type: integer
+ *           example: 2
+ *         meni_items:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 description: Enolični indetifikator
+ *                 example: 5fecb3329a977b43c4e98894
+ *               meni_item:
+ *                 type: string
+ *                 description: Ime jedi
+ *                 example: Spageti po mediternasko
+ *               ime:
+ *                  type: string
+ *                  description: Ime jedi
+ *                  example: Spageti po mediternasko
+ *               cena:
+ *                  type: integer
+ *                  example: 65
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *       required:
+ *         - _id
+ *         - natakar
+ *         - datum_in_ura
+ *         - stanje
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
  *     NarociloBranje:
  *       type: object
  *       description: Podatki o rezervaciji
@@ -133,7 +200,55 @@ const meniItemShema = new mongoose.Schema({
  *         - natakar
  *         - datum_in_ura
  *         - stanje
+ *
+ *     NarociloKreiranje:
+ *       type: object
+ *       description: Podatki za ustvarjanje narocila
+ *       properties:
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         jedi:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               meniItemID:
+ *                 type: string
+ *                 description: Enolični indentifikator jedi
+ *                 example: 5fecb3329a977b43c4e98894
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *         id:
+ *           type: string
+ *           description: Enolični indentifikator uporabnika
+ *           example: 5fecb3329a977b43c4e98894
+ *         cena:
+ *           type: integer
+ *           description: skupna cena
+ *           example: 45
+ *         miza:
+ *           type: string
+ *           description: Miza za katero je namenjeno narocilo
+ *           example: 4
+ *         stanje:
+ *           type: string
+ *           description: Stanje v katerem je narocilo
+ *           enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *           example: sprejeto
+ *
+ *       required:
+ *         - datum_in_ura
+ *         - jedi
+ *         - id
+ *         - cena
+ *         - stanje
  */
+
+
+
 const narociloShema = new mongoose.Schema({
     natakar: { type: zaposleniShema },
     datum_in_ura: { type: Date, required: true, default: Date.now },
