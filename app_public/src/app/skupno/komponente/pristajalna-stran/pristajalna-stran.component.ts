@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 import {AuthService} from '../../storitve/auth.service';
 import {User} from '../../razredi/user';
+import { PovezavaService } from '../../storitve/povezava.service';
 
 @Component({
   selector: 'app-pristajalna-stran',
@@ -13,7 +14,7 @@ export class PristajalnaStranComponent implements OnInit {
 
   public izbrano_ime: String;
 
-  constructor(private router: Router, private authSerivce: AuthService) { }
+  constructor(private router: Router, private authSerivce: AuthService,private povezavaStoritev: PovezavaService) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((data) => {
@@ -36,6 +37,10 @@ export class PristajalnaStranComponent implements OnInit {
     else {
       return user.vloga;
     }
+  }
+
+  public jePovezava(){
+    return this.povezavaStoritev.jePovezava;
   }
 
 }

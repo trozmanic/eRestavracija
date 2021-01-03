@@ -107,6 +107,9 @@ export class NadzornaPloscaRezervacijaComponent implements OnInit {
     }
     this.narociloPotrditev.natakar={ id_uporabnika: this.authService.vrniTrenutnegaUporabnika()._id };
     this.narociloPotrditev.meni_items=<any> meni_items_reduced;
+
+    console.log(this.narociloPotrditev);
+
     this.rezervacijaService.posodobiRezervacije(this.rezervacijaPotrditev._id,'narocilo').then((odgovor)=>{
       return this.narociloService.posodobiNarocilo(this.narociloPotrditev._id,this.narociloPotrditev);
     }).then((odgovor)=>{

@@ -1,0 +1,128 @@
+{
+  "configVersion": 1,
+  "timestamp": 1609707710786,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.5d2bca6f51c9a443bcd9.js",
+        "/manifest.webmanifest",
+        "/polyfills.2579940b1a9c6a3d41e4.js",
+        "/runtime.359d5ee4682f20e936e9.js",
+        "/styles.11517450759e35f86d13.css"
+      ],
+      "patterns": [
+        "https:\\/\\/fonts\\.gstatic\\.com\\/.*",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*"
+      ]
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/slike/andrew-seaman-sQopSb2K0CU-unsplash.jpg",
+        "/assets/slike/jedi/1.png",
+        "/assets/slike/jedi/2.png",
+        "/assets/slike/jedi/3.png",
+        "/assets/slike/jedi/4.png",
+        "/assets/slike/jedi/5.png",
+        "/assets/slike/jedi/6.png",
+        "/assets/slike/jedi/60643722-1609694833357.jpg",
+        "/assets/slike/jedi/7.png",
+        "/assets/slike/jedi/8.png",
+        "/assets/slike/pexels-devon-rockola-954677 (1).jpg",
+        "/assets/slike/pexels-emre-kuzu-2237189.jpg",
+        "/assets/slike/pexels-malidate-van-784632.jpg",
+        "/pexels-emre-kuzu-2237189.7d8fa16412bcb457a0ee.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "edugeocache-api",
+      "patterns": [
+        "http:\\/\\/localhost:3000\\/.*",
+        "https:\\/\\/edugeocache-sp-2020-2021\\.herokuapp\\.com\\/api\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/slike/andrew-seaman-sQopSb2K0CU-unsplash.jpg": "e28af6c8807c5ca3a879fcef80454907254321ef",
+    "/assets/slike/jedi/1.png": "1ea35209443f8b007ed5477ed3cef18edec2b7ec",
+    "/assets/slike/jedi/2.png": "832ee56b7d380237d16f5c9120e10f46d874de25",
+    "/assets/slike/jedi/3.png": "f14ee48679b9f96eede04c1350632ff79240895b",
+    "/assets/slike/jedi/4.png": "130d89a7f4ab3c1656d0ee732b443b72f3d8c808",
+    "/assets/slike/jedi/5.png": "f931e2dc3753822cccd8838464316d621f58c283",
+    "/assets/slike/jedi/6.png": "57e7a4c0c86359d3cf5b71f9c048c4b493683a71",
+    "/assets/slike/jedi/60643722-1609694833357.jpg": "3de3be5fea4cc42462ae874ddecd5010c9567050",
+    "/assets/slike/jedi/7.png": "bc8d4815e7f1eb11789ae9c925f6579d2744ddb6",
+    "/assets/slike/jedi/8.png": "907ca489b52aec151569b47f5f71662eaeca81f3",
+    "/assets/slike/pexels-devon-rockola-954677 (1).jpg": "71c7da7e908df0c9fe6b4f9b0634a8a999336cc0",
+    "/assets/slike/pexels-emre-kuzu-2237189.jpg": "6e67e73bacdbc94b10aba9e770fa84b9ef7fb447",
+    "/assets/slike/pexels-malidate-van-784632.jpg": "f07bd6954803303a484f40e02be1daae408e3d7e",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "98ce33f08feb013b1268ee32771fdf19bc83ac25",
+    "/main.5d2bca6f51c9a443bcd9.js": "cd98941f04b88f1de2819b4c5b97298cf0e550fe",
+    "/manifest.webmanifest": "fb3943104c571d92eafa69752e3e6a22d0998431",
+    "/pexels-emre-kuzu-2237189.7d8fa16412bcb457a0ee.jpg": "6e67e73bacdbc94b10aba9e770fa84b9ef7fb447",
+    "/polyfills.2579940b1a9c6a3d41e4.js": "c3999daf81bd0c0f6ec800c29cf8030ca686c9b5",
+    "/runtime.359d5ee4682f20e936e9.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/styles.11517450759e35f86d13.css": "0fa94f280bc8b7ddbcf0684eaec0700a17bfd55e"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

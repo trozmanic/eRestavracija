@@ -39,13 +39,22 @@ const swaggerDocument = swaggerJsdoc(swaggerOptions);
 
 require('./app_api/models/db')
 require('./app_api/konfiguracija/passport');
-var indexRouter = require('./app_server/routes/index');
+//var indexRouter = require('./app_server/routes/index');
 var indexApi = require('./app_api/routes/index');
 require('./app_server/views/helpers/hbsh.js');
 require('./app_server/views/partials/hbsp.js');
 var session = require('express-session')
 var app = express();
 
+// Preusmeritev na HTTPS na Heroku
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    else
+      next();
+  });
+}
 
 app.use(cors());
 // view engine setup
@@ -57,7 +66,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_public', 'build')));
 
 app.use(passport.initialize());
 
@@ -79,8 +89,11 @@ app.use(session({
   saveUninitialized: true
 }))
 
-app.use('/', indexRouter);
+//app.use('/', indexRouter);
 app.use('/api', indexApi);
+app.get('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+});
 
 indexApi.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 indexApi.get("/swagger.json", (req, res) => {
