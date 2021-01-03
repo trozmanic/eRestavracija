@@ -4,14 +4,32 @@ const Zaposleni = mongoose.model("Zaposlen");
 
 const pridobiZaposlene = async (req,res) => {
     try {
-        const zaposleni = await Zaposleni.find({}).exec();
-        var odgovor = [];
+        // const zaposleni = await Zaposleni.find({}).exec();
+
+        /*
         var id = 0;
         for(var i = 0; i < zaposleni.length; i++){
             id = zaposleni[i].id_uporabnika;
-            odgovor.push(await Uporabnik.findById(id).exec());
+            odgovor.push(await Uporabnik.findById(id).find().exec());
         }
-        
+        */
+
+        var odgovor = [];
+        let iskanje = {};
+        const kljuc = Object.keys(req.query)[0];
+        const vrednost = Object.values(req.query)[0];
+
+        const regex = new RegExp('a', 'i');
+        iskanje['vloga'] = {$regex: regex};
+
+        if (kljuc != 'odmik') {
+            const regex = new RegExp(vrednost, 'i');
+            iskanje[kljuc] = {$regex: regex};
+        }
+
+        let stevilo = await Uporabnik.countDocuments(iskanje);
+        odgovor =  await Uporabnik.find(iskanje).skip(parseInt(req.query.odmik)).limit(10).exec();
+        res.setHeader('Stevilo', stevilo);
         return res.status(200).json(odgovor);
     }catch (err) {
         console.log(err);

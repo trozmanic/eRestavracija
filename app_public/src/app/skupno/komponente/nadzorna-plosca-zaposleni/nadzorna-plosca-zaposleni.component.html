@@ -93,15 +93,15 @@
           </div>
         </form>
       </div>
-      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
-        {{ obrazecNapaka }}
+      <div *ngIf="vnesiPodatke" class="alert alert-danger" role="alert">
+        {{ vnesiPodatke }}
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-dark mr-auto" id="dodajZaposlenegaPotrdi" form="obrazec1"
                 [disabled]="!dodajForm.valid">Dodaj
         </button>
         <button type="button" class="btn btn-dark" id="dodajZaposlenegaPreklici"
-                (click)="dodajForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+                (click)="dodajForm.reset(); modal.close('Prekliči'); vnesiPodatke=''">Prekliči
         </button>
       </div>
     </ng-template>
@@ -123,7 +123,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="ImeForm2">Ime in priimek</label>
-                <input [(ngModel)]="novZaposleni.ime" type="text" class="form-control" id="ImeForm2"
+                <input [(ngModel)]="novZaposleni.ime" name="ime" type="text" class="form-control" id="ImeForm2"
                        placeholder="Npr.: Chuck Norris"
                        pattern="^[a-žA-Ž]{3,}[a-žA-Ž]*.?[a-žA-Ž]*$" #ime="ngModel" autofocus>
                 <div class="napaka" *ngIf="ime.errors?.pattern">
@@ -134,7 +134,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="TelefonForm2">Telefonska številka</label>
-                <input [(ngModel)]="novZaposleni.telefonska_stevilka" type="text" class="form-control" id="TelefonForm2"
+                <input [(ngModel)]="novZaposleni.telefonska_stevilka" name="tel" type="text" class="form-control" id="TelefonForm2"
                        placeholder="Npr.: 040 123 456"
                        pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$" #telefon="ngModel">
                 <div class="napaka" *ngIf="telefon.errors?.pattern">
@@ -147,7 +147,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="PostaForm2">E-pošta</label>
-                <input [(ngModel)]="novZaposleni.email_naslov" type="text" class="form-control" id="PostaForm2"
+                <input [(ngModel)]="novZaposleni.email_naslov" name="posta" type="text" class="form-control" id="PostaForm2"
                        placeholder="Npr.: chuck.norris@gmail.com" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                        #mail="ngModel">
                 <div class="napaka" *ngIf="mail.errors?.pattern">
@@ -160,7 +160,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="GesloForm2">Geslo</label>
-                <input [(ngModel)]="novZaposleni.geslo" type="text" class="form-control" id="GesloForm2"
+                <input [(ngModel)]="novZaposleni.geslo" name="geslo" type="text" class="form-control" id="GesloForm2"
                        placeholder="Npr.: geslo1234" #geslo="ngModel"
                        pattern="^.*$">
                 <div class="napaka" *ngIf="geslo.errors?.pattern">
@@ -173,8 +173,8 @@
             <div class="col">
               <div class="form-group is-invalid">
                 <label for="VlogaForm2">Vloga</label>
-                <select [(ngModel)]="novZaposleni.vloga" class="custom-select" id="VlogaForm2" #vloga="ngModel">
-                  <option option value="" disabled selected>Izberi vlogo:</option>
+                <select [(ngModel)]="novZaposleni.vloga" name="vloga" class="custom-select" id="VlogaForm2" #vloga="ngModel">
+                  <option option value="Izberi vlogo:" disabled selected>Izberi vlogo:</option>
                   <option value="admin">Admin</option>
                   <option value="kuhar">Kuhar</option>
                   <option value="natakar">Natakar</option>
@@ -185,7 +185,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="PlacaForm2">Placa</label>
-                <input [(ngModel)]="novaPlaca.placa" type="text" class="form-control" id="PlacaForm2" placeholder="Npr.: 1000"
+                <input [(ngModel)]="novaPlaca.placa" name="placa" type="text" class="form-control" id="PlacaForm2" placeholder="Npr.: 1000"
                        #p="ngModel">
                 <div class="napaka" *ngIf="p.dirty && p.errors?.pattern">
                   Plača lahko vsebuje samo števke brez simbola valute!
@@ -197,15 +197,12 @@
         <a href="" class="btn btn-dark btn-block" role="button" id="uredi_urnik" target="_blank">Izberi urnik <i
           class="far fa-calendar-alt"></i></a>
       </div>
-      <div *ngIf="obrazecNapaka" class="alert alert-danger" role="alert">
-        {{ obrazecNapaka }}
-      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-dark mr-auto" form="obrazec2" id="urediZaposlenegaPotrdi"
+        <button type="submit" class="btn btn-dark mr-auto" form="obrazec2" id="urediZaposlenegaPotrdi"
                 [disabled]="!urediForm.valid">Potrdi
         </button>
         <button type="button" class="btn btn-dark" id="urediZaposlenegaPreklici"
-                (click)="urediForm.reset(); modal.close('Prekliči'); obrazecNapaka=''">Prekliči
+                (click)="urediForm.reset(); modal.close('Prekliči')">Prekliči
         </button>
       </div>
     </ng-template>
@@ -221,7 +218,7 @@
       <div class="modal-header bel">
         <h5 class="modal-title" id="exampleModalLabel">Opozorilo!</h5>
       </div>
-      <div class="modal-body">
+      <div class="modal-body bel">
         <p>Ali res želite izbrisati izbrane zaposlene?</p>
       </div>
       <div class="modal-footer">
@@ -239,16 +236,16 @@
     <div class="col-12 col-lg-6">
       <div class="input-group mb-2">
         <div class="input-group-prepend">
-          <select class="custom-select input-group-text izberi" id="iskanjePo">
-            <option selected>Ime</option>
-            <option value="1">E-pošta</option>
-            <option value="2">GSM</option>
-            <option value="3">Vloga</option>
+          <select [(ngModel)]="izbira" class="custom-select input-group-text izberi" id="iskanjePo">
+            <option value="ime" selected>Ime</option>
+            <option value="email_naslov">E-pošta</option>
+            <option value="telefonska_stevilka">GSM</option>
+            <option value="vloga">Vloga</option>
           </select>
         </div>
-        <input class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZaposlenih">
+        <input [(ngModel)]="iskanje" (keyup.enter)="pridobiZaposlene()" name="iskanje" class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZaposlenih">
         <div class="input-group-append">
-          <button class="btn btn-dark" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+          <button class="btn btn-dark" (click)="pridobiZaposlene()" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
         </div>
       </div>
     </div>
@@ -272,7 +269,7 @@
           <th scope="row">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="customCheck{{i | stevec}}"
-                     idzaposlenega="{{zaposlen._id}}" (change)="obkljukan($event, i)">
+                     [value]="zaposlen._id" (change)="obkljukan($event, i)">
               <label class="custom-control-label" for="customCheck{{i | stevec}}"></label>
             </div>
           </th>

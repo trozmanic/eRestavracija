@@ -28,6 +28,30 @@ const registracija =async (req, res) => {
     }
 }
 
+const kreiraj =async (req, res) => {
+    try {
+        let uporabnik = req.body;
+        console.log(uporabnik);
+        if (!uporabnik.vloga) {
+            uporabnik.vloga = "gost";
+        }
+        const vlogaShema = uporabnik.vloga === 'gost' ? Gost : Zaposleni;
+
+        const uporabnik_model = new Uporabnik(uporabnik);
+        const vlogaModel = new vlogaShema({ "id_uporabnika": uporabnik_model._id });
+        uporabnik_model.id_vloga_info = vlogaModel._id;
+        uporabnik_model.nastaviGeslo(uporabnik.geslo);
+        //Every register user is considered to be gost so we add gostModel to DB if there is no
+        //vloga specified
+        await uporabnik_model.save();
+        await vlogaModel.save();
+        res.status(200).json(uporabnik_model);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ "error_message": err });
+    }
+}
+
 const prijava = (req, res) => {
     console.log(req.body)
     if (!req.body.email_naslov || !req.body.geslo) {
@@ -62,5 +86,7 @@ const imaVlogo = (allowedRoles) => {
 module.exports = {
     registracija,
     prijava,
-    imaVlogo
+    imaVlogo,
+    kreiraj,
+    prijava
 };

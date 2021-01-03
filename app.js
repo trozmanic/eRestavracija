@@ -6,6 +6,37 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var swaggerJsdoc = require('swagger-jsdoc');
+var swaggerUi = require('swagger-ui-express');
+
+var swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "AlDente",
+      version: "1.0.0",
+      description: "AlDente REST API"
+    },
+    license: {
+      name: "GNU LGPLv3",
+      url: "https://choosealicense.com/licenses/lgpl-3.0"
+    },
+    contact: {
+      name: "LP-22",
+      email: "nek@mail.net"
+    },
+    servers: [
+      { url: "http://localhost:3000/api" },
+      { url: "https://aldente-sp-20-21.herokuapp.com/api" }
+    ]
+  },
+  apis: [
+    "./app_api/models/sheme.js",
+    "./app_api/routes/index.js"
+  ]
+};
+const swaggerDocument = swaggerJsdoc(swaggerOptions);
+
 require('./app_api/models/db')
 require('./app_api/konfiguracija/passport');
 var indexRouter = require('./app_server/routes/index');
@@ -50,6 +81,11 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/api', indexApi);
+
+indexApi.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+indexApi.get("/swagger.json", (req, res) => {
+  res.status(200).json(swaggerDocument);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

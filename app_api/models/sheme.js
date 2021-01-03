@@ -52,6 +52,65 @@ const meniItemShema = new mongoose.Schema({
     })]
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     NarociloBranje:
+ *       type: object
+ *       description: Podatki o rezervaciji
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         natakar:
+ *           type: object
+ *           properties:
+ *              _id:
+ *                type: string
+ *                description: Enolični indetifikator
+ *                example: 5fecb3329a977b43c4e98894
+ *              id_uporabnika:
+ *                type: string
+ *                description: Enolični indetifikator natakarja
+ *                example: 5fecb3329a977b43c4e98894
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         cena:
+ *           type: number
+ *           example: 10.12
+ *         stanje:
+ *           type: string
+ *           enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *           example: rezervacija
+ *         miza:
+ *           type: integer
+ *           example: 2
+ *         meni_items:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 description: Enolični indetifikator
+ *                 example: 5fecb3329a977b43c4e98894
+ *               meni_item:
+ *                 type: string
+ *                 description: Enolični indetifikator jedi
+ *                 example: 5fecb3329a977b43c4e98894
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *       required:
+ *         - _id
+ *         - natakar
+ *         - datum_in_ura
+ *         - stanje
+ */
 const narociloShema = new mongoose.Schema({
     natakar: { type: zaposleniShema },
     datum_in_ura: { type: Date, required: true, default: Date.now },
@@ -64,6 +123,81 @@ const narociloShema = new mongoose.Schema({
     miza: { type: Number}
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     RezervacijaBranje:
+ *       type: object
+ *       description: Podatki o rezervaciji
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         id_stranke:
+ *           type: string
+ *           description: Enolični indetifikator stranke
+ *           example: 5fea48e93315186ae03c8651
+ *         ime_stranke:
+ *           type: string
+ *           example: gost
+ *         datum:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         stanje:
+ *           type: string
+ *           enum: [potrjena,zavrnjena,preklicana,narocilo]
+ *           example: potrjena
+ *         st_oseb:
+ *           type: integer
+ *           example: 2
+ *         narocilo:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/NarociloBranje'
+ *       required:
+ *         - _id
+ *         - id_stranke
+ *         - ime_stranke
+ *         - datum
+ *         - stanje
+ *         - st_oseb
+ *         - narocilo
+ *     RezervacijaPisanje:
+ *       type: object
+ *       description: Podatki za ustvarjanje rezervacije
+ *       properties:
+ *         datum_in_ura:
+ *           type: string
+ *           format: date-time
+ *           example: 2021-01-04T19:07:00.000Z
+ *         stOseb:
+ *           type: integer
+ *           example: 2
+ *         jedi:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               meni_item:
+ *                 type: string
+ *                 description: Enolični indentifikator jedi
+ *                 example: 5fecb3329a977b43c4e98894
+ *               kolicina:
+ *                 type: integer
+ *                 example: 2
+ *         uporabnik_id:
+ *           type: string
+ *           description: Enolični indentifikator uporabnika
+ *           example: 5fecb3329a977b43c4e98894
+ *       required:
+ *         - datum_in_ura
+ *         - stOseb
+ *         - jedi
+ *         - uporabnik_id
+ */  
 const rezervacijaShema = new mongoose.Schema({
     datum: { type: Date, default: Date.now },
     narocilo: { type: mongoose.ObjectId },
