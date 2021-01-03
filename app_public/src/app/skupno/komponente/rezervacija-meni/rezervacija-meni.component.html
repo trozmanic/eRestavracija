@@ -8,7 +8,7 @@
     <ng-template ngFor let-meni_item [ngForOf]="meni_items" let-odd="odd">
         <div class="col-md-3 col-10">
             <div class="menuitem">
-                <img src="{{meni_item.slika}}">
+                <img src="{{meni_item.slika | transformPictureLink}}">
                 <div class="menudesc">
                     <div class="menudescname">
                         <h1>{{meni_item.ime}}</h1>

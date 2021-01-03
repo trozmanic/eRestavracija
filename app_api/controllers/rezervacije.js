@@ -147,8 +147,6 @@ const posodobiRezervacijo=function(req,res){
                 })
             }
         })
-
-        res.status(200).json();
     }else{
         res.status(400).json("Nedovoljena operacija");
     }

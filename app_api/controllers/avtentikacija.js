@@ -68,8 +68,25 @@ const prijava = (req, res) => {
     })(req, res);
 };
 
+const imaVlogo = (allowedRoles) => {
+    return (req, res, next) => {
+        const user = req.payload;
+        if (!user) {
+            res.status(401).send({"message": "Neavtoriziran uporabnik"});
+        }
+        else if (!allowedRoles.includes(user.vloga)){
+            res.status(401).send({"message": "Za dostop do vira nimate dovoljenja"});
+        }
+        else {
+            next();
+        }
+    }
+}
+
 module.exports = {
     registracija,
+    prijava,
+    imaVlogo,
     kreiraj,
     prijava
 };

@@ -1,0 +1,26 @@
+<!-- Zacetek Zasluzka -->
+
+<div class="col-xl-12 title">
+    <h3 class="sredina-text text-white">Seznam urnikov uporabnika</h3>
+</div>
+
+<div class="col-xl-12 title" *ngIf="sporocilo">
+    <h3 class="sredina-text text-white">{{sporocilo}}</h3>
+</div>
+
+<div class="col-xl-12">
+
+    <div class="rezervacija-skatla" *ngFor="let urnik of urniki">
+        <p class="levo-text kartica-padding">
+            Leto: <strong>{{urnik.leto}}</strong>
+            <span class="desno-float">Mesec : <strong>{{urnik.mesec | mesecToString}}</strong></span>
+        </p>
+
+        <div class="ikone-stil">
+            <a><i class="fas fa-trash ikone-stil-posamezna"></i></a>
+            <a><i class="fas fa-edit ikone-stil-posamezna"></i></a>
+        </div>
+    </div>
+
+
+</div>
