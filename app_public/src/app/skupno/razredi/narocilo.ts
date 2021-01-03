@@ -55,3 +55,9 @@ export class NarociloCreatable{
   miza: number;
   stanje: string;
 }
+
+export class NarociloSocket {
+  from: string;
+  to: string;
+  narocilo: NarociloZaposleni;
+}

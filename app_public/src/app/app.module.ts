@@ -48,7 +48,10 @@ import { NarociloComponent } from './skupno/komponente/narocilo/narocilo.compone
 import { NadzornaPloscaMenuComponent } from './skupno/komponente/nadzorna-plosca-menu/nadzorna-plosca-menu.component';
 import { NadzornaPloscaNatakarComponent } from './skupno/komponente/nadzorna-plosca-natakar/nadzorna-plosca-natakar.component';
 import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/modal.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+import { environment } from 'src/environments/environment';
+const config: SocketIoConfig = { url: environment.socket_url, options: {} };
 
 @NgModule({
   declarations: [
@@ -165,7 +168,8 @@ import { NgbdModalContent, NgbdModalComponent } from './skupno/komponente/modal/
     FormsModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    NgbModule
+    NgbModule,
+      SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [MainComponent],

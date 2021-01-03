@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {NarocilaKuhar, NarociloZaposleni} from '../../razredi/narocilo';
+import {NarocilaKuhar, NarociloSocket, NarociloZaposleni} from '../../razredi/narocilo';
 import {NarociloService} from '../../storitve/narocilo.service';
+import {SocketService} from '../../storitve/socket.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nadzorna-plosca-kuhar',
@@ -10,7 +12,7 @@ import {NarociloService} from '../../storitve/narocilo.service';
 })
 export class NadzornaPloscaKuharComponent implements OnInit {
 
-  constructor(private narociloService: NarociloService) { }
+  constructor(private narociloService: NarociloService, private socketService: SocketService) { }
   public narocila: NarocilaKuhar;
 
   ngOnInit(): void {
@@ -19,6 +21,18 @@ export class NadzornaPloscaKuharComponent implements OnInit {
         console.log(narocila);
         this.narocila = narocila;
       });
+    this.socketService.socket.on('narociloKuhar', (message) => {
+      const narociloSocket: NarociloSocket  = JSON.parse(message);
+      console.log(message);
+      if (narociloSocket.to === 'zbrisano') {
+        this.narocila.vrsta = this.narocila.vrsta.filter((narocilo) => narocilo._id !== narociloSocket.narocilo._id);
+        Swal.fire('Posodobitev narocila', 'Natakar je izbrisal narocilo', 'info');
+      }
+      if (narociloSocket.to === 'sprejeto') {
+        this.narocila.vrsta.push(narociloSocket.narocilo);
+        Swal.fire('Novo narocilo', 'Natakar je kreirakl novo narocilo', 'info');
+      }
+    });
   }
 
   changeOrders(narocilo: NarociloZaposleni): void {
@@ -36,6 +50,14 @@ export class NadzornaPloscaKuharComponent implements OnInit {
       this.narocila.priprava = this.narocila.priprava.filter((item) => {
         return item._id !== id;
       });
+    }
+  }
+
+  socketOrderHandler(message): void {
+    const narociloSocket: NarociloSocket  = JSON.parse(message);
+    console.log(message);
+    if (narociloSocket.to === 'zbrisano') {
+      this.narocila.vrsta = this.narocila.vrsta.filter((narocilo) => narocilo._id !== narociloSocket.narocilo._id);
     }
   }
 

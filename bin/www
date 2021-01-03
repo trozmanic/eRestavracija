@@ -20,7 +20,14 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io')(server)
+var io = require('socket.io')(server, {
+  cors: {
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST"],
+    credentials: true
+  },
+  transports: ['websocket', 'polling']
+})
 
 /**
  * Listen on provided port, on all network interfaces.

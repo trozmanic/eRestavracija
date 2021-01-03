@@ -1,7 +1,9 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {NarociloUpdetable, NarociloZaposleni} from '../../razredi/narocilo';
+import {NarociloSocket, NarociloUpdetable, NarociloZaposleni} from '../../razredi/narocilo';
 import {NarociloService} from '../../storitve/narocilo.service';
 import {AuthService} from '../../storitve/auth.service';
+import {SocketService} from '../../storitve/socket.service';
+import {User} from '../../razredi/user';
 
 @Component({
   selector: 'app-narocilo',
@@ -10,7 +12,7 @@ import {AuthService} from '../../storitve/auth.service';
 })
 export class NarociloComponent implements OnInit {
 
-  constructor( private narociloService: NarociloService, private authService: AuthService) { }
+  constructor( private narociloService: NarociloService, private authService: AuthService, private socketService: SocketService) { }
   @Input() narocilo: NarociloZaposleni;
   @Output() newStatusEvent = new EventEmitter <NarociloZaposleni>();
   private availableStates = ['zbrisano', 'sprejeto', 'v pripravi', 'pripravljeno', 'postrezeno', 'placano'];
@@ -67,9 +69,26 @@ export class NarociloComponent implements OnInit {
 
     this.narociloService.posodobiNarociloAuth(narociloUpd)
       .then(() => {
+        const from = this.narocilo.stanje;
         this.narocilo.stanje = toStatus;
+        this.emitSocketEvent(this.narocilo, from.toString(), this.narocilo.stanje.toString());
         this.newStatusEvent.emit(this.narocilo);
       });
+  }
+
+  emitSocketEvent(narocilo: NarociloZaposleni, from: string, to: string): void {
+    const user: User = this.authService.vrniTrenutnegaUporabnika();
+    const narociloSocket: NarociloSocket = new NarociloSocket();
+    narociloSocket.from = from;
+    narociloSocket.to = to;
+    narociloSocket.narocilo = narocilo;
+    if ( (to === 'sprejeto' || to === 'zbrisano') && user.vloga === 'natakar') {
+      this.socketService.narociloKuhar(narociloSocket);
+    }
+
+    if (user.vloga === 'kuhar') {
+      this.socketService.narociloNatakar(narociloSocket);
+    }
   }
 
 }
