@@ -283,46 +283,251 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
 
 //NAROCILA
+/**
+ * @swagger
+ *  /narocila/natakar:
+ *    get:
+ *      summary: Seznam vseh narocil za natakarja
+ *      description: Pridobi seznam vseh narocil dolocenega natakarja
+ *      tags: [Narocila]
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh narocil dolocenega natakarja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  vrsta:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *                  priprava:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *                  postrezena:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila/natakar",
     avtentikacija,
     natakarAvtorizacija,
     narocila.narocilaNatakar);
+/**
+ * @swagger
+ *  /narocila/kuhar:
+ *    get:
+ *      summary: Seznam vseh narocil za kuharja
+ *      description: Pridobi seznam vseh narocil dolocenega kuharja
+ *      tags: [Narocila]
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh narocil dolocenega kuharja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  vrsta:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *                  priprava:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/NarociloZaposleni'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila/kuhar",
     avtentikacija,
     kuharAvtorizacija,
     narocila.narocilaKuhar);
+/**
+ * @swagger
+ *  /narocila:
+ *    post:
+ *      summary: Ustvari novo narocilo
+ *      description: Ustvari novo narocilo
+ *      tags: [Narocila]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/NarociloKreiranje'
+ *      responses:
+ *        "201":
+ *          description: Uspešna ustvarjeno narocilo
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post("/narocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.ustvariNarocilo);
+/**
+ * @swagger
+ *  /narocila:
+ *    get:
+ *      summary: Pridobi vsa narocila
+ *      description: Pridobi vsa narocila
+ *      tags: [Narocila]
+ *      responses:
+ *        "200":
+ *          description: Uspešna pridobljena narocila
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                   $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/narocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.pridobiNarocila);
+/**
+ * @swagger
+ *  /narocila:
+ *    put:
+ *      summary: Posodobi narocilo
+ *      description: Posodobi narocilo
+ *      tags: [Narocila]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                _id:
+ *                  example: 5fecb3329a977b43c4e98894
+ *                  type: string
+ *                  description: enolicni identfikator narocila
+ *                stanje:
+ *                  type: string
+ *                  description: novo stanje
+ *                  enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobljena narocila
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                   $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.put("/narocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.posodobiNarocilo);
+/**
+ * @swagger
+ *  /narocila/{id}:
+ *    delete:
+ *      summary: Izbrisi narocilo s podanim enolicnim identifikatorjem
+ *      description: Izbrisi narocilo s podanim enolicnim identifikatorjem
+ *      tags: [Narocila]
+ *      responses:
+ *        "200":
+ *          description: Uspešna izbrisano narocilo
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  []
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.delete("/narocila/:id",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.izbrisiNarocilo);
+
+//IS THIS NEEDED ???
 router.get("/narocila/:idNarocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.pridobiNarocilo);
+
+/**
+ * @swagger
+ *  /narocila/{id}:
+ *    put:
+ *      summary: Posodobi narocilo s podanim enolicnim identifikatorjem
+ *      description: Posodobi narocilo
+ *      tags: [Narocila]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                _id:
+ *                  example: 5fecb3329a977b43c4e98894
+ *                  type: string
+ *                  description: enolicni identfikator narocila
+ *                stanje:
+ *                  type: string
+ *                  description: novo stanje
+ *                  enum: [rezervacija, sprejeto, v pripravi, pripravljeno, postrezeno, placano]
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobljena narocila
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                   $ref: '#/components/schemas/NarociloBranje'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.put("/narocila/:idNarocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.posodobiNarocilo);
-router.get("/narocila/natakar", narocila.narocilaNatakar);
-router.get("/narocila/kuhar", narocila.narocilaKuhar);
-router.post("/narocila", narocila.ustvariNarocilo);
-router.get("/narocila", narocila.pridobiNarocila);
-router.put("/narocila", narocila.posodobiNarocilo);
-router.delete("/narocila/:id", narocila.izbrisiNarocilo);
-router.get("/narocila/:idNarocila", narocila.pridobiNarocilo);
-router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
 //ZASLUZEK
 router.get("/zasluzek", zasluzek.pridobiNarocilo);
