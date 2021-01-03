@@ -51,8 +51,9 @@ const posodobiJed = async (req,res) => {
         if (!jedUpdate.id) {
             return res.status(400).json({error_message: "Specify ID"});
         }
-        await Jed.findByIdAndUpdate(jedUpdate.id, jedUpdate);
-        res.status(200).json();
+        const jed = await Jed.findByIdAndUpdate(jedUpdate.id, jedUpdate, {new: true});
+
+        res.status(200).json(jed);
     }catch (err) {
         res.status(500).json({error_message: err});
     }

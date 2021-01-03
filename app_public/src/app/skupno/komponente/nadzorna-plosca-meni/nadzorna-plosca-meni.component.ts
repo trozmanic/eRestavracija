@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 
 import {MeniItem, MeniItemPOST, MeniItemPUT, Sestavina} from "../../razredi/meniItem";
 import {MeniService} from "../../storitve/meni.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-nadzorna-plosca-meni',
@@ -15,9 +16,9 @@ export class NadzornaPloscaMeniComponent implements OnInit {
 
   public sestavine: Sestavina[] = []
 
-  public image: string
+  public selectedFiles: FileList
 
-  public kal = 0
+  public kal: number = 0
 
   constructor(private meniService: MeniService) { }
 
@@ -34,31 +35,35 @@ export class NadzornaPloscaMeniComponent implements OnInit {
 
   delete(_id: string) {
     this.meniService.deleteItem(_id).then(() => {
-      this.getMenuItems()
+      // let newMenuItems = [];
+      for(let i = 0; i < this.menuItems.length; i++){
+        if(this.menuItems[i]._id == _id) {
+          this.menuItems.splice(i, 1)
+        }
+      }
     })
+  }
+
+  detectFiles(event) {
+    this.selectedFiles = event.target.files;
   }
 
   editItem(item: MeniItem): void {
     this.selectedItem = item
+    this.kal =  item.kalorije.valueOf()
   }
   discard(){
     this.sestavine = []
     this.selectedItem = null
     this.add=false
     this.kal = 0
+    this.selectedFiles = null
   }
 
   removeSestavina(index: number){
-    this.kal = 0
-    delete this.sestavine[index]
-    var noveSestavine: Sestavina[] = []
-    for(var i = 0; i < this.sestavine.length; i++){
-      if(this.sestavine[i] != null){
-        noveSestavine.push(this.sestavine[i])
-        this.kal += this.sestavine[i].kcal
-      }
-    }
-    this.sestavine = noveSestavine
+    this.kal -= this.sestavine[index].kcal
+    this.sestavine.splice(index, 1)
+
     console.log(this.sestavine)
   }
 
@@ -87,14 +92,48 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.cena = data.price;
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
-  console.log(newMenuItem)
-    this.meniService.addItem(newMenuItem).then(() => {
-      this.getMenuItems()
-      this.selectedItem = null
-      this.add = false
-      this.sestavine = []
-      this.kal = 0
-    }).catch()
+    newMenuItem.slika = "";
+
+
+    if(data.name == '' || data.price == '' || data.opis == '' || data.calories == ''){
+      // alert("Ime, Opis, Cena in Kalorije so obvezni atributi");
+      return Swal.fire('Neveljaven vnos!', 'Za dodajanje jedi je potrebno vnesti Ime, Opis, Ceno in Kalorije.', 'error');
+    }else {
+      if(this.selectedFiles && this.selectedFiles.length > 0){
+        let file = this.selectedFiles.item(0);
+        console.log(file)
+        let image = new FormData();
+        image.append('image', file);
+        this.meniService.postImage(image).then(odgovor => {
+          // @ts-ignore
+          var string = odgovor.image.replaceAll('\\', '/');
+          string = string.replace('app_public', '');
+          string = string.replace('/src', '');
+          console.log(string);
+          newMenuItem.slika = string
+          this.meniService.addItem(newMenuItem).then((response) => {
+            this.menuItems.push(response)
+            this.selectedItem = null
+            this.add = false
+            this.sestavine = []
+            this.kal = 0
+            this.selectedFiles = null
+          }).catch()
+        })
+
+      }else {
+        this.meniService.addItem(newMenuItem).then((response) => {
+          this.menuItems.push(response)
+          this.selectedItem = null
+          this.add = false
+          this.sestavine = []
+          this.kal = 0
+          this.selectedFiles = null
+        }).catch()
+      }
+
+
+    }
   }
 
   onClickSubmitUpdate(data){
@@ -106,14 +145,63 @@ export class NadzornaPloscaMeniComponent implements OnInit {
     newMenuItem.cena = data.price;
     newMenuItem.opis = data.description;
     newMenuItem.kalorije = data.calories;
+    if(data.name == '' || data.price == '' || data.opis == '' || data.calories == ''){
+      return Swal.fire('Neveljaven vnos!', 'Za urejanju jedi je potrebno vnesti Ime, Opis, Ceno in Kalorije.', 'error');
+    }else {
 
-    this.meniService.editItem(newMenuItem).then(() => {
-      this.getMenuItems()
-      this.selectedItem = null
-      this.add = false
-      this.sestavine = []
-      this.kal = 0
-    }).catch()
+      if(this.selectedFiles && this.selectedFiles.length > 0) {
+        let file = this.selectedFiles.item(0);
+        console.log(file)
+        let image = new FormData();
+        image.append('image', file);
+
+        this.meniService.postImage(image).then(odgovor => {
+          // @ts-ignore
+          var string = odgovor.image.replaceAll('\\', '/');
+          string = string.replace('app_public', '');
+          string = string.replace('/src', '');
+
+          newMenuItem.slika = string
+          this.meniService.editItem(newMenuItem).then((res) => {
+
+            let newMenuItems = [];
+            for (let i = 0; i < this.menuItems.length; i++) {
+              if (this.menuItems[i]._id === res._id) {
+                newMenuItems.push(res)
+              } else {
+                newMenuItems.push(this.menuItems[i])
+              }
+
+            }
+            this.menuItems = newMenuItems;
+            this.selectedItem = null
+            this.add = false
+            this.sestavine = []
+            this.kal = 0
+            this.selectedFiles = null
+          }).catch()
+        })
+      }else {
+        this.meniService.editItem(newMenuItem).then((res) => {
+
+          let newMenuItems = [];
+          for (let i = 0; i < this.menuItems.length; i++) {
+            if (this.menuItems[i]._id === res._id) {
+              newMenuItems.push(res)
+            } else {
+              newMenuItems.push(this.menuItems[i])
+            }
+
+          }
+          this.menuItems = newMenuItems;
+          this.selectedItem = null
+          this.add = false
+          this.sestavine = []
+          this.kal = 0
+          this.selectedFiles = null
+        }).catch()
+      }
+    }
   }
 
   dodaj(){

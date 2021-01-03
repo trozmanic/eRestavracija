@@ -2,7 +2,7 @@ const multer = require('multer')
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/images/jedi')
+        cb(null, './app_public/src/assets/slike/jedi')
     },
     filename: function (req, file, cb) {
         cb(null, generateFileName(file.originalname))
@@ -30,9 +30,12 @@ var upload = multer({ storage: storage, limits: {fileSize: 1024 * 1024 * 5}, fil
 
 const shraniSliko = async (req, res) => {
     upload(req, res, function (err){
+        console.log(req.body);
         if(err){
+            console.log(req.file)
             res.status(500).json({"error_message": err});
         }
+        console.log(req.file)
         var response = {
             image: req.file.path
         }

@@ -92,10 +92,10 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.uporabnik = this.authService.vrniTrenutnegaUporabnika();//TODO
-    this.uporabnik = new User();//FIX
-    this.uporabnik.vloga = "admin";//FIX
-    this.uporabnik.ime = "Ime Priimek";//FIX
+    this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
+    //this.uporabnik = new User();//FIX
+    //this.uporabnik.vloga = "admin";//FIX
+    //this.uporabnik.ime = "Ime Priimek";//FIX
 
     this.sporocilo_delete = null;
     this.zasluzek = null;
@@ -104,7 +104,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
     let dan = new Date();
     this.mesec = dan.getMonth();
     this.leto = dan.getFullYear();
-    this.uporabnik_id = "5fb9bffbe155c41ee1e19cce"; //FIX
+    this.uporabnik_id = this.uporabnik._id;
     this.zasluzekService.pridobiZasluzek(this.mesec, this.leto, this.uporabnik_id)
       .then(z => this.nastaviSpremenljivke(z))
       .catch(napaka => {
@@ -173,7 +173,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
         if(tabela == 0) {
           for (i=0; i < this.zasluzek.tabele_placanil.length; i++) {
             if (this.zasluzek.tabele_placanil[i]._id.localeCompare(idr.id) == 0) {
-              this.zasluzek.tabele_placanil = this.zasluzek.tabele_placanil.splice(i, 1);
+              this.zasluzek.tabele_placanil.splice(i, 1);
               break;
             }
           }
@@ -182,7 +182,7 @@ export class NadzornaPloscaZasluzekComponent implements OnInit {
         if (tabela == 1) {
           for (i=0; i < this.zasluzek.tabele_ne_placanil; i++) {
             if (this.zasluzek.tabele_ne_placanil[i]._id.localeCompare(idr.id) == 0) {
-              this.zasluzek.tabele_ne_placanil = this.zasluzek.tabele_ne_placanil.splice(i, 1);
+              this.zasluzek.tabele_ne_placanil.splice(i, 1);
               break;
             }
           }

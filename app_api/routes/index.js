@@ -64,6 +64,8 @@ router.post("/zaposleni", zaposleni.ustvariZaposlenega);
 router.delete("/zaposleni/:uporabnik_id", zaposleni.izbrisiZaposlenega);
 
 //NAROCILA
+router.get("/narocila/natakar", narocila.narocilaNatakar);
+router.get("/narocila/kuhar", narocila.narocilaKuhar);
 router.post("/narocila", narocila.ustvariNarocilo);
 router.get("/narocila", narocila.pridobiNarocila);
 router.put("/narocila", narocila.posodobiNarocilo);
