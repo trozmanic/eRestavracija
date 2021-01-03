@@ -26,7 +26,7 @@ const Schema = mongoose.Schema;
  *         zgoscenaVrednost:
  *           type: string
  *           description: geslo hash
- *           example:346treg45yetrhgedrherh45u45u
+ *           example: 346treg45yetrhgedrherh45u45u
  *         nakljucnaVrednost:
  *           type: string
  *           description: salt
@@ -514,6 +514,30 @@ const rezervacijaShema = new mongoose.Schema({
 })
 
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Gost:
+ *       type: object
+ *       description: Podatki o gostu
+ *       properties:
+ *         id_uporabnika:
+ *           type: string
+ *           description: id uporabnika na katerega kaze gost
+ *           example: 34yerhgerh54udfhdf
+ *         rezervacije:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/RezervacijaBranje'
+ *           description: rezervacije array
+ *         ocenjene_jedi:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/MeniItem'
+ *           description: ocenjeni jedi array
+ */
 const gostShema = new mongoose.Schema({
     id_uporabnika: { type: mongoose.ObjectId },
     rezervacije: [rezervacijaShema],
