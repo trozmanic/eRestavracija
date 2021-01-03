@@ -93,8 +93,8 @@ router.delete("/uporabniki/:idUporabnika",
 router.get("/meni",meni.pridobiJedi);
 router.get("/meni/:idJedi",meni.pridobiJed);
 router.post("/meni",
-    avtentikacija,
-    zaposleniAvtorizacija,
+    //avtentikacija,
+    //zaposleniAvtorizacija,
     meni.ustvariJed);
 router.put("/meni/:idJedi",
     avtentikacija,
@@ -137,6 +137,12 @@ router.delete("/uporabniki/:idUporabnika", uporabniki.izbrisiUporabnika);
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
 */
 router.get("/rezervacija", rezervacije.pridobiRezervacije);
 /**
@@ -175,6 +181,12 @@ router.get("/rezervacija", rezervacije.pridobiRezervacije);
  *            application/json:
  *              schema:
  *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
 */
 router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
 /** 
@@ -199,6 +211,12 @@ router.get("/rezervacija/:idUporabnika", rezervacije.pridobiRezervacije)
  *                example: Success
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
  *          content:
  *            application/json:
  *              schema:
@@ -247,20 +265,14 @@ router.post("/rezervacija", rezervacije.ustvariRezervacijo);
  *           application/json:
  *             schema:
  *               type: string
+ *       "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
  */
 router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezervacijo)
-
-//MENI
-router.get("/meni", meni.pridobiJedi);
-router.get("/meni/:idJedi", meni.pridobiJed);
-router.route("/meni")
-    .post(avtentikacija, meni.ustvariJed);
-router.route("/meni/:idJedi")
-    .put(avtentikacija, meni.posodobiJed);
-router.route("/meni/dodajOceno")
-    .post(avtentikacija, meni.dodajOceno);
-router.route("/meni/:idJedi")
-    .delete(avtentikacija, meni.izbrisiJed);
 
 //GOST
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
@@ -315,14 +327,6 @@ router.put("/narocila/:idNarocila",
     avtentikacija,
     zaposleniAvtorizacija,
     narocila.posodobiNarocilo);
-router.get("/narocila/natakar", narocila.narocilaNatakar);
-router.get("/narocila/kuhar", narocila.narocilaKuhar);
-router.post("/narocila", narocila.ustvariNarocilo);
-router.get("/narocila", narocila.pridobiNarocila);
-router.put("/narocila", narocila.posodobiNarocilo);
-router.delete("/narocila/:id", narocila.izbrisiNarocilo);
-router.get("/narocila/:idNarocila", narocila.pridobiNarocilo);
-router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 
 //ZASLUZEK
 router.get("/zasluzek", zasluzek.pridobiNarocilo);

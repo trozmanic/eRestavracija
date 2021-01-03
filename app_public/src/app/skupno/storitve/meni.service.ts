@@ -14,20 +14,17 @@ export class MeniService {
 
   private foodApiId = "fe73ca9c";
   private foodApiKey = "8ec65cd0e8152767e4be9e21f92d0610";
+  private httpOptions={ headers: this.initHeaders() };
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   public pridobiMeniGost(): Promise<MeniItemGost []> {
-    const httpOptions = {
-      headers: this.initHeaders()
-    };
-
-    return this.http.get(this.api_url + '/self/meni', httpOptions).toPromise().then(odgovor => odgovor as MeniItemGost[])
+    return this.http.get(this.api_url + '/self/meni', this.httpOptions).toPromise().then(odgovor => odgovor as MeniItemGost[])
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
   public pridobiMeni(): Promise<MeniItem []> {
-    return this.http.get(this.api_url + '/meni').toPromise().then(odgovor => odgovor as MeniItem[])
+    return this.http.get(this.api_url + '/meni',this.httpOptions).toPromise().then(odgovor => odgovor as MeniItem[])
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
@@ -43,13 +40,13 @@ export class MeniService {
 
   // tslint:disable-next-line:typedef
   public deleteItem(_id: string){
-    return this.http.delete(this.api_url + '/meni/'+_id).toPromise().catch(napaka => this.obdelajNapako(napaka))
+    return this.http.delete(this.api_url + '/meni/'+_id,this.httpOptions).toPromise().catch(napaka => this.obdelajNapako(napaka))
   }
 
 
   // tslint:disable-next-line:typedef
   public editItem(menuItem: MeniItemPUT){
-    return this.http.put(this.api_url + '/meni/'+menuItem.id, menuItem)
+    return this.http.put(this.api_url + '/meni/'+menuItem.id, menuItem,this.httpOptions)
       .toPromise()
       .then(odgovor => odgovor as MeniItem)
       .catch(napaka => this.obdelajNapako(napaka))
@@ -57,14 +54,14 @@ export class MeniService {
 
   // tslint:disable-next-line:typedef
   public addItem(menuItem: MeniItemPOST){
-    return this.http.post(this.api_url + '/meni', menuItem)
+    return this.http.post(this.api_url + '/meni', menuItem,this.httpOptions)
       .toPromise()
       .then(odgovor => odgovor as MeniItem)
       .catch(napaka => this.obdelajNapako(napaka))
   }
 
   public postImage(data){
-    return this.http.post(this.api_url + '/image',data)
+    return this.http.post(this.api_url + '/image',data,this.httpOptions)
       .toPromise()
       .then(odgovor => odgovor as ImgRes)
       .catch(napaka => this.obdelajNapako(napaka))

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment'
 
 import { ZasluzekRazred } from "../razredi/zasluzek-razred";
 import { IdRazred } from "../razredi/id-razred";
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,21 @@ export class ZasluzekService {
 
   private api_url = environment.api_url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService:AuthService) { }
+
+  private httpOptions={ headers: this.initHeaders() };
+
+  private initHeaders(): HttpHeaders {
+    return  new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
+  }
 
   public pridobiZasluzek(mesec, leto, uporabnik_id) {
-    return this.http.get(this.api_url + '/zasluzek?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id)
+    return this.http.get(this.api_url + '/zasluzek?mesec=' + mesec + '&leto=' + leto + '&uporabnik_id=' + uporabnik_id,this.httpOptions)
       .toPromise().then(odgovor => odgovor as ZasluzekRazred);
   }
 
   public izbrisiRacun(id) {
-    return this.http.delete(this.api_url + '/narocila/' + id)
+    return this.http.delete(this.api_url + '/narocila/' + id,this.httpOptions)
       .toPromise().then(odgovor => odgovor as IdRazred);
   }
 
