@@ -107,7 +107,7 @@ const poti: Routes = [
     path: '**',
     redirectTo: '404'
   }
-]
+];
 
 @NgModule({
   declarations: [],
