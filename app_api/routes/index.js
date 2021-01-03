@@ -231,10 +231,193 @@ router.put("/narocila/:idNarocila", narocila.posodobiNarocilo);
 router.get("/zasluzek", zasluzek.pridobiNarocilo);
 
 //ZALOGA
+/**
+ * @swagger
+ *  /zaloga:
+ *    get:
+ *      summary: Seznam zaloge
+ *      description: Pridobi seznam vseh surovin
+ *      tags: [Zaloga]
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh surovin
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/SurovinaBranje'
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/zaloga", zaloga.pridobiSestavine);
+/**
+ * @swagger
+ *  /zaloga/{surovinaId}:
+ *    get:
+ *      summary: Seznam zaloge
+ *      description: Pridobi seznam vseh surovin
+ *      tags: [Zaloga]
+ *      parameters:
+ *       - in: path
+ *         name: surovinaId
+ *         description: enolični identifikator surovine
+ *         schema:
+ *           type: string
+ *           required: true
+ *           example: 69lol18eb51386c379983319
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva s seznamom vseh surovin
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/SurovinaBranje'
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Napaka zahteve, sestavina s podanim id-jem ne obstaja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/zaloga/:surovinaId", zaloga.pridobiSestavino);
+/**
+ * @swagger
+ *  /rezervacija:
+ *    post:
+ *      summary: Ustvari novo surovino
+ *      description: Ustvari novo surovino
+ *      tags: [Zaloga]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        description: Podatki o surovini
+ *        required: true
+ *        content:
+ *          application/x-www-form-urlencoded:
+ *            schema:
+ *              $ref: "#/components/schemas/SurovinaPisanje"
+ *      responses:
+ *        "201":
+ *          description: Uspešno ustvarjena surovina
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post("/zaloga", zaloga.ustvariSestavino);
+/**
+ * @swagger
+ *  /zaloga:
+ *    put:
+ *      summary: Posodobi določeno surovino
+ *      description: Posodobi atribute določene surovine
+ *      tags: [Zaloga]
+ *      requestBody:
+ *        description: Podatki o surovini
+ *        required: false
+ *        content:
+ *          application/x-www-form-urlencoded:
+ *            schema:
+ *              $ref: "#/components/schemas/SurovinaPisanje"
+ *      responses:
+ *        "200":
+ *          description: Uspešno posodobljena surovina
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.put("/zaloga", zaloga.posodobiSestavino);
+/**
+ * @swagger
+ *  /zaloga/{surovinaId}:
+ *    delete:
+ *      summary: Brisanje izbranege surovine iz zaloge.
+ *      tags: [Zaloga]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: surovinaId
+ *          description: enolični identifikator surovine
+ *          schema:
+ *          type: string
+ *          required: true
+ *      responses:
+ *        "204":
+ *          description: Uspešno odstranjevanje surovine
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Vnesti je potrebno id surovine.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Napaka pri dostopu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.delete("/zaloga/:surovinaId", zaloga.izbrisiSestavino);
 
 router.post('/image', slike.shraniSliko)

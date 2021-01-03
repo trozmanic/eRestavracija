@@ -194,11 +194,11 @@
             <option value="cena">Cena</option>
           </select>
         </div>
-        <input [(ngModel)]="iskanje" (keyup.enter)="pridobiSestavine()" name="iskanje" class="form-control" type="text"
+        <input [(ngModel)]="iskanje" (keyup.enter)="stran=1; pridobiSestavine()" name="iskanje" class="form-control" type="text"
                placeholder="Iskanje"
                id="IskanjePoZalogi">
         <div class="input-group-append">
-          <button type="button" (click)="pridobiSestavine()" class="btn btn-dark" id="button-addon2"><i
+          <button type="button" (click)="stran=1; pridobiSestavine()" class="btn btn-dark" id="button-addon2"><i
             class="fas fa-search"></i>
           </button>
         </div>

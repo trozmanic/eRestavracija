@@ -31,6 +31,70 @@ const zaposleniShema = new mongoose.Schema({
     "placa": { type: Number, min: 0 }
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     SurovinaBranje:
+ *       type: object
+ *       description: Podatki o surovini
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični identifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         ime:
+ *           type: string
+ *           description: Ime surovine/sestavine
+ *           example: krompir
+ *         količina:
+ *           type: integer
+ *           minimum: 0
+ *           description: Količina surovine/sestavine
+ *           example: 10
+ *         enota:
+ *           type: string
+ *           description: Enota za količino surovine/sestavine
+ *           example: kg
+ *         cena:
+ *           type: integer
+ *           minimum: 0
+ *           description: Cena surovine/sestavine brez simbola valute
+ *           example: 2
+ *       required:
+ *         - _id
+ *         - ime
+ *         - količina
+ *         - enota
+ *         - cena
+ *     SurovinaPisanje:
+ *       type: object
+ *       description: Podatki o surovini
+ *       properties:
+ *         ime:
+ *           type: string
+ *           description: Ime surovine/sestavine
+ *           example: krompir
+ *         količina:
+ *           type: integer
+ *           minimum: 0
+ *           description: Količina surovine/sestavine
+ *           example: 10
+ *         enota:
+ *           type: string
+ *           description: Enota za količino surovine/sestavine
+ *           example: kg
+ *         cena:
+ *           type: integer
+ *           minimum: 0
+ *           description: Cena surovine/sestavine brez simbola valute
+ *           example: 2
+ *       required:
+ *         - ime
+ *         - količina
+ *         - enota
+ *         - cena
+ */
 const surovinaShema = new mongoose.Schema({
     "ime": { type: String, required: true },
     "kolicina": { type: Number, required: true, min: 0 },
@@ -133,11 +197,11 @@ const narociloShema = new mongoose.Schema({
  *       properties:
  *         _id:
  *           type: string
- *           description: Enolični indetifikator
+ *           description: Enolični identifikator
  *           example: 5fecb3329a977b43c4e98894
  *         id_stranke:
  *           type: string
- *           description: Enolični indetifikator stranke
+ *           description: Enolični identifikator stranke
  *           example: 5fea48e93315186ae03c8651
  *         ime_stranke:
  *           type: string
@@ -183,14 +247,14 @@ const narociloShema = new mongoose.Schema({
  *             properties:
  *               meni_item:
  *                 type: string
- *                 description: Enolični indentifikator jedi
+ *                 description: Enolični identifikator jedi
  *                 example: 5fecb3329a977b43c4e98894
  *               kolicina:
  *                 type: integer
  *                 example: 2
  *         uporabnik_id:
  *           type: string
- *           description: Enolični indentifikator uporabnika
+ *           description: Enolični identifikator uporabnika
  *           example: 5fecb3329a977b43c4e98894
  *       required:
  *         - datum_in_ura

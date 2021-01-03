@@ -109,7 +109,7 @@
 
     <div class="col-4 col-lg-2">
       <button type="button" class="btn btn-dark btn-block razmik" id="uredi"
-              (click)="odpriModal(modal2)" [disabled]="!obkljukanEden"><i class="fas fa-edit"></i> UREDI
+              (click)="odpriModal(modal2); pridobiIndeks()" [disabled]="!obkljukanEden"><i class="fas fa-edit"></i> UREDI
       </button>
     </div>
     <!-- ZAČETEK uredi sestavino -->
@@ -194,7 +194,7 @@
             </div>
           </div>
         </form>
-        <a href="" class="btn btn-dark btn-block" role="button" id="uredi_urnik" target="_blank">Izberi urnik <i
+        <a routerLink="/nadzorna_plosca/uredi_urnik?uporabik={{posodobljenZaposleni.id}}" class="btn btn-dark btn-block" role="button" id="uredi_urnik" target="_blank">Izberi urnik <i
           class="far fa-calendar-alt"></i></a>
       </div>
       <div class="modal-footer">
@@ -243,9 +243,9 @@
             <option value="vloga">Vloga</option>
           </select>
         </div>
-        <input [(ngModel)]="iskanje" (keyup.enter)="pridobiZaposlene()" name="iskanje" class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZaposlenih">
+        <input [(ngModel)]="iskanje" (keyup.enter)="stran=1; pridobiZaposlene()" name="iskanje" class="form-control" type="text" placeholder="Iskanje" id="IskanjePoZaposlenih">
         <div class="input-group-append">
-          <button class="btn btn-dark" (click)="pridobiZaposlene()" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+          <button class="btn btn-dark" (click)="stran=1; pridobiZaposlene()" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
         </div>
       </div>
     </div>
