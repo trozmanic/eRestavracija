@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import io from 'socket.io-client';
+import {io} from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 import {NarociloSocket} from '../razredi/narocilo';
 @Injectable({

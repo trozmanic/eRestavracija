@@ -29,6 +29,7 @@ const ustvariUporabnika=async (req,res)=>{
 }
 
 const pridobiUporabnike=async (req,res)=>{
+    console.log(req.payload);
     let email = req.query.email;
     let uporabnik_info = {};
     if (email) {
