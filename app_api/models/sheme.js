@@ -60,41 +60,46 @@ const surovinaShema = new mongoose.Schema({
     "enota": { type: String, required: true },
     "cena": { type: Number, required: true, min: 0 }
 })
+
 /**
- * @Swagger
+ * @swagger
  * components:
- *  schemas:
- *   MeniItem:
- *    type: object
- *    properties:
- *     ime:
- *      type: String
- *     cena:
- *      type: Number
- *      minimum: 0
- *      example: 12
- *     slika:
- *      type: String
- *     opis:
- *      type: String
- *     ocena:
- *      type: Number
- *      example: 4
- *     ocena_count:
- *      type: Number
- *      example: 2
- *     kalorije:
- *      type: Number
- *      minimum: 0
- *     sestavine:
- *      type: array
- *      items:
- *       type: sestavina
- *    required:
- *      - ime
- *      - cena
- *      - opis
- *      - kalorije
+ *   schemas:
+ *     MeniItem:
+ *      type: object
+ *      properties:
+ *          _id:
+ *              type: string
+ *              description: Enolični indetifikator
+ *              example: 5fecb3329a977b43c4e98894
+ *          ime:
+ *              type: String
+ *              example: Hobotnica
+ *          cena:
+ *              type: Number
+ *              minimum: 0
+ *              example: 12
+ *          slika:
+ *              type: String
+ *              example: assests/jedi/hobotnica.png
+ *          opis:
+ *              type: String
+ *              example: Hobotnica na zaru.
+ *          ocena:
+ *              type: Number
+ *              example: 4
+ *          ocena_count:
+ *              type: Number
+ *              example: 2
+ *          kalorije:
+ *              type: Number
+ *              minimum: 0
+ *              example: 300
+ *      required:
+ *          - ime
+ *          - cena
+ *          - opis
+ *          - kalorije
  *
  */
 const meniItemShema = new mongoose.Schema({

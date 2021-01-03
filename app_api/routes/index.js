@@ -287,16 +287,17 @@ router.put("/rezervacija/:idRezervacije/:operacija", rezervacije.posodobiRezerva
  *     summary: Seznam jedi na meniju
  *     description: Pridobitev seznama jedi, ki so na voljo meniju.
  *     tags: [Meni]
- *     response:
- *       "200":
+ *     responses:
+ *        "200":
  *          description: Uspešna zahteva s seznamom jedi na meniju.
  *          content:
  *            application/json:
  *              schema:
  *                type: array
  *                items:
- *                  $ref: "#/components/schemas/MeniItem"
- *       "500":
+ *                  schema:
+ *                    $ref: '#/components/schemas/MeniItem'
+ *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
  */
@@ -317,13 +318,13 @@ router.get("/meni", meni.pridobiJedi);
  *            type: string
  *          required: true
  *          example: 5ff0d494ec999c3f4475631b
- *      response:
+ *      responses:
  *        "200":
  *          description: Uspešna zahteva z jedjo v rezultatu.
  *          content:
  *            application/json:
  *              schema:
- *                $ref: "#/components/schemas/MeniItem"
+ *                $ref: '#/components/schemas/MeniItem'
  *        "404":
  *          description: Napaka zahteve, zahtevane jedi ni mogoče najti.
  *          content:
@@ -358,7 +359,7 @@ router.get("/meni/:idJedi", meni.pridobiJed);
  *        content:
  *          application/json:
  *            schema:
- *              $ref: "#/components/schemas/MeniItem"
+ *              $ref: '#/components/schemas/MeniItem'
  *      "500":
  *        description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
@@ -374,36 +375,36 @@ router.route("/meni")
  *      tags: [Meni]
  *      security:
  *        - jwt: []
- *    requestBody:
- *      description: Podatki od jedi
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: "#/components/schemas/MeniItem"
- *    parameters:
- *      - in: path
- *        name: idJedi
- *        description: enolični identifikator jedi.
- *        schema:
- *          type: string
+ *      requestBody:
+ *        description: Podatki od jedi
  *        required: true
- *        example: 5ff0d494ec999c3f4475631b
- *    responses:
- *      "200":
- *        description: Uspešno posodobljena jed, ki se vrne v rezultatu.
  *        content:
  *          application/json:
  *            schema:
- *              $ref: "#/components/schemas/MeniItem"
- *      "400":
- *        description: Napaka zahteve, manjkajo obvezni parametri.
- *        content:
- *          application/json:
- *            schema:
- *              type: string
- *      "500":
- *        description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *              $ref: '#/components/schemas/MeniItem'
+ *      parameters:
+ *        - in: path
+ *          name: idJedi
+ *          description: enolični identifikator jedi.
+ *          schema:
+ *            type: string
+ *            required: true
+ *            example: 5ff0d494ec999c3f4475631b
+ *      responses:
+ *        "200":
+ *          description: Uspešno posodobljena jed, ki se vrne v rezultatu.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/MeniItem'
+ *        "400":
+ *          description: Napaka zahteve, manjkajo obvezni parametri.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
 router.route("/meni/:idJedi")
     .put(avtentikacija, meni.posodobiJed);
@@ -438,7 +439,7 @@ router.route("/meni/:idJedi")
  *            content:
  *              application/json:
  *                schema:
- *                  $ref: "#/components/schemas/MeniItem"
+ *                  $ref: '#/components/schemas/MeniItem'
  *          "500":
  *            description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
