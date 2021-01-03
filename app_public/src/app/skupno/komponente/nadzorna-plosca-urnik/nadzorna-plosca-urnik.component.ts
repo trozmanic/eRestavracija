@@ -6,6 +6,9 @@ import { UrnikRazred } from "../../razredi/urnik-razred";
 import {User} from "../../razredi/user";
 
 import { AuthService } from "../../storitve/auth.service"
+import {BsModalRef} from "ngx-bootstrap/modal";
+
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-nadzorna-plosca-urnik',
@@ -24,7 +27,10 @@ export class NadzornaPloscaUrnikComponent implements OnInit {
 
   public sporocilo: String;
 
-  constructor(private urnikService: UrnikService, private authService: AuthService) { }
+  public legendaModal: BsModalRef;
+  public potrditevModal: BsModalRef;
+
+  constructor(private urnikService: UrnikService, private authService: AuthService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.uporabnik = this.authService.vrniTrenutnegaUporabnika();
@@ -100,6 +106,14 @@ export class NadzornaPloscaUrnikComponent implements OnInit {
         this.urnik = null;
       }
     });
+  }
+
+  public odpriLegendaModal(legenda) {
+    this.legendaModal = this.modalService.show(legenda);
+  }
+
+  public zapriLegendaModal() {
+    this.legendaModal.hide();
   }
 
 }

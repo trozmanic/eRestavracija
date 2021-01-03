@@ -1,7 +1,7 @@
 <!-- Tukaj vstavi vsebino -->
 <div class="col-xl-12 title">
   <h1>Urnik izmen</h1>
-  <i class="fas fa-question-circle" data-toggle="modal" data-target="#pomoc"></i>
+  <i class="fas fa-question-circle" (click)="odpriLegendaModal(legenda)"></i>
 </div>
 <div class="col-xl-12 title">
   <h3 class="sredina-text text-white"><i class="fas fa-arrow-left ikone-stil-posamezna" (click)="prev()"></i><span id="naslov_datum">{{mesec | mesecToString}} {{leto}}</span><i class="fas fa-arrow-right ikone-stil-posamezna" (click)="next()"></i></h3>
@@ -200,44 +200,38 @@
     </div>
   </div>
 
+</div>
 
-  <div class="modal fade" id="pomoc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-       aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <h1 class="legendheader">Legenda</h1>
-          <div class="iconsflex">
-            <div class="iconmodal">
-              <p>brez: prosto</p>
-            </div>
-            <div class="iconmodal">
-              <p>?: se ni doloceno</p>
-            </div>
-            <div class="iconmodal">
-              <p>D: dopoldan</p>
-            </div>
-            <div class="iconmodal">
-              <p>P: popoldan</p>
-            </div>
-            <div class="iconmodal">
-              <i class="fas fa-arrow-left"></i>
-              <p>naslednji mesec</p>
-            </div>
-            <div class="iconmodal">
-              <i class="fas fa-arrow-right"></i>
-              <p>Prejsnji mesec</p>
-            </div>
-          </div>
-          <div class="butlegenda">
-            <button type="submit" class="but" data-dismiss="modal">Zapri</button>
-          </div>
-        </div>
+<ng-template #legenda>
+  <div class="modal-body">
+    <h1 class="legendheader">Legenda</h1>
+    <div class="iconsflex">
+      <div class="iconmodal">
+        <p>brez: prosto</p>
+      </div>
+      <div class="iconmodal">
+        <p>?: se ni doloceno</p>
+      </div>
+      <div class="iconmodal">
+        <p>D: dopoldan</p>
+      </div>
+      <div class="iconmodal">
+        <p>P: popoldan</p>
+      </div>
+      <div class="iconmodal">
+        <i class="fas fa-arrow-left"></i>
+        <p>naslednji mesec</p>
+      </div>
+      <div class="iconmodal">
+        <i class="fas fa-arrow-right"></i>
+        <p>Prejsnji mesec</p>
       </div>
     </div>
+    <div class="butlegenda">
+      <button type="submit" class="but" (click)="zapriLegendaModal()">Zapri</button>
+    </div>
   </div>
-
-</div>
+</ng-template>
 <!-- END Urnik -->
 
 
