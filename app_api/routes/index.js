@@ -29,6 +29,7 @@ const zaposleniAvtorizacija = imaVlogo(['admin', 'kuhar', 'natakar']);
 const natakarAvtorizacija = imaVlogo(['natakar']);
 const kuharAvtorizacija = imaVlogo(['kuhar']);
 const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
+const adminkuharAvtorizacija= imaVlogo(["admin","kuhar"]);
 
 /**
  * Kategorije dostopnih točk
@@ -1445,7 +1446,7 @@ router.get("/zasluzek",
  *              schema:
  *                type: string
  */
-router.get("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.pridobiSestavine);
+router.get("/zaloga", avtentikacija, adminkuharAvtorizacija, zaloga.pridobiSestavine);
 /**
  * @swagger
  *  /zaloga/{surovinaId}:
@@ -1492,7 +1493,7 @@ router.get("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalog
  *              schema:
  *                type: string
  */
-router.get("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.pridobiSestavino);
+router.get("/zaloga/:surovinaId", avtentikacija, adminkuharAvtorizacija, zaloga.pridobiSestavino);
 /**
  * @swagger
  *  /zaloga:
@@ -1530,7 +1531,7 @@ router.get("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtoriz
  *              schema:
  *                type: string
  */
-router.post("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.ustvariSestavino);
+router.post("/zaloga", avtentikacija, adminkuharAvtorizacija, zaloga.ustvariSestavino);
 /**
  * @swagger
  *  /zaloga:
@@ -1568,7 +1569,7 @@ router.post("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalo
  *              schema:
  *                type: string
  */
-router.put("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.posodobiSestavino);
+router.put("/zaloga", avtentikacija, adminkuharAvtorizacija, zaloga.posodobiSestavino);
 /**
  * @swagger
  *  /zaloga/{surovinaId}:
@@ -1612,7 +1613,7 @@ router.put("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalog
  *              schema:
  *                type: string
  */
-router.delete("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.izbrisiSestavino);
+router.delete("/zaloga/:surovinaId", avtentikacija, adminkuharAvtorizacija, zaloga.izbrisiSestavino);
 
 
 /**

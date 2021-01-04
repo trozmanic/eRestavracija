@@ -1,0 +1,264 @@
+<head>
+    <title>InitDB</title>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('setDB').addEventListener('click', () => {
+
+                axios.post('/api/registracija', {
+                    "ime": "tempadmin",
+                    "email_naslov": "tempadmin@aldente.si",
+                    "geslo": "geslo1234",
+                    "telefonska_stevilka": "456456456",
+                    "vloga": "admin"
+                }).then(odgovor => {
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + odgovor.data.token;
+                    let id = JSON.parse(atob(odgovor.data.token.split('.')[1]))._id;
+                    // menu item
+                    axios.post('/api/meni', {
+                        ime: 'hobotnica',
+                        opis: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!',
+                        kalorije: 124,
+                        slika: '/images/jedi/2.png',
+                        cena: 12,
+                        sestavine: [
+                            {
+                                sestavina: 'egg',
+                                kolicina: 100
+                            },
+                            {
+                                sestavina: 'oli',
+                                kolicina: 2
+                            }
+                        ]
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+
+
+                    axios.post('/api/meni', {
+                        ime: 'kalamari na zaru',
+                        opis: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!',
+                        kalorije: 224,
+                        slika: '/images/jedi/3.png',
+                        cena: 12,
+                        sestavine: [
+                            {
+                                sestavina: 'egg',
+                                kolicina: 100
+                            },
+                            {
+                                sestavina: 'oli',
+                                kolicina: 2
+                            }
+                        ]
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+
+                    axios.post('/api/meni', {
+                        ime: 'ocvrti kalamari',
+                        opis: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!',
+                        kalorije: 424,
+                        slika: '/images/jedi/4.png',
+                        cena: 12,
+                        sestavine: [
+                            {
+                                sestavina: 'egg',
+                                kolicina: 100
+                            },
+                            {
+                                sestavina: 'oli',
+                                kolicina: 2
+                            }
+                        ]
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+
+
+                    axios.post('/api/meni', {
+                        ime: 'morska solata',
+                        opis: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!',
+                        kalorije: 200,
+                        slika: '/images/jedi/5.png',
+                        cena: 12,
+                        sestavine: [
+                            {
+                                sestavina: 'egg',
+                                kolicina: 100
+                            },
+                            {
+                                sestavina: 'oli',
+                                kolicina: 2
+                            }
+                        ]
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+
+
+                    axios.post('/api/meni', {
+                        ime: 'tuna',
+                        opis: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!',
+                        kalorije: 370,
+                        slika: '/images/jedi/7.png',
+                        cena: 12,
+                        sestavine: [
+                            {
+                                sestavina: 'tuna',
+                                kolicina: 300
+                            },
+                            {
+                                sestavina: 'oli',
+                                kolicina: 2
+                            }
+                        ]
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+
+                    axios.post('/api/meni', {
+                        ime: 'rizota',
+                        opis: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, corrupti fugit! Ex expedita fugit velit delectus dolore numquam vitae, ab nam voluptates eius? Omnis necessitatibus inventore debitis voluptate nobis velit!',
+                        kalorije: 230,
+                        slika: '/images/jedi/7.png',
+                        cena: 12,
+                        sestavine: [
+                            {
+                                sestavina: 'riz',
+                                kolicina: 250
+                            },
+                            {
+                                sestavina: 'oli',
+                                kolicina: 2
+                            }
+                        ]
+                    }).catch((err) => {
+                        console.log(err);
+                    })
+
+                    // surovine
+
+                    axios.post('/api/zaloga', {
+                        ime: 'krompir',
+                        kolicina: 100,
+                        enota: 'kg',
+                        cena: 20
+                    }).then((res) => {
+
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/zaloga', {
+                        ime: 'moka',
+                        kolicina: 20,
+                        enota: 'kg',
+                        cena: 12
+                    }).then((res) => {
+
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/zaloga', {
+                        ime: 'solata',
+                        kolicina: 10,
+                        enota: 'kg',
+                        cena: 30
+                    }).then((res) => {
+
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/zaloga', {
+                        ime: 'kaviar',
+                        kolicina: 500,
+                        enota: 'ml',
+                        cena: 800
+                    }).then((res) => {
+
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/zaloga', {
+                        ime: 'tuna',
+                        kolicina: 50,
+                        enota: 'kg',
+                        cena: 1000
+                    }).then((res) => {
+
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/registracija', {
+                        ime: 'kuhar',
+                        email_naslov: 'kuhar@aldente.si',
+                        telefonska_stevilka: '070000878',
+                        geslo: 'geslo1234',
+                        vloga: 'kuhar'
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/registracija', {
+                        ime: 'natakar',
+                        email_naslov: 'natakar@aldente.si',
+                        telefonska_stevilka: '070000111',
+                        geslo: 'geslo1234',
+                        vloga: 'natakar'
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/registracija', {
+                        ime: 'gost',
+                        email_naslov: 'gost@aldente.si',
+                        telefonska_stevilka: '070000222',
+                        geslo: 'geslo1234',
+                        vloga: 'gost'
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+
+                    axios.post('/api/registracija', {
+                        ime: 'admin',
+                        email_naslov: 'admin@aldente.si',
+                        telefonska_stevilka: '070000333',
+                        geslo: 'geslo1234',
+                        vloga: 'admin'
+                    });
+                    return axios.delete('/api/uporabniki/'+id);
+                }).then(odgovor=>{
+                    alert('Podatkovna baza nastavljena');
+                });
+                
+            });
+
+            document.getElementById('dropDB').addEventListener('click', () => {
+                axios.get('/api/database/drop').then((response) => {
+
+
+                });
+                alert('Vsebina baze izbrisana');
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div>
+            <button id="setDB" class="btn btn-dark">Vnos zacetnih podatkov</button>
+        </div>
+        <br>
+        <div>
+            <button id="dropDB" class="btn btn-dark">Izbris vsebine podatkovne baze</button>
+        </div>
+    </div>
+</body>
