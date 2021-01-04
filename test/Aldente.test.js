@@ -120,15 +120,54 @@
                     By.xpath("//button[contains(text(), 'REGISTRIRAJ SE')]")).click();
             });
 
+            /*
             it("pridobi JWT žeton", async function() {
                 jwtZeton = await brskalnik.executeScript(function() {
                     return localStorage.getItem("token");
                 });
                 expect(jwtZeton).to.not.be.empty;
             });
+
+             */
         })
 
+        describe("Prijava uporabnika", function () {
+            this.timeout(30 * 1000);
+            before(() => {
+                brskalnik.get(aplikacijaUrl);
+            });
 
+            it("izbira registracije", async function() {
+                await pocakajStranNalozena(brskalnik, 10, "//h1");
+                let gumb = await brskalnik.findElement(By.id("login-button"));
+                await gumb.getText().then(function(vsebina) {
+                    expect(vsebina).to.be.equal("PRIJAVA");
+                });
+                await gumb.click();
+            });
+
+            it("vnos podatkov uporabnika", async function() {
+                await pocakajStranNalozena(brskalnik, 10, "//h1");
+                let email = await brskalnik.findElement(By.id("exampleInputEmail1"));
+                expect(email).to.not.be.empty;
+                email.sendKeys("admin@aldente.si");
+                let geslo = await brskalnik.findElement(By.id("exampleInputPassword1"));
+                expect(geslo).to.not.be.empty;
+                geslo.sendKeys("geslo1234");
+                brskalnik.findElement(
+                    By.xpath("//button[contains(text(), 'PRIJAVI SE')]")).click();
+            });
+
+            context("ustreznost podatkov na nadzorni plošči", function() {
+                it("naslov strani urnik", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, '//h1');
+                    const povezava = await brskalnik.findElement(By.xpath('//a[@routerlink="/nadzorna_plosca/urnik"]'));
+                    expect(povezava).to.not.be.empty;
+                    await povezava.click();
+                });
+            });
+        })
+/*
         describe("Nadzorna plošča", function () {
             this.timeout(30 * 1000);
             before(() => {
@@ -211,6 +250,7 @@
                 // TODO
             });
         });
+ */
 
     } catch (napaka) {
         console.log("Med testom je prišlo do napake!");
