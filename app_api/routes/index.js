@@ -78,7 +78,7 @@ const adminkuharAvtorizacija= imaVlogo(["admin","kuhar"]);
  *      security:
  *        - jwt: []
  *      parameters:
- *        - in: path
+ *        - in: query
  *          name: email
  *          type: string
  *          required: false
@@ -707,8 +707,6 @@ router.delete("/meni/:idJedi",
  */
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
 
-//ZASLUZEK
-router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
 
 //URNIK
 /**
@@ -721,17 +719,17 @@ router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
  *      security:
  *        - jwt: []
  *      parameters:
- *        - in: path
+ *        - in: query
  *          name: uporabnik_id
  *          type: string
  *          required: true
  *          description: id uporabnika
- *        - in: path
+ *        - in: query
  *          name: mesec
  *          type: number
  *          required: false
  *          description: mesec urnika
- *        - in: path
+ *        - in: query
  *          name: leto
  *          type: number
  *          required: false
@@ -848,7 +846,7 @@ router.put("/urnik",
  *        - jwt: []
  *      tags: [Urnik]
  *      parameters:
- *        - in: path
+ *        - in: query
  *          name: id
  *          type: string
  *          required: true
@@ -886,17 +884,17 @@ router.delete("/urnik",
  *            schema:
  *              $ref: '#/components/schemas/Urnik'
  *      parameters:
- *        - in: path
+ *        - in: query
  *          name: uporabnik_id
  *          type: string
  *          required: true
  *          description: id uporabnika
- *        - in: path
+ *        - in: query
  *          name: mesec
  *          type: number
  *          required: true
  *          description: mesec urnika
- *        - in: path
+ *        - in: query
  *          name: leto
  *          type: number
  *          required: true
@@ -1510,7 +1508,7 @@ router.get("/narocila/:idNarocila",
 
 /**
  * @swagger
- *  /narocila/{id}:
+ *  /narocila/{idNarocila}:
  *    put:
  *      summary: Posodobi narocilo s podanim enolicnim identifikatorjem
  *      description: Posodobi narocilo
@@ -1577,12 +1575,12 @@ router.put("/narocila/:idNarocila",
  *      security:
  *        - jwt: []
  *      parameters:
- *        - in: path
+ *        - in: query
  *          name: mesec
  *          type: number
  *          required: true
  *          description: mesec zasluzka
- *        - in: path
+ *        - in: query
  *          name: leto
  *          type: number
  *          required: true

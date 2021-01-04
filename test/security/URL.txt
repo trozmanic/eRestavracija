@@ -1,0 +1,17 @@
+https://aldente-sp-20-21.herokuapp.com/
+https://aldente-sp-20-21.herokuapp.com/onas
+https://aldente-sp-20-21.herokuapp.com/rezerviraj
+https://aldente-sp-20-21.herokuapp.com/rezerviraj/podatki
+https://aldente-sp-20-21.herokuapp.com/meni
+https://aldente-sp-20-21.herokuapp.com/rezerviraj/meni
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/zaloga
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/urnik
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/zasluzek
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/kuhar
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/natakar
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/rezervacije
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/meni
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/zaposleni
+https://aldente-sp-20-21.herokuapp.com/nadzorna_plosca/uredi_urnik
+https://aldente-sp-20-21.herokuapp.com/404
