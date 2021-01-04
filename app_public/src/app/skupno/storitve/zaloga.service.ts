@@ -15,7 +15,7 @@ export class ZalogaService {
   private api_url = environment.api_url;
 
   private initHeaders(): HttpHeaders {
-    return  new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
+    return new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.vrniZeton());
   }
 
   public pridobiSestavine(query: any): Observable<any>{
@@ -23,37 +23,16 @@ export class ZalogaService {
   }
 
   public dodajSestavino(sestavina: any): Promise<Zaloga>{
-    /*
-    const httpLastnosti = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.shramba.getItem('edugeocache-zeton')}`
-      })
-    };
-     *//*                                                    , httpLastnosti) */
     return this.http.post(this.api_url + '/zaloga', sestavina).toPromise().then(odgovor => odgovor as Zaloga)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
   public posodobiSestavino(sestavina: any): Promise<Zaloga>{
-    /*
-    const httpLastnosti = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.shramba.getItem('edugeocache-zeton')}`
-      })
-    };
-     *//*                                                      , httpLastnosti) */
     return this.http.put(this.api_url + '/zaloga', sestavina).toPromise().then(odgovor => odgovor as Zaloga)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
   public odstraniSestavino(id: string): Promise<any>{
-    /*
-    const httpLastnosti = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.shramba.getItem('edugeocache-zeton')}`
-      })
-    };
-     *//*                                                      , httpLastnosti) */
     return this.http.delete(this.api_url + '/zaloga/' + id).toPromise().then(null)
       .catch(napaka => this.obdelajNapako(napaka));
   }
