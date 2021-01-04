@@ -74,4 +74,5 @@ se morata obe polji ujemati.
   - Natakar lahko opravlja z rezervacijami ("CRUD": "/api/rezervacija") in narocili (GET: "/api/"/api/narocila/natakar", POST/PUT: "/api/narocila")
   - Admin lahko pocne vse, razen upravljati z narocili (poleg ostalih omenjenih funkcionalnosti lahko tudi ureja zaposlene ("CRUD": "/api/zaposleni") ).
 
-
+# Lighthouse test
+ - Največ zgubimo na performance, predvsem na račun neuporabljene kode JS in stilov CSS, te napake je težko odpravit, saj smo v veliki meri odvisni od Angularja, ki pretvori datoteke in je težko priti do izvora težave
