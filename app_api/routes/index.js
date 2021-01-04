@@ -44,6 +44,10 @@ const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
  *    description: Obvladovanje urnika
  *  - name: Zasluzek
  *    description: Obvladovanje zasluzka
+ *  - name: Uporabnik
+ *    description: Obvladovanje uporabnikov
+ *  - name: Gost
+ *    description: Obvladovanje uporabnikov
  */
 
 /**
@@ -59,22 +63,203 @@ const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
 */
 
 //UPORABNIKI
+/**
+ * @swagger
+ *  /uporabniki:
+ *    get:
+ *      summary: Pridobi uporabnik a/ov
+ *      description: Pridobi uporabnik a/ov
+ *      tags: [Uporabnik]
+ *      security:
+ *        - jwt: []
+ *      parameters:
+ *        - in: path
+ *          name: email
+ *          type: string
+ *          required: false
+ *          description: email uporabnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva uporabnik a/ov
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/Uporabnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/uporabniki",
     avtentikacija,
     adminAvtorizacija,
     uporabniki.pridobiUporabnike);
+/**
+ * @swagger
+ *  /uporabniki/{id}:
+ *    get:
+ *      summary: Pridobi uporabnika po id
+ *      description: Pridobi uporabnika po id
+ *      tags: [Uporabnik]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva uporabnika po id
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Uporabnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "404":
+ *          description: Ni posanega id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/uporabniki/:idUporabnika",
     avtentikacija,
     adminAvtorizacija,
     uporabniki.pridobiUporabnika);
+/**
+ * @swagger
+ *  /uporabniki:
+ *    post:
+ *      summary: Ustvaritev uporabnika
+ *      description: Ustvaritev uporabnika
+ *      tags: [Uporabnik]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Uporabnik'
+ *      responses:
+ *        "200":
+ *          description: Uspešna ustvaritev uporabnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Uporabnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post("/uporabniki",
     avtentikacija,
     adminAvtorizacija,
     uporabniki.ustvariUporabnika);
+/**
+ * @swagger
+ *  /uporabniki:
+ *    put:
+ *      summary: Posodobitev uporabnika
+ *      description: Posodobitev uporabnika
+ *      tags: [Uporabnik]
+ *      security:
+ *        - jwt: []
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Uporabnik'
+ *      responses:
+ *        "200":
+ *          description: Uspešna posodobitev uporabnika
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Uporabnik'
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.put("/uporabniki",
     avtentikacija,
     adminAvtorizacija,
     uporabniki.posodbiUporabnika);
+/**
+ * @swagger
+ *  /uporabniki/{id}:
+ *    delete:
+ *      summary: Zbrisi uporabnika
+ *      description: Zbrisi uporabnika
+ *      tags: [Uporabnik]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id uporabnika
+ *      responses:
+ *        "204":
+ *          description: Uporabnik ne obstaja
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "200":
+ *          description: Uspešna Zbrisan Uporabnik
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Niste poslali user id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.delete("/uporabniki/:idUporabnika",
     avtentikacija,
     adminAvtorizacija,
@@ -99,29 +284,12 @@ router.delete("/uporabniki/:idUporabnika",
 //     rezervacije.posodobiRezervacijo)
 
 //MENI
-router.get("/meni",meni.pridobiJedi);
-router.get("/meni/:idJedi",meni.pridobiJed);
-router.post("/meni",
-    avtentikacija,
-    zaposleniAvtorizacija,
-    meni.ustvariJed);
-router.put("/meni/:idJedi",
-    avtentikacija,
-    zaposleniAvtorizacija,
-    meni.posodobiJed);
-router.post("/meni/dodajOceno",
-    avtentikacija,
-    gostAvtorizacija,
-    meni.dodajOceno);
-router.delete("/meni/:idJedi",
-    avtentikacija,
-    zaposleniAvtorizacija,
-    meni.izbrisiJed);
-router.get("/uporabniki", avtentikacija, adminAvtorizacija, uporabniki.pridobiUporabnike);
-router.get("/uporabniki/:idUporabnika", avtentikacija, adminAvtorizacija, uporabniki.pridobiUporabnika);
-router.post("/uporabniki", avtentikacija, adminAvtorizacija, uporabniki.ustvariUporabnika);
-router.put("/uporabniki", avtentikacija, adminAvtorizacija, uporabniki.posodbiUporabnika);
-router.delete("/uporabniki/:idUporabnika", avtentikacija, adminAvtorizacija, uporabniki.izbrisiUporabnika);
+
+
+
+
+
+
 
 //REZERVACIJE
 /**
@@ -300,8 +468,7 @@ router.put("/rezervacija/:idRezervacije/:operacija", avtentikacija, prijavljenAv
  *              schema:
  *                type: array
  *                items:
- *                  schema:
- *                    $ref: '#/components/schemas/MeniItem'
+ *                  $ref: '#/components/schemas/MeniItem'
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
@@ -368,8 +535,10 @@ router.get("/meni/:idJedi", meni.pridobiJed);
  *      "500":
  *        description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
-router.route("/meni")
-    .post(avtentikacija, meni.ustvariJed);
+router.post("/meni",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    meni.ustvariJed);
 
 /**
  * @swagger
@@ -411,8 +580,10 @@ router.route("/meni")
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
-router.route("/meni/:idJedi")
-    .put(avtentikacija, meni.posodobiJed);
+router.put("/meni/:idJedi",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    meni.posodobiJed);
 
 /**
  *  @swagger
@@ -449,8 +620,10 @@ router.route("/meni/:idJedi")
  *            description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
  */
-router.route("/meni/dodajOceno")
-    .post(avtentikacija, meni.dodajOceno);
+router.post("/meni/dodajOceno",
+    avtentikacija,
+    gostAvtorizacija,
+    meni.dodajOceno);
 
 /**
  * @swagger
@@ -481,10 +654,52 @@ router.route("/meni/dodajOceno")
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
-router.route("/meni/:idJedi")
-    .delete(avtentikacija, meni.izbrisiJed);
+router.delete("/meni/:idJedi",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    meni.izbrisiJed);
 
 //GOST
+
+/**
+ * @swagger
+ *  /gost/{id}:
+ *    get:
+ *      summary: Pridobi gosta
+ *      description: Pridobi gosta
+ *      tags: [Gost]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          type: string
+ *          required: true
+ *          description: id gosta
+ *      responses:
+ *        "200":
+ *          description: Uspešna zahteva gosta
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Gost'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "401":
+ *          description: Nedovoljen vstop oziroma majkajoč žeton.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Ni posanega id.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
 
 //ZASLUZEK
@@ -639,7 +854,7 @@ router.put("/urnik",
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/Urnik'
+ *                type: string
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *          content:

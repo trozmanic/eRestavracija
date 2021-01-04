@@ -3,6 +3,51 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 const Schema = mongoose.Schema;
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Uporabnik:
+ *       type: object
+ *       description: Podatki o uporabniku
+ *       properties:
+ *         ime:
+ *           type: string
+ *           description: Ime Uporabnika
+ *           example: admin admin
+ *         email_naslov:
+ *           type: string
+ *           description: email uporabnika
+ *           example: 123@mail.com
+ *         telefonska_stevilka:
+ *           type: string
+ *           description: telefonska stevilka uporabnika
+ *           example: 012 123 123
+ *         zgoscenaVrednost:
+ *           type: string
+ *           description: geslo hash
+ *           example: 346treg45yetrhgedrherh45u45u
+ *         nakljucnaVrednost:
+ *           type: string
+ *           description: salt
+ *           example: 243ytewrhgfdhdfjhrtfkrtoi67
+ *         vloga:
+ *           type: string
+ *           enum: [admin, kuhar, natakar, gost]
+ *           description: vloga uporabnika
+ *           example: admin
+ *         id_vloga_info:
+ *           type: string
+ *           description: id_vloga_info
+ *           example: 243ytewrhgfdhdfjhrtfkrtoi67
+ *       required:
+ *         - ime
+ *         - email_naslov
+ *         - telefonska_stevilka
+ *         - zgoscenaVrednost
+ *         - nakljucnaVrednost
+ *         - id_vloga_info
+ */
 const uporabnikShema = new mongoose.Schema({
     "ime": { type: String, required: true },
     "email_naslov": {
@@ -469,6 +514,28 @@ const rezervacijaShema = new mongoose.Schema({
 })
 
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Gost:
+ *          type: object
+ *          description: Podatki o Gostu.
+ *          properties:
+ *              id_uporabnika:
+ *                  type: string
+ *                  description: Enolični indetifikator Urnika
+ *                  example: 5fecb3329a977b43c4e98894
+ *              rezervacije:
+ *                  type: array
+ *                  items:
+ *                      type: RezervacijaBranje
+ *              ocenjene_jedi:
+ *                  type: array
+ *                  items:
+ *                      type: MeniItem
+ *
+ */
 const gostShema = new mongoose.Schema({
     id_uporabnika: { type: mongoose.ObjectId },
     rezervacije: [rezervacijaShema],
