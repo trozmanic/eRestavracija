@@ -140,61 +140,10 @@
                     })
 
                     // surovine
-
-                    axios.post('/api/zaloga', {
-                        ime: 'krompir',
-                        kolicina: 100,
-                        enota: 'kg',
-                        cena: 20
-                    }).then((res) => {
-
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-
-                    axios.post('/api/zaloga', {
-                        ime: 'moka',
-                        kolicina: 20,
-                        enota: 'kg',
-                        cena: 12
-                    }).then((res) => {
-
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-
-                    axios.post('/api/zaloga', {
-                        ime: 'solata',
-                        kolicina: 10,
-                        enota: 'kg',
-                        cena: 30
-                    }).then((res) => {
-
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-
-                    axios.post('/api/zaloga', {
-                        ime: 'kaviar',
-                        kolicina: 500,
-                        enota: 'ml',
-                        cena: 800
-                    }).then((res) => {
-
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-
-                    axios.post('/api/zaloga', {
-                        ime: 'tuna',
-                        kolicina: 50,
-                        enota: 'kg',
-                        cena: 1000
-                    }).then((res) => {
-
-                    }).catch((err) => {
-                        console.log(err);
-                    });
+                    const surovine=[ { "ime": "origano", "kolicina": 500, "enota": "g", "cena": 1 }, { "ime": "bazilika", "kolicina": 400, "enota": "g", "cena": 2 }, { "ime": "majaron", "kolicina": 600, "enota": "g", "cena": 2 }, { "ime": "krompir", "kolicina": 1, "enota": "kg", "cena": 4 }, { "ime": "voda", "kolicina": 5, "enota": "l", "cena": 34 }, { "ime": "sladkor", "kolicina": 4, "enota": "kg", "cena": 6 }, { "ime": "sol", "kolicina": 12, "enota": "kg", "cena": 32 }, { "ime": "čebula", "kolicina": 2, "enota": "kg", "cena": 6 }, { "ime": "česen", "kolicina": 1, "enota": "kg", "cena": 2 }, { "ime": "kumina", "kolicina": 3, "enota": "kg", "cena": 12 }, { "ime": "koruza", "kolicina": 1, "enota": "kg", "cena": 2 }, { "ime": "olje", "kolicina": 20, "enota": "l", "cena": 10 }, { "ime": "korenje", "kolicina": 3, "enota": "kg", "cena": 6 }, { "ime": "jajca", "kolicina": 15, "enota": "kg", "cena": 3 }, { "ime": "oves", "kolicina": 3, "enota": "kg", "cena": 4 }, { "ime": "maslo", "kolicina": 1, "enota": "kg", "cena": 5 }, { "ime": "pšenična moka", "kolicina": 3, "enota": "kg", "cena": 4 }, { "ime": "kakav", "kolicina": 3, "enota": "kg", "cena": 4 }, { "ime": "poper", "kolicina": 11, "enota": "kg", "cena": 19, }, { "ime": "postrv", "kolicina": 9, "enota": "kg", "cena": 9 }, { "ime": "losos", "kolicina": 6, "enota": "kg", "cena": 55 }, { "ime": "lignji", "kolicina": 26, "enota": "kg", "cena": 35 }, { "ime": "jogurt", "kolicina": 3, "enota": "l", "cena": 3 }, { "ime": "grški jogurt", "kolicina": 3, "enota": "l", "cena": 6 }, { "ime": "vinski kis", "kolicina": 5, "enota": "l", "cena": 10 }, { "ime": "jabolčni kis", "kolicina": 4, "enota": "l", "cena": 9 }, { "ime": "mleto meso", "kolicina": 3, "enota": "kg", "cena": 13 }, { "ime": "zrezek", "kolicina": 5, "enota": "kg", "cena": 23 }, { "ime": "sir", "kolicina": 2, "enota": "kg", "cena": 3 }, { "ime": "kruh", "kolicina": 1, "enota": "kg", "cena": 5 }, { "ime": "namaz", "kolicina": 3, "enota": "l", "cena": 2 } ];
+                    for(surovina of surovine){
+                        axios.post('/api/zaloga',surovina).catch((err)=>{console.log(err)});
+                    }
 
                     axios.post('/api/registracija', {
                         ime: 'kuhar',

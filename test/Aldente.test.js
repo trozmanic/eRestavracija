@@ -146,6 +146,7 @@
                 expect(uporabnik).to.not.be.empty;
             });
 
+            /*
             it("pridobi JWT žeton", async function() {
                 jwtZeton = await brskalnik.executeScript(function() {
                     return localStorage.getItem("token");
@@ -153,8 +154,11 @@
                 console.log(jwtZeton)
                 expect(jwtZeton).to.not.be.empty;
             });
+
+             */
         })
 
+<<<<<<< HEAD
         describe('Dodajanje ocene', async function () {
             this.timeout(30 * 1000);
             before(async function() { await brskalnik.get(aplikacijaUrl + "meni"); });
@@ -225,7 +229,128 @@
 
         })
 
+=======
+        describe("Prijava uporabnika", function () {
+            this.timeout(30 * 1000);
+            before(() => {
+                brskalnik.get(aplikacijaUrl);
+            });
 
+            it("izbira registracije", async function() {
+                await pocakajStranNalozena(brskalnik, 10, "//h1");
+                let gumb = await brskalnik.findElement(By.id("login-button"));
+                await gumb.getText().then(function(vsebina) {
+                    expect(vsebina).to.be.equal("PRIJAVA");
+                });
+                await gumb.click();
+            });
+
+            it("vnos podatkov uporabnika", async function() {
+                await pocakajStranNalozena(brskalnik, 10, "//h1");
+                let email = await brskalnik.findElement(By.id("exampleInputEmail1"));
+                expect(email).to.not.be.empty;
+                email.sendKeys("admin@aldente.si");
+                let geslo = await brskalnik.findElement(By.id("exampleInputPassword1"));
+                expect(geslo).to.not.be.empty;
+                geslo.sendKeys("geslo1234");
+                brskalnik.findElement(
+                    By.xpath("//button[contains(text(), 'PRIJAVI SE')]")).click();
+            });
+
+            context("ustreznost podatkov na nadzorni plošči", function() {
+                it("naslov strani urnik", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, '//h1');
+                    const povezava = await brskalnik.findElement(By.xpath('//a[@routerlink="/nadzorna_plosca/urnik"]'));
+                    expect(povezava).to.not.be.empty;
+                    await povezava.click();
+                });
+            });
+        })
+/*
+        describe("Nadzorna plošča", function () {
+            this.timeout(30 * 1000);
+            before(() => {
+                brskalnik.get(aplikacijaUrl + 'nadzorna_plosca');
+            });
+            it("Urnik", async () => {
+                await pocakajStranNalozena(brskalnik, 10, '//h1');
+                const povezava = await brskalnik.findElement(By.xpath("//a[contains(text(), 'urnik')]"));
+                expect(povezava).to.not.be.empty;
+                await povezava.click();
+            });
+            context("ustreznost podatkov na strani z urniki", function() {
+                it("naslov strani urniki", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, "//h1");
+                    let naslov = await brskalnik.findElement(By.css("h1"));
+                    expect(naslov).to.not.be.empty;
+                    await naslov.getText().then(function(vsebina) {
+                        expect(vsebina).to.be.equal("Urnik izmen");
+                    });
+                });
+            });
+            context("ustreznost podatkov na strani z rezervacijami", function() {
+                it("naslov strani rezervacije", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, "//h1");
+                    let naslov = await brskalnik.findElement(By.css("h1"));
+                    expect(naslov).to.not.be.empty;
+                    await naslov.getText().then(function(vsebina) {
+                        expect(vsebina).to.be.equal("Upravljanje Rezervacij");
+                    });
+                });
+            });
+            context("ustreznost podatkov na strani z menijem", function() {
+                it("naslov strani meni", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, "//h1");
+                    let naslov = await brskalnik.findElement(By.css("button"));
+                    expect(naslov).to.not.be.empty;
+                    await naslov.getText().then(function(vsebina) {
+                        expect(vsebina).to.be.equal(" DODAJ");
+                    });
+                });
+            });
+            context("ustreznost podatkov na strani z zalogo", function() {
+                it("naslov strani zaloga", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, "//h1");
+                    let naslov = await brskalnik.findElement(By.css("h1"));
+                    expect(naslov).to.not.be.empty;
+                    await naslov.getText().then(function(vsebina) {
+                        expect(vsebina).to.be.equal("Zaloga");
+                    });
+                });
+            });
+            context("ustreznost podatkov na strani z zaslužkom", function() {
+                it("naslov strani zaslužek", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, "//h1");
+                    let naslov = await brskalnik.findElement(By.css("h1"));
+                    expect(naslov).to.not.be.empty;
+                    await naslov.getText().then(function(vsebina) {
+                        expect(vsebina).to.be.equal("Zasluzek");
+                    });
+                });
+            });
+            context("ustreznost podatkov na strani z zaposlenimi", function() {
+                it("naslov strani zaposleni", async function() {
+                    await pocakajStranNalozena(brskalnik, 10, "//h1");
+                    let naslov = await brskalnik.findElement(By.css("h1"));
+                    expect(naslov).to.not.be.empty;
+                    await naslov.getText().then(function(vsebina) {
+                        expect(vsebina).to.be.equal("Zaposleni");
+                    });
+                });
+            });
+        });
+>>>>>>> 1a17136e9469a0cce774f95cbefb77ea1ae2e497
+
+        describe("Dodajanje sestavine", async function() {
+            this.timeout(30 * 1000);
+            before(async function() {
+                await brskalnik.get(aplikacijaUrl + 'nadzorna_plosca/zaloga');
+            });
+            it('odpri modal dodaj', function () {
+                // TODO
+            });
+        });
+ */
 
     } catch (napaka) {
         console.log("Med testom je prišlo do napake!");

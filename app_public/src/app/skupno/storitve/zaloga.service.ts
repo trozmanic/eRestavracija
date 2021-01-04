@@ -30,7 +30,7 @@ export class ZalogaService {
       })
     };
      *//*                                                    , httpLastnosti) */
-    return this.http.post(this.api_url + '/zaloga', sestavina).toPromise().then(odgovor => odgovor as Zaloga)
+    return this.http.post(this.api_url + '/zaloga', sestavina, { headers: this.initHeaders()}).toPromise().then(odgovor => odgovor as Zaloga)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
@@ -42,7 +42,7 @@ export class ZalogaService {
       })
     };
      *//*                                                      , httpLastnosti) */
-    return this.http.put(this.api_url + '/zaloga', sestavina).toPromise().then(odgovor => odgovor as Zaloga)
+    return this.http.put(this.api_url + '/zaloga', sestavina, { headers: this.initHeaders()}).toPromise().then(odgovor => odgovor as Zaloga)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
@@ -54,7 +54,7 @@ export class ZalogaService {
       })
     };
      *//*                                                      , httpLastnosti) */
-    return this.http.delete(this.api_url + '/zaloga/' + id).toPromise().then(null)
+    return this.http.delete(this.api_url + '/zaloga/' + id, { headers: this.initHeaders()}).toPromise().then(null)
       .catch(napaka => this.obdelajNapako(napaka));
   }
 
