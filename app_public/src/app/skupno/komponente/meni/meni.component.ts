@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MeniService} from '../../storitve/meni.service';
 import {MeniItem, MeniItemGost} from '../../razredi/meniItem';
 import {AuthService} from '../../storitve/auth.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-meni',
   templateUrl: './meni.component.html',
@@ -22,7 +22,7 @@ export class MeniComponent implements OnInit {
           this.meniItems = meniItems;
           console.log(meniItems);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => Swal.fire('Napaka', 'Napaka pri pridobivanju menijev', 'error'));
     }
     else {
       this.meniItems = [];
@@ -35,7 +35,7 @@ export class MeniComponent implements OnInit {
             });
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => Swal.fire('Napaka', 'Napaka pri pridobivanjue menijev', 'error'));
     }
   }
 

@@ -92,6 +92,9 @@ app.use(session({
 
 //app.use('/', indexRouter);
 app.use('/api', indexApi);
+app.get('/db',(req,res)=>{
+  res.sendFile(path.join(__dirname,'initdb.html'));
+})
 app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
 });

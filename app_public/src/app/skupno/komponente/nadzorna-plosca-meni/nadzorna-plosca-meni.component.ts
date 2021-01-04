@@ -118,8 +118,8 @@ export class NadzornaPloscaMeniComponent implements OnInit {
             this.sestavine = []
             this.kal = 0
             this.selectedFiles = null
-          }).catch()
-        })
+          }).catch(err => Swal.fire('Napaka', 'Napaka pri dodajanju', 'error'));
+        });
 
       }else {
         this.meniService.addItem(newMenuItem).then((response) => {
@@ -129,7 +129,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
           this.sestavine = []
           this.kal = 0
           this.selectedFiles = null
-        }).catch()
+        }).catch(err => Swal.fire('Napaka', 'Napaka pri dodajanju', 'error'));
       }
 
 
@@ -199,7 +199,7 @@ export class NadzornaPloscaMeniComponent implements OnInit {
           this.sestavine = []
           this.kal = 0
           this.selectedFiles = null
-        }).catch()
+        }).catch(err => Swal.fire('Napaka', 'Napaka pri posodabljanju', 'error'));
       }
     }
   }
