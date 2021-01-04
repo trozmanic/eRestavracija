@@ -135,7 +135,7 @@
                 await brskalnik.findElement(
                     By.xpath("//button[contains(text(), 'REGISTRIRAJ SE')]")).click();
 
-                const modal = await brskalnik.findElement(By.className('swal2-confirm'))
+                const modal = await brskalnik.findElement(By.css('.swal2-confirm'))
                 modal.click();
             });
 
@@ -209,7 +209,7 @@
                     expect(geslo).to.not.be.empty;
                     geslo.sendKeys("test");
 
-                    let povezavaLogin = await brskalnik.find(
+                    let povezavaLogin = await brskalnik.findElement(
                         By.xpath("//button[contains(text(), 'PRIJAVI SE')]")
                     )
                     expect(povezavaLogin).to.not.be.empty;
@@ -227,42 +227,44 @@
 
         })
 
-        describe("Prijava uporabnika", function () {
-            this.timeout(30 * 1000);
-            before(() => {
-                brskalnik.get(aplikacijaUrl);
-            });
-
-            it("izbira registracije", async function() {
-                await pocakajStranNalozena(brskalnik, 10, "//h1");
-                let gumb = await brskalnik.findElement(By.id("login-button"));
-                await gumb.getText().then(function(vsebina) {
-                    expect(vsebina).to.be.equal("PRIJAVA");
-                });
-                await gumb.click();
-            });
-
-            it("vnos podatkov uporabnika", async function() {
-                await pocakajStranNalozena(brskalnik, 10, "//h1");
-                let email = await brskalnik.findElement(By.id("exampleInputEmail1"));
-                expect(email).to.not.be.empty;
-                email.sendKeys("admin@aldente.si");
-                let geslo = await brskalnik.findElement(By.id("exampleInputPassword1"));
-                expect(geslo).to.not.be.empty;
-                geslo.sendKeys("geslo1234");
-                brskalnik.findElement(
-                    By.xpath("//button[contains(text(), 'PRIJAVI SE')]")).click();
-            });
-
-            context("ustreznost podatkov na nadzorni plošči", function() {
-                it("naslov strani urnik", async function() {
-                    await pocakajStranNalozena(brskalnik, 10, '//h1');
-                    const povezava = await brskalnik.findElement(By.xpath('//a[@routerlink="/nadzorna_plosca/urnik"]'));
-                    expect(povezava).to.not.be.empty;
-                    await povezava.click();
-                });
-            });
-        })
+        // describe("Prijava uporabnika", function () {
+        //     this.timeout(30 * 1000);
+        //     before(() => {
+        //         brskalnik.get(aplikacijaUrl);
+        //     });
+        //
+        //     it('prijavi uporabnika', async function () {
+        //         let povezava = await brskalnik.findElement(
+        //             By.xpath("//button[contains(text(), 'PRIJAVA')]"));
+        //         await povezava.click();
+        //
+        //         let email = await brskalnik.findElement(
+        //             By.id('exampleInputEmail1'));
+        //         expect(email).to.not.be.empty;
+        //         email.sendKeys("admin@aldente.si");
+        //
+        //         let geslo = await brskalnik.findElement(
+        //             By.id('exampleInputPassword1'));
+        //         expect(geslo).to.not.be.empty;
+        //         geslo.sendKeys("geslo1234");
+        //
+        //         let povezavaLogin = await brskalnik.findElement(
+        //             By.xpath("//button[contains(text(), 'PRIJAVI SE')]")
+        //         )
+        //         expect(povezavaLogin).to.not.be.empty;
+        //         await povezavaLogin.click();
+        //     })
+        //
+        //
+        //     context("ustreznost podatkov na nadzorni plošči", function() {
+        //         it("naslov strani urnik", async function() {
+        //             await pocakajStranNalozena(brskalnik, 10, '//h1');
+        //             const povezava = await brskalnik.findElement(By.xpath('//a[@routerlink="/nadzorna_plosca/urnik"]'));
+        //             expect(povezava).to.not.be.empty;
+        //             await povezava.click();
+        //         });
+        //     });
+        // })
 /*
         describe("Nadzorna plošča", function () {
             this.timeout(30 * 1000);
