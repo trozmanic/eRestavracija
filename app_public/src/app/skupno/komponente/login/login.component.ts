@@ -175,7 +175,6 @@ export class LoginComponent implements OnInit {
   }
 
   public jePovezava(){
-    console.log("Povezava"+this.povezavaStoritev.jePovezava);
     return this.povezavaStoritev.jePovezava;
   }
 

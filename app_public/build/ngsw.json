@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1609711467104,
+  "timestamp": 1609720587555,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.5d2bca6f51c9a443bcd9.js",
+        "/main.f644f20d857594389e2e.js",
         "/manifest.webmanifest",
         "/polyfills.2579940b1a9c6a3d41e4.js",
         "/runtime.359d5ee4682f20e936e9.js",
@@ -98,8 +98,8 @@
     "/assets/slike/pexels-emre-kuzu-2237189.jpg": "6e67e73bacdbc94b10aba9e770fa84b9ef7fb447",
     "/assets/slike/pexels-malidate-van-784632.jpg": "f07bd6954803303a484f40e02be1daae408e3d7e",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "98ce33f08feb013b1268ee32771fdf19bc83ac25",
-    "/main.5d2bca6f51c9a443bcd9.js": "cd98941f04b88f1de2819b4c5b97298cf0e550fe",
+    "/index.html": "e1d37b975710e374db8d3544f1c1769e7ecc242d",
+    "/main.f644f20d857594389e2e.js": "7a545c9ed977c42ff5f852f0da55b1d0fbd01ae2",
     "/manifest.webmanifest": "fb3943104c571d92eafa69752e3e6a22d0998431",
     "/pexels-emre-kuzu-2237189.7d8fa16412bcb457a0ee.jpg": "6e67e73bacdbc94b10aba9e770fa84b9ef7fb447",
     "/polyfills.2579940b1a9c6a3d41e4.js": "c3999daf81bd0c0f6ec800c29cf8030ca686c9b5",
