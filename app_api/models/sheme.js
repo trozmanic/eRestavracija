@@ -48,53 +48,142 @@ const uporabnikShema = new mongoose.Schema({
  *           example: 1212
  *       required:
  *         - id_uporabnika
+ *     ZaposleniUstvari:
+ *       type: object
+ *       description: Podatki o zaposlenem
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični indetifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         id_uporabnika:
+ *           type: string
+ *           description: Enolični indetifikator, ki se nanaša na shemo uporabnik
+ *           example: 5fecb3329a977b43c4e98894
+ *         placa:
+ *           type: number
+ *           minimum: 0
+ *           example: 1212
+ *       required:
+ *         - id_uporabnika
+ *         - placa
  */
 const zaposleniShema = new mongoose.Schema({
     "id_uporabnika" :{type:mongoose.ObjectId},
     "placa": { type: Number, min: 0 }
 })
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     SurovinaAžuriranje:
+ *       type: object
+ *       description: Podatki o surovini
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični identifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         ime:
+ *           type: string
+ *           description: Ime surovine
+ *           example: krompir
+ *         količina:
+ *           type: integer
+ *           minimum: 0
+ *           description: Količina surovine
+ *           example: 10
+ *         enota:
+ *           type: string
+ *           description: Enota za količino surovine
+ *           example: kg
+ *         cena:
+ *           type: integer
+ *           minimum: 0
+ *           description: Cena surovine brez simbola valute
+ *           example: 2
+ *       required:
+ *         - _id
+ *         - ime
+ *         - količina
+ *         - enota
+ *         - cena
+ *     SurovinaPosodobitev:
+ *       type: object
+ *       description: Podatki o surovini
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Enolični identifikator
+ *           example: 5fecb3329a977b43c4e98894
+ *         ime:
+ *           type: string
+ *           description: Ime surovine
+ *           example: krompir
+ *         količina:
+ *           type: integer
+ *           minimum: 0
+ *           description: Količina surovine
+ *           example: 10
+ *         enota:
+ *           type: string
+ *           description: Enota za količino surovine
+ *           example: kg
+ *         cena:
+ *           type: integer
+ *           minimum: 0
+ *           description: Cena surovine brez simbola valute
+ *           example: 2
+ *       required:
+ *         - _id
+ */
 const surovinaShema = new mongoose.Schema({
     "ime": { type: String, required: true },
     "kolicina": { type: Number, required: true, min: 0 },
     "enota": { type: String, required: true },
     "cena": { type: Number, required: true, min: 0 }
 })
+
 /**
- * @Swagger
+ * @swagger
  * components:
- *  schemas:
- *   MeniItem:
- *    type: object
- *    properties:
- *     ime:
- *      type: String
- *     cena:
- *      type: Number
- *      minimum: 0
- *      example: 12
- *     slika:
- *      type: String
- *     opis:
- *      type: String
- *     ocena:
- *      type: Number
- *      example: 4
- *     ocena_count:
- *      type: Number
- *      example: 2
- *     kalorije:
- *      type: Number
- *      minimum: 0
- *     sestavine:
- *      type: array
- *      items:
- *       type: sestavina
- *    required:
- *      - ime
- *      - cena
- *      - opis
- *      - kalorije
+ *   schemas:
+ *     MeniItem:
+ *      type: object
+ *      properties:
+ *          _id:
+ *              type: string
+ *              description: Enolični indetifikator
+ *              example: 5fecb3329a977b43c4e98894
+ *          ime:
+ *              type: String
+ *              example: Hobotnica
+ *          cena:
+ *              type: Number
+ *              minimum: 0
+ *              example: 12
+ *          slika:
+ *              type: String
+ *              example: assests/jedi/hobotnica.png
+ *          opis:
+ *              type: String
+ *              example: Hobotnica na zaru.
+ *          ocena:
+ *              type: Number
+ *              example: 4
+ *          ocena_count:
+ *              type: Number
+ *              example: 2
+ *          kalorije:
+ *              type: Number
+ *              minimum: 0
+ *              example: 300
+ *      required:
+ *          - ime
+ *          - cena
+ *          - opis
+ *          - kalorije
  *
  */
 const meniItemShema = new mongoose.Schema({
@@ -307,11 +396,11 @@ const narociloShema = new mongoose.Schema({
  *       properties:
  *         _id:
  *           type: string
- *           description: Enolični indetifikator
+ *           description: Enolični identifikator
  *           example: 5fecb3329a977b43c4e98894
  *         id_stranke:
  *           type: string
- *           description: Enolični indetifikator stranke
+ *           description: Enolični identifikator stranke
  *           example: 5fea48e93315186ae03c8651
  *         ime_stranke:
  *           type: string
@@ -357,14 +446,14 @@ const narociloShema = new mongoose.Schema({
  *             properties:
  *               meni_item:
  *                 type: string
- *                 description: Enolični indentifikator jedi
+ *                 description: Enolični identifikator jedi
  *                 example: 5fecb3329a977b43c4e98894
  *               kolicina:
  *                 type: integer
  *                 example: 2
  *         uporabnik_id:
  *           type: string
- *           description: Enolični indentifikator uporabnika
+ *           description: Enolični identifikator uporabnika
  *           example: 5fecb3329a977b43c4e98894
  *       required:
  *         - datum_in_ura
