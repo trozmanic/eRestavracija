@@ -1993,7 +1993,7 @@ router.get('/database/drop', database.dropDB);
  *              schema:
  *                type: array
  *                items:
- *                  $ref: '#/components/schemas/MeniItem
+ *                  $ref: '#/components/schemas/MeniItem'
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *          content:
