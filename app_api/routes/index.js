@@ -111,8 +111,6 @@ router.get("/uporabniki",
  *      summary: Pridobi uporabnika po id
  *      description: Pridobi uporabnika po id
  *      tags: [Uporabnik]
- *      security:
- *        - jwt: []
  *      parameters:
  *        - in: path
  *          name: id
@@ -156,8 +154,6 @@ router.get("/uporabniki/:idUporabnika",
  *      summary: Ustvaritev uporabnika
  *      description: Ustvaritev uporabnika
  *      tags: [Uporabnik]
- *      security:
- *        - jwt: []
  *      requestBody:
  *        content:
  *          application/json:
@@ -232,8 +228,6 @@ router.put("/uporabniki",
  *      summary: Zbrisi uporabnika
  *      description: Zbrisi uporabnika
  *      tags: [Uporabnik]
- *      security:
- *        - jwt: []
  *      parameters:
  *        - in: path
  *          name: id
@@ -290,24 +284,11 @@ router.delete("/uporabniki/:idUporabnika",
 //     rezervacije.posodobiRezervacijo)
 
 //MENI
-router.get("/meni",meni.pridobiJedi);
-router.get("/meni/:idJedi",meni.pridobiJed);
-router.post("/meni",
-    avtentikacija,
-    zaposleniAvtorizacija,
-    meni.ustvariJed);
-router.put("/meni/:idJedi",
-    avtentikacija,
-    zaposleniAvtorizacija,
-    meni.posodobiJed);
-router.post("/meni/dodajOceno",
-    avtentikacija,
-    gostAvtorizacija,
-    meni.dodajOceno);
-router.delete("/meni/:idJedi",
-    avtentikacija,
-    zaposleniAvtorizacija,
-    meni.izbrisiJed);
+
+
+
+
+
 
 
 //REZERVACIJE
@@ -487,8 +468,7 @@ router.put("/rezervacija/:idRezervacije/:operacija", avtentikacija, prijavljenAv
  *              schema:
  *                type: array
  *                items:
- *                  schema:
- *                    $ref: '#/components/schemas/MeniItem'
+ *                  $ref: '#/components/schemas/MeniItem'
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
@@ -555,8 +535,10 @@ router.get("/meni/:idJedi", meni.pridobiJed);
  *      "500":
  *        description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
-router.route("/meni")
-    .post(avtentikacija, meni.ustvariJed);
+router.post("/meni",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    meni.ustvariJed);
 
 /**
  * @swagger
@@ -598,8 +580,10 @@ router.route("/meni")
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
-router.route("/meni/:idJedi")
-    .put(avtentikacija, meni.posodobiJed);
+router.put("/meni/:idJedi",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    meni.posodobiJed);
 
 /**
  *  @swagger
@@ -636,8 +620,10 @@ router.route("/meni/:idJedi")
  *            description: Napaka na strežniku pri dostopu do podatkovne baze.
  *
  */
-router.route("/meni/dodajOceno")
-    .post(avtentikacija, meni.dodajOceno);
+router.post("/meni/dodajOceno",
+    avtentikacija,
+    gostAvtorizacija,
+    meni.dodajOceno);
 
 /**
  * @swagger
@@ -668,10 +654,10 @@ router.route("/meni/dodajOceno")
  *        "500":
  *          description: Napaka na strežniku pri dostopu do podatkovne baze.
  */
-router.route("/meni/:idJedi")
-    .delete(avtentikacija, meni.izbrisiJed);
-
-
+router.delete("/meni/:idJedi",
+    avtentikacija,
+    zaposleniAvtorizacija,
+    meni.izbrisiJed);
 
 //GOST
 
@@ -716,6 +702,8 @@ router.route("/meni/:idJedi")
  */
 router.get("/gost/:idUporabnika", gost.pridobiGosta);
 
+//ZASLUZEK
+router.get("/gost/:idUporabnika", zasluzek.pridobiNarocilo);
 
 //URNIK
 /**

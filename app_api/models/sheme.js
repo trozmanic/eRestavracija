@@ -514,29 +514,27 @@ const rezervacijaShema = new mongoose.Schema({
 })
 
 
-
 /**
  * @swagger
  * components:
- *   schemas:
- *     Gost:
- *       type: object
- *       description: Podatki o gostu
- *       properties:
- *         id_uporabnika:
- *           type: string
- *           description: id uporabnika na katerega kaze gost
- *           example: 34yerhgerh54udfhdf
- *         rezervacije:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/RezervacijaBranje'
- *           description: rezervacije array
- *         ocenjene_jedi:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/MeniItem'
- *           description: ocenjeni jedi array
+ *  schemas:
+ *      Gost:
+ *          type: object
+ *          description: Podatki o Gostu.
+ *          properties:
+ *              id_uporabnika:
+ *                  type: string
+ *                  description: Enolični indetifikator Urnika
+ *                  example: 5fecb3329a977b43c4e98894
+ *              rezervacije:
+ *                  type: array
+ *                  items:
+ *                      type: RezervacijaBranje
+ *              ocenjene_jedi:
+ *                  type: array
+ *                  items:
+ *                      type: MeniItem
+ *
  */
 const gostShema = new mongoose.Schema({
     id_uporabnika: { type: mongoose.ObjectId },
