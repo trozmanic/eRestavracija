@@ -29,6 +29,7 @@ const zaposleniAvtorizacija = imaVlogo(['admin', 'kuhar', 'natakar']);
 const natakarAvtorizacija = imaVlogo(['natakar']);
 const kuharAvtorizacija = imaVlogo(['kuhar']);
 const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
+const adminkuharAvtorizacija= imaVlogo(["admin","kuhar"]);
 
 /**
  * Kategorije dostopnih točk
@@ -47,7 +48,11 @@ const prijavljenAvtorizacija= imaVlogo(['admin', 'kuhar', 'natakar','gost']);
  *  - name: Uporabnik
  *    description: Obvladovanje uporabnikov
  *  - name: Gost
- *    description: Obvladovanje uporabnikov
+ *    description: Obvladovanje gostov
+ *  - name: Avtentikacija
+ *    description: Obvladovanje avtentikacije
+ *  - name: Database
+ *    description: Obvladovanje baze
  */
 
 /**
@@ -1660,7 +1665,7 @@ router.get("/zasluzek",
  *              schema:
  *                type: string
  */
-router.get("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.pridobiSestavine);
+router.get("/zaloga", avtentikacija, adminkuharAvtorizacija, zaloga.pridobiSestavine);
 /**
  * @swagger
  *  /zaloga/{surovinaId}:
@@ -1707,7 +1712,7 @@ router.get("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalog
  *              schema:
  *                type: string
  */
-router.get("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.pridobiSestavino);
+router.get("/zaloga/:surovinaId", avtentikacija, adminkuharAvtorizacija, zaloga.pridobiSestavino);
 /**
  * @swagger
  *  /zaloga:
@@ -1745,7 +1750,7 @@ router.get("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtoriz
  *              schema:
  *                type: string
  */
-router.post("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.ustvariSestavino);
+router.post("/zaloga", avtentikacija, adminkuharAvtorizacija, zaloga.ustvariSestavino);
 /**
  * @swagger
  *  /zaloga:
@@ -1783,7 +1788,7 @@ router.post("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalo
  *              schema:
  *                type: string
  */
-router.put("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.posodobiSestavino);
+router.put("/zaloga", avtentikacija, adminkuharAvtorizacija, zaloga.posodobiSestavino);
 /**
  * @swagger
  *  /zaloga/{surovinaId}:
@@ -1827,7 +1832,7 @@ router.put("/zaloga", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zalog
  *              schema:
  *                type: string
  */
-router.delete("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvtorizacija, zaloga.izbrisiSestavino);
+router.delete("/zaloga/:surovinaId", avtentikacija, adminkuharAvtorizacija, zaloga.izbrisiSestavino);
 
 
 /**
@@ -1859,13 +1864,143 @@ router.delete("/zaloga/:surovinaId", avtentikacija, adminAvtorizacija, kuharAvto
 router.post('/image', slike.shraniSliko)
 
 // AVTENTIKACIJA
+/**
+ * @swagger
+ *  /registracija:
+ *    post:
+ *      summary: registracija
+ *      description: registracija
+ *      tags: [Avtentikacija]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Uporabnik'
+ *      responses:
+ *        "200":
+ *          description: Uspešna registracija
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post('/registracija', ctrlAvtentikacija.registracija);
+/**
+ * @swagger
+ *  /kreiraj:
+ *    post:
+ *      summary: kreiraj
+ *      description: kreiraj
+ *      tags: [Avtentikacija]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Uporabnik'
+ *      responses:
+ *        "200":
+ *          description: Uspešno kreiran
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Uporabnik'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post('/kreiraj', ctrlAvtentikacija.kreiraj);
+/**
+ * @swagger
+ *  /prijava:
+ *    post:
+ *      summary: prijava
+ *      description: prijava
+ *      tags: [Avtentikacija]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Uporabnik'
+ *      responses:
+ *        "200":
+ *          description: Uspešno prijava
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *        "400":
+ *          description: Zahtevani so vsi podatki.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.post('/prijava', ctrlAvtentikacija.prijava);
 
+/**
+ * @swagger
+ *  /database/drop:
+ *    get:
+ *      summary: Izprazni bazo
+ *      description: Izprazni bazo
+ *      tags: [Database]
+ *      responses:
+ *        "200":
+ *          description: Uspešna izpraznitev baze
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  type: string
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get('/database/drop', database.dropDB);
 
 //GOST-SELF
+/**
+ * @swagger
+ *  /self/meni:
+ *    get:
+ *      summary: Pridobi meni
+ *      description: Pridobi meni
+ *      tags: [Database]
+ *      responses:
+ *        "200":
+ *          description: Uspešna pridobljen meni
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/MeniItem'
+ *        "500":
+ *          description: Napaka na strežniku pri dostopu do podatkovne baze.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ */
 router.get('/self/meni', self.pridobiMeni);
 
 module.exports = router
