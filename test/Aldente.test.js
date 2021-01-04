@@ -157,8 +157,6 @@
 
              */
         })
-
-<<<<<<< HEAD
         describe('Dodajanje ocene', async function () {
             this.timeout(30 * 1000);
             before(async function() { await brskalnik.get(aplikacijaUrl + "meni"); });
@@ -229,7 +227,6 @@
 
         })
 
-=======
         describe("Prijava uporabnika", function () {
             this.timeout(30 * 1000);
             before(() => {
@@ -339,7 +336,6 @@
                 });
             });
         });
->>>>>>> 1a17136e9469a0cce774f95cbefb77ea1ae2e497
 
         describe("Dodajanje sestavine", async function() {
             this.timeout(30 * 1000);
